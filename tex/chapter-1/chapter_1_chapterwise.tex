@@ -1,0 +1,82 @@
+\input{chapter-1/chapter_1_content}
+
+\section{References/Bibliographies}
+
+Lists of references are handled by \texttt{biblatex}.
+The present document has the following preamble
+\begin{verbatim}
+\usepackage[style=apa,refsection=chapter]{biblatex}
+\addbibresource{dissertation.bib}
+\end{verbatim}
+The first line tells us that the references will be formatted according to 
+the APA-standards and that each chapter will have its own list of references.
+On \texttt{Overleaf} this should adhere to the 7th version of these 
+standards.
+On your own computer the version of biblatex may be older and 
+use the 6th~version.
+
+The second line points to a file that contains the references in a database
+like format.
+Use one such line for every database that you want to use.
+
+The general way this works is as follows Using the present document as 
+an example):
+\begin{verbatim}
+xelatex dissertation
+biber dissertation
+xelatex dissertation
+\end{verbatim}
+The first line typesets the document and gathers information for the lists
+of references; the second line will generate lists of references for all 
+chapters, these will be read in during execution of the third and fourth lines.
+Depending on the editor that you use much of this can be done by clicking
+on a suitable icon or by hitting suitably defined hot keys.
+
+The \texttt{biblatex} package has many options and can be tailored to almost
+every need; you can explore its documentation at
+\texttt{https://www.ctan.org/pkg/biblatex}
+
+To cite a book we cite this one: \cite{MR1039321}.
+And another article: \cite{MR3860876}.
+And a book with more than one editor: \cite{MR3204729}.
+
+
+
+
+\section{Fonts and Colors}
+
+\dropcap{T}{he} fonts used by this template depend on which version of \LaTeX{} you use. Regular \LaTeX, \emph{i.e.}, if you compile your document with with \texttt{latex}, \texttt{pslatex} or \texttt{pdflatex}, will use Utopia for text, Fourier for math and Latin Modern for sans-serif and monospaced text. However, if you want to adhere to the TU Delft house style, you will need to use \XeLaTeX, as it supports TrueType and OpenType fonts. Compiling with \texttt{xelatex} will use Bookman Old Style for titles, Tahoma for text, Courier New for monospace and Cambria for math. If you want to use \XeLaTeX, but do not want to use the TU Delft house style fonts, you can add the \texttt{nativefonts} option to the document class.
+
+This template supports the use of drop caps, a large colored initial at the beginning of a chapter or section, via the \verb|\dropcap| command:
+
+\begin{verbatim}
+\texttt{\textbackslash dropcap\{L\}\{orem\} ipsum\ldots}
+\end{verbatim}
+The first argument is the capital that will be printed on two lines (in the title color), and the second argument is the rest of the word. Depending on the font, the latter may be printed in small caps.
+
+The corporate colors of the TU Delft are cyan, black and white, available, respectively, via \texttt{\textbackslash color\{{\color{tudelft-cyan}tudelft-cyan}\}}, \texttt{\textbackslash color\{{\color{tudelft-black}tudelft-black}\}} (which differs slightly from the default \texttt{black}) and \texttt{\textbackslash color\{tudelft-white\}}. Apart from these three, the house style defines the basic colors
+\begin{itemize}
+%% Reduce the separation between the items, since this is just a list of words.
+\itemsep 0pt
+\parskip 0pt
+\item\texttt{\color{tudelft-sea-green}tudelft-sea-green},
+\item\texttt{\color{tudelft-green}tudelft-green},
+\item\texttt{\color{tudelft-dark-blue}tudelft-dark-blue},
+\item\texttt{\color{tudelft-purple}tudelft-purple},
+\item\texttt{\color{tudelft-turquoise}tudelft-turquoise} and
+\item\texttt{\color{tudelft-sky-blue}tudelft-sky-blue},
+\end{itemize}
+as well as the accent colors
+\begin{itemize}
+\itemsep 0pt
+\parskip 0pt
+\item\texttt{\color{tudelft-lavendel}tudelft-lavendel},
+\item\texttt{\color{tudelft-orange}tudelft-orange},
+\item\texttt{\color{tudelft-warm-purple}tudelft-warm-purple},
+\item\texttt{\color{tudelft-fuchsia}tudelft-fuchsia},
+\item\texttt{\color{tudelft-bright-green}tudelft-bright-green} and
+\item\texttt{\color{tudelft-yellow}tudelft-yellow}.
+\end{itemize}
+
+\printbibliography
+
