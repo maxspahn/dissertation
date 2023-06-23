@@ -1,10 +1,15 @@
 \documentclass{TUD-dissertation2020}
 
 \usepackage[style=apa]{biblatex}
+\input{used_packages}
 
 \addbibresource{dissertation.bib}
 
+\input{graphics_paths}
+
 \begin{document}
+
+\input{commands}
 
 %% Specify the title and author of the thesis. This information will be used on
 %% the title page (in title/title.tex) and in the metadata of the final PDF.
@@ -32,7 +37,8 @@
 %% Turn on thumb indices.
 \thumbtrue
 
-\include{chapter-1/chapter_1_onebib}
+\input{chapters_onebib}
+
 \include{conclusion/conclusion}
 \include{epilogue/epilogue}
 \include{acks/acks}

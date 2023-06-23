@@ -37,5 +37,6 @@ clean:
 allclean:
 	make clean
 	rm -f outputs/*.pdf
+	rm -f *.pdf
 
 

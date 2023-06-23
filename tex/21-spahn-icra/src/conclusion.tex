@@ -1,0 +1,25 @@
+\section{Conclusion}%
+\label{sec:conclusion}
+
+This work proposes a whole-body trajectory optimization to navigate in unstructured and simplified dynamic environment safely. Evolution of the environment, i.e., dynamic obstacles, were incorporated, and static collision avoidance is realized by a union of convex regions describing the free space. By representing the free space, rather than individual obstacles, the number of inequality constraints is limited. The scaling of the method for an increasing number of obstacles and its ability to avoid collision with moving obstacles were shown in randomized scenarios.
+Real-time applicability was demonstrated on a 10-DoF's mobile manipulator in a Pick \& Place test case.
+The proposed approach overcomes the limitations of previous works and allows whole-body trajectory optimization in dynamic environments. %As future work, coupled global planning algorithm would benefit the applicability as it would allow the generation of convex regions of future states.
+%
+%
+\iffalse
+It was shown that coupling of the motion of the mobile robot and the mounted arm dramatically reduces total operational time of the robotic system.
+
+This work proposed an MPC formulation for coupled motion of mobile manipulators using
+convex region decomposition to allow safe motions in unknown environments and to reduce
+the overall execution time of navigation tasks compared to decoupled approaches.  A new
+formulation for collision avoidance in unknown environments was introduced that can fuse
+various sensor inputs to create free space regions around individual links.  Simulation
+results in randomized test cases show that the gained flexibility by the approach results
+in an increase in number of feasible trajectories. At the same time parallelizing the
+motion reduces the operation time by $38\%$ on average. The fact that no collision
+happened during the test cases highlights the advantage of having guarantees provided by
+the MPC formulation. In future works, improved prediction algorithms, which are already
+used in mobile robotics, could be integrated. Besides, close-to-singular configurations
+that are not prevented in the current formulation, should be addressed in the future.
+\fi
+
