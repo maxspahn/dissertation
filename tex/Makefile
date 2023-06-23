@@ -3,6 +3,11 @@ src=24_spahn_dissertation
 dirs:
 	mkdir -p outputs
 
+propositions:
+	pdflatex propositions
+	mv propositions.pdf outputs
+	make clean
+
 dirty:
 	make dirs
 	pdflatex $(src)_$(style).tex
