@@ -1,8 +1,153 @@
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\mat}[1]{\bm{#1}}
-\renewcommand{\vec}[1]{\bm{#1}}
 \def \stateVec {\ensuremath{\vec{z}}}
 \def \inputVec {\ensuremath{\vec{u}}}
+
+% spaces
+\newcommand\X{\ensuremath{\mathcal{X}}}
+\newcommand\Xr{\ensuremath{\mathcal{X}_{\textrm{rel}}}}
+\newcommand\Xj{\ensuremath{\mathcal{X}_j}}
+\newcommand\Q{\ensuremath{\mathcal{Q}}}
+\renewcommand\Rn{\ensuremath{\mathbb{R}^n}}
+\newcommand\Rmj{\ensuremath{\mathbb{R}^{m_j}}}
+% fabrics
+\renewcommand\l{\ensuremath{\mathcal{L}}}
+\renewcommand\le{\ensuremath{\mathcal{L}_e}}
+\newcommand\lex{\ensuremath{\mathcal{L}_{ex}}}
+\newcommand\ld{\ensuremath{\mathcal{L}_d}}
+\renewcommand\lg{\ensuremath{\mathcal{L}_g}}
+\newcommand\he{\ensuremath{\mathcal{H}_e}}
+\newcommand\hd{\ensuremath{\mathcal{H}_d}}
+\newcommand\dt{\ensuremath{\Delta t}}
+\newcommand\Me{\ensuremath{\mat{M}_{\le}}}
+\newcommand\fe{\ensuremath{\vec{f}_{\le}}}
+\newcommand\Pe{\ensuremath{\mat{P}_{\le}}}
+\newcommand\M{\ensuremath{\mat{M}}}
+\newcommand\Mnh{\ensuremath{\mat{M}_{\textrm{nh}}}}
+\newcommand\I{\ensuremath{\mat{I}}}
+\newcommand\f{\ensuremath{\vec{f}}}
+\newcommand\fnh{\ensuremath{\vec{f}_{\textrm{nh}}}}
+\newcommand\h{\ensuremath{\vec{h}}}
+\newcommand\Spec{\ensuremath{\mathcal{S}}}
+\newcommand\htwo{\ensuremath{\vec{h}_2}}
+\newcommand\Md{\ensuremath{\mat{M}_d}}
+\newcommand\fd{\ensuremath{\vec{f}_d}}
+\newcommand\Mde{\ensuremath{\mat{M}_{de}}}
+\newcommand\fde{\ensuremath{\vec{f}_{de}}}
+\newcommand\forc{\ensuremath{\vec{\psi}}}
+\newcommand\spec{\ensuremath{\left(\M,\f\right)_{\X}}}
+% variables
+\newcommand\x{\ensuremath{\vec{x}}}
+\newcommand\xdot{\ensuremath{\dot{\x}}}
+\newcommand\xddot{\ensuremath{\ddot{\x}}}
+\newcommand\xj{\ensuremath{\vec{x}_j}}
+\newcommand\xjdot{\ensuremath{\dot{\xj}}}
+\newcommand\xjddot{\ensuremath{\ddot{\xj}}}
+\newcommand\xb{\ensuremath{\bar{\vec{x}}}}
+\newcommand\xbdot{\ensuremath{\dot{\xb}}}
+\newcommand\xbddot{\ensuremath{\ddot{\xb}}}
+\newcommand\xt{\ensuremath{\vec{\tilde{x}}}}
+\newcommand\xg{\ensuremath{\vec{\x_\textrm{goal}}}}
+\newcommand\xtdot{\ensuremath{\dot{\xt}}}
+\newcommand\xtddot{\ensuremath{\ddot{\xt}}}
+\newcommand\xr{\ensuremath{\x_{\textrm{rel}}}}
+\newcommand\xrdot{\ensuremath{\dot{\x}_{\textrm{rel}}}}
+\newcommand\xrddot{\ensuremath{\ddot{\x}_{\textrm{rel}}}}
+\newcommand\q{\ensuremath{\vec{q}}}
+\newcommand\qdot{\ensuremath{\dot{\q}}}
+\newcommand\qddot{\ensuremath{\ddot{\q}}}
+\newcommand\qt{\ensuremath{\vec{\tilde{q}}}}
+\newcommand\qtdot{\ensuremath{\dot{\qt}}}
+\newcommand\qtddot{\ensuremath{\ddot{\qt}}}
+\newcommand\fk{\ensuremath{\textrm{fk}}}
+
+
+% trial
+\newcommand\params{\ensuremath{\vec{\Theta}}}
+\newcommand\cost{\ensuremath{c}}
+\newcommand\costestimate{\ensuremath{\tilde{\cost}(\params)}}
+\newcommand\costdist{\ensuremath{\cost_{\textrm{distance}}}}
+\newcommand\costpath{\ensuremath{\cost_{\textrm{path}}}}
+\newcommand\costcol{\ensuremath{\cost_{\textrm{clearance}}}}
+\newcommand\weight{\ensuremath{w}}
+\newcommand\weightdist{\ensuremath{\weight_{\textrm{distance}}}}
+\newcommand\weightpath{\ensuremath{\weight_{\textrm{path}}}}
+\newcommand\weightcol{\ensuremath{\weight_{\textrm{clearance}}}}
+\newcommand\trial{\ensuremath{\mathcal{T}}}
+\newcommand\mpp{\ensuremath{\mathcal{MP}}}
+\newcommand\paramsmp{\ensuremath{\params_{\mpp}}}
+\newcommand\planner{\ensuremath{\mathcal{P}}}
+\newcommand\kgeocol{\ensuremath{k_{\textrm{geo,col}}}}
+\newcommand\expgeocol{\ensuremath{\beta_{\textrm{geo,col}}}}
+\newcommand\kfincol{\ensuremath{k_{\textrm{fin,col}}}}
+\newcommand\expfincol{\ensuremath{\beta_{\textrm{fin,col}}}}
+\newcommand\kgeolimit{\ensuremath{k_{\textrm{geo,limit}}}}
+\newcommand\expgeolimit{\ensuremath{\beta_{\textrm{geo,limit}}}}
+\newcommand\kfinlimit{\ensuremath{k_{\textrm{fin,limit}}}}
+\newcommand\expfinlimit{\ensuremath{\beta_{\textrm{fin,limit}}}}
+\newcommand\kgeoself{\ensuremath{k_{\textrm{geo,self}}}}
+\newcommand\expgeoself{\ensuremath{\beta_{\textrm{geo,self}}}}
+\newcommand\kfinself{\ensuremath{k_{\textrm{fin,self}}}}
+\newcommand\expfinself{\ensuremath{\beta_{\textrm{fin,self}}}}
+\newcommand\baseinertia{\ensuremath{m_{\textrm{base}}}}
+\newcommand\kattractor{\ensuremath{k_{\textrm{attractor}}}}
+\newcommand\Bmax{\ensuremath{\mat{B}_{\textrm{max}}}}
+\newcommand\Bmin{\ensuremath{\mat{B}_{\textrm{min}}}}
+\newcommand\alphaex{\ensuremath{\alpha_{\textrm{ex}}}}
+\newcommand\alphale{\ensuremath{\alpha_{\le}}}
+\newcommand\alphab{\ensuremath{\alpha_{\beta}}}
+\newcommand\exfactor{\ensuremath{v_{ex}}}
+\newcommand\radiusshift{\ensuremath{r_{shift}}}
+
+
+\newcommand\J{\ensuremath{\mat{J}_{\phi}}}
+\newcommand\Jt{\ensuremath{\mat{J}^T_{\phi}}}
+\newcommand\Jdot{\ensuremath{\dot{\mat{J}}_{\phi}}}
+\newcommand\Jnh{\ensuremath{\mat{J}_{\textrm{nh}}}}
+\newcommand\Jnht{\ensuremath{\mat{J}^T_{\textrm{nh}}}}
+\newcommand\Jnhdot{\ensuremath{\dot{\mat{J}}_{\textrm{nh}}}}
+\newcommand{\map}{\ensuremath{\phi}}
+\newcommand{\mapt}{\ensuremath{\phi_t(\vec{q})}}
+\newcommand{\mapd}{\ensuremath{\phi_d}}
+\newcommand{\g}{\ensuremath{\vec{g}(t)}}
+\newcommand{\gp}{\ensuremath{\vec{g}^{\prime}(t)}}
+\newcommand{\gpp}{\ensuremath{\vec{g}^{\prime\prime}(t)}}
+% operators
+\newcommand{\pull}[2]{\textrm{pull}_{#1}{#2}}
+\newcommand{\energize}[2]{\textrm{energize}_{#1}{#2}}
+\newcommand{\der}[2]{\partial_{#1}#2}
+\newcommand{\dertwo}[2]{\partial^2_{#1}#2}
+\newcommand{\derf}[2]{\frac{\partial#2}{\partial#1}}
+\newcommand{\derftwo}[3]{\frac{\partial^2#3}{\partial#1\partial#2}}
+\newcommand{\dert}[1]{\frac{d}{dt}#1}
+\newcommand{\pinv}[1]{#1^{\dagger}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\abs}[1]{\lVert#1\rVert}
+\newcommand\mat[1]{\ensuremath{\bm{#1}}}
+\renewcommand\vec[1]{\ensuremath{\bm{#1}}}
+\newcommand\switching[2]{\ensuremath{{\vec{s}_{#1}(#2)}}}
+\newcommand\sign[1]{\ensuremath{\textrm{sgn}(#1)}}
+
+
+% Namings
+\newcommand{\panda}{Panda robot}
+\newcommand{\boxer}{Clearpath Boxer}
+\newcommand{\ros}{ROS}
+\newcommand{\optuna}{Optuna}
+\newcommand{\reachingontable}{\textit{reaching-on-table}}
+\newcommand{\reachinginring}{\textit{reaching-in-ring}}
+
+% Commenting
+\definecolor{OliveGreen}{rgb}{0,0.6,0}
+\newcommand{\MS}[1]{\textbf{{\color{OliveGreen}{{#1}}}}} % Max Answers
+
+% Tracking changes
+\iftrackchanges \newcommand{\changed}[2][]{{\color{blue}{#2}}} \else \newcommand{\changed}[2][]{#2} \fi
+%\iftrackchanges \newcommand{\deleted}[2][]{{\color{red}{#2}}} \else \newcommand{\deleted}[2][]{} \fi
+\iftrackchanges \newcommand{\deleted}[2][]{} \else \newcommand{\deleted}[2][]{} \fi
+
+% acronyms
+\acrodef{mpc}[MPC]{Model Predictive Control}
+\acrodef{sf}[SF]{Static Fabrics}
+\acrodef{df}[DF]{Dynamic Fabrics}
 
 % text
 \newcommand{\tn}[1]{\textnormal{#1}}
@@ -62,60 +207,4 @@
 \newcommand{\cX}{\mathcal{X}}
 \newcommand{\cY}{\mathcal{Y}}
 \newcommand{\cZ}{\mathcal{Z}}
-% numbers set
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\E}{\mathbb{E}}
-\newcommand{\I}{\mathbb{I}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\Z}{\mathbb{Z}}
-% statistics
-\newcommand{\hx}{\hat{\mathbf{x}}}
-\newcommand{\hp}{\hat{\mathbf{p}}}
-\newcommand{\hv}{\hat{\mathbf{v}}}
-\newcommand{\pr}{\textnormal{Pr}}
-\newcommand{\Gau}{\mathcal{N}}
-% operator
-\newcommand\normtwo[1]{\left\|#1\right\|_2}         % Big norm ||#||_2
-\newcommand\norminf[1]{\left\|#1\right\|_{\infty}}  % Big norm ||#||
-\newcommand\abs[1]{\left|#1\right|}                 % Big abs, determinant
-\newcommand{\diag}{\mathop{\mathrm{diag}}}
-\newcommand{\rank}{\textbf{rank}}
-\newcommand{\atwo}{\mathrm{atan2}}
-% special symbols
-\newcommand{\eps}{\varepsilon}
-% arrow
-\newcommand{\ra}{\rightarrow}
-\newcommand{\Ra}{\Rightarrow}
-\newcommand{\la}{\leftarrow}
-\newcommand{\La}{\Leftarrow}
-\newcommand{\lra}{\leftrightarrow}
-\newcommand{\Lra}{\Leftrightarrow}
-% others
-\newcommand{\zero}{\mathbf{0}}
-\newcommand{\one}{\mathbf{1}}
-\newcommand{\half}{\frac{1}{2}}
-\newcommand{\todo}[1]{\textcolor{red}{\textbf{TODO: #1}}}
 
-%Pazocal
-\newcommand{\A}{\pazocal{A}}
-\newcommand{\B}{\pazocal{B}}
-
-%% theorems
-% \newtheorem{theorem}{\textbf{Theorem}}
-% \newtheorem{lemma}{\textbf{Lemma}}
-% \newtheorem{remark}{\textbf{Remark}}
-% \newtheorem{definition}{\textbf{Definition}}
-% \newtheorem{assumption}{\textbf{Assumption}}
-% \newtheorem{problem}{\textbf{Problem}}
-% \newtheorem{constraint}{\textbf{Constraint}}
-% \newtheorem{proposition}{\textbf{Proposition}}
-\newtheorem{theorem}{\textbf{\textit{Theorem}}}
-\newtheorem{lemma}{\textbf{\textit{Lemma}}}
-\newtheorem{remark}{\textbf{\textit{Remark}}}
-\newtheorem{definition}{\textbf{\textit{Definition}}}
-\newtheorem{assumption}{\textbf{\textit{Assumption}}}
-\newtheorem{problem}{\textbf{\textit{Problem}}}
-\newtheorem{constraint}{\textbf{\textit{Constraint}}}
-\newtheorem{proposition}{\textbf{\textit{Proposition}}}
