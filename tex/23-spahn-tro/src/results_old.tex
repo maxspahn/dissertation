@@ -1,0 +1,365 @@
+In this part, experimental results on dynamic are presented and compared to findings in
+\cite{Ratliff2020}. This empirical evidence confirming the theoritical findings highlights
+the potential of the proposed dynamic fabrics. As the main advantage of dynamic fabrics
+lays in the ability to integrate global plans in taskspace, we will use model predictive
+control as a baseline. MPC offers trajectory following in the task space and is therefore
+suited for comparasion. Besides, comparisions to static fabrics, as presented in
+\cite{Ratliff2020} will be done. If not noted differently, the following motion planning
+methods are compared:
+\begin{compactitem}
+  \item (static) fabrics as proposed in \cite{Ratliff2020}
+  \item Model predictive control with $N=30, \Delta t=0.2$
+  \item dynamic fabrics with time variant potentials
+\end{compactitem}
+
+\section{Point robots}%
+\label{sec:point_robots}
+
+The first experimental setup constists of a point mass operating in
+the 2D-plane. Environments with different number of obstacles will be evaluated using the
+different motion planning methods.
+
+\subsection{General setup}%
+\label{sub:general_setup}
+
+Throughout this entire section some parameters will remain unchanged. A set of 10
+particles (point robots) is given the same target and environment. All entities in this
+set differ only by the initial velocity direction. The initial configuration is set to
+$\q_0 = [3, 2]^T$ and $\norm{\qdot_0} = 1.0$. The velocity vectors are distributed
+uniformly over the interval $[-\pi, \pi]$. The different initial velocities are
+represented by different colors in plots. The goal position is set to $\q_{g} = [-2,
+-1]^T$ for all of the following expirements. A fourth-order Runge-Kutta forward integration
+schemes was used. The step size was fixed to $\dt = 0.01$ and a total time of $T=15s$ is
+simulated. The boundaries in the joint space are respected using one-dimensional distance
+task spaces as described in \cite{Ratliff2020}.
+
+\subsection{Local minima}%
+\label{sub:local_minima}
+
+We introduce two different obstacle configurations for this robot.
+\begin{compactitem}
+  \item one obstacle at $\q_{o,1} = [0.5, 0.0]^T$ with radius $r=0.8$
+  \item two obstacles at $\q_{o,1} = [0.5, 0.0]^T$ and
+          $\q_{o,2} = [0.0, 1.0]^T$, both with radius $r=0.8$
+\end{compactitem}
+The resulting trajectories are plotted in \cref{fig:pointRobot_static}.
+\begin{figure}
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{pointRobot/static/output_trajectories}
+  \end{center}
+  \caption{trajectories}
+  \label{fig:pointRobot_static_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{pointRobot/static/output_solvertimes}
+  \end{center}
+  \caption{solvertimes}
+  \label{fig:pointRobot_static_solvertimes}
+  \end{subfigure}
+  \caption{Two different scenaries with one and two obstacles respectively. The generated
+trajectories are on the right. Different colors represent different initial moving
+directions. Using fabrics as proposed in \cite{Ratliff2020} in the top row and model
+predicitive control in the bottom row. The distribution of the solving times are
+visualized on the right side.}%
+  \label{fig:pointRobot_static}
+\end{figure}
+
+\subsection{Dynamic fabrics using basic splines}
+
+To overcome the problem of local minima, we make use of simple basic splines. For the
+above described problem, three control points are sufficient.
+This spline is applied to MPC and fabrics to guide the robots. The resulting trajectories
+and solver times are visualized in \cref{fig:pointRobot_dynamic}.
+\begin{figure}
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{pointRobot/dynamic/output_trajectories}
+  \end{center}
+  \caption{trajectories}
+  \label{fig:pointRobot_dynamic_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{pointRobot/dynamic/output_solvertimes}
+  \end{center}
+  \caption{solvertimes}
+  \label{fig:pointRobot_dynamic_solvertimes}
+  \end{subfigure}
+  \caption{Given a goal position and a corresponding basic spline, dynamic fabrics and MPC
+succeed at avoiding the obstacle. Solvertimes are visualized on the right side.}%
+  \label{fig:pointRobot_dynamic}
+\end{figure}
+
+\subsection{Obstructed spline}%
+\label{sub:obstructed_spline}
+
+While splines introduce global knowledge, it must be ensured that generated motions are
+remain safe when the global plan is infeasible. An example is visualized in
+\cref{fig:pointRobot_dynamic_obstruction}.
+\begin{figure}
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{pointRobot/dynamic_obstruction/output_trajectories}
+  \end{center}
+  \caption{trajectories}
+  \label{fig:pointRobot_dynamic_obstruction_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{pointRobot/dynamic_obstruction/output_solvertimes}
+  \end{center}
+  \caption{solvertimes}
+  \label{fig:pointRobot_dynami_obstructionc_solvertimes}
+  \end{subfigure}
+  \caption{Given a goal position and a corresponding basic spline (thick green), dynamic fabrics and MPC
+succeed at avoiding the obstacle. Solvertimes are visualized on the right side.}%
+  \label{fig:pointRobot_dynamic_obstruction}
+\end{figure}
+
+
+
+
+
+\subsection{Discussion}
+
+In the presence of one convex obstacle (or a set of seperated convex obstacles), fabrics
+with static attractors show good behavior conforming the findings in \cite{Ratliff2020}.
+However, if two obstacles form a non-convex shape, the point is attracted to the potential
+directly and thus trapped in the local minimum. Note, that collision avoidance is stil
+achieved at all time. Given the same task, an MPC is able to solve both motion planning
+problems with any difficulty. The time horizon allows to circumnavigate both obstacles
+smoothly at the cost of having slightly higher solving times
+\cref{fig:pointRobot_static_solvertimes}.
+
+When a global plan is integrated in the form of a basic spline, the problem of local
+minima is solved.
+This should not be suprising as
+global planning introduce global, prior knowledge to the motion planning. However,
+fabrics, in the original work, have not been equipped with the ability to integrate global
+planning using time parametrized global paths. Equally, the MPC solves the same guided
+motion planning successfully with comparable solver times, see
+\cref{fig:pointRobot_dynamic}.
+Both methods remain safe when the global paths is obstructed by a third obstacles with
+similar solving times, see \cref{fig:pointRobot_dynamic_obstruction}
+
+\section{Planar robots: static arms}
+Next, various planar kinematic chains will be investigated in combination with the three
+presented methods (static fabrics, MPC, dynamic fabrics). Initially, the task space is
+defined as the position of the end-effector, i.e. the 2D-plane. In the presented examples,
+the goal is defined as $\x_{g} = [2, 3]^T$. The following kinematic chains are compared:
+\begin{compactitem}
+  \item four-link arm with $l_i = 1.0$
+  \item five-link arm with $l_i = 1.0$
+\end{compactitem}
+
+Collision avoidance is defined for the multiple points on the robot to ensure safety.
+Specifically, for the MPC, inequality constraints for the end point of each link as well as their
+center points are formulated for every obstacles. Similarly, obstacle avoiding geometries
+are specified for the same points and all obstacles for the fabrics.
+
+\begin{figure}
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[height=1.0\linewidth]{planarRobot/n4/static/output}
+  \end{center}
+  \caption{Trajectories}
+  \label{fig:planarRobot_n4_static_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[height=1.0\linewidth]{planarRobot/n4/static/output_solvertimes}
+  \end{center}
+  \caption{Solvertimes}
+  \label{fig:planarRobot_n4_static_solvertimes}
+  \end{subfigure}
+  \caption{Results for planar robot with four links ($l_i = 1$). On the right,
+end-effector trajectories are shown in red. The initial configuration is visualized in
+green, an intermediate configuration in light grey and the finial configuration in black.
+The green circle is the end-effector goal. Boxplots on the right show solving times for
+both methods.}%
+  \label{fig:planarRobot_n4_static}
+\end{figure}
+
+\iffalse
+\begin{figure}
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[height=1.0\linewidth]{planarRobot/n4/dynamic/output}
+  \end{center}
+  \caption{Trajectories}
+  \label{fig:planarRobot_n5_dynamic_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[height=1.0\linewidth]{planarRobot/n4/dynamic/output_solvertimes}
+  \end{center}
+  \caption{Solvertimes}
+  \label{fig:planarRobot_n4_dynamic_solvertimes}
+  \end{subfigure}
+  \caption{Results for planar robot with four links using basic splines as global
+guidance. Both methods allow following the global path. Solvertimes (right) highlight the
+difference between fabric and MPC.}%
+  \label{fig:planarRobot_n4_dynamic}
+\end{figure}
+\fi
+
+\begin{figure}
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[height=1.0\linewidth]{planarRobot/n5/static/output}
+  \end{center}
+  \caption{trajectories}
+  \label{fig:planarRobot_n5_static_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[height=1.0\linewidth]{planarRobot/n5/static/output_solvertimes}
+  \end{center}
+  \caption{solvertimes}
+  \label{fig:planarRobot_n5_static_solvertimes}
+  \end{subfigure}
+  \caption{Results for planar robot with five links ($l_i=1.0$) for one ore two obstacles.
+Trajectories for static fabrics (top row) and MPC (bottom row) are attracted to the local
+minumum and become stationary when two obstacles are present. Solvertimes for static
+fabrics are about a sixth of those of MPC (right plot).}%
+  \label{fig:planarRobot_n5_static}
+\end{figure}
+
+\begin{figure}
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[height=1.0\linewidth]{planarRobot/n5/dynamic/output}
+  \end{center}
+  \caption{trajectories}
+  \label{fig:planarRobot_n5_dynamic_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.5\textwidth}
+  \begin{center}
+    \includegraphics[height=1.0\linewidth]{planarRobot/n5/dynamic/output_solvertimes}
+  \end{center}
+  \caption{solvertimes}
+  \label{fig:planarRobot_n5_dynamic_solvertimes}
+  \end{subfigure}
+  \caption{Results for planar robot with five links given end-effector guidance (green
+curve). Using the prior, global knowledge fabric and MPC circumnavigate both obstacles
+with different solving times (right).}%
+  \label{fig:planarRobot_n5_dynamic}
+\end{figure}
+
+\subsection{Discussion}
+Fabrics and MPC schemes allow to directly formulate motion planning goals in the
+workspace while also integrating collision avoidance for arbitrary links on the kinematic
+chain, see \cref{fig:planarRobot_n4_static_trajectories}. Opposito to point masses, solver
+times for MPC are about three times higher for $n=4$ compared to fabrics
+(\cref{fig:planarRobot_n4_static_solvertimes}).
+
+Both methods, as local planning methods, are prone to get trapped in local minima, as
+observed for $n=5$ in \cref{fig:planarRobot_n5_static_trajectories}.
+Levereging dynamic fabrics, fabrics can overcome this shortcoming, similarly to trajectory
+following using MPC \cref{fig:planarRobot_n5_dynamic_trajectories}. However, dynamic
+fabrics show significantly lower solver times compared to MPC in this case
+(\cref{fig:planarRobot_n5_dynamic_solvertimes}).
+
+\section{Franka Emika Panda}
+In this section, results for a real robot are presented. The environment consists of a
+Franka Emika Panda robot and five obstacles. The compared methods are, as before, static
+fabrics, MPC and dynamic fabrics. In the first experiment, the obstacles are placed in a
+way that both MPC and static succeed without guiding. For the second experiment, the scene
+is more occluded by the obstacles. This environment is kept while introducing spline
+guiding in the third experiment for the MPC and dynamic fabrics. Obstacle avoidance is
+realized using distance functions between the obstacles and all links on the kinematic
+chain for all methods. Results are quantified using the position plots of the
+end-effector, minimal distance to the obstacles and solver times.
+The results are visualized in
+\cref{fig:pandaRobot_static,fig:pandaRobot_static_infeasible,fig:pandaRobot_dynamic}.
+
+\begin{figure}
+  \begin{subfigure}[]{0.3\textwidth}
+  \begin{center}
+    \includegraphics[height=2.0\linewidth]{pandaRobot/static/output_ee}
+  \end{center}
+  \caption{Trajectories}
+  \label{fig:pandaRobot_static_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.3\textwidth}
+  \begin{center}
+    \includegraphics[height=2.0\linewidth]{pandaRobot/static/output_distances}
+  \end{center}
+  \caption{Clearance}
+  \label{fig:pandaRobot_static_distances}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.3\textwidth}
+  \begin{center}
+    \includegraphics[height=2.0\linewidth]{pandaRobot/static/output_solvertimes}
+  \end{center}
+  \caption{Solvertimes}
+  \label{fig:pandaRobot_static_solvertimes}
+  \end{subfigure}
+  \caption{Results for panda robot. From left to right: End-effector position and goal in
+dashed lines(left). Clearance computed as minimum distance between any link and any
+obstacle in the environment (center). Solving times (right).
+}%
+  \label{fig:pandaRobot_static}
+\end{figure}
+
+\begin{figure}
+  \begin{subfigure}[]{0.3\textwidth}
+  \begin{center}
+    \includegraphics[height=2.0\linewidth]{pandaRobot/static_infeasible/output_ee}
+  \end{center}
+  \caption{Trajectories}
+  \label{fig:pandaRobot_static_infeasible_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.3\textwidth}
+  \begin{center}
+    \includegraphics[height=2.0\linewidth]{pandaRobot/static_infeasible/output_distances}
+  \end{center}
+  \caption{Clearance}
+  \label{fig:pandaRobot_static_infeasible_distances}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.3\textwidth}
+  \begin{center}
+    \includegraphics[height=2.0\linewidth]{pandaRobot/static_infeasible/output_solvertimes}
+  \end{center}
+  \caption{Solvertimes}
+  \label{fig:pandaRobot_static_infeasible_solvertimes}
+  \end{subfigure}
+  \caption{Results for panda robot. From left to right: End-effector position and goal in
+dashed lines(left). Clearance computed as minimum distance between any link and any
+obstacle in the environment (center). Solving times (right).
+}%
+  \label{fig:pandaRobot_static_infeasible}
+\end{figure}
+
+\begin{figure}
+  \begin{subfigure}[]{0.3\textwidth}
+  \begin{center}
+    \includegraphics[height=2.0\linewidth]{pandaRobot/dynamic/output_ee}
+  \end{center}
+  \caption{Trajectories}
+  \label{fig:pandaRobot_dynamic_trajectories}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.3\textwidth}
+  \begin{center}
+    \includegraphics[height=2.0\linewidth]{pandaRobot/dynamic/output_distances}
+  \end{center}
+  \caption{Clearance}
+  \label{fig:pandaRobot_dynamic_distances}
+  \end{subfigure}%
+  \begin{subfigure}[]{0.3\textwidth}
+  \begin{center}
+    \includegraphics[height=2.0\linewidth]{pandaRobot/dynamic/output_solvertimes}
+  \end{center}
+  \caption{Solvertimes}
+  \label{fig:pandaRobot_dynamic_solvertimes}
+  \end{subfigure}
+  \caption{Results for panda robot with dynamic fabrics and equally guided MPC.
+From left to right: End-effector position and goal in
+dashed lines(left). Clearance computed as minimum distance between any link and any
+obstacle in the environment (center). Solving times (right).
+}%
+  \label{fig:pandaRobot_dynamic}
+\end{figure}
+
