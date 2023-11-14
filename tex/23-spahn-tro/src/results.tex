@@ -1,0 +1,103 @@
+\section{Experimental results}%
+\label{sec:experimental_results}
+%
+\begin{figure*}[ht]
+  \centering
+  \begin{subfigure}{0.33\linewidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{3_moving_obstacles/realPanda/dynamic_fabrics_optitrack_1.png}
+    \caption{$t=0$s}%
+    \label{subfig:experiment3_realPanda_example_1}
+  \end{subfigure}%
+  \begin{subfigure}{0.33\linewidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{3_moving_obstacles/realPanda/dynamic_fabrics_optitrack_2.png}
+    \caption{$t=2$s}%
+    \label{subfig:experiment3_realPanda_example_1}
+  \end{subfigure}%
+  \begin{subfigure}{0.33\linewidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{3_moving_obstacles/realPanda/dynamic_fabrics_optitrack_3.png}
+    \caption{$t=3$s}
+    \label{subfig:experiment3_realPanda_example_1}
+  \end{subfigure}%
+  \caption{\acl{df} in the presence of a human. The human hand's state is estimated with a motion capture
+    system. The robot smoothly and in advance avoids the human operator and allows for safe coexistence.
+  }%
+  \label{fig:experiment6_realPanda}
+\end{figure*}
+
+In this section, the performance of optimization fabrics is assessed on various
+robotic platforms. Although~\cite{Ratliff2020} suggested performance benefits
+over optimization-based methods to local motion planning, no quantitative
+comparisons have been presented to this date. 
+The scenarios that we have chosen here (especially in the 
+first two experiments) are intentionally simple to identify the specific
+differences. In the real world experiments, we show the differences
+on more dynamic scenarios, where the limited frequency of a global
+planning method, such as RRT, justifies the need for a local planning method.
+To give a general idea of the
+performance differences between \ac{sf} and receding-horizon trajectory
+optimization, we compare the performance of an \ac{mpc} formulation, adapted
+from~\cite{Spahn2021}, with \ac{sf}, as proposed in~\cite{Ratliff2020}.  The
+second experiment compares performance between \ac{sf} and \ac{df} for
+trajectory following tasks. In the third experiment, moving obstacles are added
+to the scene to form a dynamic environment. Our extension to non-holonomic
+systems is tested in the fourth experiment. Then, everything is combined in
+an experiment with a differential drive mobile manipulator.
+Finally, we present a possible application of a robot sharing the environment
+with a human.
+The experiments described here are supported by videos accompanying this paper.
+
+\subsection{Settings \& performance metrics}%
+\label{sub:settings}
+
+We present a detailed analysis of the experimental results for two commonly used setups,
+namely the \textit{Franka Emika Panda}, a \textit{Clearpath Boxer}, and a mobile manipulator
+composed of both components
+see~\cite{Spahn2021}. Note, that these
+robots are representative of commonly used robots in dynamic environments. The
+Franka Emika Panda is a 7 degree-of-freedom robot with joint torque sensors, comparable to the
+Kuka Iiwa. Mobile manipulators equipped with differential drives are widely used by other
+manufacturers, see Pal Robotics Tiago or the Fetch Robotics Mobile Manipulator.
+%Results on simpler kinematic chains can be found in
+%\cref{app:sec:complete_list_of_experiments}.
+
+Compared to~\cite{Cheng2018}, we propose a more extensive list of metrics.
+With regards to safety, we measure the \textbf{Clearance}, the minimum distance
+between the robot and any obstacle along the path.
+%Moreover, \textbf{Self-Clearance} is defined as the minimum distance between
+%any two links of the robot.
+For static goals, solver planner performance is measured in terms of
+\textbf{Path Length}, euclidean length of the end-effector trajectory, and
+\textbf{Time-to-Goal}, time to reach the goal. For trajectory following tasks,
+this measure\ is replaced by \textbf{Summed Error}, the normed sum of deviation
+from the desired trajectory. Computational costs are measured by the average
+\textbf{Solver Time} in each time step. Most important, binary success is
+measured by the \textbf{Success Rate}, where failure indicates that either the
+goal was not reached or a collision occurred during execution. Performance
+metrics are only evaluated if the concerned motion generator succeeded.
+More information on the testbed can be found in \cite{spahn2022local}.
+ 
+In static, industrial environments the time to reach the goal can be considered
+the one single most important metric, but we argue that dynamic environments
+require a more nuanced performance evaluation and thus a set of metrics.
+Intentionally, we do not give general weights to the individual metrics, as
+their corresponding importance highly depends on the application. As a
+consequence, we tuned the compared planners in such a way that they reach the
+goal in a similar time. Note that the general speed for all planners compared
+in this article can be adjusted by choosing a different parameter setup.
+
+As this work does not focus on obstacle detection, we simplify
+obstacles to spheres. Thus, we assume that an operational perception
+pipeline detects obstacles and constructs englobing spheres.
+The experiments are randomized in either the location of the obstacles, the location of the
+goal, the initial configuration, or in a combination of all three aspects.
+For every experiment, the type and level of randomization are stated.
+
+\input{23-spahn-tro/src/results_exp1}
+\input{23-spahn-tro/src/results_exp2}
+\input{23-spahn-tro/src/results_exp3}
+\input{23-spahn-tro/src/results_exp4}
+\input{23-spahn-tro/src/results_exp5}
+\input{23-spahn-tro/src/results_exp6}

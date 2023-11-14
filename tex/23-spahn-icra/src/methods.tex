@@ -1,0 +1,210 @@
+\section{Symbolic fabrics}
+\label{sec:symbolic_fabrics}
+%
+A trajectory generator that is based on optimization fabrics is composed of several components, such as collision
+avoidance, joint limit avoidance, goal attraction, etc. Each component contributes
+to the resulting optimization fabric through the metric-weighted summation that creates the tree of fabrics.
+The trajectory generator is parameterized by the individual terms of the components.
+Here, we lay out the parameterization for collision
+avoidance, joint limit avoidance, self-collision avoidance, and speed-control.
+In our framework, the tree of
+fabrics is generated before runtime as a symbolic expression, to which the parameters are set at runtime.
+Note that the approach of symbolic pre-solving results in much higher planning frequencies.
+In the following, we explain the individual parameters that we exposed symbolically. The form of the 
+individual terms is adapted from \cite{Ratliff2020,Xie2021,Wyk2022} but written in a symbolic form.
+
+\paragraph{Basic inertia}
+The final tree of fabrics is equipped with a basic inertia metric that indicates how reactive the entire 
+motion is. This basic inertia metric is derived from the symbolic Finsler structure:
+$\le = 0.5\baseinertia\qdot^{T}\I\qdot$.
+
+\paragraph{Collision avoidance}
+For collision avoidance, the task manifold \X{} is defined by the distance function between an obstacle and 
+a robot link. The differential map used is defined as
+\[
+    \map_{\textrm{i}}(\q) = \frac{\norm{\fk_{\textrm{i}}(\q) - \x_{\textrm{obst}}}}{r_{\textrm{obst}} + r_{\textrm{i}}} - 1,
+\]
+where $\fk_{\textrm{i}}(\q)$ is the positional forward kinematics for link $i$ in a configuration \q{},
+$r_{\textrm{obst}}$ and $r_{\textrm{i}}$ are the radii of the englobing
+spheres for the obstacle and the link respectively. 
+While this mapping between configuration space and task manifold is different for each obstacle and each
+collision link of the robot, the geometry and metric are the same for all of them.
+For the geometry 
+$\xddot + \vec{h}(\x,\xdot) = \vec{0}$, we use the parameterized forcing term
+\begin{equation}
+    \vec{h}(\x,\xdot) = \frac{-\kgeocol}{\x^{\expgeocol}}\xdot^2,
+\end{equation}
+where \kgeocol{} and \expgeocol{} are parameters of the trajectory generator. Generally, we use $k$ and $\beta$ for
+proportional parameters and exponential parameters.
+The Finsler structure for collision avoidance is parameterized as 
+\begin{equation}
+    \le(\x,\xdot) = \frac{\kfincol}{\x^{\expfincol}} \left(-0.5 (\sign{\xdot} - 1)\right) \xdot^2,
+\end{equation}
+where $\sign{\xdot}$ is the signum-operator returning the sign of \xdot{}.
+
+\paragraph{Self-collision avoidance}
+For self-collision avoidance, the task manifold \X{} is 
+defined similarly to collision avoidance:
+\[
+    \map_{i,j} = \frac{\norm{\fk_i(\q) - \fk_j(\q)}}{r_i + r_j} - 1,
+\]
+where $\fk_i(\q)$ and $\fk_j(\q)$ are the positional forward kinematics of the two links
+for a self-collision pair and $r_i$ and $r_j$ are the 
+radii for both englobing spheres.
+The geometries are defined analogously 
+\begin{equation}
+    \vec{h}(\x,\xdot) = \frac{-\kgeoself}{\x^{\expgeoself}}\xdot^2.
+\end{equation}
+The Finsler structure for collision avoidance is parameterized as 
+\begin{equation}
+    \le(\x,\xdot) = \frac{\kfinself}{\x^{\expfinself}} \left(-0.5 (\sign{\xdot} - 1)\right) \xdot^2.
+\end{equation}
+
+\paragraph{Joint limit avoidance}
+For joint-limit avoidance, two simple differential maps
+denoting the distance to the joint limits are used, specifically
+\begin{align*}
+    \map_{\textrm{limit,i,lower}}(\q) &= \q_{i} - \q_{\textrm{min,i}},\forall i \in (1,\dots,n)\\
+    \map_{\textrm{limit,i,upper}}(\q) &= \q_{\textrm{max,i}} - \q_i,\forall i \in (1,\dots,n).
+\end{align*}
+Similar to collision avoidance, we use the parameterized forcing term
+\begin{equation}
+    \vec{h}(\x,\xdot) = \frac{-\kgeolimit}{\x^{\expgeolimit}}\xdot^2
+\end{equation}
+and the Finsler structure
+\begin{equation}
+    \le(\x,\xdot) = \frac{\kfinlimit}{\x^{\expfinlimit}} \left(-0.5 (\sign{\xdot} - 1)\right) \xdot^2.
+\end{equation}
+
+%\paragraph*{Goal attraction}
+%The speed at which the robot is approaching the goal is mainly defined by the attractor potential. Similar
+%to \cite{Ratliff2020}, we use the following attractor potential:
+%\begin{equation}
+%    \psi(\x,\xdot) = \kattractor \left(\norm{\x} + \frac{1}{10}\log(1 + \exp(-20 \norm{\x}))\right).
+%\end{equation}
+%
+\paragraph{Speed control}
+%
+As the root of the tree of fabrics is a frictionless fabric, it only converges if damped \cite{Ratliff2020}. 
+Constant damping is sufficient to achieve the theoretical properties that are needed for trajectory generation.
+However, \cite{Ratliff2020,Wyk2022,Ratliff2021} proposed enhanced damping under the name of \textit{speedcontrol}. 
+We employ the same damping strategy while adding parameterization. The technique is based on a
+dynamic damping modification based on the distance to the goal. Specifically, the final optimization fabric
+is damped according to 
+\[
+    \qddot = -\vec{h}_2 - \M^{-1}\der{\q}{\forc} + \alphaex\qdot - \beta\qdot, 
+\]
+where $\vec{h}_2$ is the sum of all pulled forcing terms, \M{} is the sum of 
+all metrics of the individual geometries,
+$\der{\q}{\forc}$ is the goal attraction term pulled in the configuration space, 
+$\alphaex$ is a weighted sum of $\alphaex^0$
+that maintains constant execution energy without goal attraction
+and $\alphaex^{\forc}$ that maintains constant execution
+energy with goal attraction:
+\[
+    \alphaex = \switching{\eta}{\lex}\alphaex^0 + (1-\switching{\eta}{\lex})\alphaex^{\forc}.
+\]
+%
+Then, $\beta$ is the damping term, computed as:
+\[
+    \beta = \switching{\beta}{\q}\Bmax + \Bmin + \max(0, \alphaex - \alphale),
+\]
+where \Bmax{} and \Bmin{} are the upper and lower damping values and
+\alphale{} is the energization coefficient maintaining
+constant system energy (not execution energy) without goal attraction. 
+The switching functions \switching{\beta}{\q}, \switching{\eta}{\q} are further parameterized as
+\begin{align*}
+    \switching{\beta}{\q} &= 0.5(\tanh{-\alphab(\abs{\q} - \radiusshift)) + 1}\\
+    \switching{\eta}{\lex} &= 0.5(\tanh{\left(-0.5 \lex (1 - \exfactor) - 0.5\right)} + 1),
+\end{align*}
+where \radiusshift{} determines the distance to the goal at which the switch between \Bmin{} and \Bmax{} occurs,
+\alphab{} is the steepness of that switching, \lex{} is the user-defined execution energy (usually a simple
+kinetic energy in joint space) and \exfactor{} is the execution energy factor, i.e. it determines the desired speed
+of motion.
+For a detailed discussion on speed control with optimization fabrics, we refer
+to previous works on optimization fabrics \cite{Wyk2022,Ratliff2020}.
+
+We group all parameters resulting from the symbolic fabrics defined here into 
+a vector of parameters \params{}. 
+All parameters are listed in \cref{tab:search_space}.
+
+\section{Parameter tuning as an optimization problem}
+\label{sec:tuning}
+%
+We define parameter tuning as a constrained optimization problem:
+\begin{equation}
+    \params^{\ast} = \arg\min_{\params}\cost(\params),\ 
+    \textrm{s.t}\ \params_{\textrm{min}} < \params < \params_{\textrm{max}},
+    \label{eq:optimization_problem}
+\end{equation}
+where $\params_{\textrm{max}}$ and $\params_{\textrm{min}}$ are the upper and lower bounds of the parameters.
+The objective $\cost(\params)$ is a function of the parameters specifying the tree of fabrics and can 
+be evaluated after one trajectory planning problem has finished. We call the evaluation of one parameter set
+a \textit{trial}.
+Next, we propose an objective function that is flexible
+as different scenarios may require different parameter tuning.
+%
+\subsection{Objective}
+%
+The objective function $\cost(\params)$ is a weighted sum of
+several metrics, that are invariant to the robot:
+\begin{equation}
+    \cost(\params) = 
+      \weightdist\costdist
+    + \weightpath\costpath
+    + \weightcol\costcol.
+    \label{eq:optimization_objective}
+\end{equation}
+
+\costdist{} accounts for the normalized, summed distance to the goal over one trial and is defined as
+\begin{equation}
+    \costdist = \frac{\sum_{i=0}^{T} \norm{\x_i - \xg}}{\norm{\x_0 - \xg}},
+\end{equation}
+where $i\in[0, T]$ are the discretized time steps and $\xg$ is the goal of the motion planning problem.
+\costpath{} accounts for the normalized path length over one trial and is defined as
+\begin{equation}
+    \costpath = \frac{\sum_{i=1}^{T} \norm{\x_i - \x_{i-1}}}{\norm{\x_0 - \xg}}.
+\end{equation}
+\costcol{} accounts for the average clearance to obstacles over one trial and is defined as
+\begin{equation}
+    \costcol = \frac{1}{T}\sum_{i=1}^{T} \min_{o^j}\norm{\x_i - o^j_i)}, 
+\end{equation}
+where $o^j_i$ is the position of obstacle $j$ at time step $i$.
+Each of these terms is evaluated after an entire trial that was obtained by a specific set of parameters.
+%
+\begin{algorithm}
+\SetAlgoLined
+Formulate trajectory generator with parameters $\params$\\
+Define parameter space by $\params_{\textrm{min}},\params_{\textrm{max}}$\\
+Formulate objective $\cost(\params)$\\
+Initialize objective function estimate \costestimate{} \\
+\For{i = 0 to N}{
+    Suggest parameter $\params_i$ based on \costestimate{}\\
+    \For{t = 0 to T}{
+        Compute action with parameter set $\params_i$\\
+        Apply action to robot\\
+        Store observation relevant for metrics\\
+    }
+    Evaluate $\cost(\params_i)$\\
+    Update \costestimate{}\\
+}
+Extract the best parameter set $\params_{\textrm{best}}$\\
+\caption{Autotuning for trajectory generators}
+\label{algo:autotuning}
+\end{algorithm}
+%
+\subsection{Bayesian optimization}
+\label{sub:bayesian_optimization}
+%
+In the tuning phase, the problem specification for the investigated scenario,
+e.g., the goal and obstacle positions, across all trials during tuning remains
+the same while \params{} are optimized according to the objective. To solve the
+Bayesian optimization we employ the \textit{Tree-structured Parzen Estimator} as
+it has shown improved performance over grid-search and conventional random
+search in machine learning applications
+\cite{turner2021bayesian,bergstra_algorithms_nodate}. To deploy this technique
+we used \optuna{}, a hyperparameter optimization framework initially designed
+for machine learning applications \cite{optuna}. The general setup for one trial
+is shown in \cref{fig:overview} and the procedure is summarized in
+\cref{algo:autotuning}. 
+%

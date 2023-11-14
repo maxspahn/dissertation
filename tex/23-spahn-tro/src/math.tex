@@ -1,0 +1,197 @@
+\section{Background}%
+\label{sec:mathematics}
+
+In the previous section, we have highlighted that optimization fabrics represent a
+powerful tool for reactive motion generation. Since we generalize this concept, this
+section aims at familiarizing the reader with key findings on optimization fabrics and
+recalling some of the basic notations known from differential geometry. 
+We first give an overview on how optimization fabrics are used for motion generation
+and how the components are derived and composed. Then the theoretical foundations
+are summarized from \cite{Cheng2020,Ratliff2020}.
+
+\subsection{Motion generation using optimization fabrics}%
+\label{sub:trajectory_generation_using_optimization_fabrics}
+
+When using optimization fabrics for motion generation, all components including constraints and 
+goal attraction are designed as second order differential equations. If specific design
+rules for these equations are respected, all components can be combined to 
+form a converging motion generator. Specifically, the following steps are performed:
+%
+\begin{enumerate}
+  \item Design path-consistent geometries in suited manifolds of the configuration space
+    (\cref{eq:homogeneous}).
+  \item Design corresponding Finsler energies defining the importance metric in this manifold
+    (\cref{sub:conservative_fabrics_and_energization}).
+  \item Energize all geometries with the associated Finsler energies 
+    (\cref{sub:conservative_fabrics_and_energization}).
+  \item Pull back the energized systems into the configuration space and sum them 
+    (\cref{sub:operations_on_specs}).
+  \item Force the combined system with a differentiable potential. As a composition of optimization fabrics, 
+    the resulting trajectory converges towards the potential's minimum
+    (\cref{sub:optimization_fabrics}).
+\end{enumerate}
+In the following, we introduce the reader to the theory of optimization fabrics
+and recall important findings from \cite{Ratliff2020}.
+
+\subsection{Configurations and task variables}%
+\label{sub:configurations_and_task_variables}
+
+We denote $\q\in\Q\subset\Rn$ a
+configuration of the robot with $n$ its degrees of freedom; \Q{} is the configuration space of the generalized coordinates
+of the system. Generally, $\q(t)$ defines the robot's configuration at time $t$, so that 
+\qdot, \qddot{} define the instantaneous derivatives of the robot's configuration.
+Similarly, we assume
+that there is a set of task variables $\xj\in\Xj\subset\Rmj$ with variable dimension
+$m_j \leq n$. The task manifold \Xj{} defines an arbitrary manifold of the configuration
+space \Q{} in which a robotic task can be represented. 
+Further, we assume that there is a differential map
+$\map_j:\Rn\rightarrow\Rmj$ that relates the configuration space to the $j^{th}$ task
+space. For example, when a task variable is defined as the end-effector position, then
+$\map_j$ is the positional part of the forward kinematics. On the other hand, if a task
+variable is defined to be the joint position, then $\map_j$ is the identity function. 
+In the following, we drop the subscript $j$ in most cases for readability when the
+context is clear.
+
+In this work, we assume that \map{} is smooth and twice differentiable so that the Jacobian is
+defined as
+\begin{equation}
+  \J = \derf{\q}{\map} \in \mathcal{R}^{m\times n}, 
+\end{equation}
+or $\J = \der{\q}{\map}$ for short.
+Thus, we can write the total time derivatives of \x{} as
+\begin{align}
+  \xdot &= \J\qdot \\
+  \xddot &= \J\qddot + \Jdot\qdot.
+\end{align}
+
+\subsection{Spectral semi-sprays}%
+\label{sub:spectral_semi_sprays}
+
+Inspired by simple mechanics (e.g., the simple pendulum), the framework of optimization
+fabrics designs motion generation as second-order dynamical
+systems $\xddot = \pi(\x,\xdot)$~\cite{Cheng2020,Ratliff2020}. While higher-order systems seem feasible, their
+implementation on robots is much more challenging, as higher order configuration space
+derivatives would be required. The trajectory generator is defined by the differential equation
+$\M\xddot + \f = 0$, where $\M(\x,\xdot)$ and $\f(\x,\xdot)$ are functions of position and
+velocity. Besides, \M{} is symmetric and invertible. Such systems $\Spec = \spec$ are
+known as \textit{spectral semi-sprays}, or \textit{specs} for short.  When the space of
+the task variable is clear from the context, we drop the subscript.  Then, the trajectory
+is computed as the solution to the system $\xddot=-\M^{-1}\f$.
+
+\subsection{Operations on specs}%
+\label{sub:operations_on_specs}
+Next, the two fundamental operations for specs, transformation between spaces and
+summation, are introduced.
+
+Given a differential map $\map: \Q\rightarrow\X$ and a spec \spec{}, the \textit{pullback}
+is defined as 
+\begin{equation}
+  \pull{\map}{\spec} = {\left(\Jt\M\J, \Jt(\f+\M\Jdot\qdot)\right)}_{Q}.
+\end{equation}
+The pullback allows converting between two distinct manifolds (e.g. a spec could be 
+defined in the robot's workspace and being pulled into the robot's configuration space using
+the pullback with \map{} being the forward kinematics).
+
+For two specs, $\Spec_1 = {\left(\M_1,\f_1\right)}_{\X}$ and 
+$\Spec_2 = {\left(\M_2,\f_2\right)}_{\X}$, their \textit{summation} is defined by:
+\begin{equation}
+  \Spec_1 + \Spec_2 = {\left(\M_1 + \M_2, \f_1 + \f_2\right)}_{\X}.
+\end{equation}
+
+\subsection{Optimization fabrics}%
+\label{sub:optimization_fabrics}
+
+Optimization fabrics form a special class of specs, and thus they inherit their properties,
+specifically the previously defined operations of \textit{summation} and \textit{pullback}.
+First, let us introduce a finite and differentiable potential
+function $\forc(\x)$ defined in a task manifold \X{}. 
+Then, the modified spec $\Spec_{\forc} = \left(\M,\f + \der{\x}{\forc}\right)$
+is called the \textit{forced variant} of $\Spec = \spec$.
+Only if the trajectory $\x(t)$ generated by the forced spec converges to the minimum of \forc{}, 
+the spec is said to form an \textit{optimization fabric}.
+When the spec only converges to the minimum when equipped with a damping term,
+$\left(\M,\f + \der{\x}{\forc} + \mat{B}\xdot\right)$, 
+it forms a \textit{frictionless fabric}~\cite[Definition 4.4]{Ratliff2020}. 
+Note that the mechanical system of a pendulum forms a frictionless fabric, as it optimizes
+the potential function defined by gravity when being damped (i.e., it eventually comes to
+rest at the configuration with minimal potential energy)
+%, see Appendix
+%\ref{app:sub:motion_as_second_order_systems} for a detailed discussion on the single
+%pendulum).
+
+In the following, methods to construct optimization fabrics, or \textit{fabrics} for
+short, are summarized: the definitions of conservative fabrics and energization are
+introduced.
+
+\subsection{Conservative fabrics and energization}%
+\label{sub:conservative_fabrics_and_energization}
+
+While the previous subsection defined what criteria are required for a spec to form
+an optimization fabric, the theory on conservative fabrics and energization 
+offers a simple way of generating such special specs. As a full summary of the theory
+on optimization fabrics and their construction is out of scope here, this
+subsection only provides an outline of the theory and the reader is referred to 
+\cite{Ratliff2021,Wyk2022} for detailed derivations.
+
+In the context of fabrics, the term \textit{energy} describes a scalar quantity that
+changes as the system evolves over time.  Although this quantity has a physical meaning in
+natural systems (e.g., kinetic energy), it can be arbitrarily defined for motion generation.
+Generally, specs and optimization fabrics do not conserve an energy, but when they do, we
+call them \textit{conservative specs}.  A stationary Lagrangian~\cite[Definition
+4.11]{Ratliff2020} is one definition for an energy for which the corresponding spec, known
+as the Lagrangian spec $\Spec_{\le} = \left(\Me,\fe\right)$, is obtained by applying the
+Euler-Lagrange equations. Importantly, Lagrangian specs conserve energy and do thus belong
+to the class of \textit{conservative specs}.  It was proven that an unbiased
+(\cite[Definition~4.11]{Ratliff2020}) Lagrangian spec forms a frictionless
+fabric~\cite[Proposition~4.18]{Ratliff2020}. Such fabrics are analogously called
+\textit{conservative fabrics}.  There are two classes of conservative fabrics: Lagrangian
+fabrics (i.e., the defining energy is a Lagrangian) and the more specific subclass of
+Finsler fabrics (i.e., the
+defining energy is a Finsler structure~\cite[Definition 5.4]{Ratliff2020}). 
+
+The operation of \textit{energization} transforms a given differential equation into
+a conservative spec.
+Specifically, given an unbiased energy Lagrangian \le{} with boundary conforming
+\Me{}~\cite[Definition~4.6]{Ratliff2020} and
+lower bounded energy \he{}, an unbiased spec of form $\Spec_{\vec{h}} = (\mat{I},\vec{h})$
+is transformed into a frictionless fabric using energization as
+\begin{equation}
+  \begin{split}
+  S_{\vec{h}}^{\le} &= \text{energize}_{\le}\{S_{\vec{h}}\} \\
+    &= (\Me, \fe + \Pe[\Me\vec{h} - \fe]), 
+  \end{split}
+\end{equation}
+where $\Pe = \Me\left(\Me^{-1} - \frac{\xdot\xdot^T}{\xdot^T\Me\xdot}\right)$ is an
+orthogonal projector.
+Energized specs maintain the energy of the Lagrangian and generally change
+the trajectory of the underlying spec $\Spec_{\vec{h}}$.
+However, if 
+\begin{enumerate}
+  \item $\Spec_{\vec{h}} = (\mat{I},\vec{h})$ is homogeneous of degree 2,
+    \begin{equation}\vec{h}(\x, \alpha\xdot) = \alpha^2\vec{h}(\x, \xdot)\label{eq:homogeneous}\end{equation}
+    and
+  \item the energizing Lagrangian is a Finsler structure, 
+\end{enumerate}
+the resulting energized spec forms a frictionless fabric for which the trajectory matches
+the original trajectory of $\Spec_{\vec{h}}$. We refer to energized fabrics with that
+property as \textit{geometric fabrics}. Geometric fabrics form the building blocks for
+motion generation with optimization fabrics.
+Practically, energization equips the individual components of the planning problem
+with a metric when being combined with other components.
+
+
+\subsection{Experimental results fabrics}%
+\label{sub:experimental_results_fabrics}
+
+The theory explained above was tested on several simple kinematic chains
+in~\cite{Ratliff2020,Ratliff2021}. As fabrics design motion as a summation of several
+differential equations, each representing a specific constraint to the motion, it is
+possible to sequentially design motion~\cite{Ratliff2020}. This procedure allows to
+carefully tune individual components without harming the others. The application to a
+planar arm in a goal-reaching setup was successfully tested in~\cite{Ratliff2020}. Here,
+the authors illustrated how the resulting motion can be modified arbitrarily by the user
+by adding additional constraints or preferences.
+
+Although important concepts and findings on optimization fabrics were summarized in this
+section, we refer to~\cite{Ratliff2020} for a more in-depth presentation of optimization
+fabrics. In the following, we generalize the framework of optimization fabrics to dynamic settings.

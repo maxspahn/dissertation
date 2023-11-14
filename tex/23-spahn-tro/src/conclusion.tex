@@ -1,0 +1,41 @@
+\section{Conclusion}%
+\label{sec:conclusion}
+
+In this paper, we have generalized optimization fabrics to dynamic
+environments. We have proven that our proposed \acl{df} are convergent to
+reference paths and can thus compute motion for path following tasks
+(\cref{lem:dynamically_energized_fabrics}). Besides, we have proposed an
+extension to optimization fabrics (and thus also \ac{df}) for
+non-holonomic robots. This allows the application of this framework to a wider
+range of robotic applications and ultimately allows the deployment to many
+mobile manipulators in dynamic environments.
+
+These theoretical findings were confirmed in various experiments. First, the
+quantitative comparisons showed that \acl{sf} outperforms \ac{mpc} in terms of
+solver time while maintaining similar performance in terms of goal-reaching and
+success rate. 
+The improved performance with optimization fabrics might be caused
+by the different metric for goal
+reaching compared to \acl{mpc}. An integration of
+non-Riemannian metrics into an MPC formulation should be further
+investigated in the future.
+
+Verifying our theoretical derivations for \ac{df}, the experiments
+showed that the deviation error for path following tasks is decreased compared
+to \ac{sf}. Similarly, environments with moving obstacles and humans showed
+increased clearance while maintaining low computational costs and execution
+times. Thus, \ac{df} overcome an important drawback of
+\ac{sf}~\cite{Ratliff2020,Wyk2022}, where collision avoidance with moving
+obstacle is solved purely by the high frequency at which optimization fabrics
+can be computed. Moreover, the generalization did not increase the solving time
+compared to \ac{sf}. Unlike the original work on optimization fabrics, this
+generalization allows the deployment to dynamic environments where velocity
+estimates of moving obstacles are available.
+
+Direct sensor integration in optimization fabrics might be feasible in future
+works to overcome the shortcomings of perception pipelines for collision
+avoidance. For the trajectory path tasks in this paper, we
+used a simple global path generated in workspace. As \ac{df} integrate
+global path in arbitrary manifolds, improving the global planning phase could
+be further investigated. We expect this to be beneficial when robotics tasks
+are constantly changing and task planning is required.
