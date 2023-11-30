@@ -1,0 +1,45 @@
+\documentclass{TUD-dissertation2020}
+
+\usepackage[style=apa,refsection=chapter]{biblatex}
+\input{used_packages}
+
+\addbibresource{dissertation.bib}
+
+\input{graphics_paths}
+\newif\iftrackchanges
+
+\begin{document}
+\trackchangesfalse
+
+\input{commands}
+
+%% Specify the title and author of the thesis. This information will be used on
+%% the title page (in title/title.tex) and in the metadata of the final PDF.
+\title[Geometric Control]{Coupled Local Motion Planning for Mobile Manipulators}
+\author{Max}{Spahn}
+\maketitle
+
+%% Use Roman numerals for the page numbers of the title pages and table of
+%% contents.
+\frontmatter
+
+
+%% Use Arabic numerals for the page numbers of the chapters.
+\mainmatter
+
+%% Turn on thumb indices.
+\thumbtrue
+
+\input{introduction/chapterwise}
+
+
+%% Use letters for the chapter numbers of the appendices.
+\appendix
+
+%\include{appendix-a/appendix-a}
+
+%% Turn off thumb indices for unnumbered chapters.
+\thumbfalse
+
+\end{document}
+

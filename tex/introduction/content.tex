@@ -1,0 +1,184 @@
+\chapter{Introduction} % (fold)
+\label{cha:Introduction}
+
+%	- ~1 context with issues arising
+%	- (~ 0.5 common approaches)
+%	- (~ 1 specifics to the case studies)
+%	- ~1.5 common approaches and drawbacks (high-level)
+%	- ~1 page new method intro high-level
+%	- ~0.5 RQ/contributions
+%	- ~0.5 overview
+
+\section{Structure}
+
+Problem in society
+\begin{enumerate}
+  \item Aging modern societies, changing demographics
+  \item Shortage of cheap labour or nobody willing to do physically challenging
+  task
+  \item while advancements in natural language processing and computer vision
+  led to large improvements, emobodied systems are still dull and simplistic
+  \item the raise of collaboraitev robots promises safe robots that are
+  inherently safe in the proximity of humans
+  \item the concept of mobile manipulation, whether legged or on wheels, gives
+  robotic hardware the same capabilities as humans, sparking the hope that
+  labour shortage can be compensated with such systems
+\end{enumerate}
+Robotics as solution
+\begin{enumerate}
+  \item Robots to take over dull work, such as operating warehouses, restocking
+  shelf, package delivery, food harvesting, etc
+  \item Robots can work endless hours
+  \item Robots are yet to be deployed in human-shared environments because of
+  dynamics of such environments and safety constraints
+  \item One important part for deploying robots in human shared environments is
+  trajectory generation, what commands to send to the motors such that the robot
+  is getting closer to its goal
+  \item concluding, the hardware is capable of being deployed, but the methods
+  for generating safe trajectories is yet to be found
+\end{enumerate}
+Common approaches and their drawbacks
+\begin{enumerate}
+  \item behind fences: linear motions or once-computed collision free global paths
+  \item this approach works independent of duration for planning as it is done
+  once
+  \item such approaches fail to cope with changing environments
+  \item lead to the raise of local trajectory generation methods
+  \item pure control approaches, such as operational space control or impedence
+  control, are fast and explainable but fail to integrate the full problem,
+  including self-collision avoidance, collision-avoidance
+  \item method centered around optimization problem, consisting of an objective
+  function and constraints is favorable for safety guarantees and optimizality
+  \item optimization-based methods have shown great sucess in autonomous driving
+  but fail to meet real-time constraints for systems with more degrees of
+  freedome
+  \item learning based approaches are popular in the age of deep neural networks
+  but fail to meet often fail to meet safety constraints and tend to overfit
+  to the trained use-case, lack generalizability
+\end{enumerate}
+Geometric encoding as intermediate between control and trajectory generation
+\begin{enumerate}
+  \item trajectory generation must be reactive and generalizable
+  \item cartesian impedance control offers a very fast way, but does not include
+  many important components
+  \item in cartesian impedence control, we model the problem as a spring-damper
+  system
+  \item that system is effectively a differential equation of second order for
+  goal attraction
+  \item the same could be done for any other components of trajectory generation
+  \item set of ode's representing all the components
+  \item the combinations describes a space in which some regions are desirable
+  and some are not desirable
+  \item the entire configuration space is thus equipped with a metric
+  \item this shaped space is the encoding on which we can move towards a goal
+  \item implicitevly solving for most components
+  \item this concept has been formulaized as optimization fabrics
+\end{enumerate}
+Layout of this thesis
+\begin{enumerate}
+  \item introduction to optimization based techniques, specifically model
+  predictive control
+  \item introduction to differential geometry and optimization fabrics for
+  trajectory generation
+  \item model predictive control for whole-body control, this chapter highlights
+  the issues with optimization-based methods
+  \item dynamic optimization fabrics, this chapter makes important
+  generalizations of fabrics to dynamic environments  
+  \item symbolic optimization fabrics and automate tuning
+  \item conclusion
+\end{enumerate}
+
+\section{Robots under the eyes of demographic change}
+
+In a world grappling with the challenges of an aging population, shifting
+demographics, and a scarcity of affordable labor for physically demanding tasks,
+the need for technological solutions is more pronounced than ever. While
+strides in natural language processing and computer vision have significantly
+improved our office activities, embodied systems still
+lag behind in sophistication.
+
+Traditional robotic systems, though capable in certain tasks, often lack the
+nuanced understanding and adaptability required for dynamic, human-shared
+environments. The emergence of collaborative robots promises
+safety in close proximity to humans. These robots are designed to interact
+seamlessly and safely with their human counterparts, fostering a new era of
+cooperation between man and machine. 
+% This might already be problems
+%While the hardware often gives the
+%impressions of being capable, the algorithms generating autonomy are still
+%failing to meet expectations. To tackle the challenges by demographic changes
+%in modern societies, methods aiming for autonomy are yet to be found.
+
+\subsection{Mobile manipulation}
+
+One key feature of modern robots for human-shared environments, is mobility. The
+combination of highly mobile ground vehicles and manipulators is referred to as
+mobile manipulation. This concept enables robots to navigate and interact with
+their surroundings in ways previously deemed challenging. By endowing robots
+with the ability to move and manipulate objects in diverse environments, we
+further open avenues for addressing the mentioned societal challenges.
+Specifically, mobile manipulators could be used for tasks like warehouse
+operations, restocking shelves, and package delivery to intricate processes like
+food harvesting, robots offer a solution to alleviate humans from monotonous and
+physically demanding work. Their tireless work ethic addresses challenges
+related to labor shortages and reluctance to undertake arduous tasks.
+
+\subsection{Challenges in robotics}
+
+However, despite their potential, robots are noticeably absent from human-shared
+environments. The complexities of such spaces, coupled with safety constraints,
+present formidable challenges. This is where trajectory generation becomes
+pivotal—a fundamental aspect in deploying robots in close proximity to humans.
+It determines the commands sent to the motors, orchestrating a harmonious
+movement that brings the robot closer to its goal while ensuring the safety of
+its human counterparts.
+
+Essentially, while the hardware is ready for deployment, the missing link lies
+in methods for generating trajectories that prioritize safety. This dissertation
+embarks on a journey to unravel this critical aspect of robotics, exploring
+innovative trajectory generation methods that not only unlock the potential of
+robotic hardware but also usher in an era where robots seamlessly coexist with
+humans in shared spaces.
+
+\section{Current Trajectory Generation Landscape: Unpacking Approaches and Their
+Limitations}
+
+In the quest for effective trajectory generation, various methods have emerged,
+each with its set of advantages and drawbacks. A prevalent approach involves
+confining robots behind fences, employing linear motions or precomputed
+collision-free global paths. While such methods are independent of planning
+duration, being computed once, their Achilles' heel lies in their incapacity to
+adapt to dynamic, changing environments.
+
+Recognizing this limitation has spurred the rise of local trajectory generation
+methods. However, even within this domain, challenges persist. Pure control
+approaches, exemplified by operational space control or impedance control, offer
+speed and interpretability but fall short in incorporating the entirety of the
+problem. They struggle with aspects like self-collision avoidance and fail to
+provide a comprehensive solution for collision avoidance in complex
+environments.
+
+Another avenue explored centers around optimization problems, boasting an
+objective function and constraints that favor safety guarantees and optimality.
+While optimization-based methods have demonstrated success in autonomous driving
+applications, they stumble when confronted with real-time constraints in systems
+with increased degrees of freedom.
+
+In the age of deep neural networks, learning-based approaches have gained
+popularity. However, their drawback lies in their tendency to falter concerning
+safety constraints, often succumbing to overfitting specific use cases during
+training and lacking generalizability when confronted with new scenarios.
+
+This dissertation navigates through these existing trajectories, meticulously examining their strengths and limitations. By critically analyzing the shortcomings of current approaches, we pave the way for innovative solutions in trajectory generation that address the ever-evolving challenges of dynamic and shared environments.
+
+In this dissertation, we delve into the heart of mobile manipulation, with a
+particular focus on trajectory generation — a pivotal aspect that dictates the
+path these robots follow. As we explore the intricate dance between technology
+and society, we aim to uncover innovative solutions that not only bridge
+existing gaps but also pave the way for a future where robotic systems
+seamlessly integrate into our daily lives.
+
+
+
+
+

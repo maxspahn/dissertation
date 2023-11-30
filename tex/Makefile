@@ -44,4 +44,11 @@ allclean:
 	rm -f outputs/*.pdf
 	rm -f *.pdf
 
+intro:
+	make dirs
+	pdflatex 24_spahn_introduction_only.tex
+	mv *.pdf outputs
+	make clean
+
+
 
