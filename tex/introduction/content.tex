@@ -9,6 +9,7 @@
 %	- ~0.5 RQ/contributions
 %	- ~0.5 overview
 
+\iffalse
 \section{Structure}
 
 Problem in society
@@ -87,6 +88,7 @@ Layout of this thesis
   \item symbolic optimization fabrics and automate tuning
   \item conclusion
 \end{enumerate}
+\fi
 
 \section{Robots under the eyes of demographic change}
 
@@ -103,11 +105,6 @@ environments. The emergence of collaborative robots promises
 safety in close proximity to humans. These robots are designed to interact
 seamlessly and safely with their human counterparts, fostering a new era of
 cooperation between man and machine. 
-% This might already be problems
-%While the hardware often gives the
-%impressions of being capable, the algorithms generating autonomy are still
-%failing to meet expectations. To tackle the challenges by demographic changes
-%in modern societies, methods aiming for autonomy are yet to be found.
 
 \subsection{Mobile manipulation}
 
@@ -140,45 +137,106 @@ innovative trajectory generation methods that not only unlock the potential of
 robotic hardware but also usher in an era where robots seamlessly coexist with
 humans in shared spaces.
 
-\section{Current Trajectory Generation Landscape: Unpacking Approaches and Their
-Limitations}
+\section{Limitations of current approaches}
 
-In the quest for effective trajectory generation, various methods have emerged,
-each with its set of advantages and drawbacks. A prevalent approach involves
-confining robots behind fences, employing linear motions or precomputed
-collision-free global paths. While such methods are independent of planning
-duration, being computed once, their Achilles' heel lies in their incapacity to
-adapt to dynamic, changing environments.
+In the quest for effective trajectory generation, various
+methods have emerged, each with its set of advantages and
+drawbacks. The classical setup for robots, where they have
+proven to be quite effective, is behind fences. This setup
+simplifies trajectory generation dramatically as collision
+avoidance can be done during the installation process and
+trajectories can remain unchanged for the entire lifetime of
+the robots While such methods are independent of planning
+duration, being computed once, their Achilles' heel lies in
+their incapacity to adapt to dynamic, changing environments.
 
-Recognizing this limitation has spurred the rise of local trajectory generation
-methods. However, even within this domain, challenges persist. Pure control
-approaches, exemplified by operational space control or impedance control, offer
-speed and interpretability but fall short in incorporating the entirety of the
-problem. They struggle with aspects like self-collision avoidance and fail to
-provide a comprehensive solution for collision avoidance in complex
-environments.
+Recognizing this limitation has spurred the rise of local
+trajectory generation methods, especially as robots are
+expected to enter human-shared environments. However, even
+within this domain, challenges persist. Pure control
+approaches, exemplified by operational space control or
+impedance control, offer speed and interpretability but fall
+short in incorporating the entirety of the problem, such as
+collision avoidance with itself and the environment or
+joint limit avoidance.
 
-Another avenue explored centers around optimization problems, boasting an
-objective function and constraints that favor safety guarantees and optimality.
-While optimization-based methods have demonstrated success in autonomous driving
-applications, they stumble when confronted with real-time constraints in systems
-with increased degrees of freedom.
+With the aim for safe robots, many approaches these days
+center around optimization problems, boasting an objective
+function and constraints that favor safety guarantees and
+optimality. Such approaches are often referred to as model
+predictive control schemes or receeding horizon
+optimization. While optimization-based methods have
+demonstrated success in autonomous driving applications,
+they stumble when confronted with real-time constraints in
+systems with increased degrees of freedom.
 
 In the age of deep neural networks, learning-based approaches have gained
-popularity. However, their drawback lies in their tendency to falter concerning
+popularity as they promise similar performance to
+optimization-based techniques. After all, they solve the
+same problem, while changing the naming from objective to
+reward. However, their drawback lies in their tendency to falter concerning
 safety constraints, often succumbing to overfitting specific use cases during
 training and lacking generalizability when confronted with new scenarios.
 
-This dissertation navigates through these existing trajectories, meticulously examining their strengths and limitations. By critically analyzing the shortcomings of current approaches, we pave the way for innovative solutions in trajectory generation that address the ever-evolving challenges of dynamic and shared environments.
+\section{Encoding trajectory generation in geometries}
 
-In this dissertation, we delve into the heart of mobile manipulation, with a
-particular focus on trajectory generation — a pivotal aspect that dictates the
-path these robots follow. As we explore the intricate dance between technology
-and society, we aim to uncover innovative solutions that not only bridge
-existing gaps but also pave the way for a future where robotic systems
-seamlessly integrate into our daily lives.
+It is also possible to formulate trajectory generation as a
+purely geometric problem. One early attempt in that
+direction is referred to as the potential field method,
+where individual components are formulated as `hills' and
+`valleys'. This approach is known to be very fast in terms
+of run-time but only covers the static components of the
+problem, and thus ignores the motion of the robot at each
+time step.
+
+Another notable contender is Cartesian
+impedance control, praised for its rapid responsiveness and
+perceived safety.
+Cartesian impedance control models the the point of interest
+on the kinematic chain, usually the end-effector, as a
+spring-damper-system. In contrast to potential field theory,
+the motion of the robot is thus taken intro consideration.
+However, it falls short by not encompassing crucial
+components vital for a comprehensive trajectory generation
+solution. Modeling the point of interest of the robot as a
+second-order differential equation raises the question
+whether all components of the trajectory generation problem
+can be handled in this way. 
 
 
+In this dissertation, we introduce and extend the framework
+that allows to iteratively design trajectory generation via
+summation of individual behaviors. Individual behaviors are
+designed as differential equations of second order for which
+stability properties are conserved during summation.
+This concept, elegantly formalized as "optimization
+fabrics," offers a nuanced understanding of trajectory
+generation. Informally speaking, the composition shapes the
+landscape on which the trajectory is then generated.
+Formally, speaking we gradually introduce terms into the
+non-Riemannian metric shaping the smooth manifold of the
+configuration space. In this thesis, we provide an important
+extension to dynamic environments and give several use-cases
+for this method.
 
+\section{Outline}
 
-
+After this introduction, this dissertation first introduces
+relevant literature in the field of trajectory generation
+and motion planning. Then, we summarize the required tools
+from optimal control and from differential geometry to
+understand the main chapters. In chapter 4, we explore a
+model predictive control formulation for whole body control
+with a mobile manipulator. We provide important steps to
+handle the complexity of the problem. Then, we derive a
+generalization of optimization fabrics to dynamic
+environments, including contour tracking and avoidance with
+moving obstacles. Chapter 6 highlighs the benefits of
+formulating trajectory generation in a symbolic way to
+improve real-time capabilities and allow for online
+parameter tuning. To relax the requirement for the
+perception pipeline, we layout several ways to intergrate
+implicit environment representations into the framework of
+optimization fabrics in chapter 7. Finally, we conclude this
+thesis by summarizing the findings and giving some
+recommendations for future works.
