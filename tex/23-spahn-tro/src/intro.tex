@@ -25,7 +25,7 @@ with a variety of different goal definitions.
 %1) intro optimization based
 Motion generation is often solved by formulating an optimization problem 
 over a time horizon. The popularity of this approach is partly thanks to
-the guaranteed collision avoidance and thus safety~\cite{Hrovat2012,Hewing2020}.
+the guaranteed collision avoidance and thus safety~\cite{Hrovat2012,hewing2020learning}.
 The optimization problem is then assembled from a scalar objective
 function, encoding the motion planning problem (e.g., the desired final position, path
 constraints, etc.), the transition function, defining the robot’s
@@ -60,7 +60,8 @@ Despite abundant applications of such optimization-based approaches
 to mobile robots, the computational costs limit applicability when dealing with
 high-dimensional configuration spaces~\cite{Bednarczyk2020,Richter2010}.
 Data-driven approaches to speed up the optimization process usually come with
-reduced generalization abilities, loss of formal guarantees~\cite{Hewing2020}
+reduced generalization abilities, loss of formal
+guarantees~\cite{hewing2020learning}
 and require prior, often
 costly, data acquisition. Moreover, due to the scalar objective function, the
 user must carefully weigh up different parts of the objective function. As
