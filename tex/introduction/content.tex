@@ -15,15 +15,15 @@
 Problem in society
 \begin{enumerate}
   \item Aging modern societies, changing demographics
-  \item Shortage of cheap labour or nobody willing to do physically challenging
+  \item Shortage of cheap labor or nobody willing to do physically challenging
   task
   \item while advancements in natural language processing and computer vision
-  led to large improvements, emobodied systems are still dull and simplistic
-  \item the raise of collaboraitev robots promises safe robots that are
+  led to large improvements, embodied systems are still dull and simplistic
+  \item the raise of collaborative robots promises safe robots that are
   inherently safe in the proximity of humans
   \item the concept of mobile manipulation, whether legged or on wheels, gives
   robotic hardware the same capabilities as humans, sparking the hope that
-  labour shortage can be compensated with such systems
+  labor shortage can be compensated with such systems
 \end{enumerate}
 Robotics as solution
 \begin{enumerate}
@@ -45,14 +45,14 @@ Common approaches and their drawbacks
   once
   \item such approaches fail to cope with changing environments
   \item lead to the raise of local trajectory generation methods
-  \item pure control approaches, such as operational space control or impedence
+  \item pure control approaches, such as operational space control or impedance
   control, are fast and explainable but fail to integrate the full problem,
   including self-collision avoidance, collision-avoidance
   \item method centered around optimization problem, consisting of an objective
-  function and constraints is favorable for safety guarantees and optimizality
-  \item optimization-based methods have shown great sucess in autonomous driving
+  function and constraints is favorable for safety guarantees and optimality
+  \item optimization-based methods have shown great success in autonomous driving
   but fail to meet real-time constraints for systems with more degrees of
-  freedome
+  freedom
   \item learning based approaches are popular in the age of deep neural networks
   but fail to meet often fail to meet safety constraints and tend to overfit
   to the trained use-case, lack generalizability
@@ -60,9 +60,9 @@ Common approaches and their drawbacks
 Geometric encoding as intermediate between control and trajectory generation
 \begin{enumerate}
   \item trajectory generation must be reactive and generalizable
-  \item cartesian impedance control offers a very fast way, but does not include
+  \item Cartesian impedance control offers a very fast way, but does not include
   many important components
-  \item in cartesian impedence control, we model the problem as a spring-damper
+  \item in Cartesian impedance control, we model the problem as a spring-damper
   system
   \item that system is effectively a differential equation of second order for
   goal attraction
@@ -72,8 +72,8 @@ Geometric encoding as intermediate between control and trajectory generation
   and some are not desirable
   \item the entire configuration space is thus equipped with a metric
   \item this shaped space is the encoding on which we can move towards a goal
-  \item implicitevly solving for most components
-  \item this concept has been formulaized as optimization fabrics
+  \item implicitly solving for most components
+  \item this concept has been formalized as optimization fabrics
 \end{enumerate}
 Layout of this thesis
 \begin{enumerate}
@@ -108,33 +108,39 @@ cooperation between man and machine.
 
 \subsection{Mobile manipulation}
 
-One key feature of modern robots for human-shared environments, is mobility. The
-combination of highly mobile ground vehicles and manipulators is referred to as
-mobile manipulation. This concept enables robots to navigate and interact with
-their surroundings in ways previously deemed challenging. By endowing robots
-with the ability to move and manipulate objects in diverse environments, we
-further open avenues for addressing the mentioned societal challenges.
-Specifically, mobile manipulators could be used for tasks like warehouse
-operations, restocking shelves, and package delivery to intricate processes like
-food harvesting, robots offer a solution to alleviate humans from monotonous and
-physically demanding work. Their tireless work ethic addresses challenges
-related to labor shortages and reluctance to undertake arduous tasks.
+One key feature of modern robots for human-shared
+environments, is mobility. The combination of highly mobile
+ground vehicles and manipulators is referred to as mobile
+manipulation. This concept enables robots to navigate and
+interact with their surroundings in ways previously deemed
+challenging. By endowing robots with the ability to move and
+manipulate objects in diverse environments, we further open
+avenues for addressing the mentioned societal challenges.
+Specifically, mobile manipulators could be used for tasks
+like warehouse operations, restocking shelves, and package
+delivery to intricate processes like food harvesting. Such
+robots offer a solution to alleviate humans from monotonous
+and physically demanding work and can address challenges
+related to labor shortages and reluctance to undertake
+arduous tasks.
 
 \subsection{Challenges in robotics}
 
 However, despite their potential, robots are noticeably absent from human-shared
 environments. The complexities of such spaces, coupled with safety constraints,
 present formidable challenges. This is where trajectory generation becomes
-pivotal—a fundamental aspect in deploying robots in close proximity to humans.
+pivotal as one of the basic building blocks for robotics
+software stacks.
 It determines the commands sent to the motors, orchestrating a harmonious
-movement that brings the robot closer to its goal while ensuring the safety of
-its human counterparts.
+movement that brings the robot closer to its goal while
+ensuring the safety of itself and its environment.
 
 Essentially, while the hardware is ready for deployment, the missing link lies
-in methods for generating trajectories that prioritize safety. This dissertation
+in methods for generating trajectories that prioritize
+safety while providing high success rates. This dissertation
 embarks on a journey to unravel this critical aspect of robotics, exploring
 innovative trajectory generation methods that not only unlock the potential of
-robotic hardware but also usher in an era where robots seamlessly coexist with
+robotic hardware but also lead to a world where robots seamlessly coexist with
 humans in shared spaces.
 
 \section{Limitations of current approaches}
@@ -146,7 +152,7 @@ proven to be quite effective, is behind fences. This setup
 simplifies trajectory generation dramatically as collision
 avoidance can be done during the installation process and
 trajectories can remain unchanged for the entire lifetime of
-the robots While such methods are independent of planning
+the robots. While such methods are independent of planning
 duration, being computed once, their Achilles' heel lies in
 their incapacity to adapt to dynamic, changing environments.
 
@@ -161,14 +167,15 @@ collision avoidance with itself and the environment or
 joint limit avoidance.
 
 With the aim for safe robots, many approaches these days
-center around optimization problems, boasting an objective
+center around optimization problems, centered around an objective
 function and constraints that favor safety guarantees and
 optimality. Such approaches are often referred to as model
-predictive control schemes or receeding horizon
+predictive control schemes or receding horizon
 optimization. While optimization-based methods have
 demonstrated success in autonomous driving applications,
 they stumble when confronted with real-time constraints in
-systems with increased degrees of freedom.
+systems with increased degrees of freedom due to high
+computational costs.
 
 In the age of deep neural networks, learning-based approaches have gained
 popularity as they promise similar performance to
@@ -192,19 +199,18 @@ time step.
 Another notable contender is Cartesian
 impedance control, praised for its rapid responsiveness and
 perceived safety.
-Cartesian impedance control models the the point of interest
+Cartesian impedance control models the point of interest
 on the kinematic chain, usually the end-effector, as a
 spring-damper-system. In contrast to potential field theory,
 the motion of the robot is thus taken intro consideration.
 However, it falls short by not encompassing crucial
-components vital for a comprehensive trajectory generation
-solution. Modeling the point of interest of the robot as a
+components for a collision-free trajectory generation.
+Modeling the point of interest of the robot as a
 second-order differential equation raises the question
 whether all components of the trajectory generation problem
 can be handled in this way. 
 
-
-In this dissertation, we introduce and extend the framework
+In this dissertation, we introduce and extend a framework
 that allows to iteratively design trajectory generation via
 summation of individual behaviors. Individual behaviors are
 designed as differential equations of second order for which
@@ -213,11 +219,12 @@ This concept, elegantly formalized as "optimization
 fabrics," offers a nuanced understanding of trajectory
 generation. Informally speaking, the composition shapes the
 landscape on which the trajectory is then generated.
-Formally, speaking we gradually introduce terms into the
+Formally speaking, we gradually introduce terms into the
 non-Riemannian metric shaping the smooth manifold of the
 configuration space. In this thesis, we provide an important
 extension to dynamic environments and give several use-cases
 for this method.
+
 
 \section{Outline}
 
@@ -231,12 +238,13 @@ with a mobile manipulator. We provide important steps to
 handle the complexity of the problem. Then, we derive a
 generalization of optimization fabrics to dynamic
 environments, including contour tracking and avoidance with
-moving obstacles. Chapter 6 highlighs the benefits of
+moving obstacles. Chapter 6 highlights the benefits of
 formulating trajectory generation in a symbolic way to
 improve real-time capabilities and allow for online
 parameter tuning. To relax the requirement for the
-perception pipeline, we layout several ways to intergrate
+perception pipeline, we layout several ways to integrate
 implicit environment representations into the framework of
 optimization fabrics in chapter 7. Finally, we conclude this
-thesis by summarizing the findings and giving some
+thesis by summarizing the findings, their potential impact
+on deploying robots in human-shared environments, and giving some
 recommendations for future works.
