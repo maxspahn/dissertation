@@ -9,17 +9,14 @@ propositions:
 	make clean
 
 dirty:
-	make dirs
 	pdflatex $(src)_$(style).tex
 
 bib:
-	make dirs
 	make dirty style=$(style)
 	biber $(src)_$(style)
 	make dirty style=$(style)
 	make dirty style=$(style)
 	mv *.pdf outputs
-	make clean style=$(style)
 
 clean:
 	rm -f *.bcf
