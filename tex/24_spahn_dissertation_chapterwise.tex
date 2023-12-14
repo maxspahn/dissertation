@@ -6,33 +6,11 @@
 \addbibresource{clean.bib}
 
 \input{graphics_paths}
-\newif\iftrackchanges
 
 \begin{document}
-\trackchangesfalse
 
 \input{commands}
-
-%% Specify the title and author of the thesis. This information will be used on
-%% the title page (in title/title.tex) and in the metadata of the final PDF.
-\title[Optional Subtitle]{Title}
-\author{Albert}{Einstein}
-
-%% Use Roman numerals for the page numbers of the title pages and table of
-%% contents.
-\frontmatter
-
-\include{title/title}
-
-%% The (optional) dedication can be used to thank someone or display a
-%% significant quotation.
-\dedication{\epigraph{Science is a wonderful thing \\ if one does not have to earn one's living at it.}{Albert Einstein}}
-
-\setcounter{tocdepth}{1}
-\tableofcontents
-
-\include{summary/summary}
-\include{preface/preface}
+\input{beginning}
 
 %% Use Arabic numerals for the page numbers of the chapters.
 \mainmatter
@@ -42,20 +20,13 @@
 
 \input{chapters_chapterwise}
 
-\include{conclusion/conclusion}
-\include{epilogue/epilogue}
-\include{acks/acks}
+\input{ending}
 
-%% Use letters for the chapter numbers of the appendices.
 \appendix
 
-%\include{appendix-a/appendix-a}
-
-%% Turn off thumb indices for unnumbered chapters.
 \thumbfalse
 
 \include{cv/cv}
 \include{publications/publications}
-
 \end{document}
 

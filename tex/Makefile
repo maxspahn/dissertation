@@ -10,6 +10,7 @@ propositions:
 
 dirty:
 	pdflatex $(src)_$(style).tex
+	mv *.pdf outputs
 
 bib:
 	make dirty style=$(style)

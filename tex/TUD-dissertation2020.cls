@@ -361,7 +361,7 @@
 \titlespacing{\chapter}{0pt}{0pt}{2\baselineskip}
 %% In the table of contents, a chapter is similar to a part, except that it is
 %% preceded by half an empty line.
-\dottedcontents{chapter}[1.5em]{\vspace{0.5\baselineskip}\titlefont\bfseries}{1.5em}{0pc}
+\dottedcontents{chapter}[1.5em]{\vspace{1.5\baselineskip}\titlefont\bfseries}{1.5em}{0pc}
 
 %% Section titles start with the number in bold, followed by the name printed
 %% in the title color.
