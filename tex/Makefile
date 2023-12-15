@@ -1,4 +1,5 @@
 src=24_spahn_dissertation
+intro=24_spahn_introduction_only
 
 dirs:
 	mkdir -p outputs
@@ -44,8 +45,10 @@ allclean:
 
 intro:
 	make dirs
-	pdflatex 24_spahn_introduction_only.tex
-	mv *.pdf outputs
+	pdflatex $(intro).tex
+	biber $(intro)
+	pdflatex $(intro).tex
+	mv $(intro).pdf outputs
 	make clean
 
 
