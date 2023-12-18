@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'introduction/img/drawing.pdf' (pdf, eps, ps)
+%% Accompanies image file 'drawing.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{412.13817054bp}%
+    \setlength{\unitlength}{345.82677165bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,29 +50,24 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.40016297)%
+  \begin{picture}(1,0.90163934)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(-0.85540978,0.80611697){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{3.91157177\unitlength}\raggedright \end{minipage}}}%
-    \put(-0.25763003,0.4662997){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{1.68935492\unitlength}\raggedright \end{minipage}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{introduction/img/drawing.pdf}}%
-    \put(0.18833696,0.35994041){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Optimization-based\end{tabular}}}}%
-    \put(0.19219826,0.14193538){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Geometric Fabrics\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{introduction/img/drawing.pdf}}%
-    \put(0.02282217,0.23636403){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 1:}\\Introduction:\\Mobile\\Manipulation\\and Challenges\\in Robotics\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{introduction/img/drawing.pdf}}%
-    \put(-0.11414995,0.48623371){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{1.17375684\unitlength}\raggedright \end{minipage}}}%
-    \put(0.21980236,0.30080108){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 2:}\\Whole-Body\\MPC\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{introduction/img/drawing.pdf}}%
-    \put(0.2034986,0.08372547){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 3:}\\Dynamic Fabrics\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{introduction/img/drawing.pdf}}%
-    \put(0.37268942,0.08372547){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 4:}\\Symbolic Fabrics\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=6]{introduction/img/drawing.pdf}}%
-    \put(0.59555956,0.08737212){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0\unitlength}\raggedright \end{minipage}}}%
-    \put(0.5535667,0.09141331){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 5:}\\Environments\\with Fabrics\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=7]{introduction/img/drawing.pdf}}%
-    \put(0.74050602,0.23390861){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 6:}\\Demo:\\Application\\to Retail\\Environments\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=8]{introduction/img/drawing.pdf}}%
-    \put(0.87690048,0.24911795){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 7:}\\Conclusion:\\Lessons\\Learned\\from \\four years\\in Robotics\end{tabular}}}}%
+    \put(-1.0909547,1.93603569){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{4.66160565\unitlength}\raggedright \end{minipage}}}%
+    \put(-0.37855221,1.53105932){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{2.01328441\unitlength}\raggedright \end{minipage}}}%
+    \put(-2.30334323,-0.71053302){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{1.1152704\unitlength}\raggedright \end{minipage}}}%
+    \put(-0.4262295,0.63934426){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19672131\unitlength}\raggedright \end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{drawing.pdf}}%
+    \put(0.37845105,0.84523192){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Introduction}\end{tabular}}}}%
+    \put(0.35812866,0.74687126){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Related Works}\end{tabular}}}}%
+    \put(0.16601037,0.65203257){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Background \& Notations}\end{tabular}}}}%
+    \put(0.4804543,0.56253552){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Optimization}\end{tabular}}}}%
+    \put(0.09523132,0.56253552){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Geometric}\\\textbf{Fabrics}\end{tabular}}}}%
+    \put(0.44281825,0.02707785){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Demo}\end{tabular}}}}%
+    \put(0.39490715,0.12392038){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Conclusion}\end{tabular}}}}%
+    \put(0.48150685,0.47515369){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Chapter 2:\\Whole-body MPC\end{tabular}}}}%
+    \put(0.09524289,0.47515369){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Chapter 3:\\Dynamic Fabrics\end{tabular}}}}%
+    \put(0.09611036,0.38429573){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Chapter 4:\\Symbolic Fabrics\end{tabular}}}}%
+    \put(0.09663088,0.29343765){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Chapter 5:\\Environments\\with Fabrics\end{tabular}}}}%
   \end{picture}%
 \endgroup%
