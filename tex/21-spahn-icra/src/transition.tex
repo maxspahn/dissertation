@@ -1,0 +1,15 @@
+Now that we have delved into the crucial literature and established foundational
+notations and concepts for trajectory generation, this chapter involves
+the application of \acl{mpc} to a mobile manipulator.
+Although \ac{mpc} has found application in various domains such as autonomous
+driving, drone navigation, and manipulator control, its implementation for
+mobile manipulators has been hindered by the curse of dimensionality. This
+chapter introduces an environment representation tailored for \ac{mpc},
+demonstrating robustness and scalability with an increasing number of obstacles.
+Unlike the conventional approach of encoding each obstacle as a constraint in
+the optimization problem, we opt for a polygonal representation delineating the
+free space around the robot, thereby confining constraints to a fixed number.
+Additionally, a method for circumventing moving obstacles with mobile
+manipulators is devised through whole-body control, also referred to as
+coupled motion. The efficacy of the proposed approach is validated through
+simulation and substantiated by real-world experiments.
