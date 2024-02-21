@@ -1,0 +1,30 @@
+\section{Lessons Learned and Key Takeaways}
+
+Throughout our project, we have gained valuable insights that inform our approach to deploying robotic systems effectively. These lessons, drawn from hands-on experience, highlight key considerations and strategies we believe essential for successfully implementing robotic software solutions.
+
+\begin{itemize}
+
+    \item \textbf{Human expert trajectories are an efficient way of encoding grasping strategies}: 
+    Through the recording of human expert picking trajectories, we could address a significant portion of collision avoidance challenges and grasping strategies for specific products. This approach effectively allows for the encoding of per product strategies regarding grasp approach, location, and retrieval in a far more streamlined manner compared to traditional hard-coded behaviors. Although the adaptation of recorded trajectories proved successful, we require more complex methods to mitigate remaining failure cases.
+    
+    \item \textbf{Accurate product detection and continuous visual feedback are crucial}:
+    Accurate product detection and pose estimation emerged as critical requirements within the confines of supermarket environments because of the small size of certain products and the lack of clearance. Continuous visual feedback, particularly through visual servoing techniques, played a pivotal role by enabling real-time tracking of products and refining pose estimations as the robotic arm approached the target object.
+
+    \item \textbf{Vacuum grippers may fail with very light and small products}:
+    We underestimated the inherent difficulty in effectively picking very light and small products. This challenge highlights the need for alternative gripping mechanisms or specialized approaches tailored to handling such delicate items.
+
+    \item \textbf{Grasping angles heavily influence seal integrity and stability}:
+    We put particular emphasis on selecting optimal grasping angles to ensure both seal integrity and product stability during suction grasping. Preferably, the grasp should be positioned on a flat side of the product to establish a secure seal while minimizing the risk of product displacement or toppling. A slight angle of approach that gently presses the product against the surface further enhances stability.
+
+    \item \textbf{Compliant robotic arms are key in dynamic environments}:
+    Compliance is essential when safely operating rigid robotic arms in dynamic environments and alongside humans. Beyond safety, compliance also offers inherent forgiveness in the event of grasping failures.Together with our adaptive online task planner, this combination enables our robot to recover or retry autonomously, minimizing the need for human intervention. 
+
+    \item \textbf{Whole body control enhances efficiency}:
+    Whole body (or semi-whole body) control simplifies the task of picking products from diverse shelves within a supermarket setting. The expanded configuration space with the additional degrees of freedom significantly enhances planning efficiency and reliability, thereby streamlining operations.
+
+    \item \textbf{Rapid and iterative software development is imperative}:
+    Rapidly iterating our software directly on the physical robot was a critical success factor for us. Swift iterations serve as a reliable indicator of the eventual outcome. Furthermore, our realistic rest lab environment with anticipated operational conditions enhanced overall system robustness.
+
+    \item \textbf{Lack of high quality mobile manipulators hinders progress}:
+    Contrary to prevailing notions, the development of mobile manipulators present substantial challenges, particularly in research. Existing solutions remain scarce, and researchers are often forced to deal with inaccurate and unreliable mobile bases and robotic arms with short battery lives. Similarly, versatile gripper design is an unsolved research topic. This underscores the need for continued exploration and innovation in this domain to bridge existing gaps and facilitate rapid advancements in robotic research.   
+\end{itemize}

@@ -10,7 +10,7 @@ propositions:
 	mv propositions.pdf outputs
 
 dirty:
-	pdflatex $(src)_$(style).tex
+	pdflatex --shell-escape $(src)_$(style).tex
 	mv *.pdf outputs
 
 bib:

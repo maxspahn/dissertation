@@ -1,0 +1,56 @@
+\iffalse 
+- decisions/assumptions for retail environments
+  - layout known
+  - rough location of products, geometry, mass known in the format of a database
+  - aiming at picking around 0.6 of the products, leaving out fruits and
+  vegetable, very small items, and very heavy items
+  - suction cups for grasping as it is simple and affordable
+  - compliant control because of human-shared environment
+
+- main goals
+  - embrace recovery from failures, they are inevitable in dynamic environments
+  - programming must be ongoing and realized by non-experts
+  - everything should be running on-board
+  - whole body control if advantageous
+
+- hardware
+  - franka emika panda robotic arm
+  - boxer clearpath base
+  - custom build suction gripper with long shaft
+  - realsense D435 camera mounted on end-effector
+  - Intel NUC compute unit
+  - Alienware laptop for perception pipeline
+
+- perception
+  - object detection based on yolo
+  - object classification based on product details
+  - products can be added on-the-fly with one image
+
+- trajectory generation
+  - fabrics
+  - visual servoing for item picking
+  - state-feedback during exuction
+  - recording using constraints in compliant mode
+  - low-level controller: Velocity-PID outputting joint torques
+
+- decision making
+  - based on active inference for decision making
+  - tasks are encoded as required states and action deduced based on that
+
+- side-features
+  - voice-over for real-time self-explanations
+\fi
+
+%As we aim at evaluating recent advancement relevant for mobile manipulation for
+%human-shared environment, we decided to center this work around order-picking in
+%supermarkets during opening-hours. Based on this, we can derive certain
+%assumptions and decisions that guided our decisions throughout this work.
+%In the following, we enumerate assumptions and justify them in the
+%context of retail-environments. Then we explain the used-methods and their
+%adaption to this application.
+
+
+
+
+
+

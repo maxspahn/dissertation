@@ -1,0 +1,158 @@
+\section{Validation}
+\label{sec:results}
+
+To evaluate the performance and how well our robot adapts, we validated our robot in picking customer orders in two realistic environments.
+Our driving validation questions were:
+\begin{enumerate}
+    \item What is the success rate of our robot?
+    \item What are causes for failures of the robot?
+    \item How well did the robot recover from disturbances?
+\end{enumerate}
+We first describe the two validation environments, followed by summarizing the robot's performance and  how it recovered from introduced disturbances such as misplaced items.
+A video showcasing our robot can be found in the paper's supplementary material.
+
+
+% \MW{speaking: I think we want to show/list \textit{which}
+% disturbances the system can recover from. When showing the
+% demo, the most impressive features are the successful
+% recoveries from blocking the arm, moving or stealing the
+% product, and I would want to convey that sense of
+% impressiveness in the results section. You might be able to
+% do so with the recording of a single, continuous run where
+% all these perturbations occur, so you can point them out.
+% Not sure though how to present this compactly yet
+% convincingly.}
+
+
+
+
+
+\subsection{Validation environments}
+We evaluated our robot in two different, realistic but controlled environments: 
+\paragraph{AIRLab (see \cref{fig:layouts})}
+Our \emph{AI for Retail} (AIRLab) environment is a university laboratory at TU Delft that resembles parts of real supermarkets of our Dutch retail partner.
+AIRLab has OEM shelves and products. 
+We used this environment to develop and validate our system during development.
+
+\paragraph{Realistic store}
+We also validated our robot in a realistic validation store of our Dutch retail partner that is used by their development teams for testing before moving into their real stores.  
+For confidentiality, we cannot show this store in the paper.
+The main differences to AIRLab are a larger number of products in the shelves that are also more densely packed.
+Moreover, the shelves also contained product information tags. 
+We prepared one full day in this store to validate our system, including creating a map, scanning available products, and connecting to the product database.
+\begin{table}[b]
+    \centering
+    \caption{Number of successful (suc.) and recovered (rec.) task goals and action attempts for picking and placing (the more complex actions). 
+    }
+    \label{tab:recoveries}
+    \begin{tabular}{ccccccc}
+        \toprule
+         & \multicolumn{2}{c}{AIP-goal} &
+        \multicolumn{2}{c}{picking} &
+        \multicolumn{2}{c}{placing} \\
+        \midrule
+        & suc. & rec. & suc. & rec. & suc. & rec. \\
+        %\hline
+        AIRLab & 50 & 9 & 45 & 9 & 43 & 2 \\
+        Realistic store & 90 & 26 & 98 & 25 & 90 & 6 \\
+        \bottomrule
+    \end{tabular}   
+\end{table}
+\subsection{Performance}
+Performance is  evaluated by success rate. Orders are
+divided into \textit{success}, i.e. the entire order was
+successfully collected and returned to the client, \textit{partial success}, i.e., at least one product was not collected and at least one was collected,
+and \textit{failure},
+i.e., no product was collected. Besides, we inform the reader
+about the failure reasons and the number of products a
+successful order contained. For each action, we 
+report execution times and how many 
+failures were recovered by the adaptive task assignment
+method, see \cref{tab:recoveries}.
+
+
+\subsection{Success rate and recoveries}
+
+
+
+% \subsection{Mock Store}
+% \label{sub:mock_store}
+
+Our evaluation in a lab-like environment reveals that we can
+achieve a success rate of about 60\% for few-items orders,
+see \cref{fig:success_lab}. Additionally, we observe that
+most failures are caused by the picking-action.
+In \cref{tab:recoveries}, we see that recoveries, i.e., a skill failed at least ones before it succeeded, were common. Thus, it shows that decision-making that is able to deal with disturbances is essential in this sort of application.
+Investigating the 
+execution times, it can be seen that `picking' is also the action
+that takes most time in collecting an item, roughly $50$s on average between starting the grasp at its completion, 
+see \cref{fig:timings_lab}.
+\begin{figure}
+\begin{subfigure}[b]{1\linewidth}
+    \centering
+    \includesvg[width=\linewidth]{success_lab}
+    \caption{Success-rate across order sizes and failure causes ($N=10$).}
+    \label{fig:success_lab}
+  \end{subfigure}
+\begin{subfigure}[b]{1\linewidth}
+    \centering%
+     \includesvg[width=0.8\linewidth]{timings_lab}
+    \caption{Execution times in seconds of actions ($N=67$).}
+    \label{fig:timings_lab}
+  \end{subfigure}
+  \caption{Success-rate and action execution times in AIRLab environment.}
+\end{figure}
+
+A remarkable property of our system is its reliability and fault tolerance at a very low computational cost. This relies on our multi-level approach to adaptability and recovery from disturbances and runtime uncertainties:
+\paragraph{Skill level} Our Skills are adaptive to disturbances such as sensor noise, to which our object recognition is robust, or physical disturbances. Examples of the latter are the ability of our compliant arm control to accommodate someone holding it ---e.g., if an operator identifies an issue with the item being picked by the robot and wants to take it from the robot--- or the visual serving enabled by our object detection and trajectory generation that continuously adapts the motions in case the position of the object changes in the field of view of the robot.
+\begin{figure}[t]
+\begin{subfigure}[b]{1\linewidth}
+    \centering
+    \includesvg[width=\linewidth]{success_zandam}
+    \caption{Success-rate across order sizes and failure causes ($N=44$).}
+    \label{fig:success_zandam}
+  \end{subfigure}
+\begin{subfigure}[b]{1\linewidth}
+    \centering%
+     \includesvg[width=0.8\linewidth]{timings_zandam}
+    \caption{Execution times in seconds of actions ($N=99$).}
+    \label{fig:timings_real}
+  \end{subfigure}
+  \caption{Success-rate and action execution times in \realsupermarket.}
+\end{figure}
+\paragraph{Task execution level}
+If the adaptability of the skills falls short of accounting for a disturbance, e.g., the operator took the item from the robot. It is now out of its field of view; failing to detect the item, our extremely reactive online planner would generate an alternative sequence of actions to achieve the desired intermediate subgoal belief state of the item being in sight, resulting in the trajectory generation component smoothly transitioning to a trajectory for the end effector to look for another instance of that item in the shelf.
+The formulation of the online planning problem in terms of desired states instead of actions results in a failure recovery behaviour that is easier to scale since there is no need to re-write an entire application-specific logic, which is the case in solutions based on state machines, but one can extend the definition of the planning problem with new states and eventually new actions if new skills are developed for the robot.
+
+\paragraph{Task plan level} The behaviour tree structure with pre-defined recoveries in case a subgoal fails to re-try it up to three times, e.g., getting an item into the basket, ensures a reasonable trade-off of reliability and performance, e.g., most of the time the second attempt to pick and item was enough. If the third attempt fails, most likely, the item can not be grasped. This heuristic is computationally simple and easily adjusts to new items, e.g., allowing more attempts for incredibly challenging items.
+\begin{table*}[t]
+    \centering
+    \begin{tabular}{p{5.5cm}p{11cm}}
+        \toprule
+        Failure case & Potential causes \\
+        \midrule
+        Product knocked over during pick & Inaccuracy in product detection or trajectory following, resulting in insufficient vacuum seal \\
+        Collision with shelf & Changes in environment due to shelf railing, price tags or discount tags \\
+        Product outside reachable space  & The arm cannot physically reach the bottom or top shelf \\
+        Collision with surrounding products on the shelf & Products are differently positioned than during taught behavior \\
+        Vacuum gripper fails to attach & Factors like product size, weight, shape and material can cause vacuum suction to be insufficient \\
+        \bottomrule
+    \end{tabular}
+    \caption{Qualitatively evaluated list of potential failure cases}
+    \label{tab:failure_cases}
+\end{table*}
+
+
+The evaluation in the \realsupermarket{} shows that the system
+can be deployed to a human-shared environment without a major loss of performance, see
+\cref{fig:success_zandam}. This test environment also
+confirms that most reliability issues are caused by the
+picking action.
+
+
+
+
+
+
+
+

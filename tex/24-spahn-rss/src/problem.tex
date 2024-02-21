@@ -1,0 +1,42 @@
+\section{Problem Statement}
+
+This demonstration is concerned with mobile manipulation in
+retail environments. Although the realization of such an
+application is deemed simple, the actual implementation in a
+human-shared environment must be reliable, robust and
+fault-tolerant. In this work, we want to give a user's
+perspective on what must be taken into consideration when
+creating actual real-world application with mobile
+manipulation. Doing so, we present key takeaways from this
+project and emphasize on three main questions:
+
+\begin{itemize}
+  \item Assuming that errors may occur, how can we ensure fault-tolerant task
+  assignment and task-planning?
+  \item How can trajectory generation be robust, safe and easy to adapt by
+  non-experts?
+\end{itemize}
+
+\subsection{Assumptions in the context of supermarkets}
+
+Modern retails and supermarkets have access to a detailed information of all
+products, this includes mass, geometry and location in the store. In this paper,
+we assume that the robot can access this database to inform its decision.
+Supermarkets are characterized by a large range of products, around 100.000
+different products per store.  This work deliberately excludes
+ products that require specialized grasping strategies or even specific hardware design in favor of reliability for the remaining products.
+Moreover, in the interest of bridging the gap between robotics research and
+applications on the market, achieving high reliability for a part of all
+products is assumed to be favorable. Besides, we assume that products to
+pick are visible from the front of the shelf. We explicitly focus on
+in-store-picking during opening-hours, because warehouse automation is already
+being tackled by redesigning the interior making collaborative robots obsolete
+in such environments. Based on this focus, we generally favor safety over
+execution speed. 
+%\subsection{Main Goals}
+%The overarching objectives guiding the development of the robotic system include
+%the ability to embrace the inevitable recovery from failures in dynamic
+%environments. We aim to enable ongoing programming by individuals without
+%specialized robotics expertise. All processes are designed for on-board
+%execution, minimizing reliance on external systems. Whole-body control
+%strategies are employed when deemed advantageous for specific tasks.
