@@ -8,7 +8,6 @@ dirs:
 propositions:
 	pdflatex propositions
 	mv propositions.pdf outputs
-	make clean
 
 dirty:
 	pdflatex $(src)_$(style).tex
@@ -19,7 +18,6 @@ bib:
 	biber $(src)_$(style)
 	make dirty style=$(style)
 	make dirty style=$(style)
-	mv *.pdf outputs
 
 clean:
 	rm -f *.bcf
@@ -36,7 +34,6 @@ clean:
 	rm -f *.blg
 	rm -f *.tex.bbl
 	rm -f *.tex.blg
-	rm -rf aux/*
 	find -name '*.aux' | xargs rm -f
 
 allclean:
