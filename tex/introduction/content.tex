@@ -211,8 +211,7 @@ little justified. However, the major drawback lies in their
 tendency to falter concerning safety constraints, often
 succumbing to overfitting specific use cases during training
 and lacking generalizability when confronted with new
-scenarios.
-
+scenarios. \MS{references}
 
 It is also possible to formulate trajectory generation as a
 purely geometric problem. One early attempt in that
@@ -238,13 +237,13 @@ can be handled in this way.
 
 \section{Trajectory generation as differential equations}
 
-In this dissertation, we introduce and extend a framework
+In this dissertation, we recall and extend a framework
 that allows to iteratively design trajectory generation via
 summation of individual behaviors. Individual behaviors are
 designed as differential equations of second order for which
 stability properties are conserved during summation.
-This concept, elegantly formalized as "optimization
-fabrics," offers a nuanced understanding of trajectory
+This concept, elegantly formalized as \ac{fabrics}, offers
+a nuanced understanding of trajectory
 generation. Informally speaking, the composition shapes the
 landscape on which the trajectory is then generated.
 Formally speaking, we gradually introduce terms into the
@@ -252,6 +251,81 @@ non-Riemannian metric shaping a smooth manifold of the
 configuration space. In this thesis, we provide an important
 extension to dynamic environments and give several use-cases
 for this method.
+
+\section{Contributions}
+\label{sec:contributions}
+
+This disseretation centers around two approaches to
+trajectory generation: (a) \ac{mpc} which formulates
+trajectory generation as an optimization problem which is
+solved in a receding horizon fashion and (b) \ac{fabrics}
+where trajectory generation is formulated as a 
+purely geometric problem.
+
+This dissertation presents contributions to both methods in
+the context of mobile manipulation and demonstrate the
+usability with several robots and in a concrete application.
+Specifically, we can list the following contributions:
+
+\subsection{Advancements in \ac{mpc} for mobile manipulation}
+\begin{enumerate}
+    \item Enable real-time capable \ac{mpc} formulations for
+      coupled trajectory generation in mobile manipulators
+      using free space decomposition.
+    \item Conduct a quantitative comparison between \ac{mpc}
+      formulations and \ac{fabrics} for various types of
+      robots, providing insights into their relative
+      strengths and limitations.
+\end{enumerate}
+
+\subsection{Theoretical advancements in \ac{fabrics}}
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item Generalize the framework of \ac{fabrics}
+      for dynamic environments, integrating moving obstacles
+      through time-parameterized manifolds and incorporating
+      path following via time-parameterized goal
+      definitions.
+    \item Extend the framework of \ac{fabrics} to
+      accommodate non-holonomic robots, enhancing the
+      applicability of the framework for a broader range of
+      robots.
+\end{enumerate}
+
+\subsection{Practical contributions of \ac{fabrics}}
+\begin{enumerate}
+    \setcounter{enumi}{4}
+    \item Formulate \ac{fabrics} in a symbolic
+      manner to enhance computational efficiency at runtime.
+    \item Propose the use of Bayesian optimization for
+      automated parameter tuning of \ac{fabrics},
+      streamlining the optimization process and improving
+      performance.
+    \item Integrate implicit environment representations
+      into \ac{fabrics}, reducing requirements on
+      the perception pipeline and enhancing robustness in
+      dynamic environments.
+    \item Introduce learning-from-demonstration techniques
+      for \ac{fabrics}, simplifying trajectory
+      programming and improving usability.
+\end{enumerate}
+
+\subsection{Demonstration in a Real-world Setting:}
+\begin{enumerate}
+    \setcounter{enumi}{8}
+    \item Demonstrate the usability of \ac{fabrics}
+      in a prototype application, specifically in the
+      context of order-picking in supermarkets, showcasing
+      real-world applicability and effectiveness.
+\end{enumerate}
+
+These contributions collectively advance the field of mobile
+manipulation and trajectory generation, offering novel
+solutions to address key challenges and paving the way for
+future research and development efforts.
+
+
+
 
 
 \section{Outline}
