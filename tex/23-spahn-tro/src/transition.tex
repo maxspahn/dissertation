@@ -1,0 +1,19 @@
+The earlier presented implementation of \acl{mpc} demonstrated its capability to
+generate whole-body trajectories for a mobile manipulator efficiently. Employing
+free-space decomposition on individual robot links effectively curtailed
+computational costs. However, the simplification of collision avoidance to free
+spaces resulted in conservative behavior, ultimately constraining the robot's
+capabilities. Furthermore, solving the optimization problem remained
+computationally expensive, limiting control frequency and yielding non-smooth
+trajectories. Consequently, this dissertation marks a decisive shift away from
+optimization-based methods towards a geometric approach known as geometric
+fabrics. This method allows the encoding of trajectory generation in ordinary
+differential equations of second order, presenting an alternative that addresses
+the aforementioned limitations. Although geometric fabrics have proven
+applicable to real-time trajectory generation, their scope has historically been
+limited to dynamic environments, lacking integration with global path planning.
+This chapter introduces the concept of \acl{df} to overcome these limitations.
+Moreover, extensive comparisons between \ac{mpc} and \acl{sf} are conducted to
+substantiate the effectiveness of geometric encoding in trajectory generation.
+Finally, real-world experiments are conducted, involving both the manipulator
+and the mobile manipulator, to validate the proposed methodologies.
