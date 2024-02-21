@@ -1,5 +1,6 @@
 src=24_spahn_dissertation
 intro=24_spahn_introduction_only
+style=onebib
 
 dirs:
 	mkdir -p outputs
