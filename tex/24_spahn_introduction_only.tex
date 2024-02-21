@@ -7,17 +7,17 @@
 
 \input{graphics_paths}
 \newif\iftrackchanges
+\input{meta_info}
 
 \begin{document}
-\trackchangesfalse
+
 
 \input{commands}
 
+\include{title/title}
+
 %% Specify the title and author of the thesis. This information will be used on
 %% the title page (in title/title.tex) and in the metadata of the final PDF.
-\title[Geometric Control]{Coupled Local Motion Planning for Mobile Manipulators}
-\author{Max}{Spahn}
-\maketitle
 
 %% Use Roman numerals for the page numbers of the title pages and table of
 %% contents.
