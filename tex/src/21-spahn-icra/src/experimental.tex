@@ -8,7 +8,9 @@ The presented method is evaluated in simulation and with the real hardware. Afte
 
 \paragraph{Hardware Setup}
 The mobile manipulator used to validate this approach consists of the mobile base \textit{Clearpath\textsuperscript{TM} Boxer} and the robotic manipulator \textit{Franka Emika Panda}, see ~{Fig. \ref{fig:real_robot}}. The
-resulting system has 10 degrees of freedom (DoF's) for which the dynamics are approximated using a Runge-Kutta scheme to obtain the discrete transition function $f(\stateVec_t, \inputVec_t)$.
+resulting system has 10 degrees of freedom (DoF's) for which
+the dynamics are approximated using a Runge-Kutta scheme to
+obtain the discrete transition function $f(\z_t, \u_t)$.
 The presented robot is equipped with low level controllers that accept commanded velocities
 for all joints, one LiDAR sensor  and one
 depth camera pointing forward. Laser data and camera depth images are fused into one
