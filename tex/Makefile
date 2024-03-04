@@ -1,5 +1,4 @@
 src=spahn
-intro=intro_only
 style=ob
 
 dirs:
@@ -17,6 +16,10 @@ dirty:
 
 final:
 	pdflatex $(src)_$(style).tex
+
+short:
+	make final style=$(style)
+	mv $(src)_$(style).pdf outputs
 
 bib:
 	make dirty style=$(style)

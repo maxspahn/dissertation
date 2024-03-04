@@ -1,6 +1,126 @@
 \chapter{Background} % (fold)
 \label{cha:background}
 
+This chapter provides the necessary background for the reader to understand the
+contributions of this thesis. Firstly, we introduce
+notations used throughout thesis.
+After the introduction of some general notations, we recall the
+\ac{mpc} framework in a general setting. Then, we state
+relevant concepts of differential geometry that are required
+in the aim of understanding \ac{fabrics}. This will lead us
+the formal introduction of \ac{fabrics} which is the main
+topic of this thesis. Overall, this chapter presens essential
+background knowledge for the reader to understand the
+remainder of the thesis. 
+
+\section{Notations} % (fold)
+\label{sec:notations}
+
+Throughout this thesis, vectors are denoted in bold lowercase
+letters, $\vec{x}$, matrices in capital, $\mat{M}$, and sets
+in calligraphic uppercase, $\Q$. $\norm{\vx}_Q = \vx^TQ\vx$
+denotes the weighted squared norm. In the context of
+discrete-time systems, we denote the time step using a
+subscript, e.g., $\vx_k$ is the state at time $k$. The
+transpose of a matrix is denoted by a superscript $T$, and
+the inverse by a superscript $-1$, the pseudo-inverse by a
+superscript $\dagger$. Partial derivates are denoted by 
+$\der{\vx}{\vy}$ in text block, or more explicitely as
+\[\derf{\vx}{\vy}.\]
+
+
+We denote $\q\in\Q\subset\Rn$ a configuration of the robot
+with $n$ its degrees of freedom; \Q{} is the configuration
+space of the generalized coordinates of the system.
+Generally, $\q(t)$ defines the robot's configuration at time
+$t$, so that \qdot, \qddot{} define the instantaneous
+derivatives of the robot's configuration. Similarly, we
+assume that there is a set of task variables
+$\xj\in\Xj\subset\Rmj$ with variable dimension $m_j \leq n$.
+The task manifold \Xj{} defines an arbitrary manifold of the
+configuration space \Q{} in which a robotic task can be
+represented. Further, we assume that there is a differential
+map $\map_j:\Rn\rightarrow\Rmj$ that relates the
+configuration space to the $j^{th}$ task space. For example,
+when a task variable is defined as the end-effector
+position, then $\map_j$ is the positional part of the
+forward kinematics. On the other hand, if a task variable is
+defined to be the joint position, then $\map_j$ is the
+identity function. In the following, we drop the subscript
+$j$ in most cases for readability when the context is clear.
+
+In this work, we assume that \map{} is smooth and twice
+differentiable so that the Jacobian is defined as
+\begin{equation}
+  \J = \derf{\q}{\map} \in \mathcal{R}^{m\times n}, 
+\end{equation}
+or $\J = \der{\q}{\map}$ for short.
+Thus, we can write the total time derivatives of \x{} as
+\begin{align}
+  \xdot &= \J\qdot \\
+  \xddot &= \J\qddot + \Jdot\qdot.
+\end{align}
+
+% section notations (end)
+
+\section{Model Predictive Control} % (fold)
+\label{sec:model_predictive_control}
+
+Optimization methods, such as dynamic programming are
+populare when addressing \ac{tg} problems that are
+characterized by multiple equality and inequality
+constraints. 
+The optimization problem is composed of a cost function, 
+a dynamic model of the system, and a set of constraints.
+
+This thesis uses exclusively discrete time dynamics, such
+that the dynamics of the system are given by 
+\begin{equation}
+  \z_{k+1} = f(\z_k, \u_k),
+\end{equation}
+where $\z_k \in \Rn$, $\u_k \in \Rm$ are the state and
+control input vectors, respectively. 
+
+Multiple objectives of the \ac{tg} problem are combined in
+the cost function:
+\begin{equation}
+  J(\z,\u) = \sum_{k=0}^{N-1} J_k(\z_k, \u_k) + J_f(\z_N,\u_N),
+\end{equation}
+where $N$ is the prediction horizon, and $J_k$ and $J_f$ are
+the stage and terminal cost, respectively.
+
+The general \ac{mpc} problem is then formulated as
+\begin{equation}
+  \begin{aligned}
+    \min_{\u} \quad & J(\z,\u) \\
+    \text{subject to} \quad & \z_{k+1} = f(\z_k, \u_k), \quad k=0,\ldots,N-1 \\
+    & g(\z_k, \u_k) \leq 0, \quad k=0,\ldots,N-1 \\
+    & \z_k \in \Z, \quad \u_k \in \U, \quad k=0,\ldots,N \\
+    & \z_0 = \z_{\textrm{init}},
+  \end{aligned}
+\end{equation}
+where $\z_0$ is the initial state, $\Z$ and $\U$ are the
+admissibe sets of states and control inputs, respectively.
+Inequality constraints are denoted by $g(\z_k, \u_k)$.
+
+At each time step $k$, the \ac{mpc} problem is solved to
+find the sequence of control inputs $\u_k^*$ that minimizes
+the cost function. The first control input of the optimal
+sequence is then applied to the system. The remainder of the
+sequence is shifted by one step to form the initial guess
+for the next solution. This process is denoted as receding
+horizon control.
+
+
+
+
+
+
+
+
+
+
+
 \section{Background-TRO23}%
 \label{sec:mathematics}
 
