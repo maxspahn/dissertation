@@ -1,0 +1,33 @@
+\documentclass{src/TUD-dissertation2020}
+
+\usepackage[style=ieee]{biblatex}
+\input{src/helpers/used_packages}
+
+\addbibresource{src/clean.bib}
+
+\input{src/helpers/graphics_paths}
+
+\begin{document}
+
+\input{src/helpers/commands}
+\input{src/helpers/beginning}
+
+%% Use Arabic numerals for the page numbers of the chapters.
+\mainmatter
+
+%% Turn on thumb indices.
+\thumbtrue
+
+\input{chapters_onebib}
+
+\input{src/helpers/ending}
+
+\appendix
+
+\thumbfalse
+
+\include{src/helpers/cv/cv}
+\include{src/helpers/publications/publications}
+\end{document}
+
+

@@ -1,0 +1,44 @@
+\documentclass{src/TUD-dissertation2020}
+
+\usepackage[style=ieee,refsection=chapter]{biblatex}
+\input{src/helpers/used_packages}
+
+\addbibresource{src/clean.bib}
+
+\input{src/helpers/graphics_paths}
+\input{src/helpers/meta_info}
+
+\begin{document}
+
+
+\input{src/helpers/commands}
+
+\include{src/title/title}
+
+%% Specify the title and author of the thesis. This information will be used on
+%% the title page (in title/title.tex) and in the metadata of the final PDF.
+
+%% Use Roman numerals for the page numbers of the title pages and table of
+%% contents.
+\frontmatter
+
+
+%% Use Arabic numerals for the page numbers of the chapters.
+\mainmatter
+
+%% Turn on thumb indices.
+\thumbtrue
+
+\input{src/introduction/chapterwise}
+
+
+%% Use letters for the chapter numbers of the appendices.
+\appendix
+
+%\include{appendix-a/appendix-a}
+
+%% Turn off thumb indices for unnumbered chapters.
+\thumbfalse
+
+\end{document}
+

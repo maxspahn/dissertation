@@ -1,6 +1,6 @@
-src=24_spahn_dissertation
-intro=24_spahn_introduction_only
-style=onebib
+src=spahn
+intro=intro_only
+style=ob
 
 dirs:
 	mkdir -p outputs
@@ -9,15 +9,19 @@ propositions:
 	pdflatex propositions
 	mv propositions.pdf outputs
 
-dirty:
+svg:
 	pdflatex --shell-escape $(src)_$(style).tex
 	mv *.pdf outputs
+
+dirty:
+	pdflatex -draftmode $(src)_$(style).tex
 
 bib:
 	make dirty style=$(style)
 	biber $(src)_$(style)
 	make dirty style=$(style)
-	make dirty style=$(style)
+	make svg style=$(style)
+	mv *.pdf outputs
 
 clean:
 	rm -f *.bcf
@@ -40,6 +44,7 @@ allclean:
 	make clean
 	rm -f outputs/*.pdf
 	rm -f *.pdf
+	rm -f svg-inkscape/*
 
 intro:
 	make dirs
