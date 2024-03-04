@@ -1,101 +1,13 @@
 \chapter{Introduction} % (fold)
 \label{cha:Introduction}
 
-%	- ~1 context with issues arising
-%	- (~ 0.5 common approaches)
-%	- (~ 1 specifics to the case studies)
-%	- ~1.5 common approaches and drawbacks (high-level)
-%	- ~1 page new method intro high-level
-%	- ~0.5 RQ/contributions
-%	- ~0.5 overview
-
-\iffalse
-\section{Structure}
-
-Problem in society
-\begin{enumerate}
-  \item Aging modern societies, changing demographics
-  \item Shortage of cheap labor or nobody willing to do physically challenging
-  task
-  \item while advancements in natural language processing and computer vision
-  led to large improvements, embodied systems are still dull and simplistic
-  \item the raise of collaborative robots promises safe robots that are
-  inherently safe in the proximity of humans
-  \item the concept of mobile manipulation, whether legged or on wheels, gives
-  robotic hardware the same capabilities as humans, sparking the hope that
-  labor shortage can be compensated with such systems
-\end{enumerate}
-Robotics as solution
-\begin{enumerate}
-  \item Robots to take over dull work, such as operating warehouses, restocking
-  shelf, package delivery, food harvesting, etc
-  \item Robots can work endless hours
-  \item Robots are yet to be deployed in human-shared environments because of
-  dynamics of such environments and safety constraints
-  \item One important part for deploying robots in human shared environments is
-  trajectory generation, what commands to send to the motors such that the robot
-  is getting closer to its goal
-  \item concluding, the hardware is capable of being deployed, but the methods
-  for generating safe trajectories is yet to be found
-\end{enumerate}
-Common approaches and their drawbacks
-\begin{enumerate}
-  \item behind fences: linear motions or once-computed collision free global paths
-  \item this approach works independent of duration for planning as it is done
-  once
-  \item such approaches fail to cope with changing environments
-  \item lead to the raise of local trajectory generation methods
-  \item pure control approaches, such as operational space control or impedance
-  control, are fast and explainable but fail to integrate the full problem,
-  including self-collision avoidance, collision-avoidance
-  \item method centered around optimization problem, consisting of an objective
-  function and constraints is favorable for safety guarantees and optimality
-  \item optimization-based methods have shown great success in autonomous driving
-  but fail to meet real-time constraints for systems with more degrees of
-  freedom
-  \item learning based approaches are popular in the age of deep neural networks
-  but fail to meet often fail to meet safety constraints and tend to overfit
-  to the trained use-case, lack generalizability
-\end{enumerate}
-Geometric encoding as intermediate between control and trajectory generation
-\begin{enumerate}
-  \item trajectory generation must be reactive and generalizable
-  \item Cartesian impedance control offers a very fast way, but does not include
-  many important components
-  \item in Cartesian impedance control, we model the problem as a spring-damper
-  system
-  \item that system is effectively a differential equation of second order for
-  goal attraction
-  \item the same could be done for any other components of trajectory generation
-  \item set of ode's representing all the components
-  \item the combinations describes a space in which some regions are desirable
-  and some are not desirable
-  \item the entire configuration space is thus equipped with a metric
-  \item this shaped space is the encoding on which we can move towards a goal
-  \item implicitly solving for most components
-  \item this concept has been formalized as optimization fabrics
-\end{enumerate}
-Layout of this thesis
-\begin{enumerate}
-  \item introduction to optimization based techniques, specifically model
-  predictive control
-  \item introduction to differential geometry and optimization fabrics for
-  trajectory generation
-  \item model predictive control for whole-body control, this chapter highlights
-  the issues with optimization-based methods
-  \item dynamic optimization fabrics, this chapter makes important
-  generalizations of fabrics to dynamic environments  
-  \item symbolic optimization fabrics and automate tuning
-  \item conclusion
-\end{enumerate}
-\fi
-
 \section{Robots under the eyes of demographic change}
 
 In a world grappling with the challenges of an aging
 population, shifting demographics, and a scarcity of
 affordable labor for physically demanding tasks, the need
-for technological solutions is more pronounced than ever.
+for technological solutions is more pronounced than ever
+\cite{ince2015economic}.
 Technological progress in the corresponding field of
 robotics today is disappointing, especially in an era where
 the non-embodied counterpart is touching all of our lives.
@@ -117,16 +29,17 @@ safety, robots must be equipped with a similar level of
 mobility as humans to perform meaningful tasks. Mobility of
 industrial robots is limited as they are statically
 attached to structural elements. In that sense, they become
-part of the building and are exhibit no mobility. Placing
+part of the building and exhibit no mobility. Placing
 robots in environments, that are built with the mobility of
-humans in mind, require to unlock robots from the static
+humans in mind, requires to unlock robots from the static
 sockets.
 
-In summary, helping an aging societies to deal with labor shortage,
-the next generation of robots must be safe for humans while
-equipped with the same mobility capabilities.
+In summary, helping an aging societies to deal with labor
+shortage, the next generation of robots must be safe for
+humans while equipped with the same mobility capabilities.
 
 \subsection{Mobile manipulation}
+\label{sec:mobile_manipulation}
 
 One key feature of modern robots for human-shared
 environments, is mobility. The combination of highly mobile
@@ -147,39 +60,41 @@ human-shared environment can be achieved.
 However, despite their potential, robots are noticeably
 absent from human-shared environments. The complexities of
 such spaces, coupled with safety constraints, present
-formidable challenges. This is where trajectory generation
+formidable challenges. This is where \ac{tg}
 becomes pivotal as one of the basic building blocks for
 robotics software stacks. It determines the commands sent to
 the motors in real-time, orchestrating a harmonious movement
 that brings the robot closer to its goal while ensuring the
 safety of itself and its environment.
 
-Essentially, while the hardware is ready for deployment, the
+While the hardware is ready for deployment, the
 missing link lies in methods for generating trajectories
 that prioritize safety while providing high success rates.
 This dissertation embarks on a journey to unravel this
-critical aspect of robotics, exploring innovative trajectory
-generation methods that not only unlock the potential of
+critical aspect of robotics, exploring innovative \ac{tg}
+methods that not only unlock the potential of
 robotic hardware but also lead to a world where robots
 seamlessly coexist with humans in shared spaces.
 
 \section{Limitations of current approaches}
 
-In the quest for effective trajectory generation, various
-methods have emerged, each with its set of advantages and
-drawbacks. The classical setup for robots, where they have
-proven to be quite effective, is behind fences. This setup
-simplifies trajectory generation dramatically as collision
+In the quest for effective \ac{tg}, various
+methods have been proposed, each with its set of advantages and
+drawbacks.
+
+The classical setup for robots --where they have
+proven to be quite effective-- is behind fences. This setup
+simplifies \ac{tg} dramatically as collision
 avoidance can be done during the installation process and
 trajectories can remain unchanged for the entire lifetime of
 the robots. Therefore, high computational costs for
-trajectory generation are negligible as it is only performed
+\ac{tg} are negligible as it is only performed
 once during installation. However, their Achilles' heel lies
 in their incapacity to adapt to dynamic, changing
 environments.
 
 Recognizing this limitation has spurred the rise of local
-trajectory generation methods, especially as robots are
+\ac{tg} methods, especially as robots are
 expected to enter human-shared environments. However, even
 within this domain, challenges persist. Pure control
 approaches, exemplified by operational space control or
@@ -203,48 +118,70 @@ increased degrees of freedom due to high computational costs
 In the age of deep neural networks, learning-based
 approaches have gained popularity as they promise similar
 performance to optimization-based techniques. After all,
-they solve the same problem, while changing the naming from
-objective to reward. Computational costs
-are still mentioned when criticizing such approaches, but as
-computational capacity increase on a yearly bases, it seems
-little justified. However, the major drawback lies in their
-tendency to falter concerning safety constraints, often
-succumbing to overfitting specific use cases during training
-and lacking generalizability when confronted with new
-scenarios. \MS{references}
+they solve the same problem, while changing the naming of
+the objective function from cost function to loss (or
+reward) function. Their major drawback lies in their
+inability to integrate safety constraints in a principled
+manner, often prone to overfitting specific use cases during
+training and thus lacking generalizability when confronted
+with new scenarios \cite{noroozi2023conventional}.
+Computational costs are also often
+mentioned when criticizing such approaches, but as
+computational capacity increase rapidely, it seems little
+justified. 
 
-It is also possible to formulate trajectory generation as a
-purely geometric problem. One early attempt in that
-direction is referred to as the potential field method where
-individual components are formulated as `hills' and
-`valleys'~\cite{barraquand1992numerical,hwang1992potential}.
-This approach is known to be very fast in terms of run-time
-but only covers the static components of the problem, and
-thus ignores the motion of the robot at each time step.
+In the early days of robotics, potential field methods were
+popular in the context of \ac{tg}.
+They are based on the idea of modeling the robot as
+a point in a potential field, where the goal is a minimum
+and obstacles are maximac
+~\cite{barraquand1992numerical,hwang1992potential}. This
+approach is known to be computionally affordable and but
+only covers the static components of the problem, and thus
+ignores the dynamics of the robot.
 
-Another notable contender is Cartesian impedance control,
-praised for its rapid responsiveness and perceived safety.
-Cartesian impedance control models the point of interest on
-the kinematic chain, usually the end-effector, as a
-spring-damper-system. In contrast to potential field theory,
-the motion of the robot is thus taken intro consideration.
-However, it falls short by not encompassing crucial
-components for a collision-free trajectory generation.
-Modeling the point of interest of the robot as a
+Another notable contender from the same era is Cartesian
+impedance control, praised for its rapid responsiveness and
+perceived safety, \cite{hogan1985impedance}. Cartesian
+impedance control models the point of interest on the
+kinematic chain, usually the end-effector, as a
+spring-damper-system attracted to the goal pose. In contrast
+to potential field theory, the motion of the robot is thus
+taken intro consideration. However, it falls short by not
+encompassing crucial components for a collision-free
+\ac{tg}. Modeling the point of interest of the robot as a
 second-order differential equation raises the question
-whether all components of the trajectory generation problem
-can be handled in this way. 
+whether all components of the \ac{tg} problem can be handled
+in this way. 
 
-\section{Trajectory generation as differential equations}
+We can observe that modern approaches to \ac{tg} focus on the
+practical side of \ac{tg} and often ignore the underlying
+geometric structure \cite{Ratliff2015}. For example,
+formulating the \ac{tg} problem in the Euclidean work space
+of the end effector, as it is done 
+in many optimization-based methods, is a simplification of 
+the problem ignoring the configuration space of the robot.
+Effectively, this approach uses a Euclidean geometry.
+In contrast, the work space can also be modeled as a
+Riemannian (or even non-Riemannian) manifold of the
+configuration space. Then, other components, that live in 
+different manifolds of the configuration space, can be
+seemlessly integrated into the \ac{tg} problem \cite{Ratliff2015}.
+This insight has lead to a series of different works
+where \ac{tg} has been addressed purely geometrically
+\cite{Ratliff2015,Cheng2019,Cheng2020,Ratliff2020,Xie2020}.
+
+\section{Geometries in trajectory generation}
+\label{sec:geometries_in_trajectory_generation}
 
 In this dissertation, we recall and extend a framework
-that allows to iteratively design trajectory generation via
+that allows to iteratively design \ac{tg} via
 summation of individual behaviors. Individual behaviors are
 designed as differential equations of second order for which
 stability properties are conserved during summation.
 This concept, elegantly formalized as \ac{fabrics}, offers
-a nuanced understanding of trajectory
-generation. Informally speaking, the composition shapes the
+a nuanced understanding of \ac{tg}.
+Informally speaking, the composition shapes the
 landscape on which the trajectory is then generated.
 Formally speaking, we gradually introduce terms into the
 non-Riemannian metric shaping a smooth manifold of the
@@ -256,10 +193,10 @@ for this method.
 \label{sec:contributions}
 
 This disseretation centers around two approaches to
-trajectory generation: (a) \ac{mpc} which formulates
-trajectory generation as an optimization problem which is
+\ac{tg}: (a) \ac{mpc} which formulates
+\ac{tg} as an optimization problem which is
 solved in a receding horizon fashion and (b) \ac{fabrics}
-where trajectory generation is formulated as a 
+where \ac{tg} is formulated as a 
 purely geometric problem.
 
 This dissertation presents contributions to both methods in
@@ -270,7 +207,7 @@ Specifically, we can list the following contributions:
 \subsection{Advancements in \ac{mpc} for mobile manipulation}
 \begin{enumerate}
     \item Enable real-time capable \ac{mpc} formulations for
-      coupled trajectory generation in mobile manipulators
+      coupled \ac{tg} in mobile manipulators
       using free space decomposition.
     \item Conduct a quantitative comparison between \ac{mpc}
       formulations and \ac{fabrics} for various types of
@@ -320,7 +257,7 @@ Specifically, we can list the following contributions:
 \end{enumerate}
 
 These contributions collectively advance the field of mobile
-manipulation and trajectory generation, offering novel
+manipulation and \ac{tg}, offering novel
 solutions to address key challenges and paving the way for
 future research and development efforts.
 
@@ -331,7 +268,7 @@ future research and development efforts.
 \section{Outline}
 
 After this introduction, this dissertation first introduces
-relevant literature in the field of trajectory generation
+relevant literature in the field of \ac{tg}
 and motion planning. Then, we summarize the required tools
 from optimal control and from differential geometry to
 understand the main chapters. In chapter 4, we explore a
@@ -341,7 +278,7 @@ handle the complexity of the problem. Then, we derive a
 generalization of optimization fabrics to dynamic
 environments, including contour tracking and avoidance with
 moving obstacles. Chapter 6 highlights the benefits of
-formulating trajectory generation in a symbolic way to
+formulating \ac{tg} in a symbolic way to
 improve real-time capabilities and allow for online
 parameter tuning. To relax the requirement for the
 perception pipeline, we layout several ways to integrate
