@@ -11,17 +11,19 @@ propositions:
 
 svg:
 	pdflatex --shell-escape $(src)_$(style).tex
-	mv *.pdf outputs
 
 dirty:
 	pdflatex -draftmode $(src)_$(style).tex
+
+final:
+	pdflatex $(src)_$(style).tex
 
 bib:
 	make dirty style=$(style)
 	biber $(src)_$(style)
 	make dirty style=$(style)
-	make svg style=$(style)
-	mv *.pdf outputs
+	make final style=$(style)
+	mv $(src)_$(style).pdf outputs
 
 clean:
 	rm -f *.bcf
