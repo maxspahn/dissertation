@@ -55,13 +55,14 @@
     \@nativefontstrue
 \fi
 
+
 \if@nativefonts
     %% The native font is Utopia Regular with Fourier math. We use Latin Modern
     %% as a fallback, since Utopia lacks support for sans-serif and monospace.
     \RequirePackage[T1]{fontenc}
     \RequirePackage[utf8]{inputenc}
     \RequirePackage{lmodern}
-    \RequirePackage{fourier}
+    %\RequirePackage{fourier} % Removes weird math mode
     %% The style for titles is small caps.
     \def\titlefont{\rmfamily}
     \def\titleshape{\scshape}
