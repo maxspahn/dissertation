@@ -1,75 +1,69 @@
 \section{Related Works}%
 \label{sec:related_works}
 
-%Collision Avoidance
-\iffalse
-\BF{Here you should tell a story and have a clear structure. You can organize the
-approaches by time but also group them into categories, for instance: model-based,
-optimization-based and learning based. You can say that the first works devoted to develop
-motion planning algorithms and ensure collision avoidance were model-based ... Then you
-should say their main drawbacks, for instance: "But they rely on handcrafted functions,
-deadlocks dude to local minima, etc,." Then you introduce the next category of works, to
-deal with a high number of dynamic obstacles \cite{VanDenBerg2011} proposed an
-optimization-based method... I think you need to re-write this section again. Was my point
-clear?}
-\fi
+Past works devoted to motion planning for mobile manipulators can be divided
+into two main categories: optimization-based and sampling-based methods
+\cite{LaValle2006,Mukadam2017}. Sampling-based methods, such as rapidly
+exploring random trees (RRT's) \cite{Webb2013,Kleinbort2019,Kuffner2000} and
+probabilistic roadmaps (PRM's) \cite{Hsu2002,Faust2017} are highly efficient at
+generating paths for systems with high-degree of freedom. However, these
+approaches consider static environments requiring a complete replanning if the
+conditions change and hence, are not applicable for dynamic environments
+\cite{Avanzini2018}.
 
-Past works devoted to motion planning for mobile manipulators can be divided into two main categories: 
-optimization-based and sampling-based methods \cite{LaValle2006,Mukadam2017}. Sampling-based methods, such as rapidly exploring random trees (RRT's) \cite{Webb2013,Kleinbort2019,Kuffner2000} and probabilistic roadmaps (PRM's) \cite{Hsu2002,Faust2017} are highly efficient at generating paths for systems with high-degree of freedom. However, these approaches consider static environments requiring a complete replanning if the conditions change and hence, are not applicable for dynamic environments \cite{Avanzini2018}.
-
-In contrast, trajectory planning methods focus on executing generated paths while avoiding collisions in dynamic environments. %with the goal to avoid collisions %with all sorts of obstacles. 
-Despite the vast number of works developing motion planning methods for mobile manipulators, most approaches either tackle the motion planning problem for the robot's base or the robot's arm. 
-Pioneer works on motion planning methods for statically mounted manipulators employed potential fields for collision avoidance \cite{Khatib1985}.
-Building on the previous, \cite{Haddadin2011} introduced the Circular Field method to address dynamic collision avoidance.
-Finally, to ensure collision avoidance for the end-effector when grasping a moving obstacle, \cite{Du2018} employed a repulsive vector.
-%Recently, data-driven approaches have gained popularity for manipulation tasks, e.g. \cite{Murali2020}. \BF{We should say more here. either we dont refer those or we refer two or three works and explain their main limitations and why we dont follow a learning-based approach. do you know any work for full-body control and planning that is learning based?}
+In contrast, trajectory planning methods focus on executing generated paths
+while avoiding collisions in dynamic environments. collisions developing motion
+planning methods for mobile manipulators, most approaches either tackle the
+motion planning problem for the robot's base or the robot's arm. Pioneer works
+on motion planning methods for statically mounted manipulators employed
+potential fields for collision avoidance \cite{Khatib1985}. Building on the
+previous, \cite{Haddadin2011} introduced the Circular Field method to address
+dynamic collision avoidance. Finally, to ensure collision avoidance for the
+end-effector when grasping a moving obstacle, \cite{Du2018} employed a
+repulsive vector.
 
 \subsection{Collision Avoidance For Mobile Robots}
-%In contrast to manipulation, 
-The dynamic window approach \cite{Fox1997} and its new variant proposed in \cite{Zhang2019} have proven to be efficient in generating smooth trajectories for mobile robots in static and dynamic environments. %Introducing dynamic environments, 
-To navigate among pedestrians, \cite{Ferrer2013} introduced the Social Forces model imitating the human navigation behavior and using it as navigation policy for the robot.% approach is well suited when the agent is sharing the space with humans \cite{Ferrer2013}.  
-Yet, Social Forces and its variants rely on handcrafted functions limiting their ability to handle more complex navigation scenarios.
-To deal with a large number of agents, \textit{ORCA} was proposed in \cite{VanDenBerg2011}
-and later extended for non-holonomic bases in \cite{Alonso-Mora2012a}. However, these approaches demonstrate highly reactive behaviors because they only consider one step look-ahead predictions.
-%In cluttered environments, %For pedestrian-rich environments were addressed using 
-%reinforcement learning approaches have demonstrated high capacity to learn a policy that can scale for a large and variable number of agents but do not provide any safety guarantees.
-%to solve the optimization problem \cite{Chen2017}.
-%To deal with a large number of agents, \textit{ORCA} was proposed in \cite{VanDenBerg2011} and later extended for non-holonomic bases in \cite{Alonso-Mora2012a}. 
-MPC schemes were proposed for mobile robots and autonomous vehicles in
-\cite{Brito2019} and \cite{Schwarting2018} allowing to optimize over a prediction horizon and avoid, in advance, dynamic obstacles.
-%In the latter, the MPC formulation was used as
-%a guidance rather than a controller.
-%Drones
-To enable coupled control of a mobile manipulator, collision avoidance must be performed in
-the 3D space which is usually not necessary for ground vehicles. 
-Several 3D MPC formulation were proposed for drones to enable safe motion through
-cluttered environments \cite{Tordesillas2019,Liu2017}.
+The dynamic window approach \cite{Fox1997} and its new variant proposed in
+\cite{Zhang2019} have proven to be efficient in generating smooth trajectories
+for mobile robots in static and dynamic environments. To navigate among
+pedestrians, \cite{Ferrer2013} introduced the Social Forces model imitating
+the human navigation behavior and using it as navigation policy for the
+robot..  Yet, Social Forces and its variants rely on handcrafted functions
+limiting their ability to handle more complex navigation scenarios. To deal
+with a large number of agents, \textit{ORCA} was proposed in
+\cite{VanDenBerg2011} and later extended for non-holonomic bases in
+\cite{Alonso-Mora2012a}. However, these approaches demonstrate highly reactive
+behaviors because they only consider one step look-ahead predictions. MPC
+schemes were proposed for mobile robots and autonomous vehicles in
+\cite{Brito2019} and \cite{Schwarting2018} allowing to optimize over a
+prediction horizon and avoid, in advance, dynamic obstacles. To enable coupled
+control of a mobile manipulator, collision avoidance must be performed in the
+3D space which is usually not necessary for ground vehicles. Several 3D MPC
+formulation were proposed for drones to enable safe motion through cluttered
+environments \cite{Tordesillas2019,Liu2017}.
 
 \subsection{Collision Avoidance For Mobile Manipulators}
-Despite abundant research in trajectory planning for mobile robots and robotic arms, few works focused on coupling both systems' control. It was shown that coupling the base and the robotic arm motion leads to a considerable reduction of total operational time and smoother motions \cite{Thakar2018, Thakar2019}. Nevertheless, 
-these methods were designed for static environments and did not allow real-time collision avoidance. Furthermore, trajectory planning for the coupled system is a precondition for effective interactive navigation, including opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way \cite{Li2019}.
-% MMs in dynamic environments
+Despite abundant research in trajectory planning for mobile robots and robotic
+arms, few works focused on coupling both systems' control. It was shown that
+coupling the base and the robotic arm motion leads to a considerable reduction
+of total operational time and smoother motions \cite{Thakar2018, Thakar2019}.
+Nevertheless, these methods were designed for static environments and did not
+allow real-time collision avoidance. Furthermore, trajectory planning for the
+coupled system is a precondition for effective interactive navigation, including
+opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way
+\cite{Li2019}.
 
 In the context of mobile manipulation, less research focused on collision
-avoidance in dynamic environments, including changing scenes and moving obstacles.
-A real-time controller using MPC was presented in \cite{Ide2011}, in which either a holonomic or a non-holonomic base was combined with a two-degree-of-freedom robotic arm mounted onto the base. Although hardware constraints were respected, no collision avoidance was considered.  An MPC formulation for mobile manipulators with holonomic bases that allows collision avoidance was presented in \cite{Avanzini2015}. The perceived obstacles were translated into a set of spheres to be respected by the MPC scheme. The proposed approach used dynamically changing weights to change between arm motion and locomotion, resulting in a locked arm during navigation. A different weight setting was used to perform motion underneath a horizontal bar with an a priori position. 
-The work is extended to non-holonomic bases and includes object detection in moving underneath the horizontal bar \cite{Avanzini2018}. 
-%
-% Scalable -> 
-%Summary
-% Conclusion
-
-\iffalse
-We can summarize that in order to allow complex behaviors for mobile manipulators and to
-decrease operational time, it is crucial to develop methods that deal with the coupled
-robotic system. In the field of trajectory planning, model predictive control was
-successfully tested for autonomous vehicles to allow navigation in highly dynamic
-environments, which have not been exploited for mobile manipulators. Initial tests to
-prove the applicability of this approach to control mobile manipulators in a coupled
-manner have underlined the potential of this method.  However, no solution to reduce the
-complexity as the number of obstacles increases has been proposed. Thus, the problem of
-real-time collision avoidance for mobile manipulators remains unsolved.
-\fi
-% Contribution
-\subsection{Contribution Of This Work}
-In this work, a 3D collision avoidance for the entire kinematic chain is proposed that allows safe arm motion during all phases of the locomotion process. In contrast to the work of \cite{Avanzini2018}, no dynamic weighting is required, as collision avoidance can be guaranteed for the entire kinematic chain. The proposed work does not require an object detection method to allow safe motion, as the raw point cloud can be processed using free convex region generation \cite{Liu2017}. Moreover, our approach reduces overall operational time while introducing a convex region generation to keep the computational costs low. 
+avoidance in dynamic environments, including changing scenes and moving
+obstacles. A real-time controller using MPC was presented in \cite{Ide2011}, in
+which either a holonomic or a non-holonomic base was combined with a
+two-degree-of-freedom robotic arm mounted onto the base. Although hardware
+constraints were respected, no collision avoidance was considered.  An MPC
+formulation for mobile manipulators with holonomic bases that allows collision
+avoidance was presented in \cite{Avanzini2015}. The perceived obstacles were
+translated into a set of spheres to be respected by the MPC scheme. The proposed
+approach used dynamically changing weights to change between arm motion and
+locomotion, resulting in a locked arm during navigation. A different weight
+setting was used to perform motion underneath a horizontal bar with an a priori
+position. The work is extended to non-holonomic bases and includes object
+detection in moving underneath the horizontal bar \cite{Avanzini2018}. 

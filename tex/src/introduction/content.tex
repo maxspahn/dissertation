@@ -204,6 +204,7 @@ the context of mobile manipulation and demonstrate the
 usability with several robots and in a concrete application.
 Specifically, we can list the following contributions:
 
+
 \subsection{Advancements in \ac{mpc} for mobile manipulation}
 \begin{enumerate}
     \item Enable real-time capable \ac{mpc} formulations for
@@ -213,6 +214,19 @@ Specifically, we can list the following contributions:
       formulations and \ac{fabrics} for various types of
       robots, providing insights into their relative
       strengths and limitations.
+    \item In this work, a 3D collision avoidance for the
+      entire kinematic chain is proposed that allows safe
+      arm motion during all phases of the locomotion
+      process. In contrast to the work of
+      \cite{Avanzini2018}, no dynamic weighting is required,
+      as collision avoidance can be guaranteed for the
+      entire kinematic chain. The proposed work does not
+      require an object detection method to allow safe
+      motion, as the raw point cloud can be processed using
+      free convex region generation \cite{Liu2017}.
+      Moreover, our approach reduces overall operational
+      time while introducing a convex region generation to
+      keep the computational costs low. \MS{Shorten}
 \end{enumerate}
 
 \subsection{Theoretical advancements in \ac{fabrics}}

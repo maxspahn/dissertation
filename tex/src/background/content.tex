@@ -1,9 +1,53 @@
-\chapter{Background} % (fold)
+﻿\chapter{Background} % (fold)
 \label{cha:background}
 
 \input{src/background/transition.tex}
 
 \newpage
+
+\section{Trajectory Generation} % (fold)
+\label{sec:trajectory_generation}
+
+In this thesis, we define \ac{tg} as the process of
+computing a sequence of actions in real-time that allows a
+robot to move from an initial configuration to a desired
+goal state. Imporantly, the goal state might be defined in a
+task specific way. For example, the goal state might be
+defined in the task space (e.g., the end-effector position)
+or in the configuration space (e.g., the joint position).
+That places \ac{tg} between task planning and control.
+
+To relate this definition of \ac{tg} to the literature,
+\ac{tg} can be further split into global path planning and
+local \ac{tg}. The former is the process of
+computing a collision-free path from the initial to the
+goal state, while the latter is the process of computing a
+smooth trajectory that follows the path as closely as
+possible while satisfying the robot's kinematic and dynamic
+constraints ~\cite{Rickert2014}.
+
+% section trajectory_generation (end)
+
+\section{Dynamic Environments} % (fold)
+\label{sec:dynamic_environments}
+
+Modern research in robotics is increasingly focusing on
+robots that operate in dynamic environments. However,
+dynamic environments is a broad term that can refer to
+environments with a variety of different characteristics. In
+this thesis, we define a dynamic environment as an
+environment in which the robot's task is, generally, not
+known a priori. That means that goal configurations, such as
+goal locations, the size and shape of manipulation objects,
+may vary during deployment. Besides, the environment may
+contain moving obstacles, such as other robots, humans, or
+other unpredictable objects. Examples of such environments
+are supermarkets, hospitals, or homes. \MS{Add figure}
+
+
+
+% section dynamic_environments (end)
+
 
 \section{Notations} % (fold)
 \label{sec:notations}
