@@ -17,124 +17,70 @@
 % developed in parallel for the individual embodiments of
 % robotic systems.
 
-
-\section{Path planning}
-\label{sec:path_planning}
-
-Past works devoted to path planning can be divided into two
-main categories: optimization-based and sampling-based
-methods \cite{LaValle2006,Mukadam2017}. Sampling-based path
-planners generate random configurations until a valid path
-between an initial configuration and a set of goal
-configurations is found \cite{Karaman2011}. Sampling-based
-methods, such as rapidly exploring random trees (RRT's)
-\cite{Webb2013,Kleinbort2019,Kuffner2000} and probabilistic
-roadmaps (PRM's) \cite{Hsu2002,Faust2017} are highly
-efficient at generating paths for systems with high-degree
-of freedom.
-
-\subsection{Robotic arms}%
-\label{sub:robotic_arms}
-
-Motion planning problems are usually defined by goals in
-arbitrary task spaces, such as the 3D Euclidean space or
-end-effector poses. For mobile robots, where task space and
-configuration space are often identical \cite{LaValle2006},
-the mapping from task space to configuration space is
-straightforward. However, in the context of manipulation,
-tasks can be regarded as constraints to the motion planning
-problem. Conventional approaches to motion planning rely on
-inverse kinematics to transform task constraints into sets
-of configurations. The resulting path planning problem can
-then be solved using sampling-based methods
-\cite{Rickert2014}.
-
-Several methods have been proposed to
-directly integrate task constraints into the sampling phase.
-\cite{Stilman2010} proposed a method to iteratively push a
-random sample to the manifold adhering to the task
-constraint. The notion of task constraints was later
-extended to task space regions to define soft constraints
-for individual task components~\cite{Berenson2011}.
-\cite{Kingston2019} proposed scalar-valued functions to
-represent task constraints for sampling-based planning. As
-all of the above-mentioned methods rely on implicitly
-constrained sampling in the joint space, they exhibit high
-computational time, which is especially harmful to
-real-world applications \cite{Qureshi2020}.
-
-\subsection{Mobile Manipulators}
-\label{sub:mobile_manipulators}
-
-Despite abundant research in trajectory planning for mobile robots and robotic
-arms, few works focused on coupling both systems' control. It was shown that
-coupling the base and the robotic arm motion leads to a considerable reduction
-of total operational time and smoother motions \cite{Thakar2018, Thakar2019}.
-Nevertheless, these methods were designed for static environments and did not
-allow real-time collision avoidance. Furthermore, trajectory planning for the
-coupled system is a precondition for effective interactive navigation, including
-opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way
-\cite{Li2019}.
-
-To summarize, path planning in robotics is a well-studied
-problem. Especially in the early days of robotics, where
-robots were mostly deployed in static environments, path
-planning was a central problem. However, when exposed to
-dynamic environments, path planning becomes insufficient due
-to its unability to quickly react to changes in the
-environment. This is especially true for mobile manipulation
-systems, due to their high-dimensional configuration space,
-\cite{Avanzini2018}. To overcome this limitation, local
-trajectory generation methods have been proposed as we will
-see in the next section.
-
-\section{Local trajectory generation}
-\label{sec:local_trajectory_generation}
-
-Path planning methods as above-mentioned aim at finding
+\acl{tg} methods aim at finding
 global paths that are optimal and collision-free at the
 moment of planning. In this section, we review approaches to
 \ac{tg} that locally solve the \ac{tg} problem, while aiming
 at global optimality --generally not guarnteed-- and
 collision avoidance. It is useful to place different methods
 on a scale of reactivity, usually measured by the achieved
-compute frequency, see \cref{fig:raectivity_scale}.
-. At the most reactive end, we find low
+compute frequency, see \cref{fig:reactivity_scale}.
+At the most reactive end, we find low
 level controllers and on the least reactive end, we find
 global path planning methods.
-% Figure for that scale
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[width=0.5\textwidth]{state/reactivity_scale}
-%   \caption{Reactivity scale of different \ac{tg} methods.}
-%   \label{fig:reactivity_scale}
-% \end{figure}
+\begin{figure}[h]
+  \centering
+  \input{src/state/img/reactivity_scale.pdf_tex}
+  \caption{Reactivity scale of different \ac{tg} methods
+  revised in this thesis. Global methods, such as RRT
+  \cite{Karaman2011} are at the least reactive end. More
+  reactive methods, such as \ac{mpc}
+  \cite{hewing2020learning}, \ac{apf} \cite{Khatib1985} and
+  low-level control methods such as \ac{ic} \cite{hogan1985impedance}
+  are at the most reactive end.}
+  \label{fig:reactivity_scale}
+\end{figure}
 
-\subsection{Impedence control}%
-\label{sub:impedence_control}
+\MS{What about learning-based methods?}
+
+\subsection{Impedance control}%
+\label{sub:impedance_control}
 
 Impedance control is a widely used control method in
-robotics \cite{Hogan1985}. In impedance control, the
-controlled system is modeled as a mass-spring-damper system.
-The specific case of Cartesian impedance control was
-proposed in \cite{Hollerbach1985} and could be characterized
-as a local \ac{tg} method, because of its ability cope with
-various goal specifications and its safety properities in
-the proximity of humans
-~\cite{van2022disagreement,lachner2022shaping,hjorth2024enabling}.
-
+robotics \cite{hogan1985impedance,abu2020variable}. In impedance
+control, the controlled system is modeled as a
+mass-spring-damper system. The specific case of Cartesian
+impedance control was proposed in \cite{albu2002cartesian} and
+could be characterized as a local \ac{tg} method, because of
+its ability cope with various goal specifications and its
+safety properities in the proximity of humans
+~\cite{van2022disagreement,hjorth2024enabling}.
+Additionally, impedance control can be used in collaborative
+settings, e.g., when lifting large objects together with
+humans \cite{abu2020variable}. More recent works on
+impedance control use variable impedance parameters to adapt
+the robot's behavior to the task at hand
+\cite{abu2020variable}. Often, the impedance controller are
+modified by human feedback to improve perceived safety and
+increase reliablity of the task exeuction with human
+feedback \cite{lachner2022shaping,franzese2021ilosa}.
 
 \subsection{Reactive trajectory generation}%
 \label{sub:reactive_trajectory_generation}
 
-\subsubsection{Mobile robots}
-\label{subsub:mobile_robots}
+In this dissertation, we refer to \textit{reactive \ac{tg}}
+as methods that rely on local information about the
+environment and the robot that compute actions without a
+time horizon into the future. The most prominent example of
+reactive \ac{tg} is the \ac{apf} method as we will
+see by visiting the different embodiments of robotic
+systems.
 
 \subsubsection{Robotic arms}
 \label{subsub:robotic_arms}
 
 Pioneer works on \ac{tg} for robotic arms
-employed potential fields for collision avoidance
+employed \ac{apf} for collision avoidance
 \cite{Khatib1985,Khatib1986real,park2008movement}. Building
 on the previous, \cite{Haddadin2011} introduced the Circular
 Field method to address dynamic collision avoidance. To
@@ -155,10 +101,27 @@ pose \cite{haviland2020purely}. The work was later extended
 to integrate moving and static obstacles
 \cite{haviland2021neo}.
 
+\subsubsection{Mobile robots}
+\label{subsub:mobile_robots}
+
+The method of \ac{apf} was also used for \ac{tg} of mobile
+robotis after its introduction for robotic arms.
+For non-holonomic mobile robots, it was shown that \ac{apf}
+generally exhibits multiple equilibrium points which are not
+necessarily stable \cite{urakubo2018stability}.
+
+Different to \ac{apf}, the dynamic window approach searches
+the space of feasible velocities and computes the best
+velocity command for the next time step
+\cite{fox1997dynamic}. This methods was extended to take
+into consideration global reference paths
+\cite{zhang2019improved}.
+
 \subsubsection{Mobile Manipulators}
 \label{subsub:mobile_manipulators}
 
-To achiev 
+\MS{Does not seem to exist...}
+
 
 
 \subsection{Receding-horizon trajectory optimization}%
@@ -218,6 +181,16 @@ environments \cite{Tordesillas2019,Liu2017}.
 \subsubsection{Robotic arms}
 \label{subsub:robotic_arms}
 
+Early implementations of \ac{mpc} for industrial robotics
+arms were presented in \cite{faulwasser2016implementation}.
+Especially in the context of robotic arms, uncertainty in
+the robot model might harm the performance. To overcome this
+limitation, Gaussian Processes were proposed in
+\cite{hewing2019cautious,carron2019data} to offline learn
+the mismatch between model and real system. The learned
+model was then used to adapt the \ac{mpc} scheme during
+runtime \cite{carron2019data}.
+
 \subsubsection{Mobile Manipulators}
 \label{subsub:mobile_manipulators}
 
@@ -237,7 +210,6 @@ position. The work is extended to non-holonomic bases and includes object
 detection in moving underneath the horizontal bar \cite{Avanzini2018}. 
 
 
-
 \subsubsection{Conclusion}
 
 Receding-horizon trajectory optimization methods are a
@@ -245,15 +217,88 @@ powerful tool for local \ac{tg} in dynamic environments.
 They provide formal stability guarantees and can be analyzed
 using methods from non-linear control. Therefore, \ac{mpc}
 approaches are widely used in the context of autonomous
-driving. However, the computational costs scale with the
-degrees of freedom and restrict real-time applicability to
-simple dynamics and environment models.
+driving. For manipulators, model inaccuracies degrade
+performance and learning methods are often used to
+compensate for this. However, the computational costs scale
+with the degrees of freedom and restrict real-time
+applicability to simple dynamics and environment models.
+
+\section{Path planning}
+\label{sec:path_planning}
+
+Past works devoted to path planning can be divided into two
+main categories: optimization-based and sampling-based
+methods \cite{LaValle2006,Mukadam2017}. Sampling-based path
+planners generate random configurations until a valid path
+between an initial configuration and a set of goal
+configurations is found \cite{Karaman2011}. Sampling-based
+methods, such as rapidly exploring random trees (RRT's)
+\cite{Webb2013,Kleinbort2019,Kuffner2000} and probabilistic
+roadmaps (PRM's) \cite{Hsu2002,Faust2017} are highly
+efficient at generating paths for systems with high-degree
+of freedom.
+
+\subsection{Robotic arms}%
+\label{sub:robotic_arms}
+
+Motion planning problems are usually defined by goals in
+arbitrary task spaces, such as the 3D Euclidean space or
+end-effector poses. For mobile robots, where task space and
+configuration space are often identical \cite{LaValle2006},
+the mapping from task space to configuration space is
+straightforward. However, in the context of manipulation,
+tasks can be regarded as constraints to the motion planning
+problem. Conventional approaches to motion planning rely on
+inverse kinematics to transform task constraints into sets
+of configurations. The resulting path planning problem can
+then be solved using sampling-based methods
+\cite{Rickert2014}.
+
+Several methods have been proposed to
+directly integrate task constraints into the sampling phase.
+\cite{Stilman2010} proposed a method to iteratively push a
+random sample to the manifold adhering to the task
+constraint. The notion of task constraints was later
+extended to task space regions to define soft constraints
+for individual task components~\cite{Berenson2011}.
+\cite{Kingston2019} proposed scalar-valued functions to
+represent task constraints for sampling-based planning. As
+all of the above-mentioned methods rely on implicitly
+constrained sampling in the joint space, they exhibit high
+computational time, which is especially harmful to
+real-world applications \cite{qureshi2021constrained}.
+
+\subsection{Mobile Manipulators}
+\label{sub:mobile_manipulators}
+
+Despite abundant research in trajectory planning for mobile robots and robotic
+arms, few works focused on coupling both systems' control. It was shown that
+coupling the base and the robotic arm motion leads to a considerable reduction
+of total operational time and smoother motions \cite{Thakar2018, Thakar2019}.
+Nevertheless, these methods were designed for static environments and did not
+allow real-time collision avoidance. Furthermore, trajectory planning for the
+coupled system is a precondition for effective interactive navigation, including
+opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way
+\cite{Li2019}.
+
+To summarize, path planning in robotics is a well-studied
+problem. Especially in the early days of robotics, where
+robots were mostly deployed in static environments, path
+planning was a central problem. However, when exposed to
+dynamic environments, path planning becomes insufficient due
+to its unability to quickly react to changes in the
+environment. This is especially true for mobile manipulation
+systems, due to their high-dimensional configuration space,
+\cite{Avanzini2018}. To overcome this limitation, local
+trajectory generation methods have been proposed as we will
+see in the next section.
+
 
 
 \subsection{Geometries of trajectories}
 \label{sub:geometries_of_trajectories}
 
-Reactive \ac{tg} approaches, such as potential field theory,
+Reactive \ac{tg} approaches, such as \ac{apf} theory,
 may lead to contracting behaviors, as individual policies
 are \textit{fighting} against each other \cite{Ratliff2018}.
 To overcome the shortcoming, importance metric and policy
