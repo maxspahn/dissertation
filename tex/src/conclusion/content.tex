@@ -1,0 +1,91 @@
+\chapter{Conclusion and discussion}
+\label{cha:conclusion_and_discussion}
+
+The final chapter of this thesis summarizes the contributions and discusses the
+main results. Besides, research questions for the following years and raised and
+potential approaches are layed out. This chapter ends with a vision on the
+future of robotics in human-shared environments.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This thesis mainly contributed to geometric interpretation of \ac{tg} for manipulators
+and mobile manipulators. Specifically, we extended the framework of \ac{fabrics}
+to more dynamic environments, proposed a symbolic implementation to allow for
+fast parameter tuning at runtime, and demonstrated its effectiveness in
+a real demonstration case. Along the way, we showed how \ac{mpc} can be used for
+mobile manipulators and why geometric approaches tend to outperform
+optimization-based methods for these systems. All results were validate
+extensively in simulation and verified in real-world experiments.
+In the following, we summarize the main contributions of this thesis.
+
+\subsection{MPC for mobile manipulators}
+\label{sec:conclusion_mpc}
+
+\cref{icra_spahn_21} extended the widely used method of \ac{fsd} to mobile
+manipulators which lead to several improvements. First, it allowed to control
+the system in a coupled way reducing overall execution time, similar to what had
+been done in \cite{Avanzini2018} with dynamic weighing. Second, it reduced the
+required accuaracy of the perception pipeline as raw pointclouds or occupancy
+grids can be used. Third, we showed that computationally scaling in the number
+of obstacles can be prevented. In the context of this thesis, we additionally
+showed that geomteric approaches tend to outperform \ac{mpc} formulations
+despite weaker theoretical guarantees.
+
+\subsection{Dynamic fabrics}
+\label{sec:conclusion_dynamic_fabrics}
+
+\cref{tro_spahn_23} generalized the framework of \ac{fabrics} to dynamic
+environments. We showed that \ac{fabrics} can be formulated on moving reference
+frames, in such a way that trajectory following and collision avoidance with
+dynamic obstacles can be combined with other, static components to the \ac{tg}
+problem. Specifically, the \textit{dynamic pull-back}
+operator brings a dynamically defined component into the static manifold of the
+configuration space while making the motion of the frame a runtime variable of
+the root geometry. This chapter shows that reference velocity integration is
+required to handle moving obstacles. Additionally, integration of global path
+planning in arbitrary manifolds is possible to the generalization. In
+particular, this chapter shows that convergence to reference paths can be 
+guaranteed. Finally, this chapter presents results on path following with a
+mobile manipulator and collision avoidance with moving humans in the workspace.
+\MS{What about the extension to non-holonomic systems?}
+
+
+\subsection{Symbolic fabrics}
+\label{sec:conclusion_symbolic_fabrics}
+
+\cref{icra_spahn_23} highlighted the importance of the existence of a
+closed-forme solution to \ac{tg} when formulated as a geometric problem.
+This property is exploited in a purely symbolic implementation of \ac{fabrics}
+which allows for fast parameter tuning at runtime. This chapter addationally
+proposes to use a Bayesian method to tune parameters to \ac{fabrics} at runtime.
+The experiments showed that expert-level can be reached within 50 iterations.
+Additionally, the results reveal that parameter sets can be transfered between
+similar embodiments. Finally, qualitative results on a real robot are presented
+confirming the applicability of the approach.
+
+\subsection{Real-world demonstration}
+\label{sec:conclusion_real_world}
+
+\cref{rss_spahn_24} demonstrated that \ac{fabrics} are not a mere theoretical
+framework but can be used in real-world manipulation demos. In the combination
+with a modern decision making framework, and state-of-the-art perception, 
+we demonstrated how \ac{fabrics} can be used to generate trajectories in complex
+environments with high-dimensional robots. Besides, it was shown that different
+paradigms from \ac{tg} in manipulation, such as learning-based methods and
+redundancy resolution, can be easily integrated into the framework.
+
+
+
+
+
+
+\section{Discussion}
+\label{sec:discussion}
+
+Here, we should discuss limitations and future works.
+Geometric approaches: Potential ad limitations.
+
+
+
+
