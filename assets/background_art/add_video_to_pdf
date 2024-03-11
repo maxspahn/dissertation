@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# This script is used to overlay a video in frames to a pdf file.
+# The video should have a white background.
+#
+# Usage: ./overal.sh video_file input.pdf output.pdf
+
+videoFile=$1
+inputPdf=$2
+outputPdf=$3
+rate=10
+
+ffmpeg -i $videoFile -r ${rate} frame_%4d.png
+images=($(ls frame_*.png))
+
+n=${#images[@]}
+
+
+for i in $(seq 1 $n); do
+  # First get image name without the extension
+  image_name=$(echo ${images[$i-1]} | cut -f 1 -d '.')
+  # Crop the image
+  convert ${image_name}.png -crop 180x180+100+150 ${image_name}_crop.png
+done
+
+croped_images=($(ls frame_*crop.png))
+python3 add_image_to_pdf.py $inputPdf $outputPdf ${croped_images[@]}
+rm ${croped_images[@]}
+rm ${images[@]}
+
+
