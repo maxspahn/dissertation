@@ -6,18 +6,27 @@ main results. Besides, research questions for the following years and raised and
 potential approaches are layed out. This chapter ends with a vision on the
 future of robotics in human-shared environments.
 
+\newpage
+
 \section{Conclusion}
 \label{sec:conclusion}
 
-This thesis mainly contributed to geometric interpretation of \ac{tg} for manipulators
-and mobile manipulators. Specifically, we extended the framework of \ac{fabrics}
-to more dynamic environments, proposed a symbolic implementation to allow for
-fast parameter tuning at runtime, and demonstrated its effectiveness in
-a real demonstration case. Along the way, we showed how \ac{mpc} can be used for
-mobile manipulators and why geometric approaches tend to outperform
-optimization-based methods for these systems. All results were validate
-extensively in simulation and verified in real-world experiments.
-In the following, we summarize the main contributions of this thesis.
+% Reference back to introduction
+This thesis was stated in the context of labor shortage in the global North and
+the need for further automation to combat demographic change. In particular, we
+focused on the problem of \ac{tg} for mobile manipulators in human-shared
+environments. This thesis proposed several \ac{tg} methods to allow the safe
+deployment of mobile manipulators outside their classical cages.
+% Summary of the contributions
+This thesis mainly contributed to geometric interpretation of \ac{tg} for
+manipulators and mobile manipulators. Specifically, we extended the framework of
+\ac{fabrics} to more dynamic environments, proposed a symbolic implementation to
+allow for fast parameter tuning at runtime, and demonstrated its effectiveness
+in a real demonstration case. Along the way, we showed how \ac{mpc} can be used
+for mobile manipulators and why geometric approaches tend to outperform
+optimization-based methods for these systems. All results were validated
+extensively in simulation and verified in real-world experiments. In the
+following, we summarize the main contributions of this thesis.
 
 \subsection{MPC for mobile manipulators}
 \label{sec:conclusion_mpc}
@@ -28,9 +37,9 @@ the system in a coupled way reducing overall execution time, similar to what had
 been done in \cite{Avanzini2018} with dynamic weighing. Second, it reduced the
 required accuaracy of the perception pipeline as raw pointclouds or occupancy
 grids can be used. Third, we showed that computationally scaling in the number
-of obstacles can be prevented. In the context of this thesis, we additionally
-showed that geomteric approaches tend to outperform \ac{mpc} formulations
-despite weaker theoretical guarantees.
+of obstacles can be prevented. To relate to the other chapters of this thesis,
+we additionally showed that geomteric approaches tend to outperform \ac{mpc}
+formulations despite weaker theoretical guarantees.
 
 \subsection{Dynamic fabrics}
 \label{sec:conclusion_dynamic_fabrics}
@@ -57,12 +66,17 @@ mobile manipulator and collision avoidance with moving humans in the workspace.
 \cref{icra_spahn_23} highlighted the importance of the existence of a
 closed-forme solution to \ac{tg} when formulated as a geometric problem.
 This property is exploited in a purely symbolic implementation of \ac{fabrics}
-which allows for fast parameter tuning at runtime. This chapter addationally
-proposes to use a Bayesian method to tune parameters to \ac{fabrics} at runtime.
+which allows for fast parameter tuning. This chapter addationally
+proposes to use a Bayesian optimization to tune parameters to \ac{fabrics}.
 The experiments showed that expert-level can be reached within 50 iterations.
 Additionally, the results reveal that parameter sets can be transfered between
 similar embodiments. Finally, qualitative results on a real robot are presented
 confirming the applicability of the approach.
+
+\subsection{Implicit environment representations}
+\label{sec:conclusion_implicit}
+
+\MS{Depending on the whether this chapter gets included.}
 
 \subsection{Real-world demonstration}
 \label{sec:conclusion_real_world}
@@ -76,16 +90,90 @@ paradigms from \ac{tg} in manipulation, such as learning-based methods and
 redundancy resolution, can be easily integrated into the framework.
 
 
-
-
-
-
 \section{Discussion}
 \label{sec:discussion}
 
-Here, we should discuss limitations and future works.
-Geometric approaches: Potential ad limitations.
+This thesis focused on different methods for \ac{tg} that are capable to
+generate motion for mobile manipulators in human-shared environments. That
+included the adaption to the widely used methods of \ac{mpc} to mobile
+manipulation. The main part of this thesis was dedicated to a geometric
+interpretation of \ac{tg}. Although several advancements for bringing mobile
+manipulators to human-shared environments in a safe manner were made, we acknowledge
+that seeing robots in our daily lives will still be a rare sight for the years
+to come. In the following, we discuss the limitations of the proposed methods
+and highlight important missing pieces to unlock the full potential of mobile
+manipulators in human-shared environments.
+
+\subsection{Fabrics or MPC?}
+\label{sec:discussion_fabrics_or_mpc}
+
+Most readers are likely familar with \acl{mpc}, fewer may have seen its application
+to for example autonomous driving or mobile manipulation, and some 
+experienced roboticists may have be aware of the strengths and weaknesses of
+\ac{mpc}. In contrast, few reader have heard of \acf{fabrics} before and are 
+quick to make a connection between both methods due to the word
+\textit{optimization}. However, the methods are fundamentally different.
+and it is important to analyse the differences and similarities between
+these methods in an understandable way.
+% MPC
+\ac{mpc} is centered around the
+formulation of a constrained optimization problem. The constraints are
+the dynamics of the system and avoidance behaviors, such as collision avoidance
+or joint limit avoidance. The problem is solved up to a defined optimality 
+criteria. In general, the optimization problem is non-linear and non-convex.
+% fabrics
+In contrast, \ac{fabrics} is a purely geometric method. It is based on the
+formulation of a smooth manifold in the configuration space of the robot.
+Then, the solution to the \ac{tg} problem is solution to the geodesic equation
+where the manifolds metric is non-Riemannian in general. Importantly, the entire
+problem is encoded in the manifolds metric by iteratively adding avoidance
+behaviors, such as collision avoidance or joint limit avoidance. As the
+trajectory is consequence of solving the geodesic equation in each time step, a
+closed-form solution is available for explicit behaviors as discussed in this
+thesis.
+% transition
+This fundamentally different view on \ac{tg} has severe implications on
+practical implementations.
+
+\paragraph{Reactivity}
+\label{par:discussion_reactivity}
+
+\paragraph{Motion design}
+\label{par:motion_design}
 
 
+That has the advantage of being able to solve the problem in closed-form, which
+is generally not possible for \ac{mpc} formulations. However, all behaviors must
+be encoded on smooth manifolds of the configuration space, making the method
+less flexible to arbitrary constraints, that may be integrated into an \ac{mpc}
+formulation.
 
+\subsection{Limitations}
+\label{sec:discussion_limitations}
 
+\textit{Why moves the robot so slow?} This is the question that every roboticist
+-- especially those working on \ac{tg} --
+has to endure when showing their work to the public. While most, including the
+author, are quick to point out that the robot moves slow to ensure safety, the
+true reason is more complex.
+
+\paragraph{Hardware}
+
+\paragraph{Safety}
+
+\textit{Why is does the robot fail at this simple task?} This is not directly a
+question of the \ac{tg} problem at hand, but it is often intertangled with it.
+It touches upon task and motion planning, a widely studied field of robotics
+these days, see \cite{garrett2021integrated} for a recent survey. Especially,
+when 
+
+\subsection{Vision for trajectory generation}
+\label{sec:discussion_vision}
+
+While our modern societies are desperate for automation in human-shared
+environments, it is often disappointing to observe the current state of the art
+in robotics. From an intelectual point of view however, this is truely exciting,
+as the opportunities to shape robotics seem endless. And, from an philosophical
+point of view you may ask: \texitit{Isn't it quite reassuring that human
+abilities are still superior to those of robots when it comes to dynamic
+environments?}.
