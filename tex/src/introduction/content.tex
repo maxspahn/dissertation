@@ -1,6 +1,20 @@
 \chapter{Introduction} % (fold)
 \label{cha:Introduction}
 
+
+\begin{abstract}
+This chapter places this dissertation in the context of
+modern societies and its challenges. Specifically, we
+motivate this thesis by the demographic changes in the
+global North. In the following, we recall past approaches to
+trajectory generation and discuss their limitations.
+Finally, we present the contributions and the outline of
+this dissertation.
+\end{abstract}
+
+\newpage
+
+
 \section{Robots under the eyes of demographic change}
 
 In a world struggling with the challenges of an aging
@@ -16,13 +30,59 @@ vision have significantly improved our office activities,
 embodied systems still lag behind in sophistication and core
 capabilities.
 
-Industrial robots are highly capable in certain tasks, but
+\begin{figure}[h]
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{src/introduction/img/population_2000.eps}
+  \end{subfigure}%
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{src/introduction/img/population_2050.eps}
+  \end{subfigure}
+  \caption
+  []
+  {
+    Population portions by age in 2000 (left) and predictions for
+    2050 (right) in Europe. The aging society leads to labor shortage
+    which may be counterbalanced with increase in
+    automation. \footnotemark
+  }
+\end{figure}
+
+\footnotetext{
+    United Nations, Department of
+    Economic and Social Affairs, Population Division (2022)
+}
+
+Industrial robots, see \cref{fig:industrial_robot}
+are highly capable in certain tasks, but
 often lack the nuanced understanding and safety required for
 dynamic, human-shared environments. Collaborative robots
 provide more safety capabilities through a lightweight
-hardware design and sensors. These
+hardware design and sensors, see
+\cref{fig:collaborative_robot}. These
 robots are designed to exist safely alongside their human
 counterparts using different low-level control appraches.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{src/introduction/img/industrial_robot.png}
+    \caption{Industrial robot}
+    \label{fig:industrial_robot}
+  \end{subfigure}%
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{src/introduction/img/collaborative_robot.png}
+    \caption{Collaborative robot}
+    \label{fig:collaborative_robot}
+  \end{subfigure}
+  \caption{The difference between environments where robots
+  used to live in (left) and where we expect them to operate
+  in the future (right).}
+  \label{fig:different_robots}
+\end{figure}
 
 Next to
 safety, robots must be equipped with a similar level of
