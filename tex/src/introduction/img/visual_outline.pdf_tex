@@ -1,0 +1,93 @@
+%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'src/introduction/img/visual_outline.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{358.70981035bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.5814548)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0.09801402,0.9321254){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.72495211\unitlength}\raggedright \end{minipage}}}%
+    \put(-0.00683036,1.18937358){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.86414684\unitlength}\raggedright \end{minipage}}}%
+    \put(0.11042255,0.5744407){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.79974116\unitlength}\raggedright \end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.10283675,0.54830832){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 1}\end{tabular}}}}%
+    \put(0.09583534,0.51532584){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Introduction\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.22557132,0.44813594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}MPC\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.26633282,0.39737821){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 4}\end{tabular}}}}%
+    \put(0.22989853,0.36439572){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Whole-Body MPC\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.43080102,0.54831585){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 2}\end{tabular}}}}%
+    \put(0.42381375,0.51530477){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Background\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.75707609,0.54831623){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 3}\end{tabular}}}}%
+    \put(0.75007468,0.51530366){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Related Works\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.59345504,0.06217932){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 9}\end{tabular}}}}%
+    \put(0.59464338,0.0291968){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Conclusion\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.10284901,0.22841187){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 5}\end{tabular}}}}%
+    \put(0.06824624,0.19542938){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dynamic Fabrics\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.42964984,0.2284194){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 6}\end{tabular}}}}%
+    \put(0.39393714,0.19540832){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Symbolic Fabrics\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.75721094,0.2284198){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 7}\end{tabular}}}}%
+    \put(0.73895088,0.19540721){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Environments\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.05512599,0.28291935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Optimization Fabrics\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.26631084,0.06284597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Chapter 8}\end{tabular}}}}%
+    \put(0.25773518,0.02986345){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Retail-Demo\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{src/introduction/img/visual_outline.pdf}}%
+    \put(0.2253472,0.11674559){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Real World\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
