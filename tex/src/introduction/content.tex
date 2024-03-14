@@ -1,15 +1,16 @@
 \chapter{Introduction} % (fold)
-\label{cha:Introduction}
+\label{cha:intro}
 
 
 \begin{abstract}
 This chapter places this dissertation in the context of
-modern societies and its challenges. Specifically, we
+modern societies and their challenges. Specifically, we
 motivate this thesis by the demographic changes in the
-global North. In the following, we recall past approaches to
-trajectory generation and discuss their limitations.
-Finally, we present the contributions and the outline of
-this dissertation.
+global North. In the process, we identitfy trajectory
+\acl{tg} as a central problem in robotics, recall existing
+approaches and discuss their limitations. Finally, we
+present the contributions and the outline of this
+dissertation.
 \end{abstract}
 
 \newpage
@@ -18,17 +19,19 @@ this dissertation.
 \section{Robots under the eyes of demographic change}
 
 In a world struggling with the challenges of an aging
-population, shifting demographics, and a scarcity of
+population, shifting demographics
+(\cref{fig:demographic_change}), and a scarcity of
 affordable labor for physically demanding tasks, the need
 for technological solutions is more pronounced than ever
-\cite{ince2015economic}.
-Technological progress in the corresponding field of
-robotics today is disappointing, especially in an era where
-the non-embodied counterpart is touching all of our lives.
-While strides in natural language processing and computer
-vision have significantly improved our office activities,
-embodied systems still lag behind in sophistication and core
-capabilities.
+\cite{ince2015economic}. Technological progress in the
+corresponding field of robotics today is disappointing,
+especially in an era where the non-embodied counterpart is
+touching all of our lives. Specifically, strides in natural
+language processing and computer vision have significantly
+improved in the recent past and may rather soon than later
+increase our productivity substantially. In contrast, the
+capabilities of embodied systems still lag behind in
+sophistication and core capabilities.
 
 \begin{figure}[h]
   \begin{subfigure}{0.5\textwidth}
@@ -47,6 +50,7 @@ capabilities.
     which may be counterbalanced with increase in
     automation. \footnotemark
   }
+  \label{fig:demographic_change}
 \end{figure}
 
 \footnotetext{
@@ -59,7 +63,7 @@ are highly capable in certain tasks, but
 often lack the nuanced understanding and safety required for
 dynamic, human-shared environments. Collaborative robots
 provide more safety capabilities through a lightweight
-hardware design and sensors, see
+hardware design and a broader set of sensors, see
 \cref{fig:collaborative_robot}. These
 robots are designed to exist safely alongside their human
 counterparts using different low-level control appraches.
@@ -91,7 +95,7 @@ industrial robots is limited as they are statically
 attached to structural elements. In that sense, they become
 part of the building and exhibit no mobility. Placing
 robots in environments, that are built with the mobility of
-humans in mind, requires to unlock robots from the static
+humans in mind, requires to unlock robots from their static
 sockets.
 
 In summary, helping an aging societies to deal with labor
@@ -104,7 +108,8 @@ humans while equipped with the same mobility capabilities.
 One key feature of modern robots for human-shared
 environments, is mobility. The combination of highly mobile
 ground vehicles and manipulators is referred to as mobile
-manipulation. This concept enables robots to navigate and
+manipulation. This concept enables robots to navigate
+\textit{and}
 interact with their surroundings in ways previously deemed
 challenging. By endowing robots with the ability to move and
 manipulate objects in diverse environments, we further open
@@ -129,19 +134,23 @@ safety of itself and its environment.
 
 While the hardware is ready for deployment, the
 missing link lies in methods for generating trajectories
-that prioritize safety while providing high success rates.
+that prioritize safety while providing high success rates
+and short cycle times.
 This dissertation embarks on a journey to unravel this
 critical aspect of robotics, exploring innovative \ac{tg}
 methods that not only unlock the potential of
 robotic hardware but also lead to a world where robots
 seamlessly coexist with humans in shared spaces.
+Importantly, the presented methods are all designed with
+mobile manipulation in mind, as the increased level of
+complexity of such systems may rule out some methods that
+are superior for one of the two subsystems.
 
 \section{Limitations of current approaches}
 
 In the quest for effective \ac{tg}, various
 methods have been proposed, each with its set of advantages and
 drawbacks.
-
 The classical setup for robots --where they have
 proven to be quite effective-- is behind fences. This setup
 simplifies \ac{tg} dramatically as collision
@@ -153,7 +162,7 @@ once during installation. However, their Achilles' heel lies
 in their incapacity to adapt to dynamic, changing
 environments.
 
-Recognizing this limitation has spurred the rise of local
+Recognizing this limitation has led to the rise of local
 \ac{tg} methods, especially as robots are
 expected to enter human-shared environments. However, even
 within this domain, challenges persist. Pure control
@@ -167,7 +176,7 @@ With the aim for safe robots, many approaches these days are
 founded on optimization problems, centered around an
 objective function and constraints that favor safety
 guarantees and optimality. Such approaches are often
-referred to as model predictive control schemes or receding
+referred to as \ac{mpc} schemes or receding
 horizon optimization \cite{hewing2020learning}. While
 optimization-based methods have demonstrated success in
 autonomous driving applications, they stumble when
@@ -194,9 +203,9 @@ In the early days of robotics, potential field methods were
 popular in the context of \ac{tg}.
 They are based on the idea of modeling the robot as
 a point in a potential field, where the goal is a minimum
-and obstacles are maximac
+and obstacles are maxima
 ~\cite{barraquand1992numerical,hwang1992potential}. This
-approach is known to be computionally affordable and but
+approach is known to be computionally affordable but
 only covers the static components of the problem, and thus
 ignores the dynamics of the robot.
 
@@ -214,21 +223,22 @@ second-order differential equation raises the question
 whether all components of the \ac{tg} problem can be handled
 in this way. 
 
-We can observe that modern approaches to \ac{tg} focus on the
-practical side of \ac{tg} and often ignore the underlying
-geometric structure \cite{Ratliff2015}. For example,
-formulating the \ac{tg} problem in the Euclidean work space
-of the end effector, as it is done 
-in many optimization-based methods, is a simplification of 
-the problem ignoring the configuration space of the robot.
-Effectively, this approach uses a Euclidean geometry.
-In contrast, the work space can also be modeled as a
-Riemannian (or even non-Riemannian) manifold of the
-configuration space. Then, other components, that live in 
-different manifolds of the configuration space, can be
-seemlessly integrated into the \ac{tg} problem \cite{Ratliff2015}.
-This insight has lead to a series of different works
-where \ac{tg} has been addressed purely geometrically
+We can observe that modern approaches to \ac{tg} focus on
+the practical side of \ac{tg} and often ignore the
+underlying geometric structure \cite{Ratliff2015}. For
+example, formulating the \ac{tg} problem in the Euclidean
+work space of the end effector, as it is done in many
+optimization-based methods and learning approaches, is a
+simplification of the problem ignoring the configuration
+space of the robot. Effectively, this approach uses a
+Euclidean geometry. In contrast, the work space can also be
+modeled as a Riemannian (or even non-Riemannian) manifold of
+the configuration space \cite{klein2023design}. Then, other
+components, that live in different manifolds of the
+configuration space, can be seemlessly integrated into the
+\ac{tg} problem \cite{Ratliff2015}. This insight has lead to
+a series of different works where \ac{tg} has been addressed
+purely geometrically
 \cite{Ratliff2015,Cheng2019,Cheng2020,Ratliff2020,Xie2020}.
 
 \section{Geometries in trajectory generation}
@@ -245,80 +255,103 @@ Informally speaking, the composition shapes the
 landscape on which the trajectory is then generated.
 Formally speaking, we gradually introduce terms into the
 non-Riemannian metric shaping a smooth manifold of the
-configuration space. In this thesis, we provide an important
-extension to dynamic environments and give several use-cases
-for this method.
+configuration space.
+
+
 
 \section{Contributions}
 \label{sec:contributions}
 
-This disseretation centers around two approaches to
-\ac{tg}: (a) \ac{mpc} which formulates
-\ac{tg} as an optimization problem which is
-solved in a receding horizon fashion and (b) \ac{fabrics}
-where \ac{tg} is formulated as a 
-purely geometric problem.
-
-This dissertation presents contributions to both methods in
-the context of mobile manipulation and demonstrate the
-usability with several robots and in a concrete application.
-Specifically, we can list the following contributions:
+The theoretical contributions of this thesis
+are based on the geometric interpretation of \ac{tg}, and
+even more specifically on the framework of \ac{fabrics}.
+Additionally, extensive
+comparisons to \ac{mpc} are conducted to
+provide a more nuanced understanding of similarities and
+differences between the two approaches. In the following, we
+specify all contributions of this thesis in detail.
 
 
 \subsection{Advancements in \ac{mpc} for mobile manipulation}
 \begin{enumerate}
-    \item Enable real-time capable \ac{mpc} formulations for
-      coupled \ac{tg} in mobile manipulators
-      using \ac{fsd}.
-    \item Conduct a quantitative comparison between \ac{mpc}
+    \item \cref{cha:icra_21} presents an \ac{mpc} formulation for a
+      mobile manipulator. The presented methods proposes to cope
+      with poor scaling in the number of collision constraints, by
+      using the concept of \ac{fsd}. This method achieves a
+      control frequency of 10Hz \textit{indpendent} on the amount
+      of collision obstacles in the environment.
+    \item \cref{cha:tro_23} conducts a quantitative comparison between \ac{mpc}
       formulations and \ac{fabrics} for various types of
-      robots, providing insights into their relative
-      strengths and limitations.
-    \item In this work, a 3D collision avoidance for the
-      entire kinematic chain is proposed that allows safe
-      arm motion during all phases of the locomotion
-      process. In contrast to the work of
-      \cite{Avanzini2018}, no dynamic weighting is required,
-      as collision avoidance can be guaranteed for the
-      entire kinematic chain. The proposed work does not
-      require an object detection method to allow safe
-      motion, as the raw point cloud can be processed using
-      free convex region generation \cite{Liu2017}.
-      Moreover, our approach reduces overall operational
-      time while introducing a convex region generation to
-      keep the computational costs low. \MS{Shorten}
+      robots. The comparison reveals that clearance,
+      path-length and execution time remain unchanged for
+      both methods, while \ac{fabrics} realize a decrease in
+      solver time by a factor of approximately 50.
 \end{enumerate}
 
 \subsection{Theoretical advancements in \ac{fabrics}}
 \begin{enumerate}
     \setcounter{enumi}{2}
-    \item Generalize the framework of \ac{fabrics}
-      for dynamic environments, integrating moving obstacles
-      through time-parameterized manifolds and incorporating
-      path following via time-parameterized goal
-      definitions.
-    \item Extend the framework of \ac{fabrics} to
-      accommodate non-holonomic robots, enhancing the
-      applicability of the framework for a broader range of
-      robots.
+    \item \cref{cha:tro_23} generalizes the framework of \ac{fabrics}
+      for dynamic environments. We refer to the resulting
+      framework to as \ac{df}. Specifically, we introduce
+      time-parameterized manifolds to integrate moving
+      obstacles and time-parameterized goal definitions.
+      Technically,
+      we prove that energy conservation is preserved when
+      \textit{pulling} time-parameterized components into
+      the configuration manifold. 
+      Similarly, we prove convergence to
+      time-parameterized goals under a simple construction
+      condition. Quantative comparisons between our method
+      and the original framework of \ac{fabrics} reveal
+      that failures due to collision is reduced from 9/20
+      to 0/20 for a 7-DoF robot in a real-world experiment.
+      In terms of path following, trajectories generated
+      with \ac{df} achieve a by a factor of 2 reduced summed error 
+      when compared with the original framework of
+      \ac{fabrics} for a 7-DoF robot in simulation.
+    \item \cref{cha:tro_23} presents a extension to
+      non-holonomic systems. Non-holonomic systems, such as
+      differential-drives, are characterized by
+      non-holonomic constraints, effectively reducing the
+      degrees of freedom of the system. By solving an
+      unconstrained optimization problem reflecting the
+      jacobian of the non-holonomic constraints, we solve
+      for the least-square error of the \ac{fabrics} policy
+      given the non-holonomic constraints. While we
+      achnowledge the breaking of convergence guarantees,
+      quantative experiments reveal that this approach leads to
+      competitive results when compared to an \ac{mpc}
+      formulation for a differential-drive robot.
+      Additionally, we show that the idea transfers seemlessly
+      to mobile manipulation.
 \end{enumerate}
 
 \subsection{Practical contributions of \ac{fabrics}}
 \begin{enumerate}
-    \setcounter{enumi}{4}
-    \item Formulate \ac{fabrics} in a symbolic
-      manner to enhance computational efficiency at runtime.
-    \item Propose the use of Bayesian optimization for
-      automated parameter tuning of \ac{fabrics},
-      streamlining the optimization process and improving
-      performance.
-    \item Integrate implicit environment representations
-      into \ac{fabrics}, reducing requirements on
-      the perception pipeline and enhancing robustness in
-      dynamic environments.
-    \item Introduce learning-from-demonstration techniques
-      for \ac{fabrics}, simplifying trajectory
-      programming and improving usability.
+  \setcounter{enumi}{4}
+  \item As \ac{fabrics} offer a closed-form solution to
+    \ac{tg}, we present an symbolic implementation of
+    \ac{fabrics} in \cref{cha:icra_23}. This reduces
+    solver times to approximately 1ms for a 7-DoF robots, 
+    because the fabric compositon, combining
+    the individual behaviors, is precomputed and not
+    performed at runtime. The \ac{tg} policy can be
+    arbitraly parameterized and is thus suitable to
+    parameter refinement at runtime.
+  \item \cref{cha:icra_23} proposes the use of Bayesian optimization for
+    automated parameter tuning of \ac{fabrics},
+    reducing the need for expert knowledge. We show that
+    expert level tuning can be achieved without prior
+    knowledge of the framework. Additionally, tuning can
+    be transferred to different robots without substantial
+    loss of performance.
+  \item \cref{cha:rss_24} showcases that learning-from-demonstration
+    techniques can be integrated into \ac{fabrics} to
+    simplify trajectory programming. Taught trajectories
+    can be transformed to new environment layouts. 
+  \item \MS{Potentially add contribution of environment
+    representations.}
 \end{enumerate}
 
 \subsection{Demonstration in a Real-world Setting:}
@@ -335,38 +368,54 @@ manipulation and \ac{tg}, offering novel
 solutions to address key challenges and paving the way for
 future research and development efforts.
 
-
-
-
-
 \section{Outline}
 
-After this introduction, this dissertation first introduces
-relevant literature in the field of \ac{tg}
-and motion planning. Then, we summarize the required tools
-from optimal control and from differential geometry to
-understand the main chapters. In chapter 4, we explore a
-model predictive control formulation for whole body control
-with a mobile manipulator. We provide important steps to
-handle the complexity of the problem. Then, we derive a
-generalization of optimization fabrics to dynamic
-environments, including contour tracking and avoidance with
-moving obstacles. Chapter 6 highlights the benefits of
-formulating \ac{tg} in a symbolic way to
-improve real-time capabilities and allow for online
-parameter tuning. To relax the requirement for the
-perception pipeline, we layout several ways to integrate
-implicit environment representations into the framework of
-optimization fabrics in chapter 7. Finally, we conclude this
-thesis by summarizing the findings, their potential impact
-on deploying robots in human-shared environments, and giving some
-recommendations for future works.
-
-\begin{figure}
+The outline of this thesis is depicted in \cref{fig:outline}.
+%
+\begin{figure}[h]
   \begin{center}
     \input{src/introduction/img/visual_outline.pdf_tex}
   \end{center}
   \caption{Outline of this thesis}
   \label{fig:outline}
 \end{figure}
+% state
+After this introduction, \cref{cha:state} first introduces
+relevant literature in the field of \ac{tg}
+and motion planning.
+% background
+Then, \cref{cha:background} summarize the required tools
+from optimal control and from differential geometry to
+understand the main chapters.
+% mpc
+\cref{cha:icra_21} explores a
+model predictive control formulation for whole body control
+with a mobile manipulator. We provide important steps to
+handle the complexity of the problem.
+% dynamic fabrics
+In \cref{cha:tro_23}, we derive a
+generalization of optimization fabrics to dynamic
+environments, including path following and avoidance with
+moving obstacles.
+% symbolic implementation
+\cref{cha:icra_23} highlights the benefits of
+formulating \ac{tg} in a symbolic way to
+improve real-time capabilities and allow for online
+parameter tuning.
+% environment representations
+\MS{To relax the requirement for the
+perception pipeline, we layout several ways to integrate
+implicit environment representations into the framework of
+optimization fabrics in chapter 7}.
+% demo paper
+\cref{cha:rss_24} showcases the 
+usage of \ac{fabrics} in a prototype application in the
+context of order-picking in supermarkets.
+% conclusion
+Finally,
+\cref{cha:conclusion} summarizes the findings, their potential impact
+on deploying robots in human-shared environments, discusses
+the main differences between the presented methods and gives some
+recommendations for future direction of research.
+
 

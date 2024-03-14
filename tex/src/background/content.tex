@@ -321,6 +321,39 @@ Practically, energization equips the individual components of the planning probl
 with a metric when being combined with other components.
 
 
+\subsection{Motion generation using optimization fabrics}%
+\label{sub:trajectory_generation_using_optimization_fabrics}
+
+After this brief introduction to the theory of \ac{fabrics},
+we can layout the general procedure for \ac{tg} with the
+framework.
+When using optimization fabrics for motion generation, all
+components including constraints and goal attraction are
+designed as second order differential equations. If specific
+design rules for these equations are respected, all
+components can be combined to form a converging motion
+generator. Specifically, the following steps are performed:
+%
+\begin{enumerate}
+  \item Design path-consistent geometries in suited manifolds of the configuration space
+    (\cref{eq:homogeneous}).
+  \item Design corresponding Finsler energies defining the importance metric in this manifold
+    (\cref{sub:conservative_fabrics_and_energization}).
+  \item Energize all geometries with the associated Finsler energies 
+    (\cref{sub:conservative_fabrics_and_energization}).
+  \item Pull back the energized systems into the configuration space and sum them 
+    (\cref{sub:operations_on_specs}).
+  \item Force the combined system with a differentiable potential. As a composition of optimization fabrics, 
+    the resulting trajectory converges towards the potential's minimum
+    (\cref{sub:optimization_fabrics}).
+\end{enumerate}
+
+This procedure has been initial presented in
+\cite{Ratliff2020} and is used throughout this thesis to
+generate trajectory with \ac{fabrics}. In \cref{cha:tro_23},
+we adopt the procedure to our generalization to dynamic
+settings.
+
 \subsection{Experimental results fabrics}%
 \label{sub:experimental_results_fabrics}
 
