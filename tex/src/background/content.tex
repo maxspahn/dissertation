@@ -37,17 +37,14 @@ dynamic environments is a broad term that can refer to
 environments with a variety of different characteristics. In
 this thesis, we define a dynamic environment as an
 environment in which the robot's task is, generally, not
-known a priori. That means that goal configurations, such as
+known prior to deployement. That means that goal configurations, such as
 goal locations, the size and shape of manipulation objects,
 may vary during deployment. Besides, the environment may
 contain moving obstacles, such as other robots, humans, or
 other unpredictable objects. Examples of such environments
 are supermarkets, hospitals, or homes. \MS{Add figure}
 
-
-
 % section dynamic_environments (end)
-
 
 \section{Notations} % (fold)
 \label{sec:notations}
@@ -70,13 +67,13 @@ We denote $\q\in\Q\subset\Rn$ a configuration of the robot
 with $n$ its degrees of freedom; \Q{} is the configuration
 space of the generalized coordinates of the system.
 Generally, $\q(t)$ defines the robot's configuration at time
-$t$, so that \qdot, \qddot{} define the instantaneous
+$t$, so that \qdot{}, \qddot{} define the instantaneous time
 derivatives of the robot's configuration. Similarly, we
 assume that there is a set of task variables
 $\xj\in\Xj\subset\Rmj$ with variable dimension $m_j \leq n$.
 The task manifold \Xj{} defines an arbitrary manifold of the
 configuration space \Q{} in which a robotic task can be
-represented. Further, we assume that there is a differential
+represented. Further, we assume that there is a smooth differential
 map $\map_j:\Rn\rightarrow\Rmj$ that relates the
 configuration space to the $j^{th}$ task space. For example,
 when a task variable is defined as the end-effector
@@ -86,7 +83,7 @@ defined to be the joint position, then $\map_j$ is the
 identity function. In the following, we drop the subscript
 $j$ in most cases for readability when the context is clear.
 
-In this work, we assume that \map{} is smooth and twice
+In this work, we assume that \map{} is twice
 differentiable so that the Jacobian is defined as
 \begin{equation}
   \J = \derf{\q}{\map} \in \mathcal{R}^{m\times n}, 
@@ -141,7 +138,7 @@ admissibe sets of states and control inputs, respectively.
 Inequality constraints are denoted by $g(\z_k, \u_k)$.
 
 At each time step $k$, the \ac{mpc} problem is solved to
-find the sequence of control inputs $\u_k^*$ that minimizes
+find the sequence of control inputs $\u_k^*$ that minimize
 the cost function. The first control input of the optimal
 sequence is then applied to the system. The remainder of the
 sequence is shifted by one step to form the initial guess
@@ -169,7 +166,7 @@ formalism of \ac{fabrics}.
 
 A manifold is a topological space that locally resembles
 Euclidean space near each point. More precisely, a manifold
-is a topological space $M$ suchjson that for each point $p\in
+is a topological space $M$ such that for each point $p\in
 M$, there exists a neighborhood $U$ of $p$ that is
 homeomorphic to an open subset of $\Rn$. The dimension of
 the manifold is the dimension of the Euclidean space to
@@ -188,10 +185,10 @@ it?}
 \section{Optimization Fabrics} % (fold)
 \label{sec:optimization_fabrics}
 
-In this section, we introduce the concept of optimization
-fabrics. Optimization fabrics are a framework for motion
-generation that is based on the theory of differential
-geometry. The main idea is to design motion generation as a
+In this section, we introduce the concept of \acf{fabrics}
+\ac{fabrics} are a framework for \ac{tg}
+that is based on the theory of differential
+geometry. The main idea is to design \ac{tg} as a
 second-order dynamical system. The trajectory generator is
 defined by the differential equations as we will layout in
 the following.
@@ -245,7 +242,7 @@ kinematics).
 \subsection{Optimization fabrics}%
 \label{sub:optimization_fabrics}
 
-Optimization fabrics form a special class of specs, and thus they inherit their properties,
+\ac{fabrics} form a special class of specs, and thus they inherit their properties,
 specifically the previously defined operations of \textit{summation} and \textit{pullback}.
 First, let us introduce a finite and differentiable potential
 function $\forc(\x)$ defined in a task manifold \X{}. 
@@ -274,9 +271,12 @@ on optimization fabrics and their construction is out of scope here, this
 subsection only provides an outline of the theory and the reader is referred to 
 \cite{Ratliff2021,Wyk2022} for detailed derivations.
 
-In the context of fabrics, the term \textit{energy} describes a scalar quantity that
+In the context of \ac{fabrics}, the term \textit{energy} describes a scalar quantity that
 changes as the system evolves over time.  Although this quantity has a physical meaning in
 natural systems (e.g., kinetic energy), it can be arbitrarily defined for motion generation.
+Besides, this quantity can be used as
+a Lyaupnov function to prove the convergence of the trajectory to the minimum of the potential
+function.
 Generally, specs and optimization fabrics do not conserve an energy, but when they do, we
 call them \textit{conservative specs}.  A stationary Lagrangian~\cite[Definition
 4.11]{Ratliff2020} is one definition for an energy for which the corresponding spec, known
@@ -327,7 +327,7 @@ with a metric when being combined with other components.
 After this brief introduction to the theory of \ac{fabrics},
 we can layout the general procedure for \ac{tg} with the
 framework.
-When using optimization fabrics for motion generation, all
+When using optimization fabrics for \ac{tg}, all
 components including constraints and goal attraction are
 designed as second order differential equations. If specific
 design rules for these equations are respected, all
@@ -366,6 +366,6 @@ planar arm in a goal-reaching setup was successfully tested in~\cite{Ratliff2020
 the authors illustrated how the resulting motion can be modified arbitrarily by the user
 by adding additional constraints or preferences.
 
-Although important concepts and findings on optimization fabrics were summarized in this
+Although important concepts and findings on \ac{fabrics} were summarized in this
 section, we refer to~\cite{Ratliff2020} for a more in-depth presentation of optimization
 fabrics. In the following, we generalize the framework of optimization fabrics to dynamic settings.
