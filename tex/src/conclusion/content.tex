@@ -4,7 +4,7 @@
 \begin{abstract}
 The final chapter of this thesis summarizes the contributions and discusses the
 main results. Besides, research questions for the following years are raised and
-potential approaches are layed out. This chapter ends with a vision on the
+potential approaches are laid out. This chapter ends with a vision on the
 future of robotics in human-shared environments.
 \end{abstract}
 
@@ -37,10 +37,10 @@ following, we summarize the main contributions of this thesis.
 manipulators which led to several improvements. First, it allowed to control
 the system in a coupled way reducing overall execution time, similar to what had
 been done in \cite{Avanzini2018} with dynamic weighing. Second, it reduced the
-required accuaracy of the perception pipeline as raw pointclouds or occupancy
+required accuracy of the perception pipeline as raw point clouds or occupancy
 grids can be used. Third, we showed that computationally scaling in the number
 of obstacles can be prevented. In \cref{cha:tro_23},
-we additionally showed that geomteric approaches tend to outperform \ac{mpc}
+we additionally showed that geometric approaches tend to outperform \ac{mpc}
 formulations despite weaker theoretical guarantees.
 
 \subsection{Dynamic fabrics}
@@ -66,12 +66,12 @@ mobile manipulator and collision avoidance with moving humans in the workspace.
 \label{sec:conclusion_symbolic_fabrics}
 
 \cref{cha:icra_23} highlighted the existence of a
-closed-forme solution to \ac{tg} when formulated as a geometric problem.
+closed-form solution to \ac{tg} when formulated as a geometric problem.
 This property is exploited in a purely symbolic implementation of \ac{fabrics}
-which allows for fast parameter tuning. This chapter addationally
+which allows for fast parameter tuning. This chapter additionally
 proposed to use a Bayesian optimization to tune parameters to \ac{fabrics}.
 The experiments showed that expert-level can be reached within 50 iterations.
-Additionally, the results revealed that parameter sets can be transfered between
+Additionally, the results revealed that parameter sets can be transferred between
 similar embodiments. Finally, qualitative results on a real robot are presented
 confirming the applicability to both manipulation and mobile
 manipulation.
@@ -109,14 +109,14 @@ manipulators in human-shared environments.
 \subsection{Fabrics or MPC?}
 \label{sec:discussion_fabrics_or_mpc}
 
-Most readers are likely familar with \acl{mpc}, fewer may have seen its application
+Most readers are likely familiar with \acl{mpc}, fewer may have seen its application
 to, for example, autonomous driving or mobile manipulation, and some 
-experienced roboticists may have be aware of the strengths and weaknesses of
+experienced robotoscist may have be aware of the strengths and weaknesses of
 \ac{mpc}. In contrast, few readers have heard of \acf{fabrics} before and are 
 quick to make a connection between both methods due to the word
 \textit{optimization}. However, the methods are
 fundamentally different,
-and it is important to analyse the differences and similarities between
+and it is important to analyze the differences and similarities between
 these methods in an understandable way.
 % MPC
 \ac{mpc} is centered around the
@@ -150,7 +150,7 @@ achieved in roughly 1ms for \ac{fabrics} on a 7-DoF
 manipulator. Therefore, \ac{fabrics} can arguably be
 considered a controller, that captures geometric environment
 aspects. In contrast, the solution to the optimization
-problom in \ac{mpc} is generally not available in
+problem in \ac{mpc} is generally not available in
 closed-form. Therefore, the optimization problem has to be 
 solved in each time step. Additionally, the problem is
 usually non-convex making the solution costly. In numbers,
@@ -160,7 +160,7 @@ and 100ms are realistic. That substantially reduces
 reactivity of the system making it less suitable for fast
 changing environments.
 
-\paragraph{Global optimiality}
+\paragraph{Global optimality}
 \label{par:discussion_global_optimiality}
 
 While reactivity is an important aspect to collision
@@ -174,7 +174,7 @@ infinitely long horizon would lead to a globally optimal
 solution. This is practically impossible to achieve, such
 that the horizon is usually limited to a few stages, and the
 remaining stages are approximated by a terminal cost.
-Nevertheless, \ac{mpc} formulations practially show strong 
+Nevertheless, \ac{mpc} formulations practically show strong 
 behavior in terms avoidance of local minima. In contrast,
 \ac{fabrics} is a purely local method, with no consideration
 of future states. It relies purely on the shape of the
@@ -183,7 +183,7 @@ guaranteed to be free of local minima. In fact, we argued in
 \cref{cha:tro_23} that local minima are likely to occur in
 cluttered environments. This is a severe limitation which
 must be addressed by either global guidance as we suggested,
-or by futher analyses of the generated manifolds.
+or by further analyses of the generated manifolds.
 
 \paragraph{Motion design}
 \label{par:motion_design}
@@ -192,7 +192,7 @@ We call \textit{motion design} the process of encoding
 behaviors into the \ac{tg} problem. Practically, what is the
 process for a user to encode different desired behaviors
 into the \ac{tg} problem, such that the robot behaves as
-intented by the application. In \ac{mpc} formulations, the 
+indented by the application. In \ac{mpc} formulations, the 
 the behavior is mainly influenced by the objective function
 and its weighing factors if multiple objectives are present.
 This scalar encoding often proofs to be difficult, because
@@ -204,7 +204,7 @@ tuned separately. For example, in the experiments of this
 thesis, we usually defined behaviors in order of
 increasing importance, starting with joint limit avoidance
 and ending with goal-reaching. That makes the method
-user-friendly and individual components exchangable if an
+user-friendly and individual components exchangeable if an
 application might require that. Moreover, individual
 behaviors can be quite complex, such as collision avoidance
 defined by signed distance fields, or goal reaching using
@@ -233,11 +233,11 @@ our proposed methods and point the reader to potential
 future directions of research. 
 % continuous time
 A practical limitation of \ac{fabrics} --as for any other
-geometric method definied in the continuous time domain --
+geometric method defined in the continuous time domain --
 is that the method is not directly applicable to real-world
 systems. Specifically, the method has to be discretized and
-approximated leading to inaccuarcies when tracking continuous
-trajectories. A thourough analysis of the discretization
+approximated leading to inaccuracies when tracking continuous
+trajectories. A thorough analysis of the discretization
 when applied to real robots is missing to this point.
 % tuning
 Despite improved design-invariant properties on stability
@@ -255,9 +255,9 @@ should be seen as a compact, yet rich, encoding of
 \ac{tg} that serves only as the building structure for
 nuanced, learned behaviors. Be ensuring that deep neural
 networks exhibit the properties required by the theory of 
-\ac{fabrics}, arbitrarly complex behaviors can be
+\ac{fabrics}, arbitrarily complex behaviors can be
 constructed and importantly combined into a single policy.
-This approach has been experiented with in \cite{xie2023neural}
+This approach has been experienced with in \cite{xie2023neural}
 and in \cref{cha:rss_24} of this thesis.
 % Geometric algebra
 When putting a method into the context of geometric
@@ -274,7 +274,7 @@ For example, attractors in this thesis are limited to
 sets of translations, e.g. a end-effector pose can be
 encoded as three translational attractors. Higher order
 algebra allow to encode attraction to a circle, line, pose
-or sphere as an object of the same alegbra \cite{low2023geometric}.
+or sphere as an object of the same algebra \cite{low2023geometric}.
 From a conceptional point of view, this seems the more
 compact understanding of attractors, and from a practical
 point of view, it reduces the amount of parameters required.
@@ -291,23 +291,23 @@ the integration of higher order geometric algebras.
 After having discussed the advantages and limitations of
 methods related to the chapters of this thesis, we also want
 to give a broader perspective on robotics. In particular, we
-want to shed light on some the resosns why robots have not
+want to shed light on some the reasons why robots have not
 entered human shared environments in a more widespread
 manner. To make this section a bit more lively, we shall ask
 important questions, that are often asked by the public, and
 try to answer them in a more philosophical way.
 
 
-\textit{Why moves the robot so slow?} This is the question that every roboticist
+\textit{Why moves the robot so slow?} This is the question that every robotoscist
 -- especially those working on \ac{tg} --
 has to endure when showing their work to the public. While most, including the
 author, are quick to point out that the robot moves slow to ensure safety, the
 true reason is more complex. Execution speed is dependent on
 (a) the ability to move fast,
-(b) the ability to execute trajectories accuratly when moving fast,
+(b) the ability to execute trajectories accurately when moving fast,
 (c) the ability to make state estimates fast,
 (d) the ability to compute trajectories fast,
-(e) the effect of speed of motion on the enviornment,
+(e) the effect of speed of motion on the environment,
 and, of course,  (f) safety considerations.
 Let us treat each of these
 points in turn. 
@@ -318,7 +318,7 @@ points in turn.
     should not be used as an excuse, because all robots used
     in this thesis are capable of moving much faster than
     shown in the experiments. 
-  \item Moving fast however is not sufficient as accuaracy
+  \item Moving fast however is not sufficient as accuracy
     is quite important in manipulation tasks. It turns out
     that modern hardware is quite capable of speeding up
     moving between waypoints defined in the configuration
@@ -331,7 +331,7 @@ points in turn.
     an open-loop manner. Instead, the environment has to be
     constantly perceived and the state of the robot must be
     estimated at the same speed. It is obviously difficult
-    to achive required update frequency with computer
+    to achieve required update frequency with computer
     vision, but even state estimates related to the robot
     itself fail to be accurate at high speeds. For example,
     the joint velocities of the \panda{} used primarily
@@ -339,7 +339,7 @@ points in turn.
     proves to be highly problematic when using reactive
     \ac{tg} methods. In this thesis, the problem was usually
     addressed by low-pass filtering the joint velocities
-    which on the flipside introduces a delay of the signal.
+    which on the flip side introduces a delay of the signal.
     Either the estimates must be improved without
     introducing delays or \ac{tg} methods must be robust
     against noise estimates.
@@ -360,7 +360,7 @@ points in turn.
     conflict. We put fast robots in cages because their
     kinetic energy is dangerous to humans. Having the same
     kind of robots in human-shared environments naturally 
-    results in slow motions to componate for the lack of
+    results in slow motions to compensate for the lack of
     the cage as a safety measure. Unless, we start relying
     on soft-robots to imitate human hardware, this conflict
     seems hard to impossible to resolve.
@@ -376,7 +376,7 @@ when
 
 While our modern societies are desperate for automation in human-shared
 environments, it is often disappointing to observe the current state of the art
-in robotics. From an intelectual point of view however, this is truely exciting,
+in robotics. From an intellectual point of view however, this is truly exciting,
 as the opportunities to shape robotics seem endless. And, from an philosophical
 point of view you may ask: \textit{Isn't it quite reassuring that human
 abilities are still superior to those of robots when it comes to dynamic

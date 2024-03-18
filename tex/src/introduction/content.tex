@@ -6,7 +6,7 @@
 This chapter places this dissertation in the context of
 modern societies and their challenges. Specifically, we
 motivate this thesis by the demographic changes in the
-global North. In the process, we identitfy trajectory
+global North. In the process, we identify trajectory
 \acl{tg} as a central problem in robotics, recall existing
 approaches and discuss their limitations. Finally, we
 present the contributions and the outline of this
@@ -66,7 +66,7 @@ provide more safety capabilities through a lightweight
 hardware design and a broader set of sensors, see
 \cref{fig:collaborative_robot}. These
 robots are designed to exist safely alongside their human
-counterparts using different low-level control appraches.
+counterparts using different low-level control approaches.
 
 \begin{figure}
   \centering
@@ -196,7 +196,7 @@ training and thus lacking generalizability when confronted
 with new scenarios \cite{noroozi2023conventional}.
 Computational costs are also often
 mentioned when criticizing such approaches, but as
-computational capacity increase rapidely, it seems little
+computational capacity increase rapidly, it seems little
 justified. 
 
 In the early days of robotics, potential field methods were
@@ -205,7 +205,7 @@ They are based on the idea of modeling the robot as
 a point in a potential field, where the goal is a minimum
 and obstacles are maxima
 ~\cite{barraquand1992numerical,hwang1992potential}. This
-approach is known to be computionally affordable but
+approach is known to be computationally affordable but
 only covers the static components of the problem, and thus
 ignores the dynamics of the robot.
 
@@ -235,7 +235,7 @@ Euclidean geometry. In contrast, the work space can also be
 modeled as a Riemannian (or even non-Riemannian) manifold of
 the configuration space \cite{klein2023design}. Then, other
 components, that live in different manifolds of the
-configuration space, can be seemlessly integrated into the
+configuration space, can be seamlessly integrated into the
 \ac{tg} problem \cite{Ratliff2015}. This insight has lead to
 a series of different works where \ac{tg} has been addressed
 purely geometrically
@@ -278,7 +278,7 @@ specify all contributions of this thesis in detail.
       mobile manipulator. The presented methods proposes to cope
       with poor scaling in the number of collision constraints, by
       using the concept of \ac{fsd}. This method achieves a
-      control frequency of 10Hz \textit{indpendent} on the amount
+      control frequency of 10Hz \textit{independent} on the amount
       of collision obstacles in the environment.
     \item \cref{cha:tro_23} conducts a quantitative comparison between \ac{mpc}
       formulations and \ac{fabrics} for various types of
@@ -302,7 +302,7 @@ specify all contributions of this thesis in detail.
       the configuration manifold. 
       Similarly, we prove convergence to
       time-parameterized goals under a simple construction
-      condition. Quantative comparisons between our method
+      condition. Quantitative comparisons between our method
       and the original framework of \ac{fabrics} reveal
       that failures due to collision is reduced from 9/20
       to 0/20 for a 7-DoF robot in a real-world experiment.
@@ -319,11 +319,11 @@ specify all contributions of this thesis in detail.
       jacobian of the non-holonomic constraints, we solve
       for the least-square error of the \ac{fabrics} policy
       given the non-holonomic constraints. While we
-      achnowledge the breaking of convergence guarantees,
-      quantative experiments reveal that this approach leads to
+      acknowledge the breaking of convergence guarantees,
+      quantitative experiments reveal that this approach leads to
       competitive results when compared to an \ac{mpc}
       formulation for a differential-drive robot.
-      Additionally, we show that the idea transfers seemlessly
+      Additionally, we show that the idea transfers seamlessly
       to mobile manipulation.
 \end{enumerate}
 
@@ -334,10 +334,10 @@ specify all contributions of this thesis in detail.
     \ac{tg}, we present an symbolic implementation of
     \ac{fabrics} in \cref{cha:icra_23}. This reduces
     solver times to approximately 1ms for a 7-DoF robots, 
-    because the fabric compositon, combining
-    the individual behaviors, is precomputed and not
+    because the fabric composition, combining
+    the individual behaviors, is pre-computed and not
     performed at runtime. The \ac{tg} policy can be
-    arbitraly parameterized and is thus suitable to
+    arbitrarily parameterized and is thus suitable to
     parameter refinement at runtime.
   \item \cref{cha:icra_23} proposes the use of Bayesian optimization for
     automated parameter tuning of \ac{fabrics},
