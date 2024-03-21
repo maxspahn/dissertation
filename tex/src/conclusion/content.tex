@@ -3,9 +3,15 @@
 
 \begin{abstract}
 The final chapter of this thesis summarizes the contributions and discusses the
-main results. Besides, research questions for the following years are raised and
-potential approaches are laid out. This chapter ends with a vision on the
-future of robotics in human-shared environments.
+main findings. Then, we provide a qualative comparison between \ac{fabrics} and
+\ac{mpc}. We discuss the limitations of \ac{fabrics} and
+propose potential future directions of research.
+Specificially, we point the reader to lines of research
+that could be integrated to further promote the framework.
+Finally, we discuss common questions from the public when
+it comes to \ac{tg} and robotics in general. The chapter
+is closed by a vision on the future of robotics by the
+author.
 \end{abstract}
 
 \newpage
@@ -17,10 +23,11 @@ future of robotics in human-shared environments.
 This thesis was stated in the context of labor shortage in the global North and
 the need for further automation to combat demographic change. In particular, we
 focused on the problem of \ac{tg} for mobile manipulators in human-shared
-environments. This thesis proposed several \ac{tg} methods to allow the safe
+environments. This thesis proposed several \ac{tg} methods to allow the
 deployment of mobile manipulators outside their classical cages.
 % Summary of the contributions
-This thesis mainly contributed to geometric interpretation of \ac{tg} for
+The core methods are centered around a
+geometric interpretation of \ac{tg} for
 manipulators and mobile manipulators. Specifically, we extended the framework of
 \ac{fabrics} to more dynamic environments, proposed a symbolic implementation to
 allow for fast parameter tuning at runtime, and demonstrated its effectiveness
@@ -33,7 +40,7 @@ following, we summarize the main contributions of this thesis.
 \subsection{MPC for mobile manipulators}
 \label{sec:conclusion_mpc}
 
-\cref{cha:icra_21} extended the widely used method of \ac{fsd} to mobile
+\cref{cha:icra_21} applied the widely used method of \ac{fsd} to mobile
 manipulators which led to several improvements. First, it allowed to control
 the system in a coupled way reducing overall execution time, similar to what had
 been done in \cite{Avanzini2018} with dynamic weighing. Second, it reduced the
@@ -59,8 +66,9 @@ planning in arbitrary manifolds is possible to the generalization. In
 particular, this chapter proved that convergence to reference paths can be 
 guaranteed. Finally, this chapter presented results on path following with a
 mobile manipulator and collision avoidance with moving humans in the workspace.
-\MS{What about the extension to non-holonomic systems?}
-
+Additionally, we provided a required extension to
+\ac{fabrics} for non-holonomic systems, such as differential
+drive robots.
 
 \subsection{Symbolic fabrics}
 \label{sec:conclusion_symbolic_fabrics}
@@ -68,8 +76,9 @@ mobile manipulator and collision avoidance with moving humans in the workspace.
 \cref{cha:icra_23} highlighted the existence of a
 closed-form solution to \ac{tg} when formulated as a geometric problem.
 This property is exploited in a purely symbolic implementation of \ac{fabrics}
-which allows for fast parameter tuning. This chapter additionally
-proposed to use a Bayesian optimization to tune parameters to \ac{fabrics}.
+which allows for solver times around 1ms. This chapter additionally
+proposed to use a Bayesian optimization to tune parameters
+for \ac{fabrics}.
 The experiments showed that expert-level can be reached within 50 iterations.
 Additionally, the results revealed that parameter sets can be transferred between
 similar embodiments. Finally, qualitative results on a real robot are presented
@@ -97,10 +106,11 @@ redundancy resolution, can be easily integrated into the framework.
 
 This thesis focused on different methods for \ac{tg} that are capable to
 generate motion for mobile manipulators in human-shared environments. That
-included the adaption to the widely used methods of \ac{mpc} to mobile
-manipulation. The main part of this thesis was dedicated to a geometric
+included the adaption to the widely used method of \ac{mpc}
+to whole-body control for mobile
+manipulators. The main part of this thesis was dedicated to a geometric
 interpretation of \ac{tg}. Although several advancements for bringing mobile
-manipulators to human-shared environments in a safe manner were made, we acknowledge
+manipulators to human-shared environments were made, we acknowledge
 that seeing robots in our daily lives will still be a rare sight for the years
 to come. In the following, we discuss the limitations of the proposed methods
 and highlight important missing pieces to unlock the full potential of mobile
@@ -111,10 +121,12 @@ manipulators in human-shared environments.
 
 Most readers are likely familiar with \acl{mpc}, fewer may have seen its application
 to, for example, autonomous driving or mobile manipulation, and some 
-experienced robotoscist may have be aware of the strengths and weaknesses of
-\ac{mpc}. In contrast, few readers have heard of \acf{fabrics} before and are 
-quick to make a connection between both methods due to the word
-\textit{optimization}. However, the methods are
+experienced robotoscist may be aware of the strengths and weaknesses of
+\ac{mpc}. In contrast, few readers have heard of \ac{fabrics} before and are 
+quick to make a connection between both methods, because
+\ac{mpc} is based on an \textit{optimization} which is part
+of the name of \acf{fabrics}
+However, the methods are
 fundamentally different,
 and it is important to analyze the differences and similarities between
 these methods in an understandable way.
@@ -131,7 +143,7 @@ Then, the solution to the \ac{tg} problem is solution to the geodesic equation
 where the manifolds metric is non-Riemannian in general. Importantly, the entire
 problem is encoded in the metric by iteratively adding avoidance
 behaviors, such as collision avoidance or joint limit avoidance. As the
-trajectory is consequence of solving the geodesic equation in each time step, a
+trajectory is as consequence of solving the geodesic equation in each time step, a
 closed-form solution is available for explicit behaviors as discussed in this
 thesis.
 % transition
@@ -143,7 +155,11 @@ practical implementations.
 
 One important aspect of \ac{tg} in human-shared environments is the ability to
 react fast to changing environments. The \textit{speed} of reaction
-of different approaches is captured in what we call \textit{reactivity}.
+of different approaches is captured in what we call
+\textit{reactivity} and is uniquely defined by the frequency
+at which a \ac{tg} problem can be deployed, which is a
+direct consequence of the computational complexity of the
+method.
 
 Due to the closed-form solution, computing actions can be
 achieved in roughly 1ms for \ac{fabrics} on a 7-DoF
@@ -189,21 +205,22 @@ or by further analyses of the generated manifolds.
 \label{par:motion_design}
 
 We call \textit{motion design} the process of encoding
-behaviors into the \ac{tg} problem. Practically, what is the
+behaviors into the \ac{tg} problem. Practically, motion
+design describes the 
 process for a user to encode different desired behaviors
 into the \ac{tg} problem, such that the robot behaves as
-indented by the application. In \ac{mpc} formulations, the 
+indented by the application. In \ac{mpc} formulations,
 the behavior is mainly influenced by the objective function
 and its weighing factors if multiple objectives are present.
-This scalar encoding often proofs to be difficult, because
+This scalar encoding often prooves to be difficult, because
 individual objectives are highly coupled. In contrast,
-\ac{fabrics} allow of \textit{iterative} motion design.
+\ac{fabrics} allow for \textit{iterative} motion design.
 Specifically, the defining manifold can be iteratively
 enhanced, such that individual components can be tested and
 tuned separately. For example, in the experiments of this
 thesis, we usually defined behaviors in order of
 increasing importance, starting with joint limit avoidance
-and ending with goal-reaching. That makes the method
+and ending with goal-attraction. That makes the method
 user-friendly and individual components exchangeable if an
 application might require that. Moreover, individual
 behaviors can be quite complex, such as collision avoidance
@@ -237,7 +254,7 @@ geometric method defined in the continuous time domain --
 is that the method is not directly applicable to real-world
 systems. Specifically, the method has to be discretized and
 approximated leading to inaccuracies when tracking continuous
-trajectories. A thorough analysis of the discretization
+trajectories. A thorough analysis on convergence of the discretization
 when applied to real robots is missing to this point.
 % tuning
 Despite improved design-invariant properties on stability
@@ -247,7 +264,7 @@ tackle that problem in \cref{cha:icra_23}, but further
 research should be conducted to simplify the tuning process.
 Moreover, all behaviors used in this thesis are
 hand-crafted, in \cref{cha:icra_23} up to certain
-parameters. Hand-crafting \ac{tg} methods is time-consuming
+parameter bounds. Hand-crafting \ac{tg} methods is time-consuming
 and does not seem to be the right approach in the long run.
 Especially considering the success of learning-based methods
 in other fields. Therefore, we argue that \ac{fabrics}
@@ -281,17 +298,13 @@ point of view, it reduces the amount of parameters required.
 Future research in \ac{fabrics} should therefore consider
 the integration of higher order geometric algebras.
 
-
-
-
-
 \subsection{Considerations and vision}
 \label{sec:discussion_vision}
 
 After having discussed the advantages and limitations of
 methods related to the chapters of this thesis, we also want
 to give a broader perspective on robotics. In particular, we
-want to shed light on some the reasons why robots have not
+want to shed light on some reasons why robots have not
 entered human shared environments in a more widespread
 manner. To make this section a bit more lively, we shall ask
 some questions, that are often asked by the public, and
@@ -311,8 +324,8 @@ true reason is more complex. Execution speed is dependent on
 (d) the ability to compute trajectories fast,
 (e) the effect of speed of motion on the environment,
 and, of course,  (f) safety considerations.
-Let us treat each of these
-points in turn. 
+Let us treat these
+points in turns:
 % enumeration in alphabetical order (a) - (f)
 \begin{enumerate}[(a)]
   \item When a robot's motors are not powerful enough to
@@ -344,11 +357,15 @@ points in turn.
     which on the flip side introduces a delay of the signal.
     Either the estimates must be improved without
     introducing delays or \ac{tg} methods must be robust
-    against noise estimates.
+    against noise estimates. Inaccurate, slow or delayed
+    sensing seems an important reason for slow motion in
+    human-shared environments.
   \item The ability to compute trajectories fast is
     discussed in \cref{sec:discussion_fabrics_or_mpc} and we
     believe that \ac{fabrics} offer a good approach to
     address this part of the problem of slow motion.
+    However, more widely used methods do not offer this
+    speed and are therefore contributing to slow motion.
   \item What is often under-appreciated by the public is
     that speeding up motions has a direct effect on the
     interactions with the environment. For example, when
@@ -357,7 +374,9 @@ points in turn.
     approaching an item to avoid it tipping over. This
     logical connection is often considered trivial by the
     public but is very difficult to encode in a robot's
-    behavior.
+    behavior. This leads to a tradeoff between speed of
+    motion and sucess rate, where the later is usually
+    favored.
   \item And finally, speed of motion and safety are in direct
     conflict. We put fast robots in cages because their
     kinetic energy is dangerous to humans. Having the same
@@ -371,45 +390,41 @@ points in turn.
 \textit{Why does the robot choose this highly complicated
 way of moving?}
 
-That question usually arises when a robot
-takes an \textit{unnatural} road to reach a goal. The problem
-is directly related to the definition of natural, because it
-referes to the human understanding of \textit{best} route.
-In robotics, the best route is usually defined as the
-optimal route, which is the shortest route in the
-configuration space. This shortest route in configuration
-space, however is hard to find, because of the high
-dimensionality and the constraints defined by obstacles.
-In fact, the problem is so hard that it is usually
-approximated by sampling-based methods, such as RRT.
-This methods solves the problem by sampling configurations
-until a sequence of valid configurations leading to the goal
-configuration is found \cite{Karaman2011}.
-The problem with this approach is
-that only the connection between two subsequent samples can
-be guaranteed to be the shortest, not the entire sequence.
-Moreover, this often leads to highly jerky motions. Although,
-plenty of research has been conducted to improve the paths,
-by for example smoothing the sequence \cite{siegwart2011introduction},
-the problem is
-inherent to planning in the configuration space. As it is
-very unlikely that we humans do that, paths generated by
-this approach seems unusual to us. Methods presented in this
-thesis did not plan over a long horizon in the configuration
-space, but relied either purely on local \ac{tg} or used
-global path planning in the workspace. In general, this
-seems to produce more natural looking paths. Specifically,
-the technique of shaping the configuration manifold might be
-very close to what humans do when planning a path
+This question often arises when a robot seems to take an
+unconventional path to reach its destination. The issue
+hinges on the notion of what is considered \textit{natural},
+which essentially boils down to what humans perceive as the
+most optimal route. In the context of robotics, the optimal
+path is typically defined as the shortest path in the
+configuration space, which poses significant challenges due
+to its high dimensionality and the constraints imposed by
+obstacles. Consequently, finding this shortest path becomes
+a difficult task, often addressed through sampling-based
+methods like Rapidly-exploring Random Trees (RRT), which
+iteratively sample configurations until a viable sequence of
+configurations leading to the goal is discovered
+\cite{Karaman2011}. However, this approach only guarantees
+the shortest connection between subsequent samples, not the
+entire sequence, often resulting in abrupt and jerky
+motions. Despite efforts to refine these paths, such as
+through smoothing techniques
+\cite{siegwart2011introduction}, the fundamental challenge
+lies in the nature of planning within the configuration
+space, which tends to yield paths that appear unconventional
+to human observers. In contrast, the methods outlined in
+this thesis avoid long-term planning within the
+configuration space, instead relying on purely local \ac{tg}
+and global path planning in the workspace, which generally
+yields paths that appear more natural. Specifically,
+techniques like shaping the configuration manifold seem to
+resemble to human path-planning processes
 \cite{klein2022riemannian}.
-
-
 
 \textit{Why is does the robot fail at this simple task?}
 
-This is not directly a
-question of the \ac{tg} problem at hand, but it is often intertangled with it.
-It touches upon task and motion planning, a widely studied field of robotics
+This is not directly a question of the \ac{tg} problem at
+hand, but it is often intertangled with it. It touches upon
+task and motion planning, a widely studied field of robotics
 these days, see \cite{garrett2021integrated} for a recent
 survey. To answer this question, one has to appreciate the
 ease of humans to combine several sensors, e.g. vision,
@@ -422,7 +437,6 @@ cases, make long term plans and to transfer knowledge are
 not met by robots. Until great advancements are made, the
 public will continue wondering why robots fail at simple
 tasks.
-
 
 While our modern societies are desperate for automation in human-shared
 environments, it is often disappointing to observe the current state of the art
