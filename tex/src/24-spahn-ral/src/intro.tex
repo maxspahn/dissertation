@@ -1,0 +1,62 @@
+\section{Introduction}
+\label{sec:intro}
+
+As robots are making their way into human shared environments,
+fast reactive behavior is needed to make sure that obstacles are safely avoided
+at all time. Trajectory optimization methods, such as Model Predictive Control,
+are widely used to guarantee collision avoidance during execution. While such
+methods perform well in slowly changing environments, their computational costs
+limit the achievable computation frequencies cannot be considered truly reactive. 
+\ac{fabrics} offer an
+alternative to classic trajectory optimization techniques. Based on differential
+geometry, policies are composed of several components to form a highly reactive
+and fast behavior. However, the composition of \ac{fabrics} of
+individual obstacle avoidance geometries is limited to simple geometric shapes,
+such that a differentiable distance function can easily be formulated. The 
+sets a challenging requirement on the perception part of the motion generation
+pipeline. In this work, we present and analyse three different methods to 
+overcome this drawback, namely integration of \ac{fsd}, 
+\acp{sdf} and raw sensor data into the framework of
+\ac{fabrics}. While putting more computational effort onto the fabrics planner, it
+relaxes the computational costs of the perception pipeline.
+In the process, we derive essential extensions to the framework and
+analyse strength and weaknesses of the individual methods. To summarize, this
+paper makes the following contributions:
+\begin{itemize}
+  \item We integrate implicit representation of the environment into the
+    framework of \ac{fabrics}, namely \ac{fsd}, \ac{sdf}
+    and raw sensor data.
+  \item We derive how numerical gradients can be used for pullback operations
+    which are essential in the composition of \ac{fabrics}.
+  \item We analyse strength and weaknesses of the three representations in
+    dynamic environments.
+  \item We present real-world experiments illustrating the power of our
+    open-source implementation.
+\end{itemize}
+
+In this project, direct sensor data should be integrated into
+the framework of \ac{fabrics} to remove the requirement for formal
+object detection algorithms. Collision avoidance is crucial for every robotic
+application in a human-shared environment. Model Predictive Control is highly
+valuable to mobile robots as it leverages formal safety guarantees to mobile
+robots. However, the underlying optimization problem may be highly non-linear
+and difficult to solve [1]. Control frequencies higher than 10Hz are generally
+hard to achieve \cite{hewing_learning-based_2020}. For mobile manipulators, it
+becomes even more difficult to obtain reasonable control-frequencies. On the
+other hand, \ac{fabrics} offer a highly reactive motion planning
+framework for various types of robots \cite{Ratliff2021}.
+Frequencies above 1kHz are realistic to obtain. However, so far, \ac{fabrics}
+depend on precise perception tools to realize safe motions.
+Specifically, \ac{fabrics} require a differentiable distance function
+between robot and obstacle. Sensors, such as Lidar or depth cameras, might
+directly offer such distance measures. 
+
+
+\begin{figure}
+  \centering
+  \input{methods/inkscape/spectrum_tex.pdf_tex}
+  \caption{Different levels of implicitness for environment representations.}
+  \label{fig:overview}
+\end{figure}
+
+

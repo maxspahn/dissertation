@@ -1,0 +1,131 @@
+\section{Background}
+\label{sec:math}
+
+\MS{Rewrite with ChatGPT.}
+%
+In this section, we very briefly introduce the concepts required for trajectory
+generation with \ac{fabrics}. For a more in-depth introduction to \ac{fabrics}
+and its foundations in differential geometry, the reader
+is referred to \cite{Ratliff2021,Spahn2023a,Wyk2022}.
+%
+\subsection{Configurations and task variables}%
+\label{sub:configurations_and_task_variables}
+%
+We denote $\q\in\Q\subset\Rn$ a configuration of the robot with $n$ its degrees
+of freedom; \Q{} is the configuration space of the generalized coordinates of
+the system. Generally, $\q(t)$ defines the robot's configuration at time $t$, so
+that \qdot, \qddot{} define the instantaneous derivatives of the robot's
+configuration. Similarly, we assume that there is a set of task variables
+$\xj\in\Xj\subset\Rmj$ with variable dimension $m_j \leq n$. The task space
+\Xj{} defines an arbitrary manifold of the configuration space \Q{} in which a
+robotic task can be represented. Further, we assume that there is a differential
+map $\map_j:\Rn\rightarrow\Rmj$ that relates the configuration space to the
+$j^{th}$ task space. For example, when a task variable is defined as the
+end-effector position, then $\map_j$ is the positional part of the forward
+kinematics. On the other hand, if a task variable is defined to be the joint
+position, then $\map_j$ is the identity function. In the following, we drop the
+subscript $j$ in most cases for readability when the context is clear.
+
+We assume that \map{} is in $\mathcal{C}^1$ so that the Jacobian is
+defined as
+\begin{equation}
+  \J = \derf{\q}{\map} \in \mathcal{R}^{m\times n}, 
+\end{equation}
+or $\J = \der{\q}{\map}$ for short.
+Thus, we can write the total time derivatives of \x{} as
+$\xdot = \J\qdot$ and $\xddot = \J\qddot + \Jdot\qdot$.
+%
+\subsection{Spectral semi-sprays}%
+\label{sub:semi_spectral_sprays}
+%
+Inspired by simple mechanics (e.g., the simple pendulum), the framework of
+\ac{fabrics} designs motion policies as second-order dynamical systems $\xddot =
+\pi(\x,\xdot)$~\cite{Cheng2020,Ratliff2020}. The motion policy is defined by the
+differential equation $\M\xddot + \f = 0$, where $\M(\x,\xdot)$ and
+$\f(\x,\xdot)$ are functions of position and velocity. Besides, \M{} is
+symmetric and invertible. We denote such systems as $\Spec = \spec$ and refer to
+them as \textit{spectral semi-sprays}, or \textit{specs} for short.  When the
+space of the task variable is clear from the context, we drop the subscript. 
+
+\subsection{Operations on specs}%
+\label{sub:operations_on_specs}
+%
+%
+Complex trajectory generation is composed of multiple components, such as collision avoidance, joint limits
+avoidance, etc. The power of \ac{fabrics} lies in the metric-weighted sum to
+combine multiple components from different manifolds.
+These operations are derived from operations on specs and are briefly recalled here.
+
+Given a differential map $\map: \Q\rightarrow\X$ and a spec \spec{}, the \textit{pullback}
+is defined as 
+\begin{equation}
+  \pull{\map}{\spec} = {\left(\Jt\M\J, \Jt(\f+\Jdot\qdot)\right)}_{Q}.
+  \label{eq:pullback}
+\end{equation}
+The pullback allows converting between two distinct manifolds (e.g. a spec could be 
+defined in the robot's workspace and pulled into the robot's configuration space using
+the pullback with \map{} being the forward kinematics).
+
+For two specs, $\Spec_1 = {\left(\M_1,\f_1\right)}_{\X}$ and 
+$\Spec_2 = {\left(\M_2,\f_2\right)}_{\X}$, their \textit{summation} is defined by:
+\begin{equation}
+  \Spec_1 + \Spec_2 = {\left(\M_1 + \M_2, \f_1 + \f_2\right)}_{\X}.
+  \label{eq:specs_summation}
+\end{equation}
+%
+
+Additionally, a spec can be \textit{energized} by a Lagrangian energy. Effectively, 
+this equips the spec with a metric.
+Specifically, given a spec of form $\Spec_{\vec{h}} = (\mat{I},\vec{h})$ and 
+an energy Lagrangian \le{} with the derived equations of motion $\M_{\le}\xddot + \f_{\le} =0$, 
+we can define the operation
+\begin{equation}
+  \begin{split}
+  S_{\vec{h}}^{\le} &= \text{energize}_{\le}\{S_{\vec{h}}\} \\
+    &= (\Me, \fe + \Pe[\Me\vec{h} - \fe]), 
+  \end{split}
+  \label{eq:energization}
+\end{equation}
+where $\Pe = \Me\left(\Me^{-1} - \frac{\xdot\xdot^T}{\xdot^T\Me\xdot}\right)$ is an
+orthogonal projector. The resulting spec is an \textit{energized spec} and 
+we call the operation \textit{energization}.
+
+With spectral semi-sprays and the presented operations,
+avoidance behavior, such as joint limit avoidance, collision
+avoidance or self-collision avoidance, can be realized.
+
+\subsection{Optimization fabrics}%
+\label{sub:optimization_fabrics}
+%
+In the previous subsection, we explained how different avoidance behaviors can
+be combined. Spectral semi-sprays can additionally be \textit{forced} by a
+potential, denoted as the \textit{forced variant} of form $\Spec_{\forc} =
+\left(\M,\f + \der{\x}{\forc}\right)$. This forcing term clearly changes the
+behavior of the system. \Ac{fabrics} introduce construction rules to
+make sure that the solution path $\x(t)$ of $\Spec_{\forc}$ converges towards
+the minimum of $\forc(\x)$. Then, the potential is designed in such a way that
+its minimum represents a goal state of the motion planning problem.
+
+First, the initial spec that represents an avoidance component
+is written in the form $\xddot + \vec{h}(\x,\xdot) = 0$,
+such that $\vec{h}$ is \textit{homogeneous of degree 2}:
+$\vec{h}(\x,\alpha\xdot) = \alpha^2\vec{h}(\x,\xdot)$ 
+(\textbf{Creation}). 
+Secondly, the geometry is
+energized (\cref{eq:energization})
+with a Finsler structure~\cite[Definition 5.4]{Ratliff2020} (\textbf{Energization}).
+The property of homogeneity of degree 2 and the energization with the Finsler structure
+guarantees, according to ~\cite[Theorem 4.29]{Ratliff2020}, that the energized spec
+forms a \textit{frictionless fabric}.
+A frictionless fabric is defined to optimize the forcing potential \forc{} when being
+damped by a positive definite damping term~\cite[Definition 4.4]{Ratliff2020}.
+Thirdly, all avoidance components are combined in the configuration space
+of the robot using the pullback and summation operation (\textbf{Combination}).
+Note, that both operations are closed 
+under the algebra designed by these operations, i.e. every pulled optimization fabric or the sum
+of two \ac{fabrics} is, itself, an optimization fabric.
+In the last step, the combined spec is forced by the potential \forc{} with the desired minimum and
+damped with a positive definite damping term (\textbf{Forcing}).
+This resulting system of form $\M\qddot + \f(\q, \qdot) + \der{\q}{\forc} + \beta\qdot = 0$ is solved to 
+obtain the trajectory generation policy in acceleration form $\qddot = \pi(\q,\qdot)$.
+
