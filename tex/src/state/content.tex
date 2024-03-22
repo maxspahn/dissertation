@@ -17,7 +17,7 @@
 % developed in parallel for the individual embodiments of
 % robotic systems.
 
-\acl{tg} methods aim at finding
+\Acl{tg} methods aim at finding
 global paths that are optimal and collision-free at the
 moment of planning. In this section, we review approaches to
 \ac{tg} that locally solve the \ac{tg} problem, while aiming
@@ -374,6 +374,60 @@ coupled system is a precondition for effective interactive navigation, including
 opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way
 \cite{Li2019}.
 
+\section{Environment represenations}
+\label{sec:environment_representations}
+
+All above described methods rely on some form of environment
+representation. For example, the inequality constraints in
+\ac{mpc} formulations responsible for collision avoidance
+rely on a distance function between the robot and the
+obstacles. Path planning methods, as described above, 
+also require an environment representation, such that
+collision checking can accept or reject new samples. In
+geometric approaches, such as \ac{apf}, \ac{rmp} and
+\ac{fabrics}, distance functions are also necessary.
+For primitive shapes, such as spheres and boxes, distances
+can be computed in closed form. When working in dynamic
+environments, robots perceive their environment using vision
+sensors, such as cameras, or range sensors, such as lidar.
+Classifying the environment into primitive shapes is a
+challenging task, especially when the environment is
+cluttered and parts are occluded. A different approach to
+collision avoidance relies on more implicit representations
+of the environments --the most implicit would be raw sensor
+data--. In the following, we recall some works that focus on
+such representations in the contex to of \ac{tg}.
+
+
+\subsection{Implicit representations}
+\label{sub:implicit_representations}
+
+For trajectory planning using short-term optimization,
+unoccupied space constraints limit robot movement, proven
+useful for mobile robots in cluttered areas
+\cite{Brito2019}. In drone flight, a similar concept
+generates safe flight zones along a global path
+\cite{Liu2017a,Tordesillas2019a,tordesillas2021mader}. In
+the context of drone flying, \ac{sdf} has been utilized with
+\ac{mpc} trajectory generation in unknow environments
+\cite{Oleynikova2017voxblox}. Raw lidar data has been used
+in combination with \acp{rmp} showing impressively high
+frequencies when computation is parallized on GPU
+\cite{Pantic2023obstacle}. Recent advances in sampling-based
+\ac{mpc}, utilizing physics engines for collision avoidance
+\cite{Pezzato2023sampling}, integrate obstacle collisions in
+cost functions during trajectory rollouts. A parallel
+approach is seen in \cite{Sundaralingam2023curobo}. For
+these approaches, the environment representation is implicit
+through integration into the cost function, but requires
+accurate modeling of the robot and the environment in the
+physics engine used for rollout computation.
+
+Though many methods demand manual robot representation, like
+composing spheres, exploration of even more implicit
+characterizations, such as learned \ac{sdf} like in
+\cite{Liu2022regularized,Koptev2023neural}, is underway.
+
 \paragraph{Conclusion}
 
 To summarize, path planning in robotics is a well-studied
@@ -384,9 +438,11 @@ dynamic environments, path planning becomes insufficient due
 to its unability to quickly react to changes in the
 environment. This is especially true for mobile manipulation
 systems, due to their high-dimensional configuration space,
-\cite{Avanzini2018}. For that reasons, path planning is at
-most used for global guiding of the methods introduced
-in previous sections.
-
+\cite{Avanzini2018}. Environment representations are
+crucially for all of the planning methods described above.
+Here, implicit representations have shown to be very useful
+for cluttered, unknown and dynamic environments. However,
+most research focuses no mobile robots, and manipulators
+are yet to be explored in this context.
 
 

@@ -1,12 +1,12 @@
 \section{Methods}
 \label{sec:methods}
 
-Having introduced optimization \ac{fabrics} in the previous section, this sections
-introduces numerical gradients in the framework and proposes three different
-implicit environment representations. Then, we propose methods to integrate
-these representations into the framework of optimization \ac{fabrics}.
-
-\MS{Still need to explain how capsules are integrated.}
+As this work does not alter the fundamental principles of
+\ac{fabrics}, this section focuses on the integration of
+three different implicit environment representations into
+the framework. In the process, we lay out the necessary
+concepts required for the representations, and provide the
+tools to combine them with \ac{fabrics}.
 
 \begin{figure}
   \centering
@@ -52,7 +52,7 @@ over time, see \cref{fig:sdf} for a two-dimensional example.
   \label{fig:sdf}
 \end{figure}
 
-Collision avoidance in the context of optimization \ac{fabrics} is based on
+Collision avoidance in the context of \ac{fabrics} is based on
 individual task manifolds for each collision obstacle. The geometry and the 
 weighing Finsler energy are defined in the correpsonding task manifold \X{}.
 To combine those tasks the geometries and the energies are pulled back into the

@@ -347,13 +347,18 @@ specify all contributions of this thesis in detail.
     knowledge of the framework. Additionally, tuning can
     be transferred to different robots without substantial
     loss of performance.
+  \item \cref{cha:ral_24} integrates implicit environment
+    representations into the framework of \ac{fabrics}.
+    This allows for the relaxation of the requirement for
+    the perception pipeline, as the environment is
+    represented implicitly in the \ac{tg} policy.
+    Specifically, we compare \ac{fsd}, \ac{sdf} and raw
+    point clouds as the input for collision avoidance.
   \item \cref{cha:rss_24} showcases that learning-from-demonstration
     techniques can be integrated into \ac{fabrics} to
     simplify trajectory programming. Taught trajectories
     can be transformed to new environment layouts using 
     rigid body transformations.
-  \item \MS{Potentially add contribution of environment
-    representations.}
 \end{enumerate}
 
 \subsection{Demonstration in a Real-world Setting:}
@@ -410,10 +415,10 @@ formulating \ac{tg} in a symbolic way to
 improve real-time capabilities and allow for online
 parameter tuning.
 % environment representations
-\MS{To relax the requirement for the
-perception pipeline, we layout several ways to integrate
+\cref{cha:ral_24} showcases the integration of
 implicit environment representations into the framework of
-optimization fabrics in chapter 7}.
+\ac{fabrics} to relax the requirement for the
+perception pipeline.
 % demo paper
 \cref{cha:rss_24} showcases the 
 usage of \ac{fabrics} in a prototype application in the
