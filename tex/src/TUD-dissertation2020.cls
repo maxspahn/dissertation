@@ -15,7 +15,7 @@
 %% English is the default language, but Dutch is used for some sections.
 \RequirePackage[dutch,english]{babel}
 \RequirePackage{calc}
-\RequirePackage[nooneline,footnotesize]{caption}
+\RequirePackage[footnotesize]{caption}
 \RequirePackage{etaremune}
 \RequirePackage{fancyhdr}
 \RequirePackage[flushmargin,hang]{footmisc}
