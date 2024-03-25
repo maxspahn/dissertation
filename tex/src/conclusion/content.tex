@@ -2,10 +2,12 @@
 \label{cha:conclusion}
 
 \begin{abstract}
-The final chapter of this thesis summarizes the contributions and discusses the
-main results. Besides, research questions for the following years are raised and
-potential approaches are laid out. This chapter ends with a vision on the
-future of robotics in human-shared environments.
+The final chapter of this thesis summarizes the
+contributions and discusses the main results. Besides,
+research questions for the following years are raised, and
+potential approaches are laid out. This chapter ends with
+a vision on the future of robotics in human-shared
+environments.
 \end{abstract}
 
 \newpage
@@ -72,21 +74,21 @@ which allows for fast parameter tuning. This chapter additionally
 proposed to use a Bayesian optimization to tune parameters to \ac{fabrics}.
 The experiments showed that expert-level can be reached within 50 iterations.
 Additionally, the results revealed that parameter sets can be transferred between
-similar embodiments. Finally, qualitative results on a real robot are presented
+similar embodiment. Finally, qualitative results on a real robot are presented
 confirming the applicability to both manipulation and mobile
 manipulation.
 
 \subsection{Implicit environment representations}
 \label{sec:conclusion_implicit}
 
-\MS{Depending on the whether this chapter gets included.}
+\MS{Depending on whether this chapter gets included.}
 
 \subsection{Real-world demonstration}
 \label{sec:conclusion_real_world}
 
 \cref{cha:rss_24} demonstrated that \ac{fabrics} are not a mere theoretical
 framework but can be used in real-world manipulation demos. In the combination
-with a modern decision making framework, and state-of-the-art perception, 
+with a modern decision-making framework, and state-of-the-art perception, 
 we demonstrated how \ac{fabrics} can be used to generate trajectories in complex
 environments with high-dimensional robots. Besides, it was shown that different
 paradigms from \ac{tg} in manipulation, such as learning-based methods and
@@ -95,23 +97,26 @@ redundancy resolution, can be easily integrated into the framework.
 \section{Discussion}
 \label{sec:discussion}
 
-This thesis focused on different methods for \ac{tg} that are capable to
-generate motion for mobile manipulators in human-shared environments. That
-included the adaption to the widely used methods of \ac{mpc} to mobile
-manipulation. The main part of this thesis was dedicated to a geometric
-interpretation of \ac{tg}. Although several advancements for bringing mobile
-manipulators to human-shared environments in a safe manner were made, we acknowledge
-that seeing robots in our daily lives will still be a rare sight for the years
-to come. In the following, we discuss the limitations of the proposed methods
-and highlight important missing pieces to unlock the full potential of mobile
-manipulators in human-shared environments.
+This thesis focused on different methods for \ac{tg} that
+are capable to generate motion for mobile manipulators in
+human-shared environments. That included the adaption to the
+widely used methods of \ac{mpc} to mobile manipulation. The
+main part of this thesis was dedicated to a geometric
+interpretation of \ac{tg}. Although several advancements for
+deploying mobile manipulators safely to human-shared
+environments were made, we acknowledge that seeing robots in
+our daily lives will still be a rare sight for the years to
+come. In the following, we discuss the limitations of the
+proposed methods and highlight important missing pieces to
+unlock the full potential of mobile manipulators in
+human-shared environments.
 
 \subsection{Fabrics or MPC?}
 \label{sec:discussion_fabrics_or_mpc}
 
 Most readers are likely familiar with \acl{mpc}, fewer may have seen its application
 to, for example, autonomous driving or mobile manipulation, and some 
-experienced robotoscist may have be aware of the strengths and weaknesses of
+experienced robotoscists may be aware of the strengths and weaknesses of
 \ac{mpc}. In contrast, few readers have heard of \acf{fabrics} before and are 
 quick to make a connection between both methods due to the word
 \textit{optimization}. However, the methods are
@@ -183,7 +188,7 @@ guaranteed to be free of local minima. In fact, we argued in
 \cref{cha:tro_23} that local minima are likely to occur in
 cluttered environments. This is a severe limitation which
 must be addressed by either global guidance as we suggested,
-or by further analyses of the generated manifolds.
+or by further analyzes of the generated manifolds.
 
 \paragraph{Motion design}
 \label{par:motion_design}
@@ -192,7 +197,7 @@ We call \textit{motion design} the process of encoding
 behaviors into the \ac{tg} problem. Practically, what is the
 process for a user to encode different desired behaviors
 into the \ac{tg} problem, such that the robot behaves as
-indented by the application. In \ac{mpc} formulations, the 
+indented by the application. In \ac{mpc} formulations,
 the behavior is mainly influenced by the objective function
 and its weighing factors if multiple objectives are present.
 This scalar encoding often proofs to be difficult, because
@@ -271,15 +276,21 @@ While low-order geometric algebras can unify translation and
 rotation, higher order geometric algebras can be used to unify
 different attractors, as they are required by \ac{fabrics}.
 For example, attractors in this thesis are limited to
-sets of translations, e.g. a end-effector pose can be
+sets of translations, e.g. an end-effector pose can be
 encoded as three translational attractors. Higher order
-algebra allow to encode attraction to a circle, line, pose
+algebra allow encoding attraction to a circle, line, pose
 or sphere as an object of the same algebra \cite{low2023geometric}.
 From a conceptional point of view, this seems the more
 compact understanding of attractors, and from a practical
 point of view, it reduces the amount of parameters required.
 Future research in \ac{fabrics} should therefore consider
 the integration of higher order geometric algebras.
+% Online sampling or MPPI
+As the goal of mobile manipulators is the interaction with
+their environment is the ultimate goal. \Ac{fabrics} do not
+take into account contacts with the environment. As a
+consquence additional steps must be integrated to really
+plan for the interaction, such as grasping.
 
 
 
