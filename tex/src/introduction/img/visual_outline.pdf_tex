@@ -80,7 +80,7 @@
     \put(0.42964984,0.2284194){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:icra_23}}\end{tabular}}}}%
     \put(0.39393714,0.19540832){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Symbolic Fabrics\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=9]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.75721094,0.2284198){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:environments}}\end{tabular}}}}%
+    \put(0.75721094,0.2284198){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:ral_24}}\end{tabular}}}}%
     \put(0.73895088,0.19540721){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Environments\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=10]{src/introduction/img/visual_outline.pdf}}%
     \put(0.05512599,0.28291935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Optimization Fabrics\end{tabular}}}}%
