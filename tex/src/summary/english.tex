@@ -15,7 +15,7 @@ collisions with obstacles and itself. Thus, it is directly placed between
 task planning, the problem of defining what high level tasks should be executed
 in which order, and control, the problem of executing motor commands.
 A good solution to \ac{tg} must be fast, to cope with changes in the
-environment, flexible to different goal definitions, and promote safety.
+environment, flexible to different goal definitions, and it should promote safety.
 Most advancements in the field of robotics in \ac{tg} focus either on
 manipulators or on mobile robots. However, the combination of both
 systems seems inevitable for deployment in human-shared environments.
@@ -31,13 +31,13 @@ manipulation.
 
 \paragraph{\acf{mpc} for mobile manipulation}
 The first contribution of this thesis is the introduction of an \ac{mpc}
-formulation for mobile manipulation. The method presented in \cref{cha:icra_21}
+formulation for wheeled mobile manipulators. The method presented in \cref{cha:icra_21}
 copes with poor scaling in the number of collision constraints, by using the
 concept of \ac{fsd}. This leads to reasonable control frequencies of 10Hz
 independent on the amount of collision obstacles in the environment.
 Importantly, this approach allowed for coupled motion of the mobile base and the
 manipulator. This is beneficial in situations where synchronization of the two
-subsystems is crucial, such as opening doors or moving below obstacles. 
+subsystems is crucial, such as opening doors or moving obstacles around.
 
 \paragraph{Dynamic fabrics}
 To achieve truly reactive behavior, \ac{mpc} for whole-body \ac{tg} does not
@@ -63,7 +63,7 @@ manipulation by several contributions.
 Next to the introduction of \ac{df}, \cref{cha:tro_23} also presents a way to
 integrate non-holonomic constraints into the framework. Despite resulting in a
 loss of convergence guarantee, the method is shown to be the natural extension
-to 
+to wheeled mobile robots characterized by non-holonomic constraints.
 \Cref{cha:icra_23} presents a symbolic
 implementation of \ac{fabrics} to achieve higher control frequencies. The
 closed-form solution to the \ac{tg} is parameterized by problem parameters in
@@ -71,20 +71,20 @@ case of changing environments. Additionally, we show symbolic
 hyperparameters can be tuned automatically to achieve expert-level performance.
 To overcome high requirements on the perception pipeline, \cref{cha:ral_24}
 integrates different implicit environment representations into the framework.
-Using \ac{sdf} and \ac{fsd} for example is widely used in mobile robotics when
+Using \acf{sdf} and \acf{fsd} for example is widely used in mobile robotics when
 formulating \ac{tg} as \ac{mpc}. We show that the same representations can be
 used in \ac{fabrics} while achieving much faster solver times.
 \Cref{cha:rss_24} deploys a mobile manipulator controlled by \ac{fabrics}
-in a supermarket. Programming dexterous manipulation is programmed using
+in a supermarket. Dexterous manipulation is programmed using
 learning-from-demonstration with \ac{fabrics} as the underlying encoding.
 That allowed to teach rather than program complicated behaviors while
 maintaining properties on collision avoidance.
 
 % Summary of summary
 This thesis presents insights and advances the framework of \ac{fabrics} to
-\ac{tg} and compares it extensively to more commonly used methods, such as
-\ac{mpc}. Through the ideas presented in this thesis, we hope to encourage the
-usage geometric properties of robotic systems deployed to human-shared 
+\ac{tg} and compares it extensively to the more commonly method of \ac{mpc}.
+Through the ideas presented in this thesis, we hope to encourage the
+usage of geometric properties of robotic systems deployed to human-shared 
 environments. This approach does not only provide reactive \ac{tg} but also may
 act as a compact encoding of trajectories for learning-based methods in the
 future.
