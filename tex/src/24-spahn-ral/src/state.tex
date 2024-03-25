@@ -1,0 +1,59 @@
+\section{Related works}
+\label{sec:state}
+
+Initially, we provide an overview of recent developments in geometric control
+applied to trajectory generation. Subsequently, we encapsulate implicit
+environment representations employed within alternative trajectory generation
+methodologies.
+
+\subsection{Geometric control for trajectory generation}
+%
+Operational space control emerged as a pioneering control approach, entailing
+the imposition of a desired dynamical system onto robotic systems
+\cite{Khatib1985,Khatib1987}. This notion marked a pivotal stride towards the
+innate manipulation of kinematically redundant robots. The foundation of this
+concept was solidified within the realm of geometric control, where the
+exploration of differential geometry engendered stability and convergence
+through geometric prerequisites \cite{bullo2019geometric}.
+
+More recently, \acp{rmp} for manipulation tasks have
+introduced a highly responsive trajectory generation methodology
+\cite{Ratliff2018,Cheng2019}. This methodology attains composability through a
+segregation between the significance metric and the compelling factor.
+Leveraging the \textit{pullback} and \textit{pushforward} operators to navigate
+across configuration space manifolds, distinct constituents such as collision
+avoidance and goal attraction can be systematically devised. Nevertheless, the
+design of \acp{rmp} necessitates an intuitive understanding and experiential finesse,
+with convergence being conditionally established \cite{Ratliff2020}.
+
+Subsequently, \ac{fabrics} emerged as a novel approach, entirely
+disentangling the significance metrics and the defining geometry. By adhering to
+straightforward construction principles governing these two components, assured
+convergence can be readily ascertained
+\cite{Ratliff2020,Xie2021,Li2021,meng2019neural}. In our preceding work on
+\ac{fabrics}, this framework was initially
+applied to mobile manipulation and subsequently extended to encompass more
+dynamic environments \cite{Spahn2022}.
+
+\subsection{Implicit Environment Represenations for trajectory generation}
+
+While \ac{fabrics} mainly focus on explicit environment representation
+\cite{Spahn2022,Ratliff2020}, new trajectory methods lean towards implicit
+approaches. For trajectory planning using short-term optimization, unoccupied
+space constraints limit robot movement, proven useful for mobile manipulators in
+cluttered areas \cite{Spahn2021}.
+In drone flight, a similar concept generates safe flight zones along a global
+path \cite{Liu2017a,Tordesillas2019a}. In the context of drone flying,
+\ac{sdf} has been utilized with \ac{mpc} trajectory generation in unknow
+environments \cite{Oleynikova2017voxblox}. Raw lidar data has been used in combination
+with \acp{rmp} showing impressively high frequencies when computation is
+parallized on GPU \cite{Pantic2023obstacle}.
+Recent advances in sampling-based
+\ac{mpc}, utilizing physics engines for collision avoidance
+\cite{Pezzato2023sampling},
+integrate obstacle collisions in cost functions during trajectory rollouts. A
+parallel approach is seen in \cite{Sundaralingam2023curobo}.
+
+Though many methods demand manual robot representation, like composing spheres,
+exploration of more implicit characterizations, such as learned \ac{sdf} like in
+\cite{Liu2022regularized,Koptev2023neural}, is underway.

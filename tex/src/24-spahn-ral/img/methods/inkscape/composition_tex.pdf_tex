@@ -1,0 +1,92 @@
+%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'methods/inkscape/composition_tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{233.3452425bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.52279414)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(-0.01610078,0.19999994){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{1.11443212\unitlength}\raggedright \end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.66225672,0.46615737){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(M,f)_{\X_6}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.66225672,0.34165867){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(M,f)_{\X_3}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.43015449,0.21605704){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(M,f)_{\Q}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.43015444,0.34165867){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(M,f)_{\X_2}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.2951613,0.46615737){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(M,f)_{\X_5}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.06305905,0.46615737){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(M,f)_{\X_4}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.19805216,0.34165867){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$(M,f)_{\X_1}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.74318179,0.44246884){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12272728\unitlength}\raggedright
+    $\map_6$\end{minipage}}}%
+    \put(0.15454545,0.44019611){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12272728\unitlength}\raggedright $\map_4$\end{minipage}}}%
+    \put(0.64552144,0.31889479){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12272728\unitlength}\raggedright $\map_3$\end{minipage}}}%
+    \put(0.50454544,0.32081103){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12272728\unitlength}\raggedright $\map_2$\end{minipage}}}%
+    \put(0.33782303,0.43682048){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12272728\unitlength}\raggedright $\map_5$\end{minipage}}}%
+    \put(0.371524,0.34009576){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12272728\unitlength}\raggedright $\map_1$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{methods/inkscape/composition_tex.pdf}}%
+    \put(-0.00113637,0.24545454){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Pre Runtime\end{tabular}}}}%
+    \put(-0.00227273,0.1931818){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}During Runtime\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.82376171,0.11640988){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Robot\end{tabular}}}}%
+    \put(0.39210987,0.0330636){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Perception\end{tabular}}}}%
+    \put(0.7,0.19545451){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\qddot{}\end{tabular}}}}%
+    \put(0.25,0.11704543){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}environment\end{tabular}}}}%
+    \put(0.74204545,0.00340905){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}raw
+    sennsor\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{methods/inkscape/composition_tex.pdf}}%
+    \put(0.59545461,0.13749995){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\q,\qdot\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

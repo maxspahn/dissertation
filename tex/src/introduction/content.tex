@@ -6,7 +6,7 @@
 This chapter places this dissertation in the context of
 modern societies and their challenges. Specifically, we
 motivate this thesis by the demographic changes in the
-global North. In the process, we identify trajectory
+global North. In the process, we identify
 \acl{tg} as a central problem in robotics, recall existing
 approaches and discuss their limitations. Finally, we
 present the contributions and the outline of this
@@ -18,8 +18,8 @@ dissertation.
 
 \section{Robots under the eyes of demographic change}
 
-In a world struggling with the challenges of an aging
-population, shifting demographics
+As the countries of the global North are struggling with the
+challenges of an aging population, shifting demographics
 (\cref{fig:demographic_change}), and a scarcity of
 affordable labor for physically demanding tasks, the need
 for technological solutions is more pronounced than ever
@@ -29,9 +29,10 @@ especially in an era where the non-embodied counterpart is
 touching all of our lives. Specifically, strides in natural
 language processing and computer vision have significantly
 improved in the recent past and may rather sooner than later
-increase our productivity substantially. In contrast, the
-capabilities of embodied systems still lag behind in
-sophistication and core capabilities.
+increase our productivity substantially. In contrast, 
+embodied systems still lag behind in
+sophistication and are still mainly bound to industrial
+settings.
 
 \begin{figure}[h]
   \begin{subfigure}{0.5\textwidth}
@@ -46,9 +47,9 @@ sophistication and core capabilities.
   []
   {
     Population portions by age in 2000 (left) and predictions for
-    2050 (right) in Europe. The aging society leads to labor shortage
+    2050 (right) in Europe \footnotemark. The aging society leads to labor shortage
     which may be counterbalanced with increase in
-    automation. \footnotemark
+    automation.
   }
   \label{fig:demographic_change}
 \end{figure}
@@ -57,18 +58,18 @@ sophistication and core capabilities.
     United Nations, Department of
     Economic and Social Affairs, Population Division (2022)
 }
-
+% Safety
 Industrial robots, see \cref{fig:industrial_robot}
 are highly capable in certain tasks, but
 often lack the nuanced understanding and safety required for
 dynamic, human-shared environments. Collaborative robots
-provide more safety capabilities through a lightweight
+promote safety through a lightweight
 hardware design and a broader set of sensors, see
 \cref{fig:collaborative_robot}. These
 robots are designed to exist safely alongside their human
 counterparts using different low-level control approaches.
-
-\begin{figure}
+%
+\begin{figure}[t]
   \centering
   \begin{subfigure}{0.5\textwidth}
     \centering
@@ -87,7 +88,7 @@ counterparts using different low-level control approaches.
   in the future (right).}
   \label{fig:different_robots}
 \end{figure}
-
+%  Mobility
 Next to
 safety, robots must be equipped with a similar level of
 mobility as humans to perform meaningful tasks. Mobility of
@@ -100,10 +101,10 @@ sockets.
 
 In summary, helping an aging societies to deal with labor
 shortage, the next generation of robots must be safe for
-humans while equipped with the same mobility capabilities.
+humans while equipped with the same level of mobility.
 
 \subsection{Mobile manipulation}
-\label{sec:mobile_manipulation}
+\label{sub:mobile_manipulation}
 
 One key feature of modern robots for human-shared
 environments, is mobility. The combination of highly mobile
@@ -117,11 +118,13 @@ avenues for addressing the mentioned societal challenges.
 Specifically, mobile manipulators could be used for tasks
 from warehouse operations, restocking shelves, and package
 delivery to intricate processes like food harvesting.
-By placing robots onto moving bases, necessary mobility for
-human-shared environment can be achieved.
+In short, mobile manipulation is a key concept if robots
+should perform similar tasks as humans in the same
+environments.
 
-\subsection{Challenges in robotics}
-
+\subsection{Challenges in human-shared environments}
+\label{sub:challenges_in_human_shared_environments}
+%
 However, despite their potential, robots are noticeably
 absent from human-shared environments. The complexities of
 such spaces, coupled with safety constraints, present
@@ -147,6 +150,7 @@ complexity of such systems may rule out some methods that
 are superior for one of the two subsystems.
 
 \section{Limitations of current approaches}
+\label{sec:limitations_of_current_approaches}
 
 In the quest for effective \ac{tg}, various
 methods have been proposed, each with its set of advantages and
@@ -172,7 +176,7 @@ short in incorporating the entirety of the problem, such as
 collision avoidance with itself and the environment or
 joint limit avoidance.
 
-With the aim for safe robots, many approaches these days are
+With the aim for safe robots, many approaches are
 founded on optimization problems, centered around an
 objective function and constraints that favor safety
 guarantees and optimality. Such approaches are often
@@ -191,7 +195,7 @@ they solve the same problem, while changing the naming of
 the objective function from cost function to loss (or
 reward) function. Their major drawback lies in their
 inability to integrate safety constraints in a principled
-manner, often prone to overfitting specific use cases during
+manner and they are often prone to overfitting specific use cases during
 training and thus lacking generalizability when confronted
 with new scenarios \cite{noroozi2023conventional}.
 Computational costs are also often
@@ -217,7 +221,7 @@ kinematic chain, usually the end-effector, as a
 spring-damper-system attracted to the goal pose. In contrast
 to potential field theory, the motion of the robot is thus
 taken intro consideration. However, it falls short by not
-encompassing crucial components for a collision-free
+encompassing crucial components for collision-free
 \ac{tg}. Modeling the point of interest of the robot as a
 second-order differential equation raises the question
 whether all components of the \ac{tg} problem can be handled
@@ -257,11 +261,9 @@ Formally speaking, we gradually introduce terms into the
 non-Riemannian metric shaping a smooth manifold of the
 configuration space.
 
-
-
 \section{Contributions}
 \label{sec:contributions}
-
+%
 The theoretical contributions of this thesis
 are based on the geometric interpretation of \ac{tg}, and
 even more specifically on the framework of \ac{fabrics}.
@@ -270,12 +272,11 @@ comparisons to \ac{mpc} are conducted to
 provide a more nuanced understanding of similarities and
 differences between the two approaches. In the following, we
 specify all contributions of this thesis in detail.
-
-
+%
 \subsection{Advancements in \ac{mpc} for mobile manipulation}
 \begin{enumerate}
     \item \cref{cha:icra_21} presents an \ac{mpc} formulation for a
-      mobile manipulator. The presented methods proposes to cope
+      mobile manipulator. The presented method proposes to cope
       with poor scaling in the number of collision constraints, by
       using the concept of \ac{fsd}. This method achieves a
       control frequency of 10Hz \textit{independent} on the amount
@@ -293,7 +294,7 @@ specify all contributions of this thesis in detail.
     \setcounter{enumi}{2}
     \item \cref{cha:tro_23} generalizes the framework of \ac{fabrics}
       for dynamic environments. We refer to the resulting
-      framework to as \ac{df}. Specifically, we introduce
+      framework as \ac{df}. Specifically, we introduce
       time-parameterized manifolds to integrate moving
       obstacles and time-parameterized goal definitions.
       Technically,
@@ -310,12 +311,12 @@ specify all contributions of this thesis in detail.
       with \ac{df} achieve a by a factor of 2 reduced summed error 
       when compared with the original framework of
       \ac{fabrics} for a 7-DoF robot in simulation.
-    \item \cref{cha:tro_23} presents a extension to
+    \item \cref{cha:tro_23} presents an extension to
       non-holonomic systems. Non-holonomic systems, such as
       differential-drives, are characterized by
       non-holonomic constraints, effectively reducing the
       degrees of freedom of the system. By solving an
-      unconstrained optimization problem reflecting the
+      unconstrained optimization problem integrating the
       jacobian of the non-holonomic constraints, we solve
       for the least-square error of the \ac{fabrics} policy
       given the non-holonomic constraints. While we
@@ -323,7 +324,7 @@ specify all contributions of this thesis in detail.
       quantitative experiments reveal that this approach leads to
       competitive results when compared to an \ac{mpc}
       formulation for a differential-drive robot.
-      Additionally, we show that the idea transfers seamlessly
+      Additionally, we show that the idea transfers effectively
       to mobile manipulation.
 \end{enumerate}
 
@@ -331,7 +332,7 @@ specify all contributions of this thesis in detail.
 \begin{enumerate}
   \setcounter{enumi}{4}
   \item As \ac{fabrics} offer a closed-form solution to
-    \ac{tg}, we present an symbolic implementation of
+    \ac{tg}, we present a symbolic implementation of
     \ac{fabrics} in \cref{cha:icra_23}. This reduces
     solver times to approximately 1ms for a 7-DoF robots, 
     because the fabric composition, combining
@@ -346,25 +347,36 @@ specify all contributions of this thesis in detail.
     knowledge of the framework. Additionally, tuning can
     be transferred to different robots without substantial
     loss of performance.
+  \item \cref{cha:ral_24} integrates implicit environment
+    representations into the framework of \ac{fabrics}.
+    This allows for the relaxation of the requirement for
+    the perception pipeline, as the environment is
+    represented implicitly in the \ac{tg} policy.
+    Specifically, we compare \ac{fsd}, \ac{sdf} and raw
+    point clouds as the input for collision avoidance.
   \item \cref{cha:rss_24} showcases that learning-from-demonstration
     techniques can be integrated into \ac{fabrics} to
     simplify trajectory programming. Taught trajectories
-    can be transformed to new environment layouts. 
-  \item \MS{Potentially add contribution of environment
-    representations.}
+    can be transformed to new environment layouts using 
+    rigid body transformations.
 \end{enumerate}
 
 \subsection{Demonstration in a Real-world Setting:}
 \begin{enumerate}
-    \setcounter{enumi}{8}
-    \item Demonstrate the usability of \ac{fabrics}
+  \setcounter{enumi}{8}
+  \item \cref{cha:rss_24} demonstrates the usability of \ac{fabrics}
       in a prototype application, specifically in the
       context of order-picking in supermarkets, showcasing
-      real-world applicability and effectiveness.
+      real-world applicability and effectiveness. In this
+      real-world scenario, we make use of the ability
+      to arbitrarily formulate goals in different task
+      spaces. The goal definition of pointing towards the
+      shelf can then be very different to the goal
+      definition of placing an item in the shopping basket.
 \end{enumerate}
 
-These contributions collectively advance the field of mobile
-manipulation and \ac{tg}, offering novel
+These contributions collectively advance the field of
+\ac{tg} for mobile manipulation, offering novel
 solutions to address key challenges and paving the way for
 future research and development efforts.
 
@@ -388,8 +400,8 @@ Then, \cref{cha:background} summarize the required tools
 from optimal control and from differential geometry to
 understand the main chapters.
 % mpc
-\cref{cha:icra_21} explores a
-model predictive control formulation for whole body control
+\cref{cha:icra_21} explores an \ac{mpc}
+formulation for whole body control
 with a mobile manipulator. We provide important steps to
 handle the complexity of the problem.
 % dynamic fabrics
@@ -403,10 +415,10 @@ formulating \ac{tg} in a symbolic way to
 improve real-time capabilities and allow for online
 parameter tuning.
 % environment representations
-\MS{To relax the requirement for the
-perception pipeline, we layout several ways to integrate
+\cref{cha:ral_24} showcases the integration of
 implicit environment representations into the framework of
-optimization fabrics in chapter 7}.
+\ac{fabrics} to relax the requirement for the
+perception pipeline.
 % demo paper
 \cref{cha:rss_24} showcases the 
 usage of \ac{fabrics} in a prototype application in the
