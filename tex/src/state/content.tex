@@ -17,22 +17,28 @@
 % developed in parallel for the individual embodiments of
 % robotic systems.
 
-\Acl{tg} methods aim at finding
-global paths that are optimal and collision-free at the
-moment of planning. In this section, we review approaches to
-\ac{tg} that locally solve the \ac{tg} problem, while aiming
-at global optimality --generally not guarnteed-- and
-collision avoidance. It is useful to place different methods
+\Acl{tg} methods aim at finding connections between two
+robot states
+that are collision-free at the
+moment of planning and potentially optimal.
+In the context of changing environments, 
+it is useful to place different methods
 on a scale of reactivity, usually measured by the achieved
 compute frequency, see \cref{fig:reactivity_scale}.
 At the most reactive end, we find low
 level controllers and on the least reactive end, we find
-global path planning methods.
+global path planning methods. In most robotics planning
+pipelines, a global path planner is guiding the local
+\ac{tg} method.
+This thesis focuses on the reactive end of the scale, and
+therefore we will only give a brief overview of global path
+planning methods. 
+%
 \begin{figure}[h]
   \centering
   \input{src/state/img/reactivity_scale.pdf_tex}
   \caption{Reactivity scale of different \ac{tg} methods
-  revised in this thesis. Global methods, such as RRT
+  revised in this thesis. Global methods, such as \ac{rrt}
   \cite{Karaman2011} are at the least reactive end. More
   reactive methods, such as \ac{mpc}
   \cite{hewing2020learning}, \ac{apf} \cite{Khatib1985} and
@@ -40,8 +46,6 @@ global path planning methods.
   are at the most reactive end.}
   \label{fig:reactivity_scale}
 \end{figure}
-
-\MS{What about learning-based methods?}
 
 \section{Impedance control}%
 \label{sec:impedance_control}
@@ -53,16 +57,16 @@ mass-spring-damper system. The specific case of Cartesian
 impedance control was proposed in \cite{albu2002cartesian} and
 could be characterized as a local \ac{tg} method, because of
 its ability cope with various goal specifications and its
-safety properities in the proximity of humans
+safety properties in the proximity of humans
 ~\cite{van2022disagreement,hjorth2024enabling}.
 Additionally, impedance control can be used in collaborative
 settings, e.g., when lifting large objects together with
 humans \cite{abu2020variable}. More recent works on
 impedance control use variable impedance parameters to adapt
 the robot's behavior to the task at hand
-\cite{abu2020variable}. Often, the impedance controller are
+\cite{abu2020variable}. Often, the impedance controller is
 modified by human feedback to improve perceived safety and
-increase reliablity of the task exeuction with human
+increase reliability of the task execution with human
 feedback \cite{lachner2022shaping,franzese2021ilosa}.
 
 \section{Reactive trajectory generation}%
@@ -72,7 +76,7 @@ In this dissertation, we refer to \textit{reactive \ac{tg}}
 as methods that rely on local information about the
 environment and the robot that compute actions without a
 time horizon into the future. The most prominent example of
-reactive \ac{tg} is the \ac{apf} method as we will
+reactive \ac{tg} is the \acf{apf} method as we will
 see by visiting the different embodiments of robotic
 systems.
 
@@ -102,7 +106,7 @@ to integrate moving and static obstacles
 \paragraph{Mobile robots}
 
 The method of \ac{apf} was also used for \ac{tg} of mobile
-robotis after its introduction for robotic arms.
+robotics after its introduction for robotic arms.
 For non-holonomic mobile robots, it was shown that \ac{apf}
 generally exhibits multiple equilibrium points which are not
 necessarily stable \cite{urakubo2018stability}.
@@ -118,17 +122,12 @@ variants rely on handcrafted functions limiting their
 ability to handle more complex navigation scenarios. To deal
 with a large number of agents, \textit{ORCA} was proposed in
 \cite{VanDenBerg2011} and later extended for non-holonomic
-bases in \cite{Alonso-Mora2012a}. However, these approaches
-demonstrate highly reactive behaviors because they only
-consider one step look-ahead predictions.
+bases in \cite{Alonso-Mora2012a}.
 
 
-
-%\subsubsection{Mobile Manipulators}
-%\label{subsub:mobile_manipulators}
-%
-%\MS{Does not seem to exist...}
-%%
+While, these reactive \ac{tg} methods capture more
+information that pure controllers, they often rely on 
+scalar objectives functions to weigh different components.
 
 \subsection{Geometries of trajectories}
 \label{sec:geometries_of_trajectories}
@@ -136,23 +135,26 @@ consider one step look-ahead predictions.
 Reactive \ac{tg} approaches, such as \ac{apf} theory,
 may lead to contradicting behaviors, as individual policies
 are \textit{fighting} against each other \cite{Ratliff2018}.
-To overcome the shortcoming, importance metric and policy
-are decoupled in \ac{rmp}. This tuple defines
+To overcome this shortcoming, some geometric approaches make
+an explicit distinction between the importance metric and
+the policy of individual behaviors. The metric can often be
+interpreted as a measure of curvature on the optimization
+manifold. The tuple of metric and policy defines
 for each \textit{behavior} a dynamical system.
-Defining collision avoidance behavior as dynamical systems
-is a widely used approach
+Formulating \ac{tg} as a dynamical system is a widely used
+approach
 \cite{khansari2012dynamical,huber2023avoidance}, for which
 \ac{osc} \cite{Khatib1987a} and \ac{dmp}
 \cite{ijspeert2013dynamical} are special cases.
-
-Based on the findings of contracting metrics for non-linear
-control design \cite{l2,l3}, geometric approaches design the motion
-generation such that convergence is inherent to the problem formulation
-rather than imposing them on the solution process. Practically, individual
-constraints to the motion planning problem shape the optimization manifold
-so that the solution is accessible through the solution of simple differential
-equation. An example for shaping the optimization
-manifold is seen in \cref{fig:spec_combination}.
+%
+%Based on the findings of contracting metrics for non-linear
+%control design \cite{l2,l3}, geometric approaches design the motion
+%generation such that convergence is inherent to the problem formulation
+%rather than imposing them on the solution process. Practically, individual
+%constraints to the motion planning problem shape the optimization manifold
+%so that the solution is accessible through the solution of simple differential
+%equation. An example for shaping the optimization
+%manifold is seen in \cref{fig:spec_combination}.
 
 %
 \begin{figure}[h]
@@ -184,47 +186,51 @@ manifold is seen in \cref{fig:spec_combination}.
   \label{fig:spec_combination}
 \end{figure}
 %
-Realizing this concept, Riemannian motion policies (RMPs) represent a
+A more general framework was introduced as \acf{rmp} in
+\cite{Ratliff2018,Cheng2018}. \Ac{rmp} represent a
 natural way of combining multiple policies into one joined policy.
-RMPs define individual sub-tasks of the motion planning as
+\ac{rmp} define individual sub-tasks of the motion planning as
 differential equations (\textit{spectral semi sprays} or
 \textit{specs} for short) of second order and propose the
 \textit{pullback} and \textit{summation} operators to combine multiple policies
 in the configuration space. As subtasks can be defined in arbitrary manifolds
-of the configuration space, RMP generalize operational space
-control~\cite{Khatib1987}. The resulting behavior of RMP was reported to be
+of the configuration space, \ac{rmp} generalize operational space
+control~\cite{Khatib1987}. The resulting behavior of
+\ac{rmp} was reported to be
 intuitive while keeping computational costs low~\cite{Ratliff2018}. The concept
-of RMP was used in~\cite{Cheng2018,Cheng2020} to form RMP-Flow, a motion
+of \ac{rmp} was used in~\cite{Cheng2018,Cheng2020} to form RMP-Flow, a motion
 planning algorithm that is shown to be conditionally stable and invariant
-across robots. In RMP-Flow, individual tasks are represented as a pair of
-a motion policy and a corresponding metric defining the importance of
-individual directions. An RMP adaptation was proposed for non-holonomic robots
+across robots. An \ac{rmp} adaptation was proposed for non-holonomic robots
 in~\cite{Meng2019}. By incorporating the kinematic constraint into the root
-equation of the RMP, the computed policy is applicable to non-holonomic robots.
+equation of the \ac{rmp}, the computed policy is applicable to non-holonomic robots.
 Besides, that work proposed a neural net to learn the collision avoidance task
 components. 
 
-Although RMPs have proven to be a powerful tool for
+Although \ac{rmp} have proven to be a powerful tool for
 motion generation, it was reported to require intuition and experience
-during tuning~\cite{Ratliff2020}. Optimization fabrics with Finsler structures
+during tuning~\cite{Ratliff2020}. \Acf{fabrics} with Finsler structures
 as metric generators simplify the motion design as the conditions for stability
 and convergence are inherent to the definition of Finsler
-structures~\cite{Ratliff2020,Ratliff2021}. Opposed to RMPs, where the metric is
+structures~\cite{Ratliff2020,Ratliff2021}. Opposed to
+\ac{rmp}, where the metric is
 typically user-defined, fabrics derive Finsler metrics from artificial
 energies, similar to approaches from control design, \cite{l2,l3}, using the
 Euler-Lagrange-Equation from geometric mechanics. Although fabrics generalize
-the concept of RMPs and make it accessible to a broader audience by
+the concept of \ac{rmp} and make it accessible to a broader audience by
 decreasing the intuition and expertise required, they have not yet been applied
 to a wide range of robots. 
 
-The reason for this lack of application of fabrics is twofold. First, all the
+The reason for this lack of application of \ac{fabrics} is twofold. First, all the
 above mentioned methods are reactive and highly local methods, thus making them
-prone to local minima \cite{bhardwaj2022storm}. As RMPs and optimization
-fabrics do not incorporate path following, integration of global
-planning to overcome local minima is not possible to this date. Second, fabrics
-and RMP do not make use of velocity estimates of obstacles but rely purely on
+prone to local minima \cite{bhardwaj2022storm}. As \ac{rmp}
+and \ac{fabrics} do not incorporate path following,
+integration of global path
+planning to overcome local minima is not possible to this
+date. Second, \ac{fabrics}
+and \ac{rmp} do not make use of velocity estimates of obstacles but rely purely on
 their high reactivity in dynamic environments. As for other trajectory
-optimization techniques, motion estimates could benefit fabrics (and RMP) to
+optimization techniques, motion estimates could benefit
+\ac{fabrics} (and \ac{rmp}) to
 result in even smoother motion and allow applications in such environments. 
 
 
@@ -250,7 +256,7 @@ the corresponding infinite time-horizon formulation
 
 Despite these results, formal stability
 guarantees in such environments are challenging as appropriate terminal cost
-functions are often not computable or too conservative. Besides, the
+functions are often not commutable or too conservative. Besides, the
 computational costs scale with the degrees of freedom restricting real-time
 applicability to simple dynamics and environment models \cite{Spahn2021}.
 
@@ -263,6 +269,13 @@ designs show exponential stabilizing properties \cite{l2}. These
 findings have been applied to tracking control problems \cite{l3}.
 
 \paragraph{Mobile robots}
+
+Early works on \ac{mpc} for mobile robots focus on goal
+reaching in static environments \cite{howard2010receding}.
+Acknowledging the importance of global path following, most
+\ac{mpc} formulations rely on contour errors in the
+objective function to ensure minimal tracking errors
+\cite{lam2010model,brown2017safe}.
 
 MPC schemes were proposed for mobile robots and autonomous vehicles in
 \cite{Brito2019} and \cite{Schwarting2018} allowing to optimize over a
@@ -322,9 +335,9 @@ methods \cite{LaValle2006,Mukadam2017}. Sampling-based path
 planners generate random configurations until a valid path
 between an initial configuration and a set of goal
 configurations is found \cite{Karaman2011}. Sampling-based
-methods, such as rapidly exploring random trees (RRT's)
-\cite{Webb2013,Kleinbort2019,Kuffner2000} and probabilistic
-roadmaps (PRM's) \cite{Hsu2002,Faust2017} are highly
+methods, such as \acf{rrt}
+\cite{Webb2013,Kleinbort2019,Kuffner2000} and \acf{prm}
+\cite{Hsu2002,Faust2017} are highly
 efficient at generating paths for systems with high-degree
 of freedom.
 
@@ -341,8 +354,8 @@ problem. Conventional approaches to motion planning rely on
 inverse kinematics to transform task constraints into sets
 of configurations. There is abundant research on
 solving the resulting path planning problem in the
-configuration space \cref{LaValle2006,Rickert2014}. This
-thesis focuses on methods to solve the \ac{tg} in arbitary
+configuration space \cite{LaValle2006,Rickert2014}. This
+thesis focuses on methods to solve the \ac{tg} in arbitrary
 task spaces. Therefore, this section is limited to
 sampling-based methods that directly integrate tasks into
 the sampling process, rather than relying on the inverse
@@ -357,7 +370,7 @@ extended to task space regions to define soft constraints
 for individual task components~\cite{Berenson2011}.
 \cite{Kingston2019} proposed scalar-valued functions to
 represent task constraints for sampling-based planning. As
-all of the above-mentioned methods rely on implicitly
+all the above-mentioned methods rely on implicitly
 constrained sampling in the joint space, they exhibit high
 computational time, which is especially harmful to
 real-world applications \cite{qureshi2021constrained}.
@@ -374,7 +387,7 @@ coupled system is a precondition for effective interactive navigation, including
 opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way
 \cite{Li2019}.
 
-\section{Environment represenations}
+\section{Environment representations}
 \label{sec:environment_representations}
 
 All above described methods rely on some form of environment
@@ -395,8 +408,8 @@ challenging task, especially when the environment is
 cluttered and parts are occluded. A different approach to
 collision avoidance relies on more implicit representations
 of the environments --the most implicit would be raw sensor
-data--. In the following, we recall some works that focus on
-such representations in the contex to of \ac{tg}.
+data. In the following, we recall some works that focus on
+such representations in the context to of \ac{tg}.
 
 
 \subsection{Implicit representations}
@@ -409,14 +422,14 @@ useful for mobile robots in cluttered areas
 generates safe flight zones along a global path
 \cite{Liu2017a,Tordesillas2019a,tordesillas2021mader}. In
 the context of drone flying, \ac{sdf} has been utilized with
-\ac{mpc} trajectory generation in unknow environments
-\cite{Oleynikova2017voxblox}. Raw lidar data has been used
+\ac{mpc} trajectory generation in unknown environments
+\cite{Oleynikova2017voxblox}. Raw Lidar data has been used
 in combination with \acp{rmp} showing impressively high
 frequencies when computation is parallized on GPU
 \cite{Pantic2023obstacle}. Recent advances in sampling-based
 \ac{mpc}, utilizing physics engines for collision avoidance
 \cite{Pezzato2023sampling}, integrate obstacle collisions in
-cost functions during trajectory rollouts. A parallel
+cost functions during trajectory rollouts. A similar
 approach is seen in \cite{Sundaralingam2023curobo}. For
 these approaches, the environment representation is implicit
 through integration into the cost function, but requires
@@ -435,11 +448,11 @@ problem. Especially in the early days of robotics, where
 robots were mostly deployed in static environments, path
 planning was a central problem. However, when exposed to
 dynamic environments, path planning becomes insufficient due
-to its unability to quickly react to changes in the
+to its inability to quickly react to changes in the
 environment. This is especially true for mobile manipulation
 systems, due to their high-dimensional configuration space,
 \cite{Avanzini2018}. Environment representations are
-crucially for all of the planning methods described above.
+crucially for all the planning methods described above.
 Here, implicit representations have shown to be very useful
 for cluttered, unknown and dynamic environments. However,
 most research focuses no mobile robots, and manipulators
