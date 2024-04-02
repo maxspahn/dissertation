@@ -101,7 +101,7 @@ humans in mind, requires unlocking robots from their static
 sockets.
 
 In summary, helping aging societies to deal with labor
-shortage, the next generation of robots must be safe for
+shortage, the next generation of robots should be safe for
 humans while equipped with the same level of mobility.
 
 \subsection{Mobile manipulation}
@@ -152,7 +152,7 @@ seamlessly coexist with humans in shared spaces.
 Importantly, the presented methods are all designed with
 mobile manipulation in mind, as the increased level of
 complexity of such systems may rule out some methods that
-are superior for one of the two subsystems.
+are superior for either the mobile base or the manipulator.
 
 \section{Limitations of current approaches}
 \label{sec:limitations_of_current_approaches}
@@ -310,11 +310,11 @@ specify all contributions of this thesis in detail.
       condition. Quantitative comparisons between our method
       and the original framework of \ac{fabrics} reveal
       that failures due to collision is reduced from 9/20
-      to 0/20 for a 7-DoF robot in a real-world experiment.
+      to 0/20 for a 7-\ac{dof} robot in a real-world experiment.
       In terms of path following, trajectories generated
       with \ac{df} achieve a by a factor of 2 reduced summed error 
       when compared with the original framework of
-      \ac{fabrics} for a 7-DoF robot in simulation.
+      \ac{fabrics} for a 7-\ac{dof} robot in simulation.
     \item \cref{cha:tro_23} presents an extension to
       non-holonomic systems. Non-holonomic systems, such as
       differential-drives, are characterized by
@@ -338,7 +338,7 @@ specify all contributions of this thesis in detail.
   \item As \ac{fabrics} offer a closed-form solution to
     \ac{tg}, we present a symbolic implementation of
     \ac{fabrics} in \cref{cha:icra_23}. This reduces
-    solver times to approximately 1ms for a 7-DoF robots, 
+    solver times to approximately 1ms for a 7-\ac{dof} robots, 
     because the fabric composition, combining
     the individual behaviors, is pre-computed and not
     performed at runtime. The \ac{tg} policy can be
