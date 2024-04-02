@@ -207,31 +207,46 @@ Besides, that work proposed a neural net to learn the collision avoidance task
 components. 
 
 Although \ac{rmp} have proven to be a powerful tool for
-motion generation, it was reported to require intuition and experience
-during tuning~\cite{Ratliff2020}. \Acf{fabrics} with Finsler structures
-as metric generators simplify the motion design as the conditions for stability
-and convergence are inherent to the definition of Finsler
+motion generation, it was reported to require intuition and
+experience during tuning~\cite{Ratliff2020}. \Acf{fabrics}
+with Finsler structures as metric generators simplify the
+motion design as the conditions for stability and
+convergence are inherent to the definition of Finsler
 structures~\cite{Ratliff2020,Ratliff2021}. Opposed to
-\ac{rmp}, where the metric is
-typically user-defined, fabrics derive Finsler metrics from artificial
-energies, similar to approaches from control design, \cite{l2,l3}, using the
-Euler-Lagrange-Equation from geometric mechanics. Although fabrics generalize
-the concept of \ac{rmp} and make it accessible to a broader audience by
-decreasing the intuition and expertise required, they have not yet been applied
-to a wide range of robots. 
+\ac{rmp}, where the metric is typically user-defined,
+fabrics derive Finsler metrics from artificial energies,
+similar to approaches from control design, \cite{l2,l3},
+using the Euler-Lagrange-Equation from geometric mechanics.
 
-The reason for this lack of application of \ac{fabrics} is twofold. First, all the
-above mentioned methods are reactive and highly local methods, thus making them
-prone to local minima \cite{bhardwaj2022storm}. As \ac{rmp}
-and \ac{fabrics} do not incorporate path following,
-integration of global path
-planning to overcome local minima is not possible to this
-date. Second, \ac{fabrics}
-and \ac{rmp} do not make use of velocity estimates of obstacles but rely purely on
-their high reactivity in dynamic environments. As for other trajectory
-optimization techniques, motion estimates could benefit
-\ac{fabrics} (and \ac{rmp}) to
-result in even smoother motion and allow applications in such environments. 
+The theory of \ac{fabrics} was tested on several simple
+kinematic chains in~\cite{Ratliff2020,Ratliff2021}. As
+\ac{fabrics} design motion as a summation of several
+differential equations, each representing a specific
+constraint to the motion, it is possible to sequentially
+design motion~\cite{Ratliff2020}. This procedure allows to
+carefully tune individual components without harming the
+others. The application to a planar arm in a goal-reaching
+setup was successfully tested in~\cite{Ratliff2020}. Here,
+the authors illustrated how the resulting motion can be
+modified arbitrarily by the user by adding additional
+constraints or preferences. Although \ac{fabrics} generalize
+the concept of \ac{rmp} and make it accessible to a broader
+audience by decreasing the intuition and expertise required,
+they have not yet been applied to a wide range of robots. 
+
+The reason for this lack of application of \ac{fabrics} is
+twofold. First, all the above mentioned methods are reactive
+and highly local methods, thus making them prone to local
+minima \cite{bhardwaj2022storm}. As \ac{rmp} and
+\ac{fabrics} do not incorporate path following, integration
+of global path planning to overcome local minima is not
+possible to this date. Second, \ac{fabrics} and \ac{rmp} do
+not make use of velocity estimates of obstacles but rely
+purely on their high reactivity in dynamic environments. As
+for other trajectory optimization techniques, motion
+estimates could benefit \ac{fabrics} (and \ac{rmp}) to
+result in even smoother motion and allow applications in
+such environments. 
 
 
 \section{Receding-horizon trajectory optimization}%
@@ -441,7 +456,8 @@ composing spheres, exploration of even more implicit
 characterizations, such as learned \ac{sdf} like in
 \cite{Liu2022regularized,Koptev2023neural}, is underway.
 
-\paragraph{Conclusion}
+\section{Conclusion}
+\label{sec:state_conclusion}
 
 To summarize, path planning in robotics is a well-studied
 problem. Especially in the early days of robotics, where
