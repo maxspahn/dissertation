@@ -6,7 +6,7 @@
 \addbibresource{src/clean.bib}
 
 \input{src/helpers/graphics_paths}
-\includeonly{src/introduction/chapterwise}
+%\includeonly{src/introduction/chapterwise}
 
 \begin{document}
 
@@ -19,15 +19,15 @@
 %% Turn on thumb indices.
 \thumbtrue
 
-\include{src/introduction/chapterwise}
-\include{src/background/chapterwise}
-\include{src/state/chapterwise}
-\include{src/21-spahn-icra/chapterwise}
-\include{src/23-spahn-tro/chapterwise}
-\include{src/23-spahn-icra/chapterwise}
-\include{src/24-spahn-ral/chapterwise}
-\include{src/24-spahn-rss/chapterwise}
-\include{src/conclusion/chapterwise}
+\input{src/introduction/chapterwise}
+\input{src/background/chapterwise}
+\input{src/state/chapterwise}
+\input{src/21-spahn-icra/chapterwise}
+\input{src/23-spahn-tro/chapterwise}
+\input{src/23-spahn-icra/chapterwise}
+\input{src/24-spahn-ral/chapterwise}
+\input{src/24-spahn-rss/chapterwise}
+\input{src/conclusion/chapterwise}
 
 \input{src/helpers/ending}
 
@@ -35,7 +35,7 @@
 
 \thumbfalse
 
-\include{src/helpers/cv/cv}
-\include{src/helpers/publications/publications}
+\input{src/helpers/cv/cv}
+\input{src/helpers/publications/publications}
 \end{document}
 
