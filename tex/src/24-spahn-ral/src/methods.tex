@@ -60,7 +60,7 @@ root space, usually defined as the configuration space \Q{}. According
 to \cref{eq:pullback}, this requires the computation of the gradient \J{}.
 When the environment is represented as a \ac{sdf}, the gradient cannot be
 computed analytically, as it is possible for simple geometric shapes in
-\cite{Ratliff2021,Spahn2022}. To overcome this limitation, we propose to
+\cite{Ratliff2021,Spahn2023}. To overcome this limitation, we propose to
 use the numerical gradient as an approximation instead.
 The \ac{sdf} is evaluated based on the forward kinematics of the collision link,
 so $\map_{sdf}(\fk)$ is a function of \q{}.
@@ -176,7 +176,7 @@ within boundaries. Thus, raw sensor data, such as lidar data, point clouds or
 occupancy maps, must be processed to limit the number of constraints (or cost
 terms). On the other side, as optimization \ac{fabrics} can be formulated entirely
 symbolically, the computational costs can be reduced drastically
-\cite{Spahn2022}. This allows to reduce the amount of preprocessing,
+\cite{Spahn2023}. This allows to reduce the amount of preprocessing,
 limiting the amount of uncertainty and room for error in this step. Here, we
 explain how raw lidar sensor data can be used with optimization \ac{fabrics}.
 The same approach can be used to directly integrate pointclouds or occupancy

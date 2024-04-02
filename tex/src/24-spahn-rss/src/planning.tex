@@ -14,7 +14,14 @@ area to prevent the robot from going into unsafe or crowded areas, such as the c
 \subsection{Motion of the arm}
 \label{sub:arm_motion}
 To generate the motion of the arm (and base during picking), we employ the framework of \ac{fabrics}.
-Fabrics is based on the composition of behaviours, defined as differential equations in the appropriate manifolds, which enables safe real-time planning at a very high frequency \cite{ratliff2023fabrics,van2022geometric,spahn2023}. Since \ac{fabrics} is a local, reactive trajectory generation method, global guidance is required to perform complex actions, such as product picking or placing. 
+Fabrics is based on the composition of behaviours, defined
+as differential equations in the appropriate manifolds,
+which enables safe real-time planning at a very high
+frequency
+\cite{ratliff2023fabrics,van2022geometric,Spahn2023}. Since
+\ac{fabrics} is a local, reactive trajectory generation
+method, global guidance is required to perform complex
+actions, such as product picking or placing. 
 The global guidance for fabrics essentially consists of a sequence of local goals, where we only continue to the next goal if the previous goal has been reached. In Sec.~\ref{sub:teaching} we show how this sequence of goals, i.e., reference trajectory, can be obtained by human teaching. In the following we shortly explain how \ac{fabrics} works and how to use it.
 
 
@@ -43,7 +50,7 @@ differential map $\map_{\textrm{goal}} = (\fk{c} - \fk{p}) -
 define the forcing potential $\forc$ that can be pulled at
 forcing our optimization fabric as
 $\M\qddot+\f+\der{\q}{\forc} = 0$.
-For further details on the definition and composition of fabrics we refer the reader to \cite{spahn2023}.
+For further details on the definition and composition of fabrics we refer the reader to \cite{Spahn2023}.
 
 The key advantages of \ac{fabrics} are their very fast computation and their flexibility to
 compose behaviours and define the desired goal in an appropriate manifold, rather than being
