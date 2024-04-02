@@ -179,6 +179,7 @@
 \acrodef{sf}[SF]{Static Fabrics}
 \acrodef{df}[DF]{Dynamic Fabrics}
 \acrodef{icra}[ICRA]{IEEE International Conference on Robotics and Automation}
+\acrodef{rss}[RSS]{Robotics: Science and Systems}
 \acrodef{iros}[IROS]{IEEE/RSJ International Conference on Intelligent Robots and Systems}
 \acrodef{tro}[T-RO]{IEEE Transactions on Robotics}
 \acrodef{ral}[RA-L]{IEEE Robotics and Automation Letters}
@@ -262,3 +263,99 @@
 \newtheorem{theorem}[definition]{Theorem}
 \newtheorem{proposition}[definition]{Proposition}
 \newtheorem{lemma}[definition]{Lemma}
+
+
+\newcommand{\publication}[4]{\ding{43} #1. {\itshape "#2"}. #3, (#4).}
+\newcommand{\partscontentfootnote}{
+  Parts of this chapter
+  have been published in the following publications:
+}
+\newcommand{\copycontentfootnote}{
+  This chapter is a verbatim copy of the peer-reviewed
+  publication:
+}
+\newcommand{\copysubmittedcontentfootnote}{
+  This chapter is a verbatim copy of the submitted work:
+}
+\newcommand{\copypreparationcontentfootnote}{
+  This chapter is a verbatim copy of the work in preparation for submission:
+}
+\newcommand{\statementcontributions}[1]{\textit{Statement of
+contributions:} #1}
+
+
+\newcommand{\ralsampling}{
+  \publication
+  {C. Pezzato$^*$, C. Salmi$^*$, \textbf{M. Spahn}$^*$, E. Trevisan$^*$, J.
+  Alonso-Mora and C.H. Corbato}
+  {Sampling-based model predictive control leveraging parallelizable physics simulations}
+  {\textit{In preparation for submission to} \acl{ral}}
+  {2024}
+}
+
+\newcommand{\ralovercoming}{
+  \publication
+  {\textbf{M. Spahn} and J. Alonso-Mora}
+  {Overcoming Explicit Environment Representations with Geometric Fabrics}
+  {\textit{In preparation for submission to} \acl{ral}}
+  {2024}
+}
+
+\newcommand{\trodynamic}{
+  \publication
+  {\textbf{M. Spahn}, M. Wisse and J. Alonso-Mora}
+  {Dynamic Optimization Fabrics for Motion Generation}
+  {\acl{tro}}
+  {2023}
+}
+
+\newcommand{\tcdsactive}{
+  \publication
+  {C. Meo, G. Franzese, C. Pezzato, \textbf{M. Spahn} and P. Lanillos}
+  {Adaptation through prediction: multisensory active inference torque control}
+  {\acl{tcds}}
+  {2022}
+}
+
+\newcommand{\rssdemo}{
+  \publication
+  {\textbf{M. Spahn}, C. Pezzato, C. Salmi, R. Dekker, C.
+  Wang, C. Pek, J. Kober, J. Alonso-Mora, C. Hernandez
+  Corbato and M. Wisse}
+  {DEMO: Mobile Manipulation in Human-Shared Retail Spaces}
+  {\acl{rss}}
+  {2024}
+}
+
+
+\newcommand{\mrsmulti}{
+  \publication{S. Bakker, L. Knödler, \textbf{M. Spahn}, W. Böhmer and J. Alonso-Mora}
+  {Multi-Robot Local Motion Planning Using Dynamic
+  Optimization Fabrics}
+  {\acl{mrs}}
+  {2023}
+}
+
+\newcommand{\icraautotuning}{
+  \publication
+  {\textbf{M. Spahn} and J. Alonso-Mora}
+  {Autotuning Symbolic Optimization Fabrics for Trajectory Generation}
+  {\acl{icra}}
+  {2023}
+}
+
+\newcommand{\icracoupled}{
+  \publication
+  {\textbf{M. Spahn}, B. Brito and J. Alonso-Mora}
+  {Coupled Mobile Manipulation via Trajectory Optimization with Free Space Decomposition}
+  {\acl{icra}}
+  {2021}
+}
+
+\newcommand{\irosbench}{
+  \publication{\textbf{M. Spahn}, C. Salmi and J. Alonso-Mora}
+  {Local Planner Bench: Benchmarking for Local Motion Planning}
+  {\acl{iros}}
+  {2023}
+}
+
