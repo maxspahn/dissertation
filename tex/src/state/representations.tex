@@ -1,0 +1,52 @@
+\section{Environment representations}
+\label{sec:environment_representations}
+
+All above described methods rely on some form of environment
+representation. For example, the inequality constraints in
+\ac{mpc} formulations responsible for collision avoidance
+rely on a distance function between the robot and the
+obstacles. Path planning methods, as described above, 
+also require an environment representation, such that
+collision checking can accept or reject new samples. In
+geometric approaches, such as \ac{apf}, \ac{rmp} and
+\ac{fabrics}, distance functions are also necessary.
+For primitive shapes, such as spheres and boxes, distances
+can be computed in closed form. When working in dynamic
+environments, robots perceive their environment using vision
+sensors, such as cameras, or range sensors, such as LiDAR.
+Classifying the environment into primitive shapes is a
+challenging task, especially when the environment is
+cluttered and parts are occluded. A different approach to
+collision avoidance relies on more implicit representations
+of the environments --the most implicit would be raw sensor
+data. In the following, we recall some works that focus on
+such representations in the context of \ac{tg}.
+
+\subsection{Implicit representations}
+\label{sub:implicit_representations}
+
+For trajectory planning using short-term optimization,
+unoccupied space constraints limit robot movement, proven
+useful for mobile robots in cluttered areas
+\cite{Brito2019}. In drone flight, a similar concept
+generates safe flight zones along a global path
+\cite{Liu2017a,Tordesillas2019a,tordesillas2021mader}. In
+the context of drone flying, \ac{sdf} has been utilized with
+\ac{mpc} trajectory generation in unknown environments
+\cite{Oleynikova2017voxblox}. Raw Lidar data has been used
+in combination with \acp{rmp} showing impressively high
+frequencies when computation is parallelized on GPU
+\cite{Pantic2023obstacle}. Recent advances in sampling-based
+\ac{mpc}, utilizing physics engines for collision avoidance
+\cite{Pezzato2023sampling}, integrate obstacle collisions in
+cost functions during trajectory rollouts. A similar
+approach is seen in \cite{Sundaralingam2023curobo}. For
+these approaches, the environment representation is implicit
+through integration into the cost function, but requires
+accurate modeling of the robot and the environment in the
+physics engine used for rollout computation.
+
+Though many methods demand manual robot representation, like
+composing spheres, exploration of even more implicit
+characterizations, such as learned \ac{sdf} like in
+\cite{Liu2022regularized,Koptev2023neural}, is underway.

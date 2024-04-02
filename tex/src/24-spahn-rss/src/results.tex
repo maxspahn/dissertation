@@ -88,15 +88,15 @@ execution times, it can be seen that `picking' is also the action
 that takes most time in collecting an item, roughly $50$s on average between starting the grasp at its completion, 
 see \cref{fig:timings_lab}.
 \begin{figure}
-\begin{subfigure}[b]{1\linewidth}
+\begin{subfigure}[b]{0.5\linewidth}
     \centering
     \includesvg[width=\linewidth]{success_lab}
     \caption{Success-rate across order sizes and failure causes ($N=10$).}
     \label{fig:success_lab}
   \end{subfigure}
-\begin{subfigure}[b]{1\linewidth}
+\begin{subfigure}[b]{0.5\linewidth}
     \centering%
-     \includesvg[width=0.8\linewidth]{timings_lab}
+     \includesvg[width=1.0\linewidth]{timings_lab}
     \caption{Execution times in seconds of actions ($N=67$).}
     \label{fig:timings_lab}
   \end{subfigure}
@@ -106,15 +106,15 @@ see \cref{fig:timings_lab}.
 A remarkable property of our system is its reliability and fault tolerance at a very low computational cost. This relies on our multi-level approach to adaptability and recovery from disturbances and runtime uncertainties:
 \paragraph{Skill level} Our Skills are adaptive to disturbances such as sensor noise, to which our object recognition is robust, or physical disturbances. Examples of the latter are the ability of our compliant arm control to accommodate someone holding it ---e.g., if an operator identifies an issue with the item being picked by the robot and wants to take it from the robot--- or the visual serving enabled by our object detection and trajectory generation that continuously adapts the motions in case the position of the object changes in the field of view of the robot.
 \begin{figure}[t]
-\begin{subfigure}[b]{1\linewidth}
+\begin{subfigure}[b]{0.5\linewidth}
     \centering
     \includesvg[width=\linewidth]{success_zandam}
     \caption{Success-rate across order sizes and failure causes ($N=44$).}
     \label{fig:success_zandam}
   \end{subfigure}
-\begin{subfigure}[b]{1\linewidth}
+\begin{subfigure}[b]{0.5\linewidth}
     \centering%
-     \includesvg[width=0.8\linewidth]{timings_zandam}
+     \includesvg[width=1\linewidth]{timings_zandam}
     \caption{Execution times in seconds of actions ($N=99$).}
     \label{fig:timings_real}
   \end{subfigure}
@@ -127,16 +127,20 @@ The formulation of the online planning problem in terms of desired states instea
 \paragraph{Task plan level} The behaviour tree structure with pre-defined recoveries in case a subgoal fails to re-try it up to three times, e.g., getting an item into the basket, ensures a reasonable trade-off of reliability and performance, e.g., most of the time the second attempt to pick and item was enough. If the third attempt fails, most likely, the item can not be grasped. This heuristic is computationally simple and easily adjusts to new items, e.g., allowing more attempts for incredibly challenging items.
 \begin{table*}[t]
     \centering
-    \begin{tabular}{p{5.5cm}p{11cm}}
-        \toprule
+    \begin{tabular}{p{.4\linewidth}p{.5\linewidth}}
+        \hline
         Failure case & Potential causes \\
-        \midrule
+        \hline
         Product knocked over during pick & Inaccuracy in product detection or trajectory following, resulting in insufficient vacuum seal \\
+        \hdashline
         Collision with shelf & Changes in environment due to shelf railing, price tags or discount tags \\
+        \hdashline
         Product outside reachable space  & The arm cannot physically reach the bottom or top shelf \\
+        \hdashline
         Collision with surrounding products on the shelf & Products are differently positioned than during taught behavior \\
+        \hdashline
         Vacuum gripper fails to attach & Factors like product size, weight, shape and material can cause vacuum suction to be insufficient \\
-        \bottomrule
+        \hline
     \end{tabular}
     \caption{Qualitatively evaluated list of potential failure cases}
     \label{tab:failure_cases}

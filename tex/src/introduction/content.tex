@@ -97,17 +97,17 @@ industrial robots is limited as they are statically
 attached to structural elements. In that sense, they become
 part of the building and exhibit no mobility. Placing
 robots in environments, that are built with the mobility of
-humans in mind, requires to unlock robots from their static
+humans in mind, requires unlocking robots from their static
 sockets.
 
-In summary, helping an aging societies to deal with labor
+In summary, helping aging societies to deal with labor
 shortage, the next generation of robots must be safe for
 humans while equipped with the same level of mobility.
 
 \subsection{Mobile manipulation}
 \label{sub:mobile_manipulation}
 
-One key feature of modern robots for human-shared
+One key feature of modern robots, for human-shared
 environments, is mobility. The combination of highly mobile
 ground vehicles and manipulators is referred to as mobile
 manipulation. This concept enables robots to navigate
@@ -200,7 +200,7 @@ they solve the same problem, while changing the naming of
 the objective function from cost function to loss (or
 reward) function. Their major drawback lies in their
 inability to integrate safety constraints in a principled
-manner and they are often prone to overfitting specific use cases during
+manner, and they are often prone to overfitting specific use cases during
 training and thus lacking generalizability when confronted
 with new scenarios \cite{noroozi2023conventional}.
 Computational costs are also often
@@ -228,8 +228,7 @@ to potential field theory, the motion of the robot is thus
 taken intro consideration. However, it falls short by not
 encompassing crucial components for collision-free
 \ac{tg}. Modeling the point of interest of the robot as a
-second-order differential equation raises the question
-whether all components of the \ac{tg} problem can be handled
+second-order differential equation raises whether all components of the \ac{tg} problem can be handled
 in this way. 
 
 We can observe that modern approaches to \ac{tg} focus on
@@ -245,7 +244,7 @@ modeled as a Riemannian (or even non-Riemannian) manifold of
 the configuration space \cite{klein2023design}. Then, other
 components, that live in different manifolds of the
 configuration space, can be seamlessly integrated into the
-\ac{tg} problem \cite{Ratliff2015}. This insight has lead to
+\ac{tg} problem \cite{Ratliff2015}. This insight has led to
 a series of different works where \ac{tg} has been addressed
 purely geometrically
 \cite{Ratliff2015,Cheng2019,Cheng2020,Ratliff2020,Xie2020}.
@@ -263,7 +262,7 @@ a nuanced understanding of \ac{tg}.
 Informally speaking, the composition shapes the
 landscape on which the trajectory is then generated.
 Formally speaking, we gradually introduce terms into the
-non-Riemannian metric shaping a smooth manifold of the
+non-Riemannian metric, shaping a smooth manifold of the
 configuration space.
 
 \section{Contributions}
@@ -322,7 +321,7 @@ specify all contributions of this thesis in detail.
       non-holonomic constraints, effectively reducing the
       degrees of freedom of the system. By solving an
       unconstrained optimization problem integrating the
-      jacobian of the non-holonomic constraints, we solve
+      Jacobian of the non-holonomic constraints, we solve
       for the least-square error of the \ac{fabrics} policy
       given the non-holonomic constraints. While we
       acknowledge the breaking of convergence guarantees,
@@ -343,7 +342,7 @@ specify all contributions of this thesis in detail.
     because the fabric composition, combining
     the individual behaviors, is pre-computed and not
     performed at runtime. The \ac{tg} policy can be
-    arbitrarily parameterized and is thus suitable to
+    arbitrarily parameterized, and is thus suitable for
     parameter refinement at runtime.
   \item \cref{cha:icra_23} proposes the use of Bayesian optimization for
     automated parameter tuning of \ac{fabrics},

@@ -22,7 +22,7 @@
 % The problem of \ac{tg} is paramount to robotic systems,
 % i.e., its solution is required in the context of mobile robots,
 % drones, manipulators, and consequently mobile manipulation
-% systems. Historicaly, proposed solutions to \ac{tg} were
+% systems. Historically, proposed solutions to \ac{tg} were
 % developed in parallel for the individual embodiments of
 % robotic systems.
 
@@ -105,8 +105,8 @@ Reactive \ac{tg} can also be formulated as an optimization
 problem. In this case, the optimization problem is solved
 at each time step. While statements about global optimality
 are not possible, different objectives can be encoded in the
-cost function and avoidances can be integrated using
-constraints. By maximizing manipulability the robot remains
+cost function and avoidance can be integrated using
+constraints. By maximizing manipulability, the robot remains
 flexible to changes in the environment while reaching a goal
 pose \cite{haviland2020purely}. The work was later extended
 to integrate moving and static obstacles
@@ -129,7 +129,7 @@ imitating the human navigation behavior and using it as
 navigation policy for the robot.  Yet, Social Forces and its
 variants rely on handcrafted functions limiting their
 ability to handle more complex navigation scenarios. To deal
-with a large number of agents, \textit{ORCA} was proposed in
+with numerous agents, \textit{ORCA} was proposed in
 \cite{VanDenBerg2011} and later extended for non-holonomic
 bases in \cite{Alonso-Mora2012a}.
 
@@ -244,7 +244,7 @@ audience by decreasing the intuition and expertise required,
 they have not yet been applied to a wide range of robots. 
 
 The reason for this lack of application of \ac{fabrics} is
-twofold. First, all the above mentioned methods are reactive
+twofold. First, all the above-mentioned methods are reactive
 and highly local methods, thus making them prone to local
 minima \cite{bhardwaj2022storm}. As \ac{rmp} and
 \ac{fabrics} do not incorporate path following, integration
@@ -279,9 +279,9 @@ the corresponding infinite time-horizon formulation
 \cite{l1,l4,keerthi1988optimal}. 
 
 Despite these results, formal stability
-guarantees in such environments are challenging as appropriate terminal cost
+guarantees in such environments are challenging, as appropriate terminal cost
 functions are often not commutable or too conservative. Besides, the
-computational costs scale with the degrees of freedom restricting real-time
+computational costs scale with the degrees of freedom, restricting real-time
 applicability to simple dynamics and environment models \cite{Spahn2021}.
 
 Some \ac{mpc} formulations are non-linear and can be analyzed
@@ -411,59 +411,8 @@ coupled system is a precondition for effective interactive navigation, including
 opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way
 \cite{Li2019}.
 
-\section{Environment representations}
-\label{sec:environment_representations}
 
-All above described methods rely on some form of environment
-representation. For example, the inequality constraints in
-\ac{mpc} formulations responsible for collision avoidance
-rely on a distance function between the robot and the
-obstacles. Path planning methods, as described above, 
-also require an environment representation, such that
-collision checking can accept or reject new samples. In
-geometric approaches, such as \ac{apf}, \ac{rmp} and
-\ac{fabrics}, distance functions are also necessary.
-For primitive shapes, such as spheres and boxes, distances
-can be computed in closed form. When working in dynamic
-environments, robots perceive their environment using vision
-sensors, such as cameras, or range sensors, such as lidar.
-Classifying the environment into primitive shapes is a
-challenging task, especially when the environment is
-cluttered and parts are occluded. A different approach to
-collision avoidance relies on more implicit representations
-of the environments --the most implicit would be raw sensor
-data. In the following, we recall some works that focus on
-such representations in the context to of \ac{tg}.
-
-
-\subsection{Implicit representations}
-\label{sub:implicit_representations}
-
-For trajectory planning using short-term optimization,
-unoccupied space constraints limit robot movement, proven
-useful for mobile robots in cluttered areas
-\cite{Brito2019}. In drone flight, a similar concept
-generates safe flight zones along a global path
-\cite{Liu2017a,Tordesillas2019a,tordesillas2021mader}. In
-the context of drone flying, \ac{sdf} has been utilized with
-\ac{mpc} trajectory generation in unknown environments
-\cite{Oleynikova2017voxblox}. Raw Lidar data has been used
-in combination with \acp{rmp} showing impressively high
-frequencies when computation is parallized on GPU
-\cite{Pantic2023obstacle}. Recent advances in sampling-based
-\ac{mpc}, utilizing physics engines for collision avoidance
-\cite{Pezzato2023sampling}, integrate obstacle collisions in
-cost functions during trajectory rollouts. A similar
-approach is seen in \cite{Sundaralingam2023curobo}. For
-these approaches, the environment representation is implicit
-through integration into the cost function, but requires
-accurate modeling of the robot and the environment in the
-physics engine used for rollout computation.
-
-Though many methods demand manual robot representation, like
-composing spheres, exploration of even more implicit
-characterizations, such as learned \ac{sdf} like in
-\cite{Liu2022regularized,Koptev2023neural}, is underway.
+\input{src/state/representations}
 
 \section{Conclusion}
 \label{sec:state_conclusion}
@@ -480,7 +429,7 @@ systems, due to their high-dimensional configuration space,
 crucially for all the planning methods described above.
 Here, implicit representations have shown to be very useful
 for cluttered, unknown and dynamic environments. However,
-most research focuses no mobile robots, and manipulators
+most research focuses on mobile robots, and manipulators
 are yet to be explored in this context.
 
 

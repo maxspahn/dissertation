@@ -1,0 +1,149 @@
+
+
+\subsection{Considerations and vision}
+\label{sec:discussion_vision}
+
+After having discussed the advantages and limitations of
+methods related to the chapters of this thesis, we also want
+to give a broader perspective on robotics. In particular, we
+want to shed light on some reasons why robots have not
+entered human shared environments in a more widespread
+manner. To make this section a bit more lively, we shall ask
+some questions, that are often asked by the public, and
+try to answer them in a more philosophical way.
+
+
+\textit{Why does the robot move so slow?}
+
+This is the question that every roboticist
+-- especially those working on \ac{tg} --
+has to endure when showing their work to the public. While most, including the
+author, are quick to point out that the robot moves slow to ensure safety, the
+true reason is more complex. Execution speed is dependent on
+(a) the ability to move fast,
+(b) the ability to execute trajectories accurately when moving fast,
+(c) the ability to make state estimates fast,
+(d) the ability to compute trajectories fast,
+(e) the effect of speed of motion on the environment,
+and, of course,  (f) safety considerations.
+Let us treat these
+points in turns:
+% enumeration in alphabetical order (a) - (f)
+\begin{enumerate}[(a)]
+  \item When a robot's motors are not powerful enough to
+    move fast, the robot will move slow. This is obvious and
+    should not be used as an excuse, because all robots used
+    in this thesis are capable of moving much faster than
+    shown in the experiments. 
+  \item Moving fast however is not sufficient as accuracy
+    is quite important in manipulation tasks. It turns out
+    that modern hardware is quite capable of speeding up
+    moving between waypoints defined in the configuration
+    space. After all,
+    robots in cages are moving extremely fast with
+    super-human accuracy, so this cannot be the reason for
+    slow motion either.
+  \item When deployed in human-shared environments however,
+    robots cannot simply play back sequences of waypoints in
+    an open-loop manner. Instead, the environment has to be
+    constantly perceived and the state of the robot must be
+    estimated at the same speed. It is obviously difficult
+    to achieve required update frequency with computer
+    vision, but even state estimates related to the robot
+    itself fail to be accurate at high speeds. For example,
+    the joint velocities of the \panda{} used primarily
+    in this thesis are not accurate at high speeds. That
+    proves to be highly problematic when using reactive
+    \ac{tg} methods. In this thesis, the problem was usually
+    addressed by low-pass filtering the joint velocities
+    which on the flip side introduces a delay of the signal.
+    Either the estimates must be improved without
+    introducing delays or \ac{tg} methods must be robust
+    against noise estimates. Inaccurate, slow or delayed
+    sensing seems an important reason for slow motion in
+    human-shared environments.
+  \item The ability to compute trajectories fast is
+    discussed in \cref{sec:discussion_fabrics_or_mpc} and we
+    believe that \ac{fabrics} offer a good approach to
+    address this part of the problem of slow motion.
+    However, more widely used methods do not offer this
+    speed and are therefore contributing to slow motion.
+  \item What is often under-appreciated by the public is
+    that speeding up motions has a direct effect on the
+    interactions with the environment. For example, when
+    grasping objects with a vacuum gripper, as done in 
+    \cref{cha:rss_24}, the motion must be slow when
+    approaching an item to avoid it tipping over. This
+    logical connection is often considered trivial by the
+    public, but is very difficult to encode in a robot's
+    behavior. This leads to a tradeoff between speed of
+    motion and success rate, where the latter is usually
+    favored.
+  \item And finally, speed of motion and safety are in direct
+    conflict. We put fast robots in cages because their
+    kinetic energy is dangerous to humans. Having the same
+    kind of robots in human-shared environments naturally 
+    results in slow motions to compensate for the lack of
+    the cage as a safety measure. Unless, we start relying
+    on soft-robots to imitate human hardware, this conflict
+    seems hard to impossible to resolve.
+\end{enumerate}
+
+\textit{Why does the robot choose this highly complicated
+way of moving?}
+
+This question often arises when a robot seems to take an
+unconventional path to reach its destination. The issue
+hinges on the notion of what is considered \textit{natural},
+which essentially boils down to what humans perceive as the
+most optimal route. In the context of robotics, the optimal
+path is typically defined as the shortest path in the
+configuration space, which poses significant challenges due
+to its high dimensionality and the constraints imposed by
+obstacles. Consequently, finding this shortest path becomes
+a difficult task, often addressed through sampling-based
+methods like Rapidly-exploring Random Trees (RRT), which
+iteratively sample configurations until a viable sequence of
+configurations leading to the goal is discovered
+\cite{Karaman2011}. However, this approach only guarantees
+the shortest connection between subsequent samples, not the
+entire sequence, often resulting in abrupt and jerky
+motions. Despite efforts to refine these paths, such as
+through smoothing techniques
+\cite{siegwart2011introduction}, the fundamental challenge
+lies in the nature of planning within the configuration
+space, which tends to yield paths that appear unconventional
+to human observers. In contrast, the methods outlined in
+this thesis avoid long-term planning within the
+configuration space, instead relying on purely local \ac{tg}
+and global path planning in the workspace, which generally
+yields paths that appear more natural. Specifically,
+techniques like shaping the configuration manifold seem to
+resemble to human path-planning processes
+\cite{klein2022riemannian}.
+
+\textit{Why is does the robot fail at this simple task?}
+
+This is not directly a question of the \ac{tg} problem at
+hand, but it is often intertangled with it. It touches upon
+task and motion planning, a widely studied field of robotics
+these days, see \cite{garrett2021integrated} for a recent
+survey. To answer this question, one has to appreciate the
+ease of humans to combine several sensors, e.g. vision,
+feel, sound, etc. with general understanding of physics and
+highly precise, yet compliant actuation. Some works suggest
+that the sensors of robots are fundamentally limiting the set of
+tasks a robot could do \cite{majumdar2023fundamental}.
+Additionally, our cognitive abilities to understand failure
+cases, make long term plans and to transfer knowledge are
+not met by robots. Until great advancements are made, the
+public will continue wondering why robots fail at simple
+tasks.
+
+While our modern societies are desperate for automation in human-shared
+environments, it is often disappointing to observe the current state of the art
+in robotics. From an intellectual point of view however, this is truly exciting,
+as the opportunities to shape robotics seem endless. And, from a philosophical
+point of view you may ask: \textit{Isn't it quite reassuring that human
+abilities are still superior to those of robots when it
+comes to human-shared environments?}.

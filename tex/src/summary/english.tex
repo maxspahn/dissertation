@@ -8,7 +8,7 @@ they are noticeably absent from human-shared environments.
 Human-shared environments are characterized by other moving agents, 
 such as humans, varying tasks and high safety requirements.
 In the aim to deploy robots in such environments, the
-\ac{tg} problem becomes crucial. \Ac{tg} approaches compute sequences
+\ac{tg} problem becomes crucial. \Ac{tg} approaches to compute sequences
 of control commands that bring the robot from its current
 configuration to a desired goal state while avoiding
 collisions with obstacles and itself. Thus, it is directly placed between 
@@ -51,7 +51,7 @@ with convergence guarantees in static environments, but is still little used
 for real applications. In \cref{cha:tro_23}, we present a generalization of
 \ac{fabrics} to dynamic environments. We refer to the resulting framework as
 \ac{df}. The generalization uses time-parameterized manifolds to integrate 
-moving obstacles and time-parameterized reference trajectories. The later is
+moving obstacles and time-parameterized reference trajectories. The latter is
 especially important for long-horizon \ac{tg} that may exhibit local minima.
 Importantly, \cref{cha:tro_23} shows that the dynamic component of \ac{df}
 is required when coping with moving obstacles, because with slow moving robots,
@@ -76,7 +76,7 @@ formulating \ac{tg} as \ac{mpc}. We show that the same representations can be
 used in \ac{fabrics} while achieving much faster solver times.
 \Cref{cha:rss_24} deploys a mobile manipulator controlled by \ac{fabrics}
 in a supermarket. Dexterous manipulation is programmed using
-learning-from-demonstration with \ac{fabrics} as the underlying encoding.
+learning-from-demonstration, with \ac{fabrics} as the underlying encoding.
 That allowed to teach rather than program complicated behaviors while
 maintaining properties on collision avoidance.
 
