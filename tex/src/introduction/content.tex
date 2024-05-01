@@ -16,8 +16,6 @@ dissertation.
 \newpage
 
 
-\section{Robots under the eyes of demographic change}
-
 As the countries of the global North are struggling with the
 challenges of an aging population, shifting demographics
 (\cref{fig:demographic_change}), and a scarcity of
@@ -62,7 +60,8 @@ settings.
 % Safety
 Industrial robots, see \cref{fig:industrial_robot}
 are highly capable in certain tasks, but
-often lack the nuanced understanding and safety required for
+these systems are often unable to adapt to changes in
+real-time and lack the nuanced understanding and safety required for
 dynamic, human-shared environments. Collaborative robots
 promote safety through a lightweight
 hardware design and a broader set of sensors, see
@@ -95,17 +94,17 @@ Next to
 safety, robots must be equipped with a similar level of
 mobility as humans to perform meaningful tasks. Mobility of
 industrial robots is limited as they are statically
-attached to structural elements. In that sense, they become
-part of the building and exhibit no mobility. Placing
+attached to structural elements.
+Placing
 robots in environments, that are built with the mobility of
 humans in mind, requires unlocking robots from their static
 sockets.
 
-In summary, helping aging societies to deal with labor
+In summary, to help aging societies in dealing with labor
 shortage, the next generation of robots should be safe for
 humans while equipped with the same level of mobility.
 
-\subsection{Mobile manipulation}
+\subsection*{Mobile manipulation}
 \label{sub:mobile_manipulation}
 
 One key feature of modern robots, for human-shared
@@ -119,7 +118,8 @@ manipulate objects in diverse environments, we further open
 avenues for addressing the mentioned societal challenges.
 Specifically, mobile manipulators could be used for tasks
 from warehouse operations, restocking shelves, and package
-delivery to intricate processes like food harvesting.
+delivery to intricate processes like food harvesting and
+service tasks at home.
 In short, mobile manipulation is a key concept if robots
 should perform similar tasks as humans in the same
 environments.
@@ -128,13 +128,13 @@ environments.
   Image from \url{https://www.vanch.net}.
 }
 
-\subsection{Challenges in human-shared environments}
+\subsection*{Challenges in human-shared environments}
 \label{sub:challenges_in_human_shared_environments}
 %
 However, despite their potential, robots are noticeably
-absent from human-shared environments. The complexities of
+absent from human-shared environments. The complexity of
 such spaces, coupled with safety constraints, present
-formidable challenges. This is where \ac{tg}
+formidable challenges. This is where \acf{tg}
 becomes pivotal as one of the basic building blocks for
 robotics software stacks. It determines the commands sent to
 the motors in real-time, orchestrating a harmonious movement
@@ -182,16 +182,18 @@ short in incorporating the entirety of the problem, such as
 collision avoidance with itself and the environment or
 joint limit avoidance.
 
-With the aim for safe robots, many approaches are
-founded on optimization problems, centered around an
+
+\subsection*{Optimization-based approaches}
+With the aim of safe robots, many approaches are
+rooted on optimization problems, centered around an
 objective function and constraints that favor safety
 guarantees and optimality. Such approaches are often
-referred to as \ac{mpc} schemes or receding
+referred to as \acf{mpc} schemes or receding
 horizon optimization \cite{hewing2020learning}. While
 optimization-based methods have demonstrated success in
 autonomous driving applications, they stumble when
 confronted with real-time constraints in systems with
-increased degrees of freedom due to high computational costs
+a large number of degrees of freedom due to high computational costs
 \cite{spahn2021coupled}.
 
 In the age of deep neural networks, learning-based
@@ -207,17 +209,19 @@ with new scenarios \cite{noroozi2023conventional}.
 Computational costs are also often
 mentioned when criticizing such approaches, but as
 computational capacity increase rapidly, it seems little
-justified. 
+justified \MS{Data needed, references}.
 
+\subsection*{Control-based approaches}
 In the early days of robotics, potential field methods were
 popular in the context of \ac{tg}.
 They are based on the idea of modeling the robot as
-a point in a potential field, where the goal is a minimum
+a point in a potential field built in the robot's configuration
+space, where the goal is a minimum
 and obstacles are maxima
 ~\cite{barraquand1992numerical,hwang1992potential}. This
 approach is known to be computationally affordable but
 only covers the static components of the problem, and thus
-ignores the dynamics of the robot.
+does not naturally integrates the dynamics of the robot.
 
 Another notable contender from the same era is Cartesian
 impedance control, praised for its rapid responsiveness and
@@ -228,9 +232,12 @@ spring-damper-system attracted to the goal pose. In contrast
 to potential field theory, the motion of the robot is thus
 taken intro consideration. However, it falls short by not
 encompassing crucial components for collision-free
-\ac{tg}. Modeling the point of interest of the robot as a
-second-order differential equation raises whether all components of the \ac{tg} problem can be handled
-in this way. 
+\ac{tg}, such as self-collision avoidance or joint-limit
+avoidance.
+Modeling the point of interest of the robot as a
+second-order differential equation raises whether all
+components of the \ac{tg} problem can be handled in this
+way. 
 
 We can observe that modern approaches to \ac{tg} focus on
 the practical side of \ac{tg} and often ignore the
@@ -238,7 +245,7 @@ underlying geometric structure \cite{Ratliff2015}. For
 example, formulating the \ac{tg} problem in the Euclidean
 work space of the end effector, as it is done in many
 optimization-based methods and learning approaches, is a
-simplification of the problem ignoring the configuration
+simplification of the problem that ignores the configuration
 space of the robot. Effectively, this approach uses a
 Euclidean geometry. In contrast, the work space can also be
 modeled as a Riemannian (or even non-Riemannian) manifold of
@@ -246,7 +253,7 @@ the configuration space \cite{klein2023design}. Then, other
 components, that live in different manifolds of the
 configuration space, can be seamlessly integrated into the
 \ac{tg} problem \cite{Ratliff2015}. This insight has led to
-a series of different works where \ac{tg} has been addressed
+a series of works where \ac{tg} has been addressed
 purely geometrically
 \cite{Ratliff2015,Cheng2019,Cheng2020,Ratliff2020,Xie2020}.
 
@@ -268,6 +275,7 @@ configuration space.
 
 \section{Contributions}
 \label{sec:contributions}
+\MS{Make it fewer contributions, potentially two parts}
 %
 The theoretical contributions of this thesis
 are based on the geometric interpretation of \ac{tg}, and
@@ -403,12 +411,13 @@ and motion planning.
 % background
 Then, \cref{cha:background} summarize the required tools
 from optimal control and from differential geometry to
-understand the main chapters.
+understand used in this thesis.
 % mpc
 \cref{cha:icra_21} explores an \ac{mpc}
 formulation for whole body control
-with a mobile manipulator. We provide important steps to
-handle the complexity of the problem.
+with a mobile manipulator. Specifically, we integrate
+\acl{fsd} to cope with poor scaling in the number of
+obstacles.
 % dynamic fabrics
 In \cref{cha:tro_23}, we derive a
 generalization of optimization fabrics to dynamic
@@ -422,7 +431,7 @@ parameter tuning.
 % environment representations
 \cref{cha:ral_24} showcases the integration of
 implicit environment representations into the framework of
-\ac{fabrics} to relax the requirement for the
+\ac{fabrics} to relax the requirements for the
 perception pipeline.
 % demo paper
 \cref{cha:rss_24} showcases the 
