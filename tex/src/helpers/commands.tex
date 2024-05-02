@@ -251,6 +251,16 @@
 \newcommand{\cY}{\mathcal{Y}}
 \newcommand{\cZ}{\mathcal{Z}}
 
+% Define the new environment
+%\newenvironment{textboxold}
+%  {\par\medskip\centering\colorbox{gray!30}{\begin{minipage}{0.8\textwidth}\color{black}}
+%  {\end{minipage}
+%}
+
+\newenvironment{textbox}[1]
+  {\begin{tcolorbox}[colback=tudelft-cyan!50!white,colframe=tudelft-cyan,title=#1]}
+  {\end{tcolorbox}}
+
 \newtheoremstyle{spaced}
   {1em plus .2em minus .0em}%   Space above
   {1em plus .2em minus .0em}%   Space below

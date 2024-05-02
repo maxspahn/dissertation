@@ -17,7 +17,7 @@
 \section{Trajectory Generation} % (fold)
 \label{sec:trajectory_generation}
 
-In this thesis, we define \ac{tg} as the process of
+In this thesis, we define \ac{tg} as the problem of
 computing a sequence of actions in real-time that allows a
 robot to move from an initial configuration to a desired
 goal state. Importantly, the goal state might be defined in a
@@ -25,6 +25,9 @@ task specific way. For example, the goal state might be
 defined in the task space (e.g., the end-effector position)
 or in the configuration space (e.g., the joint position).
 That places \ac{tg} between task planning and control.
+We use \textit{policy} as a general term to refer to 
+a method that generates actions at each time step and thus
+solves the \ac{tg} problem.
 
 To relate this definition of \ac{tg} to the literature,
 \ac{tg} can be further split into global path planning and

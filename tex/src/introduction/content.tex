@@ -24,7 +24,10 @@ for technological solutions is more pronounced than ever
 \cite{ince2015economic,mcgrath2021report,astrov2021economies}.
 Technological progress in the
 corresponding field of robotics today is disappointing,
-especially in an era where the non-embodied counterpart is
+especially in an era where the non-embodied counterpart,
+i.e. speech recognition \cite{radford2023robust},
+text generation \cite{hoffmann2022training},
+and computer vision \MS{reference}, is
 touching all of our lives. Specifically, strides in natural
 language processing and computer vision have significantly
 improved in the recent past and may rather sooner than later
@@ -133,7 +136,7 @@ environments.
 %
 However, despite their potential, robots are noticeably
 absent from human-shared environments. The complexity of
-such spaces, coupled with safety constraints, present
+such spaces, coupled with safety constraints, presents
 formidable challenges. This is where \acf{tg}
 becomes pivotal as one of the basic building blocks for
 robotics software stacks. It determines the commands sent to
@@ -208,8 +211,12 @@ training and thus lacking generalizability when confronted
 with new scenarios \cite{noroozi2023conventional}.
 Computational costs are also often
 mentioned when criticizing such approaches, but as
-computational capacity increase rapidly, it seems little
-justified \MS{Data needed, references}.
+computational capacity increases rapidly and important
+advancements in natural language processing resulted from
+more capable hardware and larger datasets
+\cite{radford2023robust},
+it seems little
+justified. 
 
 \subsection*{Control-based approaches}
 In the early days of robotics, potential field methods were
@@ -221,7 +228,7 @@ and obstacles are maxima
 ~\cite{barraquand1992numerical,hwang1992potential}. This
 approach is known to be computationally affordable but
 only covers the static components of the problem, and thus
-does not naturally integrates the dynamics of the robot.
+does not naturally integrate the dynamics of the robot.
 
 Another notable contender from the same era is Cartesian
 impedance control, praised for its rapid responsiveness and
@@ -275,118 +282,107 @@ configuration space.
 
 \section{Contributions}
 \label{sec:contributions}
-\MS{Make it fewer contributions, potentially two parts}
+
+There are two lines of research in this thesis. Given the
+success of \ac{mpc} in the field of autonomous driving and
+mobile robotics, we explore how this method can be adapted
+to mobile manipulation. 
 %
-The theoretical contributions of this thesis
-are based on the geometric interpretation of \ac{tg}, and
-even more specifically on the framework of \ac{fabrics}.
-Additionally, extensive
-comparisons to \ac{mpc} are conducted to
-provide a more nuanced understanding of similarities and
-differences between the two approaches. In the following, we
-specify all contributions of this thesis in detail.
+\begin{textbox}{Part1: \acl{mpc}}
+  As manipulators and even more so mobile manipulators are
+  characterized by a high number of degrees of freedom, this
+  thesis investigates how \ac{mpc} must be adapted and how
+  it performs to geometric methods.
+\end{textbox}
 %
-\subsection{Advancements in \ac{mpc} for mobile manipulation}
-\begin{enumerate}
-    \item \cref{cha:icra_21} presents an \ac{mpc} formulation for a
-      mobile manipulator. The presented method proposes to cope
-      with poor scaling in the number of collision constraints, by
-      using the concept of \acf{fsd}. This method achieves a
-      control frequency of 10Hz \textit{independent} on the amount
-      of collision obstacles in the environment.
-    \item \cref{cha:tro_23} conducts a quantitative comparison between \ac{mpc}
-      formulations and \ac{fabrics} for various types of
-      robots. The comparison reveals that clearance,
-      path-length and execution time remain unchanged for
-      both methods, while \ac{fabrics} realize a decrease in
-      solver time by a factor of approximately 50.
-\end{enumerate}
 
-\subsection{Theoretical advancements in \ac{fabrics}}
-\begin{enumerate}
-    \setcounter{enumi}{2}
-    \item \cref{cha:tro_23} generalizes the framework of \ac{fabrics}
-      for dynamic environments. We refer to the resulting
-      framework as \ac{df}. Specifically, we introduce
-      time-parameterized manifolds to integrate moving
-      obstacles and time-parameterized goal definitions.
-      Technically,
-      we prove that energy conservation is preserved when
-      \textit{pulling} timeparameterized components into
-      the configuration manifold. 
-      Similarly, we prove convergence to
-      time-parameterized goals under a simple construction
-      condition. Quantitative comparisons between our method
-      and the original framework of \ac{fabrics} reveal
-      that failures due to collision is reduced from 9/20
-      to 0/20 for a 7-\ac{dof} robot in a real-world experiment.
-      In terms of path following, trajectories generated
-      with \ac{df} achieve a by a factor of 2 reduced summed error 
-      when compared with the original framework of
-      \ac{fabrics} for a 7-\ac{dof} robot in simulation.
-    \item Additionally, \cref{cha:tro_23} presents an extension to
-      non-holonomic systems. Non-holonomic systems, such as
-      differential-drives, are characterized by
-      non-holonomic constraints, effectively reducing the
-      degrees of freedom of the system. By solving an
-      unconstrained optimization problem integrating the
-      Jacobian of the non-holonomic constraints, we solve
-      for the least-square error of the \ac{fabrics} policy
-      given the non-holonomic constraints. While we
-      acknowledge the breaking of convergence guarantees,
-      quantitative experiments reveal that this approach leads to
-      competitive results when compared to an \ac{mpc}
-      formulation for a differential-drive robot.
-      Additionally, we show that the idea transfers effectively
-      to mobile manipulation.
-\end{enumerate}
+As the results from the first part reveal that \ac{mpc} is 
+not competitive in terms of reactivity and computational
+coss, the second, and main part, of this thesis focuses on
+geometric methods. Specifically, we study the framework
+of \acl{fabrics} and its suitability for mobile manipulation
+in dynamic environments.
+%
+\begin{textbox}{Part2: \acl{fabrics}}
+  The main part of this thesis is dedicated to the
+  exploration of the geometric framework of \ac{fabrics} for
+  mobile manipulation in dynamic environments. In that
+  context, we investigate how the framework generalizes to
+  dynamic environments, how global path planning can be
+  integrated and how implicit environment representations,
+  such as point clouds can be used for collision avoidance.
+\end{textbox}
 
-\subsection{Practical contributions of \ac{fabrics}}
-\begin{enumerate}
-  \setcounter{enumi}{4}
-  \item As \ac{fabrics} offer a closed-form solution to
-    \ac{tg}, we present a symbolic implementation of
-    \ac{fabrics} in \cref{cha:icra_23}. This reduces
-    solver times to approximately 1ms for a 7-\ac{dof} robots, 
-    because the fabric composition, combining
-    the individual behaviors, is pre-computed and not
-    performed at runtime. The \ac{tg} policy can be
-    arbitrarily parameterized, and is thus suitable for
-    parameter refinement at runtime.
-  \item \cref{cha:icra_23} proposes the use of Bayesian optimization for
-    automated parameter tuning of \ac{fabrics},
-    reducing the need for expert knowledge. We show that
-    expert level tuning can be achieved without prior
-    knowledge of the framework. Additionally, tuning can
-    be transferred to different robots without substantial
-    loss of performance.
-  \item \cref{cha:ral_24} integrates implicit environment
-    representations into the framework of \ac{fabrics}.
-    This allows for the relaxation of the requirement for
-    the perception pipeline, as the environment is
-    represented implicitly in the \ac{tg} policy.
-    Specifically, we compare \ac{fsd}, \ac{sdf} and raw
-    point clouds as the input for collision avoidance.
-  \item \cref{cha:rss_24} showcases that learning-from-demonstration
-    techniques can be integrated into \ac{fabrics} to
-    simplify trajectory programming. Taught trajectories
-    can be transformed to new environment layouts using 
-    rigid body transformations.
-\end{enumerate}
+To address the challenges formulated above, several
+contributions are made in this thesis.
 
-\subsection{Demonstration in a Real-world Setting:}
-\begin{enumerate}
-  \setcounter{enumi}{8}
-  \item \cref{cha:rss_24} demonstrates the usability of \ac{fabrics}
-      in a prototype application, specifically in the
-      context of order-picking in supermarkets, showcasing
-      real-world applicability and effectiveness. In this
-      real-world scenario, we make use of the ability
-      to arbitrarily formulate goals in different task
-      spaces. The goal definition of pointing towards the
-      shelf can then be very different to the goal
-      definition of placing an item in the shopping basket.
-\end{enumerate}
+\paragraph{Mobile manipulation through \ac{mpc}}
+\cref{cha:icra_21} presents an \ac{mpc} formulation for a
+mobile manipulator. The presented method proposes to cope
+with poor scaling in the number of collision constraints, by
+using the concept of \acf{fsd}. This method achieves a
+control frequency of 10Hz \textit{independent} on the amount
+of collision obstacles in the environment.
+
+\paragraph{Generalization of \ac{fabrics} to \ac{df}}
+\cref{cha:tro_23} generalizes the framework of \ac{fabrics}
+for dynamic environments. We refer to the resulting
+framework as \ac{df}. Specifically, we introduce
+time-parameterized manifolds to integrate moving
+obstacles and time-parameterized goal definitions.
+Technically,
+we prove that energy conservation is preserved when
+\textit{pulling} time-parameterized components into
+the configuration manifold. 
+Similarly, we prove convergence to
+time-parameterized goals under a simple construction
+condition. Quantitative comparisons between our method
+and the original framework of \ac{fabrics} reveal
+that failures due to collision is reduced from 9/20
+to 0/20 for a 7-\ac{dof} robot in a real-world experiment.
+In terms of path following, trajectories generated
+with \ac{df} achieve a by a factor of 2 reduced summed error 
+when compared with the original framework of
+\ac{fabrics} for a 7-\ac{dof} robot in simulation.
+
+
+\paragraph{Symbolic implementation of \ac{fabrics}}
+As \ac{fabrics} offer a closed-form solution to
+\ac{tg}, we present a symbolic implementation of
+\ac{fabrics} in \cref{cha:icra_23}. This reduces
+solver times to approximately 1ms for a 7-\ac{dof} robots, 
+because the fabric composition, combining
+the individual behaviors, is pre-computed and not
+performed at runtime. The \ac{tg} policy can be
+arbitrarily parameterized, and is thus suitable for
+parameter refinement at runtime.
+\cref{cha:icra_23} proposes the use of Bayesian optimization for
+automated parameter tuning of \ac{fabrics},
+reducing the need for expert knowledge. We show that
+expert level tuning can be achieved without prior
+knowledge of the framework. Additionally, tuning can
+be transferred to different robots without substantial
+loss of performance.
+
+\paragraph{Implicit environment representations}
+\cref{cha:ral_24} integrates implicit environment
+representations into the framework of \ac{fabrics}.
+This allows for the relaxation of the requirement for
+the perception pipeline, as the environment is
+represented implicitly in the policy.
+Specifically, we compare \ac{fsd}, \ac{sdf} and raw
+point clouds as the input for collision avoidance.
+
+\paragraph{Demonstration in a Real-world setting}
+\cref{cha:rss_24} demonstrates the usability of \ac{fabrics}
+in a prototype application, specifically in the
+context of order-picking in supermarkets, showcasing
+real-world applicability and effectiveness. In this
+real-world scenario, we make use of the ability
+to arbitrarily formulate goals in different task
+spaces. The goal definition of pointing towards the
+shelf can then be very different to the goal
+definition of placing an item in the shopping basket.
 
 These contributions collectively advance the field of
 \ac{tg} for mobile manipulation, offering novel
@@ -401,7 +397,10 @@ The outline of this thesis is depicted in \cref{fig:outline}.
   \begin{center}
     \input{src/introduction/img/visual_outline.pdf_tex}
   \end{center}
-  \caption{Outline of this thesis}
+  \caption{Outline of this thesis. General chapters are
+  colored in blue, chapters related to \ac{mpc} are colored
+  in red, chapters related to \ac{fabrics} are colored in 
+  green, and demonstrations are colored in yellow.}
   \label{fig:outline}
 \end{figure}
 % state
