@@ -26,7 +26,7 @@
 % developed in parallel for the individual embodiments of
 % robotic systems.
 
-\Acl{tg} methods aim at finding connections between two
+Motion planning methods aim at finding connections between two
 robot states
 that are collision-free at the
 moment of planning and potentially optimal.
@@ -37,7 +37,7 @@ compute frequency, see \cref{fig:reactivity_scale}.
 At the most reactive end, we find low
 level controllers and on the least reactive end, we find
 global path planning methods. In most robotics planning
-pipelines, a global path planner is guiding the local
+pipelines, a global path planner is guiding the 
 \ac{tg} method.
 This thesis focuses on the reactive end of the scale, and
 therefore we will only give a brief overview of global path
@@ -46,7 +46,7 @@ planning methods.
 \begin{figure}[h]
   \centering
   \input{src/state/img/reactivity_scale.pdf_tex}
-  \caption{Reactivity scale of different \ac{tg} methods
+  \caption{Reactivity scale of different motion planning methods
   revised in this thesis. Global methods, such as \ac{rrt}
   \cite{Karaman2011} are at the least reactive end. More
   reactive methods, such as \ac{mpc}
@@ -64,8 +64,8 @@ robotics \cite{hogan1985impedance,abu2020variable}. In impedance
 control, the controlled system is modeled as a
 mass-spring-damper system. The specific case of Cartesian
 impedance control was proposed in \cite{albu2002cartesian} and
-could be characterized as a local \ac{tg} method, because of
-its ability cope with various goal specifications and its
+could be characterized as a \ac{tg} method, because of
+its ability to cope with various goal specifications and its
 safety properties in the proximity of humans
 ~\cite{van2022disagreement,hjorth2024enabling}.
 Additionally, impedance control can be used in collaborative
@@ -115,7 +115,7 @@ to integrate moving and static obstacles
 \paragraph{Mobile robots}
 
 The method of \ac{apf} was also used for \ac{tg} of mobile
-robotics after its introduction for robotic arms.
+robots after its introduction for robotic arms.
 For non-holonomic mobile robots, it was shown that \ac{apf}
 generally exhibits multiple equilibrium points which are not
 necessarily stable \cite{urakubo2018stability}.
@@ -129,13 +129,13 @@ imitating the human navigation behavior and using it as
 navigation policy for the robot.  Yet, Social Forces and its
 variants rely on handcrafted functions limiting their
 ability to handle more complex navigation scenarios. To deal
-with numerous agents, \textit{ORCA} was proposed in
+with many agents, \textit{ORCA} was proposed in
 \cite{VanDenBerg2011} and later extended for non-holonomic
 bases in \cite{Alonso-Mora2012a}.
 
 
 While, these reactive \ac{tg} methods capture more
-information that pure controllers, they often rely on 
+information than pure controllers, they often rely on 
 scalar objectives functions to weigh different components.
 
 \subsection{Geometries of trajectories}
@@ -154,7 +154,7 @@ Formulating \ac{tg} as a dynamical system is a widely used
 approach
 \cite{khansari2012dynamical,huber2023avoidance}, for which
 \ac{osc} \cite{Khatib1987a} and \ac{dmp}
-\cite{ijspeert2013dynamical} are special cases.
+\cite{saveriano2023dynamic,ijspeert2013dynamical} are special cases \MS{???}.
 %
 %Based on the findings of contracting metrics for non-linear
 %control design \cite{l2,l3}, geometric approaches design the motion
@@ -165,6 +165,26 @@ approach
 %equation. An example for shaping the optimization
 %manifold is seen in \cref{fig:spec_combination}.
 
+%
+A more general framework was introduced as \acf{rmp} in
+\cite{Ratliff2018,Cheng2020,Li2021}. \Ac{rmp} represent a
+natural way of combining multiple policies into one joined policy.
+\ac{rmp} define individual sub-tasks of the motion planning as
+differential equations (\textit{spectral semi sprays} or
+\textit{specs} for short) of second order and propose the
+\textit{pullback} and \textit{summation} operators to combine multiple policies
+in the configuration space, see \cref{fig:spec_combination}. As subtasks can be defined in arbitrary manifolds
+of the configuration space, \ac{rmp} generalize operational space
+control~\cite{Khatib1987}. The resulting behavior of
+\ac{rmp} was reported to be
+intuitive while keeping computational costs low~\cite{Ratliff2018}. The concept
+of \ac{rmp} was used in~\cite{Cheng2020,Cheng2020a} to form RMP-Flow, a motion
+planning algorithm that is shown to be conditionally stable and invariant
+across robots. An \ac{rmp} adaptation was proposed for non-holonomic robots
+in~\cite{Meng2019}. By incorporating the kinematic constraint into the root
+equation of the \ac{rmp}, the computed policy is applicable to non-holonomic robots.
+Besides, that work proposed a neural net to learn the collision avoidance task
+components. 
 %
 \begin{figure}[h]
   \centering
@@ -195,25 +215,6 @@ approach
   \label{fig:spec_combination}
 \end{figure}
 %
-A more general framework was introduced as \acf{rmp} in
-\cite{Ratliff2018,Cheng2020}. \Ac{rmp} represent a
-natural way of combining multiple policies into one joined policy.
-\ac{rmp} define individual sub-tasks of the motion planning as
-differential equations (\textit{spectral semi sprays} or
-\textit{specs} for short) of second order and propose the
-\textit{pullback} and \textit{summation} operators to combine multiple policies
-in the configuration space. As subtasks can be defined in arbitrary manifolds
-of the configuration space, \ac{rmp} generalize operational space
-control~\cite{Khatib1987}. The resulting behavior of
-\ac{rmp} was reported to be
-intuitive while keeping computational costs low~\cite{Ratliff2018}. The concept
-of \ac{rmp} was used in~\cite{Cheng2018,Cheng2020} to form RMP-Flow, a motion
-planning algorithm that is shown to be conditionally stable and invariant
-across robots. An \ac{rmp} adaptation was proposed for non-holonomic robots
-in~\cite{Meng2019}. By incorporating the kinematic constraint into the root
-equation of the \ac{rmp}, the computed policy is applicable to non-holonomic robots.
-Besides, that work proposed a neural net to learn the collision avoidance task
-components. 
 
 Although \ac{rmp} have proven to be a powerful tool for
 motion generation, it was reported to require intuition and
@@ -235,7 +236,7 @@ constraint to the motion, it is possible to sequentially
 design motion~\cite{Ratliff2020}. This procedure allows to
 carefully tune individual components without harming the
 others. The application to a planar arm in a goal-reaching
-setup was successfully tested in~\cite{Ratliff2020}. Here,
+setup was successfully tested in~\cite{Ratliff2020}. There,
 the authors illustrated how the resulting motion can be
 modified arbitrarily by the user by adding additional
 constraints or preferences. Although \ac{fabrics} generalize
@@ -261,10 +262,12 @@ such environments.
 \section{Receding-horizon trajectory optimization}%
 \label{sec:receding_horizon_trajectory_optimization}
 
-Methods formulating local \ac{tg} as an optimization problem with a finite
-discrete time horizon are known under the name of receding-horizon trajectory
-optimization. In line with most literature in robotics, we will refer to such
-methods as \ac{mpc}.
+Acknowledging the limitations of reactive \ac{tg} methods,
+\ac{tg} is formulated as an optimization problem with with a
+finite discrete time horizon. Such methods are known under
+the name of receding-horizon trajectory optimization. In
+line with most literature in robotics, we will refer to such
+methods as \acf{mpc}.
 Generally, several objectives are encoded in the scalar
 objective function, dynamics
 are formulated as equality constraints and inequality constraints ensure
@@ -281,8 +284,10 @@ the corresponding infinite time-horizon formulation
 Despite these results, formal stability
 guarantees in such environments are challenging, as appropriate terminal cost
 functions are often not commutable or too conservative. Besides, the
-computational costs scale with the degrees of freedom, restricting real-time
-applicability to simple dynamics and environment models \cite{Spahn2021}.
+computational costs scale with the degrees of freedom,
+limiting update frequencies on real systems
+and consequently achieve lower reactivity than purely
+geometric methods \cite{Spahn2021}.
 
 Some \ac{mpc} formulations are non-linear and can be analyzed
 using methods from non-linear control. When analyzing non-linear control
@@ -340,7 +345,7 @@ detection in moving underneath the horizontal bar \cite{Avanzini2018}.
 \paragraph{Conclusion}
 
 Receding-horizon trajectory optimization methods are a
-powerful tool for local \ac{tg} in dynamic environments.
+powerful tool for \ac{tg} in dynamic environments.
 Some realizations provide formal stability guarantees and can be analyzed
 using methods from non-linear control. Therefore, \ac{mpc}
 approaches are widely used in the context of autonomous
@@ -412,24 +417,23 @@ opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way
 \cite{Li2019}.
 
 
-\input{src/state/representations}
+%\input{src/state/representations}
 
 \section{Conclusion}
 \label{sec:state_conclusion}
 
-To summarize, path planning in robotics is a well-studied
+To summarize, motion planning in robotics is a well-studied
 problem. Especially in the early days of robotics, where
-robots were mostly deployed in static environments, path
-planning was a central problem. However, when exposed to
-dynamic environments, path planning becomes insufficient due
+robots were mostly deployed in static environments, motion
+planning was limited to global path planning.
+However, when exposed to
+dynamic environments, global path planning becomes insufficient due
 to its inability to quickly react to changes in the
-environment. This is especially true for mobile manipulation
-systems, due to their high-dimensional configuration space,
-\cite{Avanzini2018}. Environment representations are
-crucially for all the planning methods described above.
-Here, implicit representations have shown to be very useful
-for cluttered, unknown and dynamic environments. However,
-most research focuses on mobile robots, and manipulators
-are yet to be explored in this context.
-
-
+environment. Therefore, methods for solving the \ac{tg}
+problem in dynamic environments are required. Such methods
+compute sequences of actions based on changes in the
+environment to ensure collision avoidances and adapation to
+changing goal definitions. Geometric methods, such as
+\ac{fabrics} can achieve high reactivity and smooth motions
+whereas optimization based methods, such as \ac{mpc}, excel
+when formal guarantees are required.
