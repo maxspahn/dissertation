@@ -14,34 +14,31 @@
 
 \newpage
 
-\section{Trajectory Generation} % (fold)
-\label{sec:trajectory_generation}
-
-In this thesis, we define \ac{tg} as the problem of
-computing a sequence of actions in real-time that allows a
-robot to move from an initial configuration to a desired
-goal state. Importantly, the goal state might be defined in a
+This thesis is concerned with motion planning for robots
+with a special focus on mobile manipulators.
+Motion planning is a fundamental problem that
+aims at finding feasible trajectories between an initial
+state and a goal state amidst changing
+environments. Importantly, the goal state might be defined in a
 task specific way. For example, the goal state might be
 defined in the task space (e.g., the end-effector position)
 or in the configuration space (e.g., the joint position).
-That places \ac{tg} between task planning and control.
-We use \textit{policy} as a general term to refer to 
-a method that generates actions at each time step and thus
-solves the \ac{tg} problem.
+That places motion planning between task planning and control.
 
-To relate this definition of \ac{tg} to the literature,
-\ac{tg} can be further split into global path planning and
-local \ac{tg}. The former is the process of
+To relate this definition of motion planning to the literature,
+it can be further split into global path planning and
+\ac{tg}. The former is the process of
 computing a collision-free path from the initial to the
 goal state, while the latter is the process of computing a
 smooth trajectory that follows the path as closely as
 possible while satisfying the robot's kinematic and dynamic
-constraints ~\cite{Rickert2014}.
-
-% section trajectory_generation (end)
-
-\section{Dynamic Environments} % (fold)
-\label{sec:dynamic_environments}
+constraints ~\cite{Rickert2014}. In this thesis, we often
+evaluate methods for \ac{tg} without the need for a global
+path planner. Instead of following a global path, the
+\ac{tg} is then defined by the initial and goal state.
+We use \textit{policy} as a general term to refer to 
+a method that generates actions at each time step and thus
+solves the \ac{tg} problem.
 
 Modern research in robotics is increasingly focusing on
 robots that operate in dynamic environments. However,
@@ -59,12 +56,12 @@ are supermarkets, hospitals, or homes, see \cref{fig:dynamic_environments}.
 % Figure with two subfigures showing a hospital and a supermarket
 \begin{figure}[ht]
   \centering
-  \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{robot_in_hospital.png}
+  \begin{subfigure}[b]{0.6\textwidth}
+    \includegraphics[height=100pt]{robot_in_hospital.png}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{human_shared_environment.png}
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[height=100pt]{human_shared_environment.png}
   \end{subfigure}
   \caption{Examples of dynamic environments: robots may be
   deployed in the hospital to assist the personnel
@@ -84,8 +81,8 @@ letters, $\vec{x}$, matrices in capital, $\mat{M}$, and sets
 in calligraphic uppercase, $\mathcal{M}$. In the context of
 discrete-time systems, we denote the time step using a
 subscript, e.g., $\vx_k$ is the state at time $k$. The
-transpose of a matrix is denoted by a superscript $^T$, and
-the inverse by a superscript $^{-1}$, the pseudo-inverse by a
+transpose of a matrix is denoted by a superscript $^T$, 
+the inverse by a superscript $^{-1}$, and the pseudo-inverse by a
 superscript $^{\dagger}$. Partial derivatives are denoted by 
 $\der{\vx}{\vy}$ in text block, or more explicitly as
 \[\derf{\vx}{\vy}.\]
@@ -171,17 +168,18 @@ Inequality constraints are denoted by $g(\z_k, \u_k)$.
 At each time step, the \ac{mpc} problem is solved to
 find the sequence of control inputs $\u_k^*$ that minimize
 the cost function. The first control input of the optimal
-sequence is then applied to the system. The remainder of the
-sequence is shifted by one step to form the initial guess
-for the next solution. This process is usually referred to as
+sequence is then applied to the system.
+The subsequent actions in the sequence are used as the
+initial guess for the next timestep. 
+This process is usually referred to as
 receding horizon control \cite{howard2010receding}.
 
 \section{Differential Geometry} % (fold)
 \label{sec:differential_geometry}
 
 In this section, we consciously use a simplified formalism
-for differential geometry to allow its understanding for
-engineers. For a more thorough introduction to differential
+for differential geometry to facilitate its understanding
+For a more thorough introduction to differential
 geometry, we refer to
 ~\cite{bullo2019geometric,lee2012smooth,boumal2023introduction,lang2012fundamentals}.
 
@@ -222,7 +220,7 @@ each chart.
 \label{sec:optimization_fabrics}
 
 In this section, we introduce the concept of \acf{fabrics}
-are a framework for \ac{tg}
+which are a framework for \ac{tg}
 that is based on the theory of differential
 geometry. The main idea is to design \ac{tg} as a
 second-order dynamical system. The trajectory generator is
@@ -252,7 +250,7 @@ $\xddot=-\M^{-1}\f$.
 \label{sub:operations_on_specs}
 
 On \textit{specs}, we can define two fundamental operations:
-the \textit{pullback} and the \textit{summation}.
+the \textit{summation} and the \textit{pull-back}.
 
 Given two specs $\Spec_1 = {\left(\M_1,\f_1\right)}_{\X}$ and
 $\Spec_2 = {\left(\M_2,\f_2\right)}_{\X}$, their sum is
@@ -299,8 +297,7 @@ potential function defined by gravity when being damped
 minimal potential energy)
 
 In the following, methods to construct \ac{fabrics} are
-summarized: the definitions of conservative fabrics and
-energization are introduced.
+summarized.
 
 \subsection{Conservative fabrics and energization}%
 \label{sub:conservative_fabrics_and_energization}
@@ -336,7 +333,9 @@ The operation of \textit{energization} transforms a given differential equation 
 a conservative spec.
 Specifically, given an unbiased energy Lagrangian \le{} with boundary conforming
 \Me{}~\cite[Definition~4.6]{Ratliff2020} and
-lower bounded energy \he{}, an unbiased spec of form $\Spec_{\vec{h}} = (\mat{I},\vec{h})$
+lower bounded energy \he{}, an unbiased spec in normalized,
+i.e. $\vec{h} = \inv{\M}\f$,
+form $\Spec_{\vec{h}} = (\mat{I},\vec{h})$
 is transformed into a frictionless fabric using energization as
 \begin{equation}
   \begin{split}
