@@ -24,7 +24,7 @@ in a real demonstration case. Along the way, we showed how \ac{mpc} can be used
 for mobile manipulators and why geometric approaches tend to outperform
 optimization-based methods for these systems. All results were validated
 extensively in simulation and verified in real-world experiments. In the
-following, we summarize the main contributions of this thesis.
+following, we summarize the key findings of this thesis.
 
 \subsection{MPC for mobile manipulators}
 \label{sec:conclusion_mpc}
@@ -35,7 +35,7 @@ the system in a coupled way reducing overall execution time, similar to what had
 been done in \cite{Avanzini2018} with dynamic weighing. Second, it reduced the
 required accuracy of the perception pipeline as raw point clouds or occupancy
 grids can be used. Third, we showed that computationally scaling in the number
-of obstacles can be prevented. In \cref{cha:tro_23},
+of obstacles can be prevented \MS{improve text clarity}. In \cref{cha:tro_23},
 we additionally showed that geometric approaches tend to outperform \ac{mpc}
 formulations despite weaker theoretical guarantees.
 
@@ -52,8 +52,8 @@ configuration space while making the motion of the frame a runtime variable of
 the root geometry. This chapter showed that reference velocity integration is
 required to handle moving obstacles. Additionally, integration of global path
 planning in arbitrary manifolds is possible to the generalization. In
-particular, this chapter proved that convergence to reference paths can be 
-guaranteed. Finally, this chapter presented results on path following with a
+particular, this chapter proved that convergence to reference trajectories can be 
+guaranteed. Finally, this chapter presented results on trajectory following with a
 mobile manipulator and collision avoidance with moving humans in the workspace.
 Additionally, we provided a required extension to
 \ac{fabrics} for non-holonomic systems, such as differential
@@ -68,7 +68,8 @@ This property is exploited in a purely symbolic implementation of \ac{fabrics}
 which allows for solver times around 1ms. This chapter additionally
 proposed to use a Bayesian optimization to tune parameters
 for \ac{fabrics}.
-The experiments showed that expert-level can be reached within 50 iterations.
+The experiments showed that expert-level can be reached within 50 iterations
+\MS{How long does it take?}.
 Additionally, the results revealed that parameter sets can be transferred between
 similar embodiments. Finally, qualitative results on a real robot are presented
 confirming the applicability to both manipulation and mobile
@@ -77,6 +78,7 @@ manipulation.
 \subsection{Implicit environment representations}
 \label{sec:conclusion_implicit}
 
+\MS{Still need to add numbers once i have the final results.}
 \cref{cha:ral_24} proposed the integration of several implicit environment
 representations into the framework of \ac{fabrics}. Specifically, we showed how
 \ac{sdf} can be integrated using numeric gradients and how \ac{fsd} can be
@@ -115,17 +117,17 @@ manipulators in human-shared environments.
 \subsection{Fabrics or MPC?}
 \label{sec:discussion_fabrics_or_mpc}
 
-Most readers are likely familiar with \acl{mpc}, fewer may have seen its application
+Most readers are likely familiar with \acl{mpc} and may have seen its application
 to, for example, autonomous driving or mobile manipulation, and some 
 experienced roboticist may be aware of the strengths and weaknesses of
-\ac{mpc}. In contrast, few readers have heard of \ac{fabrics} before and are 
-quick to make a connection between both methods, because
+\ac{mpc}. In contrast, fewer readers may have heard of \ac{fabrics} before.
+One way to make a connection between both methods, because
 \ac{mpc} is based on an \textit{optimization} which is part
 of the name of \acf{fabrics}
 However, the methods are
 fundamentally different,
 and it is important to analyze the differences and similarities between
-these methods in an understandable way.
+these methods.
 % MPC
 \ac{mpc} is centered around the
 formulation of a constrained optimization problem. The constraints are
@@ -182,7 +184,7 @@ manipulation tasks. In \ac{mpc} formulations, future states
 are considered when constructing the optimization problem,
 thus the evolution and, importantly, goal approaching is
 optimized over the entire horizon. In the extreme, an
-infinitely long horizon would lead to a globally optimal
+infinitely long horizon and a global solver would lead to a globally optimal
 solution. This is practically impossible to achieve, such
 that the horizon is usually limited to a few stages, and the
 remaining stages are approximated by a terminal cost.
@@ -205,7 +207,7 @@ behaviors into the \ac{tg} problem. Practically, motion
 design describes the 
 process for a user to encode different desired behaviors
 into the \ac{tg} problem, such that the robot behaves as
-indented by the application. In \ac{mpc} formulations,
+intended by the application. In \ac{mpc} formulations,
 the behavior is mainly influenced by the objective function
 and its weighing factors if multiple objectives are present.
 This scalar encoding often proves to be difficult, because
@@ -234,9 +236,9 @@ contrast, \ac{fabrics} excels in reactivity and motion
 design and should often be regarded as an informed
 controller. That comes at the cost of global properties
 which must be taken into account when using the method in
-cluttered environment. In this thesis, we showed how global
+cluttered environments. In this thesis, we showed how global
 guidance can be integrated using either conventional
-path planning or learning-from-demonstration methods.
+path planning (\cref{cha:tro_2023}) or learning-from-demonstration methods (\cref{cha:rss_2024}).
 
 \subsection{The future of \ac{fabrics}}
 \label{sec:discussion_limitations_of_fabrics}
@@ -246,14 +248,21 @@ After having discussed differences and similarities between
 our proposed methods and point the reader to potential
 future directions of research. 
 % continuous time
+\paragraph{Continuous time}
+\label{par:discussion_continuous_time}
+
 A practical limitation of \ac{fabrics} --as for any other
-geometric method defined in the continuous time domain --
+geometric method defined in the continuous time domain--
 is that the method is not directly applicable to real-world
 systems. Specifically, the method has to be discretized and
 approximated leading to inaccuracies when tracking continuous
 trajectories. A thorough analysis on convergence of the discretization
 when applied to real robots is missing to this point.
 % tuning
+
+\paragraph{Tuning}
+\label{par:discussion_tuning}
+
 Despite improved design-invariant properties on stability
 and convergence compared to \ac{rmp}, the tuning of \ac{fabrics} requires some
 intuition that usually comes from experience. We aimed to
@@ -267,13 +276,16 @@ Especially considering the success of learning-based methods
 in other fields. Therefore, we argue that \ac{fabrics}
 should be seen as a compact, yet rich, encoding of
 \ac{tg} that serves only as the building structure for
-nuanced, learned behaviors. Be ensuring that deep neural
+nuanced, learned behaviors. By ensuring that deep neural
 networks exhibit the properties required by the theory of 
 \ac{fabrics}, arbitrarily complex behaviors can be
 constructed and importantly combined into a single policy.
 This approach has been experienced with in \cite{xie2023neural}
 and in \cref{cha:rss_24} of this thesis.
-% Geometric algebra
+
+\paragraph{Geometric algebra}
+\label{par:discussion_geometric_algebra}
+
 When putting a method into the context of geometric
 interpretation, it is natural to ask whether other
 mathematical concepts can be applied to the problem.
@@ -294,6 +306,48 @@ compact understanding of attractors, and from a practical
 point of view, it reduces the amount of parameters required.
 Future research in \ac{fabrics} should therefore consider
 the integration of higher order geometric algebras.
+
+\paragraph{Fabrics in the context of sampling intensive methods}
+\label{par:discussion_sampling_methods}
+
+In this thesis, we used \ac{fabrics} as a standalone method for \ac{tg}, but we
+argue that the compact encoding as a dynamical system can be deployed as a
+nuanced low-level controller \cite{ratliff2023fabrics,vanwyk2024geometric}.
+That interpretation offers a direct integration with methods that are based on 
+intensive sampling for either learning or online-sampling.
+% example safety filter
+For one
+example, \ac{fabrics} can be used as a safety filter during training and/or
+during testing. Acting as a filter, \ac{fabrics} can ensure that joint limits
+are respecting, self-collision is avoided and that action spaces defined in task
+spaces is tracking in joint space. Especially the latter is a common assumption
+for reinforcement-learning agents, see
+\cref{hansen2020self,hansen2021generalization} for examples. In this setting,
+\ac{fabrics} replace the simplistic low-level controller that is already
+needed to track end-effector actions.
+% example learning attractor
+Similar to goal definitions in higher-order algebras, see
+\cref{par:discussion_geometric_algebra}, goal attraction and/or damping in the final
+policy equation 
+\[
+  \M\qddot + \f + \der{\q}{\forc} + \mat{B}\qdot = 0
+\]
+could be computed based on visuals inputs, such as images or point clouds. By
+doing so complex behaviors can be achieved without the need for hand-crafting
+complicated objectives. This direction of research has already been experiented
+with in \cite{vanwyk2024geometric}.
+% sampling to exploit cheap forward computations
+Finally, the low computational costs of \ac{fabrics} can be exploited for
+forward rollouts in sampling-based methods. The approach of forward rollouts is
+often used when objectives are non-convex or gradients are unknown. Then
+sampling is benificial and can lead to high-quality trajectories, see
+\cref{Pezzato2023sampling}. In this context, \ac{fabrics} can be used as an
+initial guess to form the mean of the sampling distribution. Potentially, that
+can lead to a reduced sample size. Similarly, pure \ac{fabrics} policies can be
+used to generate non-optimal trajectories for various tasks that are
+subsequently used for training.
+
+  
 
 
 \input{src/conclusion/considerations}
