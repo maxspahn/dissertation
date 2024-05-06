@@ -162,6 +162,8 @@
 % Commenting
 \definecolor{OliveGreen}{rgb}{0,0.6,0}
 \definecolor{Blue}{rgb}{0,0,1}
+\definecolor{Part1Color}{rgb}{0.906,0.478,0.486}
+\definecolor{Part2Color}{rgb}{0.41176471, 0.83137255,0.7372549}
 \newcommand{\MS}[1]{\textbf{{\color{OliveGreen}{{#1}}}}} % Max Answers
 \newcommand{\added}[1]{{\color{Blue}{{#1}}}} % added text
 
@@ -257,8 +259,8 @@
 %  {\end{minipage}
 %}
 
-\newenvironment{textbox}[1]
-  {\begin{tcolorbox}[colback=tudelft-cyan!50!white,colframe=tudelft-cyan,title=#1]}
+\newenvironment{textbox}[2]
+  {\begin{tcolorbox}[colback=#1!20!white,colframe=#1,title=\textbf{#2}]}
   {\end{tcolorbox}}
 
 \newtheoremstyle{spaced}

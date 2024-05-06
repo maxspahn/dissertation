@@ -27,7 +27,7 @@ corresponding field of robotics today is disappointing,
 especially in an era where the non-embodied counterpart,
 i.e. speech recognition \cite{radford2023robust},
 text generation \cite{hoffmann2022training},
-and computer vision \MS{reference}, is
+and computer vision \cite{voulodimos2018deep}, is
 touching all of our lives. Specifically, strides in natural
 language processing and computer vision have significantly
 improved in the recent past and may rather sooner than later
@@ -288,22 +288,23 @@ success of \ac{mpc} in the field of autonomous driving and
 mobile robotics, we explore how this method can be adapted
 to mobile manipulation. 
 %
-\begin{textbox}{Part1: \acl{mpc}}
+\begin{textbox}{Part1Color}{Part 1: \acl{mpc}}
   As manipulators and even more so mobile manipulators are
   characterized by a high number of degrees of freedom, this
-  thesis investigates how \ac{mpc} must be adapted and how
-  it performs to geometric methods.
+  thesis investigates how \ac{mpc} formulations known from
+  autonomous driving must be adapted and how
+  it performs in comparison to geometric methods.
 \end{textbox}
 %
 
 As the results from the first part reveal that \ac{mpc} is 
 not competitive in terms of reactivity and computational
-coss, the second, and main part, of this thesis focuses on
+costs, the second, and main part, of this thesis focuses on
 geometric methods. Specifically, we study the framework
 of \acl{fabrics} and its suitability for mobile manipulation
 in dynamic environments.
 %
-\begin{textbox}{Part2: \acl{fabrics}}
+\begin{textbox}{Part2Color}{Part 2: \acl{fabrics}}
   The main part of this thesis is dedicated to the
   exploration of the geometric framework of \ac{fabrics} for
   mobile manipulation in dynamic environments. In that
@@ -318,7 +319,7 @@ contributions are made in this thesis.
 
 \paragraph{Mobile manipulation through \ac{mpc}}
 \cref{cha:icra_21} presents an \ac{mpc} formulation for a
-mobile manipulator. The presented method proposes to cope
+whole-body mobile manipulation. The presented method proposes to cope
 with poor scaling in the number of collision constraints, by
 using the concept of \acf{fsd}. This method achieves a
 control frequency of 10Hz \textit{independent} on the amount

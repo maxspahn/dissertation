@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'src/introduction/img/visual_outline.pdf' (pdf, eps, ps)
+%% Accompanies image file 'visual_outline.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{358.70981035bp}%
+    \setlength{\unitlength}{358.70961335bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,44 +50,44 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.5814548)%
+  \begin{picture}(1,0.62745333)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0.09801402,0.9321254){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.72495211\unitlength}\raggedright \end{minipage}}}%
-    \put(-0.00683036,1.18937358){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.86414684\unitlength}\raggedright \end{minipage}}}%
-    \put(0.11042255,0.5744407){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.79974116\unitlength}\raggedright \end{minipage}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.10283675,0.54830832){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:intro}}\end{tabular}}}}%
-    \put(0.09583534,0.51532584){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Introduction\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.22557132,0.44813594){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}MPC\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.26633282,0.39737821){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:icra_21}}\end{tabular}}}}%
-    \put(0.22989853,0.36439572){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Whole-Body MPC\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.43080102,0.54831585){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:background}}\end{tabular}}}}%
-    \put(0.42381375,0.51530477){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Background\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.75707609,0.54831623){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:state}}\end{tabular}}}}%
-    \put(0.75007468,0.51530366){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Related Works\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=6]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.59345504,0.06217932){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:conclusion}}\end{tabular}}}}%
-    \put(0.59464338,0.0291968){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Conclusion\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=7]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.10284901,0.22841187){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:tro_23}}\end{tabular}}}}%
-    \put(0.06824624,0.19542938){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dynamic Fabrics\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=8]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.42964984,0.2284194){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:icra_23}}\end{tabular}}}}%
-    \put(0.39393714,0.19540832){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Symbolic Fabrics\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=9]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.75721094,0.2284198){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:ral_24}}\end{tabular}}}}%
-    \put(0.73895088,0.19540721){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Environments\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=10]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.05512599,0.28291935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Optimization Fabrics\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=11]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.26631084,0.06284597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:rss_24}}\end{tabular}}}}%
-    \put(0.25773518,0.02986345){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Retail-Demo\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=12]{src/introduction/img/visual_outline.pdf}}%
-    \put(0.2253472,0.11674559){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Real World\end{tabular}}}}%
+    \put(0.09801353,0.97812412){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.72495251\unitlength}\raggedright \end{minipage}}}%
+    \put(-0.00683091,1.23537244){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.86414731\unitlength}\raggedright \end{minipage}}}%
+    \put(0.11042206,0.62043922){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.7997416\unitlength}\raggedright \end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{visual_outline.pdf}}%
+    \put(0.10283625,0.59430683){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:intro}}\end{tabular}}}}%
+    \put(0.09583484,0.56132433){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Introduction\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{visual_outline.pdf}}%
+    \put(0.2255709,0.49413439){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Part 1: MPC\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{visual_outline.pdf}}%
+    \put(0.26633242,0.44337664){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:icra_21}}\end{tabular}}}}%
+    \put(0.22989811,0.41039413){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Whole-Body MPC\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{visual_outline.pdf}}%
+    \put(0.43080071,0.59431436){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:background}}\end{tabular}}}}%
+    \put(0.42381343,0.56130326){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Background\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{visual_outline.pdf}}%
+    \put(0.75707596,0.59431474){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:state}}\end{tabular}}}}%
+    \put(0.75007454,0.56130215){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Related Works\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{visual_outline.pdf}}%
+    \put(0.59345482,0.06217935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:conclusion}}\end{tabular}}}}%
+    \put(0.59464316,0.02919681){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Conclusion\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{visual_outline.pdf}}%
+    \put(0.10284851,0.27248206){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:tro_23}}\end{tabular}}}}%
+    \put(0.06824573,0.24210188){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dynamic Fabrics\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{visual_outline.pdf}}%
+    \put(0.42964949,0.27248209){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:icra_23}}\end{tabular}}}}%
+    \put(0.3939368,0.24179439){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Symbolic Fabrics\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{visual_outline.pdf}}%
+    \put(0.75721074,0.27248206){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:ral_24}}\end{tabular}}}}%
+    \put(0.72377795,0.24191273){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Environment\\Representations\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{visual_outline.pdf}}%
+    \put(0.05512548,0.32891772){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Part 2: Fabrics\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{visual_outline.pdf}}%
+    \put(0.26631044,0.06284601){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\cref{cha:rss_24}}\end{tabular}}}}%
+    \put(0.25773477,0.02986347){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Retail-Demo\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{visual_outline.pdf}}%
+    \put(0.22534678,0.11674565){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Real World\end{tabular}}}}%
   \end{picture}%
 \endgroup%
