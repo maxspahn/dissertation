@@ -1,6 +1,7 @@
 \section{System overview}
 
-We briefly introduce the considered supermarket setting and detail our order-picking pipeline and system components.
+We briefly introduce the considered supermarket setting and
+detail our order picking pipeline and system components.
 
 \subsection{Considered supermarket setting}
 
@@ -12,14 +13,14 @@ in the store. In our demonstration, we assume that the robot
 can access this database to inform its decision. The large
 variety of products usually requires specialized grasping
 strategies per category, e.g., grasping tomatoes is
-different from grasping a large soft-drink bottle. We focus
+different from grasping a large soft\hyp{}drink bottle. We focus
 on a subset of products that can be picked with the suction
 gripper of our robot (see hardware design in
 \cref{sec:hardware}), e.g., cans, milk boxes, bottles, or
 bags of crisps (see \cref{fig:product_examples}). The masses
 of products range from 100g (instant food mixes) to 1.5 kg
-(soft-drink bottle) and the size are between 10 cm (cans)
-and 30 cm (soft-drink bottle). We assume that products to
+(soft\hyp{}drink bottle) and the size are between 10 cm (cans)
+and 30 cm (soft\hyp{}drink bottle). We assume that products to
 pick are visible, accessible from the shelf's front and in the robot's workspace.
 \begin{figure}[t]
   \centering
@@ -45,18 +46,19 @@ pick are visible, accessible from the shelf's front and in the robot's workspace
 \end{figure}
 
 %Moreover, in the interest of bridging the gap between robotics research and applications on the market, achieving high reliability for a part of all products is assumed to be favorable. Besides, 
-For in-store picking, we focus on picking products during opening-hours and favor reliability over execution speed. 
+For in\hyp{}store picking, we focus on picking products
+during opening\hyp{}hours and favor reliability over execution speed. 
 %, because warehouse automation is already being tackled by redesigning the interior making collaborative robots obsolete
 %in such environments. Based on this focus, we generally favor reliability over execution speed. 
 
 \input{src/24-spahn-rss/src/hardware}
 
-\subsection{Order-picking overview}
+\subsection{Order\hyp{}picking overview}
 \label{sec:order_system_overview}
 
 
 
-\begin{figure*}[h]
+\begin{figure*}[ht]
   \centering
   \begin{subfigure}[b]{0.18\linewidth}
     \centering
@@ -90,7 +92,7 @@ For in-store picking, we focus on picking products during opening-hours and favo
 
 %A static sequence of tasks for order-picking in supermarkets can roughly be described as follows.
 %
-The high-level overview of our order-picking system is
+The high\hyp{}level overview of our order\hyp{}picking system is
 illustrated in \cref{fig:flow}.
 Customers first place an order via the order placement website. 
 The robot processes the order into a task assignment. 
@@ -103,7 +105,7 @@ When the order is completed, the customer can pick up the order from the robot.
 
 \subsection{System components}
 
-We used the order-picking sequence in \cref{sec:order_system_overview} to guide our system development, while focusing on adaptiveness to recover from failure and inaccuracies in perception. 
+We used the order\hyp{}picking sequence in \cref{sec:order_system_overview} to guide our system development, while focusing on adaptiveness to recover from failure and inaccuracies in perception. 
 In the following, we outline the main
 system components that are visualized in \cref{fig:software_overview} and can be grouped in: 
 \begin{figure}[t]
@@ -114,7 +116,7 @@ system components that are visualized in \cref{fig:software_overview} and can be
   \label{fig:software_overview}
 \end{figure}
 %The overview of our system components is visualized in. 
-(a) task planner, (b) motion planners, (c) low-level controllers, and (d) perception.
+(a) task planner, (b) motion planners, (c) low\hyp{}level controllers, and (d) perception.
 
 
 After receiving the customer order, the task planner (see
@@ -136,7 +138,7 @@ by the motion planning and control components (see
 \cref{sec:trajectory_generation}). Motion planning is
 decomposed into path planning and online trajectory
 optimization for the base and reactive trajectory generation
-for the arm, augmented with a pseudo-prismatic joint on the
+for the arm, augmented with a pseudo\hyp{}prismatic joint on the
 base, see \cref{sec:trajectory_generation}. Lastly, the
 perception component (see \cref{sec:perception}) takes care
 of item detection and classification and provides item poses

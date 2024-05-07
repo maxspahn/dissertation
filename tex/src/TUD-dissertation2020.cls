@@ -14,6 +14,7 @@
 \RequirePackage{amssymb}
 %% English is the default language, but Dutch is used for some sections.
 \RequirePackage[dutch,english]{babel}
+\RequirePackage{csquotes}
 \RequirePackage{calc}
 \RequirePackage[footnotesize]{caption}
 \RequirePackage{etaremune}

@@ -2,11 +2,11 @@
 \label{sub:experiment_5_mobile_manipulators}
 
 In the final experiment, we assess the applicability of \ac{sf} and \ac{df} to a 
-non-holonomic mobile manipulator. In an environment that is densely occluded by obstacles,
+non\hyp{}holonomic mobile manipulator. In an environment that is densely occluded by obstacles,
 the motion planning problem is defined by a desired end-effector position and additional
 path constraints (e.g. desired orientation of the end-effector).
 \paragraph{Simulation}
-In simulation, we evaluate the performance of our extension to non-holonomic
+In simulation, we evaluate the performance of our extension to non\hyp{}holonomic
 mobile manipulators with \ac{sf}. In this series, the positions of 8 obstacles
 are randomized for $N=50$ cases. The workspace was limited to a
 7mx7m square, so that random obstacles are ensured to be actually hindering the
@@ -17,7 +17,7 @@ benefit, \cref{fig:experiment5_simAlbert_results}. In this series, there were
 to the previous experiments, caused by local minima. Local minima are more
 likely for mobile manipulators as their workspace is larger.
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{1.0\linewidth}
     \centering
@@ -40,14 +40,14 @@ likely for mobile manipulators as their workspace is larger.
     \includegraphics[angle=-90,width=\textwidth]{4_non_holonomic/simAlbert/success}
   \end{subfigure}
   \caption{Quantitative results with static fabrics for a 
-    non-holonomic mobile manipulator in simulation. Fabrics solve planning problems in
+    non\hyp{}holonomic mobile manipulator in simulation. Fabrics solve planning problems in
     randomized environments in low planning time. This allows whole-body control and highly
     reactive behavior.
   }%
   \label{fig:experiment5_simAlbert_results}
 \end{figure}
 %
-Combining our contributions, \ac{df} and the extension to non-holonomic robots, we
+Combining our contributions, \ac{df} and the extension to non\hyp{}holonomic robots, we
 achieve reactive and safe behavior in dynamic environments. Moving obstacles are avoided in a natural way
 using our method, see \cref{fig:albert_moving_obstacles}.
 %
@@ -87,7 +87,7 @@ using our method, see \cref{fig:albert_moving_obstacles}.
 \end{figure*}
 %
 \paragraph{Real-World}
-We present qualitative results for a non-holonomic mobile manipulator using \ac{df}.
+We present qualitative results for a non\hyp{}holonomic mobile manipulator using \ac{df}.
 In \cref{fig:albert_spline_example}, the robot follows a trajectory defined by a basic spline,
 while additionally respecting an orientation constraints on its end-effector and avoiding
 the shelves and an obstacle on the ground. The end-effector trajectory is plotted in \cref{fig:albert_spline_trajectory}.
@@ -96,14 +96,14 @@ the shelves and an obstacle on the ground. The end-effector trajectory is plotte
     \centering
     \includegraphics[width=0.9\linewidth]{4_non_holonomic/realAlbert/trajectory}
     \caption{Real-world experiment for path following with a mobile manipulator. The global path can be tracked
-        accurately by \ac{df} including the extension to non-holonomic robots. The scene 
+        accurately by \ac{df} including the extension to non\hyp{}holonomic robots. The scene 
         is visualized in \cref{fig:albert_spline_example}.}
     \label{fig:albert_spline_trajectory}
 \end{figure}
 %
 \iffalse
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\linewidth]{4_non_holonomic/realAlbert/motion_in_frame}
   \caption{Trajectory following with mobile manipulator. \MS{This needs to be redone \ldots}}%

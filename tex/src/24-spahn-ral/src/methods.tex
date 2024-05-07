@@ -1,5 +1,5 @@
 \section{Methods}
-\label{sec:methods}
+\label{sec:ral24_methods}
 
 As this work does not alter the fundamental principles of
 \ac{fabrics}, this section focuses on the integration of
@@ -25,7 +25,7 @@ the closest obstacle of the environment is assigned to each voxel in the grid.
 In this work, we are addressing dynamic environments, so the \ac{sdf} changes
 over time, see \cref{fig:sdf} for a two-dimensional example.
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{0.25\linewidth}
     \centering
@@ -91,7 +91,7 @@ distance field can be used and does not require extra computation.
 \subsection{Free Space Decomposition}
 \label{sub:Free Space Decomposition}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{0.33\linewidth}
     \centering
@@ -182,8 +182,8 @@ explain how raw lidar sensor data can be used with optimization \ac{fabrics}.
 The same approach can be used to directly integrate pointclouds or occupancy
 grids.
 
-We assume that a sensor in question outputs a set of $n_{\textrm{points}}$
-points \pointcloud{} in the robot's workspace. For example, a two-dimensional
+We assume that a sensor outputs a set of $n_{\textrm{points}}$
+points \pointcloud{} in the robot`s workspace. For example, a two-dimensional
 lidar sensor produces $n_{\textrm{points}}=resolution_{lidar}$ points
 $\pointcloud_{\textrm{lidar}}$. We integrate this data directly into
 optimization \ac{fabrics} by placing a virtual, spherical obstacle at each $\point

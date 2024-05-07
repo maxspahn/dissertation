@@ -43,7 +43,7 @@ This thesis focuses on the reactive end of the scale, and
 therefore we will only give a brief overview of global path
 planning methods. 
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \input{src/state/img/reactivity_scale.pdf_tex}
   \caption{Reactivity scale of different motion planning methods
@@ -116,7 +116,7 @@ to integrate moving and static obstacles
 
 The method of \ac{apf} was also used for \ac{tg} of mobile
 robots after its introduction for robotic arms.
-For non-holonomic mobile robots, it was shown that \ac{apf}
+For non\hyp{}holonomic mobile robots, it was shown that \ac{apf}
 generally exhibits multiple equilibrium points which are not
 necessarily stable \cite{urakubo2018stability}.
 Different to \ac{apf}, the dynamic window approach
@@ -130,7 +130,7 @@ navigation policy for the robot.  Yet, Social Forces and its
 variants rely on handcrafted functions limiting their
 ability to handle more complex navigation scenarios. To deal
 with many agents, \textit{ORCA} was proposed in
-\cite{VanDenBerg2011} and later extended for non-holonomic
+\cite{VanDenBerg2011} and later extended for non\hyp{}holonomic
 bases in \cite{Alonso-Mora2012a}.
 
 
@@ -186,13 +186,13 @@ control~\cite{Khatib1987}. The resulting behavior of
 intuitive while keeping computational costs low~\cite{Ratliff2018}. The concept
 of \ac{rmp} was used in~\cite{Cheng2020,Cheng2020a} to form RMP-Flow, a motion
 planning algorithm that is shown to be conditionally stable and invariant
-across robots. An \ac{rmp} adaptation was proposed for non-holonomic robots
+across robots. An \ac{rmp} adaptation was proposed for non\hyp{}holonomic robots
 in~\cite{Meng2019}. By incorporating the kinematic constraint into the root
-equation of the \ac{rmp}, the computed policy is applicable to non-holonomic robots.
+equation of the \ac{rmp}, the computed policy is applicable to non\hyp{}holonomic robots.
 Besides, that work proposed a neural net to learn the collision avoidance task
 components. 
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{0.33\linewidth}
     \centering
@@ -335,7 +335,7 @@ runtime \cite{carron2019data}.
 In the context of mobile manipulation, less research focused on collision
 avoidance in dynamic environments, including changing scenes and moving
 obstacles. A real-time controller using MPC was presented in \cite{Ide2011}, in
-which either a holonomic or a non-holonomic base was combined with a
+which either a holonomic or a non\hyp{}holonomic base was combined with a
 two-degree-of-freedom robotic arm mounted onto the base. Although hardware
 constraints were respected, no collision avoidance was considered.  An MPC
 formulation for mobile manipulators with holonomic bases that allows collision
@@ -344,7 +344,7 @@ translated into a set of spheres to be respected by the MPC scheme. The proposed
 approach used dynamically changing weights to change between arm motion and
 locomotion, resulting in a locked arm during navigation. A different weight
 setting was used to perform motion underneath a horizontal bar with an a priori
-position. The work is extended to non-holonomic bases and includes object
+position. The work is extended to non\hyp{}holonomic bases and includes object
 detection in moving underneath the horizontal bar \cite{Avanzini2018}. 
 
 

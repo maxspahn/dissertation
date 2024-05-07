@@ -1,5 +1,5 @@
 \section{Validation}
-\label{sec:results}
+\label{sec:rss24_results}
 
 To evaluate the performance and how well our robot adapts, we validated our robot in picking customer orders in two realistic environments.
 Our driving validation questions were:
@@ -49,17 +49,34 @@ We prepared one full day in this store to validate our system, including creatin
     failure.
     }
     \label{tab:recoveries}
-    \begin{tabular}{c|ccc|ccc|ccc}
+    \begin{tabular}{c|ccc}
         \toprule
-         & \multicolumn{3}{c}{AIP-goal} &
-        \multicolumn{3}{c}{picking} &
-        \multicolumn{3}{c}{placing} \\
+         & \multicolumn{3}{c}{AIP-goal} \\
         \midrule
-        & attempted & succeeded & recovered & attempted & succeeded & recovered & attempted & succeeded & recovered \\
+        & attempted & succeeded & recovered \\
         %\hline
-        AIRLab & 81 & 50 & 9 & 65 & 45 & 9 & 46 & 43 & 2 \\
-        Realistic store & 151 &  90 & 26 & 153 & 98 & 25 &
-        91 & 90 & 6 \\
+        AIRLab & 81 & 50 & 9 \\
+        Realistic store & 151 &  90 & 26 \\
+        \bottomrule
+    \end{tabular}   
+    \begin{tabular}{c|ccc}
+        \toprule
+        & \multicolumn{3}{c}{picking} \\
+        \midrule
+        & attempted & succeeded & recovered \\
+        %\hline
+        AIRLab &  65 & 45 & 9 \\
+        Realistic store & 153 & 98 & 25 \\
+        \bottomrule
+    \end{tabular}   
+    \begin{tabular}{c|ccc}
+        \toprule
+        & \multicolumn{3}{c}{placing} \\
+        \midrule
+        & attempted & succeeded & recovered \\
+        %\hline
+        AIRLab &  46 & 43 & 2 \\
+        Realistic store 91 & 90 & 6 \\
         \bottomrule
     \end{tabular}   
 \end{table*}
@@ -97,7 +114,7 @@ more capable teleoperation setups, see for example
 might substantially
 outperform the autonomous mode.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \includesvg[width=0.9\linewidth]{teleoperation}
   \caption{Execution times for the combination
@@ -209,7 +226,7 @@ developed for the robot.
 \paragraph{Task plan level} The \ac{bt} structure with pre-defined recoveries retries a subgoal, e.g., getting an item into the basket, up to three times when it fails. This ensures a reasonable trade-off of reliability and performance, e.g., most of the time the second attempt to pick and item was enough. If the third attempt fails, most likely, the item can not be grasped. This heuristic is computationally simple and easily adjusts to new items, e.g., allowing more attempts for incredibly challenging items.
 \begin{table*}[t]
     \centering
-    \begin{tabular}{p{5.5cm}p{11cm}}
+    \begin{tabular}{p{0.3\linewidth}p{0.6\linewidth}}
         \toprule
         Failure case & Potential causes \\
         \midrule

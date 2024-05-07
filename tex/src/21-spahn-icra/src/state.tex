@@ -31,7 +31,7 @@ the human navigation behavior and using it as navigation policy for the
 robot..  Yet, Social Forces and its variants rely on handcrafted functions
 limiting their ability to handle more complex navigation scenarios. To deal
 with a large number of agents, \textit{ORCA} was proposed in
-\cite{VanDenBerg2011} and later extended for non-holonomic bases in
+\cite{VanDenBerg2011} and later extended for non\hyp{}holonomic bases in
 \cite{Alonso-Mora2012a}. However, these approaches demonstrate highly reactive
 behaviors because they only consider one step look-ahead predictions. MPC
 schemes were proposed for mobile robots and autonomous vehicles in
@@ -56,7 +56,7 @@ opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way
 In the context of mobile manipulation, less research focused on collision
 avoidance in dynamic environments, including changing scenes and moving
 obstacles. A real-time controller using MPC was presented in \cite{Ide2011}, in
-which either a holonomic or a non-holonomic base was combined with a
+which either a holonomic or a non\hyp{}holonomic base was combined with a
 two-degree-of-freedom robotic arm mounted onto the base. Although hardware
 constraints were respected, no collision avoidance was considered.  An MPC
 formulation for mobile manipulators with holonomic bases that allows collision
@@ -65,5 +65,5 @@ translated into a set of spheres to be respected by the MPC scheme. The proposed
 approach used dynamically changing weights to change between arm motion and
 locomotion, resulting in a locked arm during navigation. A different weight
 setting was used to perform motion underneath a horizontal bar with an a priori
-position. The work is extended to non-holonomic bases and includes object
+position. The work is extended to non\hyp{}holonomic bases and includes object
 detection in moving underneath the horizontal bar \cite{Avanzini2018}. 

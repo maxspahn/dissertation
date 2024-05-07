@@ -1,25 +1,22 @@
 \section{Experimental results}%
-\label{sec:experimental_results}
+\label{sec:tro23_experimental_results}
 %
-\begin{figure*}[h]
+\begin{figure*}[ht]
   \centering
   \begin{subfigure}{0.33\linewidth}
     \centering
     \includegraphics[width=0.9\textwidth]{3_moving_obstacles/realPanda/dynamic_fabrics_optitrack_1.png}
     \caption{$t=0$s}%
-    \label{subfig:experiment3_realPanda_example_1}
   \end{subfigure}%
   \begin{subfigure}{0.33\linewidth}
     \centering
     \includegraphics[width=0.9\textwidth]{3_moving_obstacles/realPanda/dynamic_fabrics_optitrack_2.png}
     \caption{$t=2$s}%
-    \label{subfig:experiment3_realPanda_example_1}
   \end{subfigure}%
   \begin{subfigure}{0.33\linewidth}
     \centering
     \includegraphics[width=0.9\textwidth]{3_moving_obstacles/realPanda/dynamic_fabrics_optitrack_3.png}
     \caption{$t=3$s}
-    \label{subfig:experiment3_realPanda_example_1}
   \end{subfigure}%
   \caption{\acl{df} in the presence of a human. The human hand's state is estimated with a motion capture
     system. The robot smoothly and in advance avoids the human operator and allows for safe coexistence.
@@ -42,7 +39,7 @@ optimization, we compare the performance of an \ac{mpc} formulation, adapted
 from~\cite{Spahn2021}, with \ac{sf}, as proposed in~\cite{Ratliff2020}.  The
 second experiment compares performance between \ac{sf} and \ac{df} for
 trajectory following tasks. In the third experiment, moving obstacles are added
-to the scene to form a dynamic environment. Our extension to non-holonomic
+to the scene to form a dynamic environment. Our extension to non\hyp{}holonomic
 systems is tested in the fourth experiment. Then, everything is combined in
 an experiment with a differential drive mobile manipulator.
 Finally, we present a possible application of a robot sharing the environment

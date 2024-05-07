@@ -1,13 +1,13 @@
 \section{Extension to non-Holonomic Constraints}%
 \label{sec:non_holonomic_constraints}
 %
-Mobile manipulators are often equipped with a non-holonomic base (e.g., a
+Mobile manipulators are often equipped with a non\hyp{}holonomic base (e.g., a
 differential drive mobile robot). In contrast to revolute joints for
-manipulators, non-holonomic bases imply non-holonomic constraints. Based on
+manipulators, non\hyp{}holonomic bases imply non\hyp{}holonomic constraints. Based on
 ideas presented in \cite{Meng2019}, we propose a method to integrate such
 constraints in optimization fabrics, including \ac{df}.
 
-We assume that the non-holonomic constraint at hand can be expressed as an
+We assume that the non\hyp{}holonomic constraint at hand can be expressed as an
 equality of form
 \begin{equation}
   \xdot = \Jnh\qdot,
@@ -31,7 +31,7 @@ expressed in its root-coordinates of form $\M\xddot + \f = 0$ with its solution 
   \label{eq:fabric_solution}
 \end{equation}
 Plugging Eq. \ref{eq:non_holonomic_constraint_derived} into the root
-fabric we obtain the non-holonomic fabric of form
+fabric we obtain the non\hyp{}holonomic fabric of form
 \begin{align*}
   \M\Jnh\qddot + \M\Jnhdot\qdot + \f & = 0 \\
   \Mnh\qddot + \fnh & = 0 \\.
@@ -54,9 +54,9 @@ This optimization problem replaces \cref{eq:fabric_solution} and is solved by
   \qddot^{\ast} = \pinv{\Mnh}\fnh.
 \end{equation}
 The solutions to this problem makes optimization fabrics, and thus dynamic fabrics,
-applicable to non-holonomic robots, such as differential drive robots or cars.
+applicable to non\hyp{}holonomic robots, such as differential drive robots or cars.
 A qualitative comparison between a trajectory generated for a holonomic
-and a non-holonomic robot is shown in \cref{fig:non_holonomic_trajectory}.
+and a non\hyp{}holonomic robot is shown in \cref{fig:non_holonomic_trajectory}.
 \begin{figure}
   \centering
   \begin{subfigure}{0.3\linewidth}
@@ -89,8 +89,8 @@ and a non-holonomic robot is shown in \cref{fig:non_holonomic_trajectory}.
     \includegraphics[width=0.95\textwidth]{4_non_holonomic/simBoxer/point_dynamic_fabrics_18_cropped.png}
     \caption{18s}
   \end{subfigure}%
-  \caption{Path (green) following with a holonomic and a non-holonomic robot using \ac{df} with the extension
-  to non-holonomic robots}
+  \caption{Path (green) following with a holonomic and a non\hyp{}holonomic robot using \ac{df} with the extension
+  to non\hyp{}holonomic robots}
   \label{fig:non_holonomic_trajectory}
 \end{figure}
 
@@ -101,7 +101,7 @@ The theory of optimization fabrics is built upon energy conservation of artifici
 that design the motion. \cref{eq:non_holonomic_fabrics} does not solve the
 resulting spec exactly, but minimizes the deviation according to the least square objective function.
 For many kinematic systems, e.g., differential drive model, bicycle model, the
-non-holonomic constraint additionally reduces the number of degrees of freedom, 
+non\hyp{}holonomic constraint additionally reduces the number of degrees of freedom, 
 $\dim{q} < \dim{x}$. As a consequence, the least square solution has a non-zero residuum.
 Then, some fundamental properties of optimization fabrics, such as energy
 conservation and convergence can no longer be guaranteed. Despite this theoretical

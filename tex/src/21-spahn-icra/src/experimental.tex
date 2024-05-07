@@ -57,7 +57,7 @@ generation. Two different step size were used over the time horizon, $\Delta t_1
   \end{tabular}
 \end{table}
 %
-\begin{table}[h]
+\begin{table}[ht]
   \centering
   \caption{Parameter Settings}
   \label{tab:parameters}
@@ -106,7 +106,7 @@ A horizontal bar is placed between the start and goal configuration. In contrast
 % Improved flexibility
 The advantage of whole-body optimization can be extracted when the horizontal bar is placed at a lower $z$-positions. In ~{Fig. \ref{fig:feasibility_issue}}, such a situation is visualized for $z=1.3$. In the visualized case, it is not possible to move underneath the bar with the sequenced approach. On the other hand, the coupled method can navigate safely avoiding collision by moving the arm into an extended position in which the absolute height is smaller than when having it folded.
 %
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \begin{subfigure}[b]{0.45\linewidth}
         \includegraphics[width=0.9\textwidth]{bar/adv_coupling.png}
@@ -120,7 +120,7 @@ The advantage of whole-body optimization can be extracted when the horizontal ba
     \label{fig:feasibility_issue}
 \end{figure}
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}[b]{0.32\linewidth}
     \includegraphics[width=1.0\textwidth]{bar/sequence_pic1.png}
@@ -162,10 +162,10 @@ generated obstacles, uniformly distributed on the intervals $x \in [2m, 5m], y \
 \begin{figure}[!t]
     \centering
     \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[height=0.9\linewidth]{randObst/infeasible1.png}
+        \includegraphics[height=0.85\linewidth]{randObst/infeasible1.png}
     \end{subfigure}
     \begin{subfigure}[b]{0.48\linewidth}
-        \includegraphics[height=0.9\linewidth]{randObst/infeasible2.png}
+        \includegraphics[height=0.85\linewidth]{randObst/infeasible2.png}
     \end{subfigure}
     \caption{Example for infeasible cases, that were excluded from the test set in randomized scenario.}
     \label{fig:infeasible}
@@ -178,14 +178,14 @@ generated obstacles, uniformly distributed on the intervals $x \in [2m, 5m], y \
   \label{fig:case_2_example}
 \end{figure}
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}[b]{0.45\linewidth}
-    \includegraphics[height=0.7\linewidth]{randObst/increase_solverTimes_spheres.png}
+    \includegraphics[height=0.65\linewidth]{randObst/increase_solverTimes_spheres.png}
     \caption{Obstacles as spheres}
   \end{subfigure}
   \begin{subfigure}[b]{0.45\linewidth}
-    \includegraphics[height=0.7\linewidth]{randObst/increase_solverTimes_convex.png}
+    \includegraphics[height=0.65\linewidth]{randObst/increase_solverTimes_convex.png}
     \caption{Convex regions}
   \end{subfigure}
   \caption{Comparison solver performance for an increasing number of obstacles.}%
@@ -218,7 +218,7 @@ Furthermore, parallelizing the locomotion and arm motion allows to reduce the me
 Here, we evaluate dynamic collision avoidance with a single moving obstacle for different obstacle's velocities. As dynamic object detection and velocity estimation are out of the scope of this work, the state of the obstacle is assumed to be known to the robot during the entire process. In Fig. \ref{fig:dynamic_case}, the experiment is visualized. The goal pose (light grey) is to be reached but a moving sphere, conflicting the goal, must be avoided at all time. 
 The proposed MPC formulation's reactivity is investigated using the clearing distance $d_{\textrm{clear}} = \min_i{\norm{\vp^{\textrm{dyn}} - \vp_{i}} - r_i - r_d^{\textrm{dyn}}}$ and the distance to target, $d_{\textrm{target}} = \norm{\vec{z}_{\textrm{des}} - \vec{z}}$, where $\vec{z}_{\textrm{des}}$ is composed of the desired base and arm configuration. Different velocities ($\vec{v}_d^{\textrm{dyn}}$) and different heights ($z_{\textrm{obs}}$) of the moving obstacles were investigated. Fig. \ref{fig:dynamic_distances} shows that our approach successfully avoids collision with dynamic obstacles when moving towards the goal. 
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
 %  \includegraphics[width=1.0\linewidth]{dynFig.png}
   \begin{subfigure}[b]{0.4\linewidth}
@@ -233,7 +233,7 @@ The proposed MPC formulation's reactivity is investigated using the clearing dis
   \label{fig:dynamic_distances}
 \end{figure}
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}[b]{0.23\linewidth}
     \includegraphics[width=1.0\textwidth]{dynamic/sequence_pic1.png}
@@ -258,7 +258,7 @@ The proposed MPC formulation's reactivity is investigated using the clearing dis
 \paragraph{Real-World Experiment}
 \label{par:real_world}
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}[b]{0.23\linewidth}
     \includegraphics[width=1.0\textwidth]{real/sequence_pic1.png}

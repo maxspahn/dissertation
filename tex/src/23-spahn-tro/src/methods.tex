@@ -1,5 +1,5 @@
 \section{Derivation of dynamic fabrics}%
-\label{sec:methods}
+\label{sec:tro23_methods}
 
 We extend the framework of optimization fabrics to \acf{df}.
 including
@@ -22,14 +22,16 @@ from \cite{Ratliff2020} and can then be extended from the procedure outlined in
 original procedure are highlighted in bold.
 
 \begin{enumerate}
-  \item Design path-consistent geometries in a suited, \textbf{time-parameterized} (\cref{def:dynamic_map}) manifold of the configuration
+  \item Design path\hyp{}consistent geometries in a suited,\newline
+    \textbf{time\hyp{}parameterized}
+    (\cref{def:dynamic_map}) manifold of the configuration
   \item Design corresponding Finsler energies defining the importance metric in this manifold.
   \item Energize all geometries with the associated Finsler energies.
-  \item \textbf{If necessary, pull back the energized system from the time-parameterized manifold into
+  \item \textbf{If necessary, pull back the energized system from the time\hyp{}parameterized manifold into
     the corresponding fixed manifold (\cref{eq:dynamic_pull})}.
   \item Pull back the energized system into the configuration space and combine it with
     all components using summation.
-  \item Force the system with a \textbf{time-parameterized} potential. As a composition of \ac{df}, 
+  \item Force the system with a \textbf{time\hyp{}parameterized} potential. As a composition of \ac{df}, 
     the resulting trajectory converges towards the potential's minimum (\cref{lem:dynamic_lagrangian_fabrics}).
 \end{enumerate}
 In the following, we explain our proposed changes to the framework of \ac{sf} so that it remains
@@ -59,7 +61,7 @@ coordinate system.
   \label{def:dynamic_map}
 \end{definition}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{0.5\linewidth}
     \centering
@@ -346,8 +348,9 @@ dynamically converging for short if the reference is clear from the context.
 Analogously to unbiased specs, we define dynamically unbiased specs (i.e., specs whose
 solutions do not diverge from the reference \xt{} when starting on the reference).
 \begin{definition}
-A spec is said to be \textit{dynamically unbiased} with respect to $\xt(t)$ if
-$\f(\x, \xdot) = -\M\xtddot$, for $\x(t) = \xt(t)$ and $\xdot(t) = \xtdot(t)$.
+A spec is said to be \textit{dynamically unbiased} with
+respect to $\xt(t)$ if\newline
+${\f(\x, \xdot) = -\M\xtddot}$, for $\x(t) = \xt(t)$ and $\xdot(t) = \xtdot(t)$.
 \end{definition}
 
 Beside being dynamically unbiased, some specs will converge to the reference trajectory
@@ -367,7 +370,8 @@ to a minimum of the forcing potential then forms a dynamic fabrics.
 A spec forms a \textit{dynamically rough fabric} if it is dynamically rough with respect
 to $\xt(t)$ when forced by a dynamic potential and 
 $\exists t_1 > 0$ such that $\forall t>t_1, \x(t)$ satisfies the
-Karush-Kuhn-Tucker (KKT) conditions for the optimization problem $\text{min}_{\x\in\X} \forc(\x,
+Karush-Kuhn-Tucker (KKT) conditions for the optimization problem\newline
+$\text{min}_{\x\in\X} \forc(\x,
 \xt(t))$. If a spec does not form a dynamically rough fabric but all its damped variants
 do, it forms a \textit{dynamically frictionless fabric}.
 \end{definition}
@@ -472,8 +476,9 @@ show convergence of the damped spec.
   \hd^{\forc}(\x) &= \hd + \forc \\
   &= \der{\xrdot}{\ld^T}\xrdot - \ld + \forc
 \end{align*}
-The time derivative is composed of the time derivative of the Hamiltonian, $\dot{\he} =
-\xrdot^T (\M_{\ld}\xrddot + \f_{\ld})$, and the time derivative of the forcing potential, 
+The time derivative is composed of the time derivative of the Hamiltonian,\newline
+$\dot{\he} = \xrdot^T (\M_{\ld}\xrddot + \f_{\ld})$,
+and the time derivative of the forcing potential, 
 $\dot{\forc} = \xdot^T\der{\x}{\forc} + \xtdot^T\der{\xt}{\forc}$.
 Thus, the system's total energy varies over time:
 \[
@@ -518,13 +523,13 @@ derive the algorithm using the formal findings in this section, see \cref{alg:mo
     Design geometry on $\X_i$: $\xddot_i + \h_{2,i} = \zerovec$ \\
     Design Finsler energy for behavior on $\X_i$: $\l_i$ \\
     Energize geometry with Finsler energy \ref{prop:dynamic_energization}\\
-    \If{\map{} is time-parameterized}{
+    \If{\map{} is time\hyp{}parameterized}{
       Apply dynamic pullback to energized system\\
     }
     Apply standard pullback\\
     Add pulled avoidance component to root fabric\\
   }
-  Force root system with (time-parameterized) potential\\
+  Force root system with (time\hyp{}parameterized) potential\\
   \caption{Motion design with dynamic fabrics}
   \label{alg:motion_design}
 \end{algorithm}

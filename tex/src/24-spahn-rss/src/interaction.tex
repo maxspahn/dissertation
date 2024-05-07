@@ -94,7 +94,7 @@ During trajectory playback, we loop through the recorded goals sequentially, con
 %manner. Proceeding to the subsequent trajectory point
 %requires that the current one has been reached up to a
 %desired accuracy. 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=1\linewidth]{trajectory_transformation.pdf}
   \caption{To generalize to different item poses, recorded
@@ -210,7 +210,10 @@ form $pr$:
     pr := \textit{action }~a~i~c,
 \end{equation*}
 where $c\in\{\texttt{running},\texttt{failed}, \texttt{completed}, \texttt{retry}\}$ is the status returned from the sub-tree.
-An example for a generated prompt is ``\textit{action }\texttt{picking }\texttt{Whole Milk }\texttt{retry}''.
+An example for a generated prompt is 
+\begin{center}
+``\textit{action }\texttt{picking }\texttt{Whole Milk }\texttt{retry}''.
+\end{center}
 
 
 \paragraph{Explanation generation}

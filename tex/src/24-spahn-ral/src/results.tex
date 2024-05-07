@@ -7,7 +7,7 @@ analysis of the different methods under noisy sensor data. In the real world,
 sensor data, but also the perception pipeline detecting obstacles and occupied
 voxels, produces sensor noise. In this section, we present quantative
 comparisons for three simulation environments, namely a holonomic ground robot,
-a non-holonomic ground robot and a robot manipulator. For all cases, we evaluate
+a non\hyp{}holonomic ground robot and a robot manipulator. For all cases, we evaluate
 50 cases with different noise levels $\sigma$. The noisy signal is generated
 using a Gaussian distrubtion centered around the unoisy sensor data. 
 The performance is measured 
@@ -57,7 +57,7 @@ increases computational costs, as observed in
 for a greater number of obstacles compared to the other methods.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{0.33\linewidth}
     \centering
@@ -82,7 +82,7 @@ for a greater number of obstacles compared to the other methods.
   \label{fig:point_robot_sim_success}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{0.5\linewidth}
     \centering
@@ -119,13 +119,13 @@ outcomes from receding horizon optimization techniques, such as those
 highlighted in \cite{Tordesillas2019}, applied to \ac{mpc} formulations
 involving drones.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{0.33\linewidth}
     \centering
     \includegraphics[width=1.0\textwidth]{panda_sim/success_Panda_00.eps}
     \caption{$\sigma = 0.0$}%
-    \label{subfig:point_robot_sim_sucess_noise_00}
+    \label{subfig:panda_sim_sucess_noise_00}
   \end{subfigure}%
   \begin{subfigure}{0.33\linewidth}
     \centering
@@ -144,7 +144,7 @@ involving drones.
   \label{fig:panda_sim_success}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{0.5\linewidth}
     \centering

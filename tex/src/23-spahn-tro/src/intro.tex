@@ -1,5 +1,5 @@
 \section{Introduction}%
-\label{sec:introduction}
+\label{sec:tro21_intro}
 
 Robots increasingly populate dynamic environments. 
 % Motivation
@@ -32,7 +32,7 @@ constraints, etc.), the transition function, defining the robot’s
 dynamics, and several inequality constraints, integrating physical limits and
 obstacle avoidance. 
 %
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{subfigure}{0.5\linewidth}
     \centering
@@ -47,7 +47,7 @@ obstacle avoidance.
     \label{subfig:albert_spline_2}
   \end{subfigure}%
   \caption{
-    Dynamic fabrics for path (green) following with a non-holonomic mobile
+    Dynamic fabrics for path (green) following with a non\hyp{}holonomic mobile
     manipulator. Dynamic fabrics control all actuators simultaneously to follow
     the end-effector path while keeping a given orientation and avoiding collision
     with the environment.
@@ -86,7 +86,7 @@ RMP-Flow~\cite{Cheng2020,Cheng2020a},
 have shown the power of designing reactive behavior as second-order
 differential equations. However, integration of dynamic features, such as
 moving obstacles and path following, have not been proposed
-nor have the framework been applied to non-holonomic systems.
+nor have the framework been applied to non\hyp{}holonomic systems.
 In this article, we exploit relative coordinate systems in the framework of
 optimization fabrics by introducing the dynamic pullback operation (\cref{eq:dynamic_pull}).
 This generalization 
@@ -95,7 +95,7 @@ We show that our generalization maintains
 guaranteed convergence for path following tasks and improves collision
 avoidance with moving obstacles.
 Moreover, we propose a method
-to incorporate non-holonomic constraints.
+to incorporate non\hyp{}holonomic constraints.
 Lastly, we compare a trajectory optimization formulation, namely a model
 predictive control formulation, with optimization fabrics to provide the reader
 with a better understanding of key differences between the two approaches.
@@ -115,7 +115,7 @@ summarized as:
     second-order predictor models. As a consequence, this enables the
     integration of moving obstacles and path following tasks
     , see \cref{fig:reference_trajectory}.
-  \item We extend the framework of optimization fabrics to non-holonomic robots.
+  \item We extend the framework of optimization fabrics to non\hyp{}holonomic robots.
   \item We present a quantitative comparison between model predictive control and
   optimization fabrics. The results reveal that fabrics are an order of magnitude faster,
   more reliable, and easier to tune for goal-reaching tasks with a robotic manipulator in
