@@ -151,10 +151,16 @@ interpreted as a measure of curvature on the optimization
 manifold. The tuple of metric and policy defines
 for each \textit{behavior} a dynamical system.
 Formulating \ac{tg} as a dynamical system is a widely used
-approach
-\cite{khansari2012dynamical,huber2023avoidance}, for which
-\ac{osc} \cite{Khatib1987a} and \ac{dmp}
-\cite{saveriano2023dynamic,ijspeert2013dynamical} are special cases \MS{???}.
+approach \cite{khansari2012dynamical,huber2023avoidance}.
+Similarly, \ac{dmp} formulate \ac{tg} as a known dynamical
+systems with convenient stability properties for which
+parameters can be learned or tuned
+\cite{saveriano2023dynamic,ijspeert2013dynamical}. The
+chosen dynamical systems are usally damped spring models
+(similar to \ac{ic}) and focus on attraction to the goal,
+\cite{perez2023stable}. When limited to damped spring models
+in one task space, \ac{dmp} ared reduced to \ac{osc}
+\cite{Khatib1987a}.
 %
 %Based on the findings of contracting metrics for non-linear
 %control design \cite{l2,l3}, geometric approaches design the motion
