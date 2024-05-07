@@ -1,0 +1,10 @@
+#! /bin/bash
+# src_files are all files passed as arguments except the last one
+src_files=${@:1:$#-1}
+# target directory is the last argument
+target_dir=${@: -1}
+
+echo "Copying files $src_files"
+echo "to $target_dir"
+
+cp $src_files $target_dir

@@ -4,19 +4,7 @@
 %\MW{We need still an appealing and convincing introduction. I think this is the best part for you to write. While doing this, you might want to look at the following section and remove all the repetitions in there.}
 
 
-Ageing has started to impact the labour markets profoundly,
-and robotic labour shortage relief is becoming a necessity
-in all
-industries~\cite{mcgrath2021report,astrov2021economies}.
-Yet, there are still surprisingly few robots operating
-outside of structured environments. To bring robots
-successfully to human-occupied environments, the main
-challenge still is handling human-instilled
-disturbances~\cite{rodriguez2021human}, e.g., misplaced
-products in shelves, newly added products, blocked aisles,
-or interactions from humans. Such disturbances should be
-handled adaptively, with little development effort and short
-response times for natural effective interaction. 
+Ageing has started to impact the labour markets profoundly, and robotic labour shortage relief is becoming a necessity in all industries~\cite{mcgrath2021report,astrov2021economies}. Yet, there are still surprisingly few robots operating outside of structured environments. To bring robots successfully to human-occupied environments, the main challenge still is handling human-instilled disturbances~\cite{rodriguez2021human}, e.g., misplaced products in shelves, newly added products, blocked aisles, or interactions from humans. Such disturbances should be handled adaptively, with little development effort and short response times for natural effective interaction. 
 Focusing on these challenges, this paper demonstrates a combination of two novel methods, one for adaptive decision making and one for rapid motion planning, embedded in a state-of-the-art integrated robot system. 
 
 The demonstrator is a mobile manipulator for order picking in realistic supermarkets, see \cref{fig:layouts}. %In the following, we explain how this demonstrator is rooted in a real need. 
@@ -29,7 +17,7 @@ The increase in online shopping  induces an equal decrease in store visits. Espe
   \caption{We validated our mobile manipulator in our AIRLab lab environment (shown here) and a realistic supermarket environment of a large Dutch retailer. %Robot Hardware used for in the demo in the two evaluated environments. 
   %The robot is
   %composed out of a differential-drive robotic base and a
-  %7-\ac{dof} robotic arm.}
+  %7-dof robotic arm.}
   }
   \label{fig:layouts}
 \end{figure}
@@ -39,38 +27,16 @@ The increase in online shopping  induces an equal decrease in store visits. Espe
 % To deploy autonomous robots in supermarkets with success, their operation in a
 % human-shared environment must be safe, 
 % fault-tolerant, and adaptive.
-In this work, we present our solution to mobile manipulation
+This work presents our mobile manipulation solution
 in human-shared environments that aims at being adaptive and fault-tolerant. %Doing so, 
-We  focus on three main questions that we argue are most 
-relevant when deploying robots in supermarkets:
+We focus on three main questions that are most 
+relevant when deploying robots in supermarkets: How can we
 
 \begin{enumerate}
-  \item How can we generate \emph{safe} and \emph{robust} trajectories for manipulation? % (safety, robustness)? %be robust, safe and easy to adapt by
+  \item generate \emph{safe} and \emph{robust} trajectories for manipulation? % (safety, robustness)? %be robust, safe and easy to adapt by
   %non-experts (ease-of-use)?
-  \item How can we ensure \emph{fault-tolerant} task planning and execution? % (fault-tolerance)? 
-  \item How can we easily \emph{adapt} the robot to pick new products? % (adaptability)?
+  \item ensure \emph{fault-tolerant} task planning and execution? % (fault-tolerance)? 
+  \item easily \emph{adapt} the robot to pick new products? % (adaptability)?
   %data-driven item detection be extended quickly (extendability)?
 \end{enumerate}
 Our solution addresses these questions with specific decisions on the robot's capabilities for decision-making, trajectory generation, and perception. Our contributions are thus an integrated system with adaptive decision-making, fast motion planning and easy-to-use teaching from demonstration. 
-
-%Each of these points is mainly effected by one component, decision making, trajectory generation and perception respectively. 
-% Thus, the motivational questions were the driver to our design decisions.
-
-% \subsection{Assumptions in the context of supermarkets}
-
-% Modern retails and supermarkets have access to a detailed information of all
-% products, this includes mass, geometry and location in the store. In this paper,
-% we assume that the robot can access this database to inform its decision.
-% Supermarkets are characterized by a large range of products, around 100.000
-% different products per store.  This work deliberately excludes
-%  products that require specialized grasping strategies or even specific hardware design in favor of reliability for the remaining products.
-% Moreover, in the interest of bridging the gap between robotics research and
-% applications on the market, achieving high reliability for a part of all
-% products is assumed to be favorable. Besides, we assume that products to
-% pick are visible from the front of the shelf. We explicitly focus on
-% in-store-picking during opening-hours, because warehouse automation is already
-% being tackled by redesigning the interior making collaborative robots obsolete
-% in such environments. Based on this focus, we generally favor reliability over
-% execution speed. 
-
-%To address these question we go through the different modules of our system \ref{sec:order_system_overview}. Chapter \ref{sec:decision_making} introduces our adaptive decision making solution. Chapter \ref{sec:trajectory_generation} covers we 

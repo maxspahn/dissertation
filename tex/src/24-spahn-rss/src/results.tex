@@ -35,112 +35,190 @@ AIRLab has OEM shelves and products.
 We used this environment to develop and validate our system during development.
 
 \paragraph{Realistic store}
-We also validated our robot in a realistic validation store of our Dutch retail partner that is used by their development teams for testing before moving into their real stores.  
-For confidentiality, we cannot show this store in the paper.
-The main differences to AIRLab are a larger number of products in the shelves that are also more densely packed.
+We also validated our robot in a realistic store layout of our Dutch retail partner, used by their development teams for testing before moving into their real stores.  
+For confidentiality, we cannot show this store.
+The main differences to AIRLab are a larger number of products in the shelves that are also more densely packed, similar to the real stores of our partner.
 Moreover, the shelves also contained product information tags. 
 We prepared one full day in this store to validate our system, including creating a map, scanning available products, and connecting to the product database.
-\begin{table}[b]
+\begin{table*}[t]
     \centering
-    \caption{Number of successful (suc.) and recovered (rec.) task goals and action attempts for picking and placing (the more complex actions). 
+    \caption{Number of attempted, succeeded and recovered
+    symbolic action attempts for picking and placing
+    (the more complex symbolic actions). Note, that a recovery is
+    defined as a successful execution of a symbolic action after a
+    failure.
     }
     \label{tab:recoveries}
-    \begin{tabular}{ccccccc}
+    \begin{tabular}{c|ccc|ccc|ccc}
         \toprule
-         & \multicolumn{2}{c}{AIP-goal} &
-        \multicolumn{2}{c}{picking} &
-        \multicolumn{2}{c}{placing} \\
+         & \multicolumn{3}{c}{AIP-goal} &
+        \multicolumn{3}{c}{picking} &
+        \multicolumn{3}{c}{placing} \\
         \midrule
-        & suc. & rec. & suc. & rec. & suc. & rec. \\
+        & attempted & succeeded & recovered & attempted & succeeded & recovered & attempted & succeeded & recovered \\
         %\hline
-        AIRLab & 50 & 9 & 45 & 9 & 43 & 2 \\
-        Realistic store & 90 & 26 & 98 & 25 & 90 & 6 \\
+        AIRLab & 81 & 50 & 9 & 65 & 45 & 9 & 46 & 43 & 2 \\
+        Realistic store & 151 &  90 & 26 & 153 & 98 & 25 &
+        91 & 90 & 6 \\
         \bottomrule
     \end{tabular}   
-\end{table}
-\subsection{Performance}
-Performance is  evaluated by success rate. Orders are
-divided into \textit{success}, i.e. the entire order was
-successfully collected and returned to the client, \textit{partial success}, i.e., at least one product was not collected and at least one was collected,
-and \textit{failure},
-i.e., no product was collected. Besides, we inform the reader
-about the failure reasons and the number of products a
-successful order contained. For each action, we 
-report execution times and how many 
-failures were recovered by the adaptive task assignment
-method, see \cref{tab:recoveries}.
+\end{table*}
+%
+\subsection{Comparison to teleoperated systems}
 
+A direct comparison to a human picker seems of little use as
+the current stage of the system is not competitive in terms
+of capabalities and speed to a human picker. Instead, 
+ we compare the autonomy of
+the picking strategy to a teleoperated version of it.
+The
+focus on the picking for this lies in its important
+contribution to the overall success rate and execution time,
+see \cref{fig:success_zandam}. For this study, the robot starts
+facing the shelf where the product is expected. The teleoperator
+has access to the camera image from the camera mounted on
+the end effector. Control is limited to Cartesian movements
+of the end effector, base forward motion and vacuum
+activation. Then, the teleoperator has access to the same controls
+available to the robot in autonomous mode. Therefore, the
+symbolic actions evaluated in this study are the
+\textit{look-for-a-product} and
+\textit{picking-of-a-product}. This limited study was
+performed for a subset of five different products from the
+set used in the demo stores. Teleoperation results in
+similar execution times than the autonomous mode, see
+\cref{fig:teleoperation}. This indicates that the 
+execution times is likely limited by the hardware setup,
+including sensors and actuators, and not by the modules
+responsible for the autonomous behavior. However, we acknowledge
+that the teleoperation study is limited in scope and that
+more capable teleoperation setups, see for example
+\cite{behnke202310},
+might substantially
+outperform the autonomous mode.
+
+\begin{figure}[h]
+  \centering
+  \includesvg[width=0.9\linewidth]{teleoperation}
+  \caption{Execution times for the combination
+  of \textit{look-for-a-product} and
+  \textit{picking-of-a-product} between teleoperation and 
+  autonomous mode.}
+  \label{fig:teleoperation}
+\end{figure}
+%
+\subsection{Performance}
+%
+Performance is evaluated by success rate and execution
+times. Orders are divided into \textit{success}, i.e. the
+entire order was successfully collected and returned to the
+client, \textit{partial success}, i.e., at least one product
+was not collected and at least one was collected, and
+\textit{failure}, i.e., no product was collected. This is
+visualized by the inner ring in
+\cref{fig:success_lab,fig:success_zandam}. We also
+inform about the failure reasons and the number
+of products a successful order contained (outer ring in
+\cref{fig:success_lab,fig:success_zandam}). For each
+symbolic action,
+we report execution times and how many failures were
+recovered by the adaptive task assignment method, see
+\cref{tab:recoveries}. As the symbolic action remains active
+throughout the entire treatment of one product, there lower
+bound is the sum of the execution times of the other
+symbolic actions.
 
 \subsection{Success rate and recoveries}
-
-
-
-% \subsection{Mock Store}
-% \label{sub:mock_store}
 
 Our evaluation in a lab-like environment reveals that we can
 achieve a success rate of about 60\% for few-items orders,
 see \cref{fig:success_lab}. Additionally, we observe that
-most failures are caused by the picking-action.
-In \cref{tab:recoveries}, we see that recoveries, i.e., a skill failed at least ones before it succeeded, were common. Thus, it shows that decision-making that is able to deal with disturbances is essential in this sort of application.
+most failures are caused during `picking'.
+In \cref{tab:recoveries}, we see that recoveries, i.e., a
+symbolic action failed at least ones before it succeeded, were common. Thus, it shows that decision-making that is able to deal with disturbances is essential in this sort of application.
 Investigating the 
-execution times, it can be seen that `picking' is also the action
+execution times, it can be seen that `picking' is also the
+symbolic action
 that takes most time in collecting an item, roughly $50$s on average between starting the grasp at its completion, 
 see \cref{fig:timings_lab}.
 \begin{figure}
-\begin{subfigure}[b]{0.5\linewidth}
+\begin{subfigure}[b]{1\linewidth}
     \centering
     \includesvg[width=\linewidth]{success_lab}
-    \caption{Success-rate across order sizes and failure causes ($N=10$).}
+    \caption{Success-rate across order sizes and failure causes.}
     \label{fig:success_lab}
   \end{subfigure}
-\begin{subfigure}[b]{0.5\linewidth}
+\begin{subfigure}[b]{1\linewidth}
     \centering%
-     \includesvg[width=1.0\linewidth]{timings_lab}
-    \caption{Execution times in seconds of actions ($N=67$).}
+     \includesvg[width=0.9\linewidth]{timings_lab}
+    \caption{Execution times of symbolic actions in seconds. Note
+    that symbolic actions remain active until the desired state,
+    i.e., product in basket, is reached or a failure occurs.
+    In that case, the symbolic action is re-attempted.}
     \label{fig:timings_lab}
   \end{subfigure}
-  \caption{Success-rate and action execution times in AIRLab environment.}
+  \caption{Success-rate and action execution times in AIRLab
+  environment. A total of $N=27$ were performed.}
 \end{figure}
 
-A remarkable property of our system is its reliability and fault tolerance at a very low computational cost. This relies on our multi-level approach to adaptability and recovery from disturbances and runtime uncertainties:
+A remarkable property of our system is its reliability and
+fault tolerance at a very low computational cost.
+Specifically, apart from the perception, all the components,
+including the decision-making and the trajectory generation,
+are running on the Intel NUC with an Intel Core i7-10710U, a
+low-power CPU that is roughly 80\% worse than the compute
+unit used in \cite{toyota2023} according to \url{www.cpubenchmark.net}.
+This
+relies on our multi-level approach to adaptability and
+recovery from disturbances and runtime uncertainties:
 \paragraph{Skill level} Our Skills are adaptive to disturbances such as sensor noise, to which our object recognition is robust, or physical disturbances. Examples of the latter are the ability of our compliant arm control to accommodate someone holding it ---e.g., if an operator identifies an issue with the item being picked by the robot and wants to take it from the robot--- or the visual serving enabled by our object detection and trajectory generation that continuously adapts the motions in case the position of the object changes in the field of view of the robot.
 \begin{figure}[t]
-\begin{subfigure}[b]{0.5\linewidth}
+\begin{subfigure}[b]{1\linewidth}
     \centering
     \includesvg[width=\linewidth]{success_zandam}
-    \caption{Success-rate across order sizes and failure causes ($N=44$).}
+    \caption{Success-rate across order sizes and failure causes.}
     \label{fig:success_zandam}
   \end{subfigure}
-\begin{subfigure}[b]{0.5\linewidth}
+\begin{subfigure}[b]{1\linewidth}
     \centering%
-     \includesvg[width=1\linewidth]{timings_zandam}
-    \caption{Execution times in seconds of actions ($N=99$).}
+     \includesvg[width=0.9\linewidth]{timings_zandam}
+    \caption{Execution times of symbolic actions in seconds. Note
+    that symbolic actions remain active until the desired state,
+    i.e., product in basket, is reached or a failure occurs.
+    In that case, the symbolic action is re-attempted.}
     \label{fig:timings_real}
   \end{subfigure}
-  \caption{Success-rate and action execution times in \realsupermarket.}
+  \caption{Success-rate and action execution times in
+  \realsupermarket. A total of $N=45$ were performed.}
 \end{figure}
 \paragraph{Task execution level}
-If the adaptability of the skills falls short of accounting for a disturbance, e.g., the operator took the item from the robot. It is now out of its field of view; failing to detect the item, our extremely reactive online planner would generate an alternative sequence of actions to achieve the desired intermediate subgoal belief state of the item being in sight, resulting in the trajectory generation component smoothly transitioning to a trajectory for the end effector to look for another instance of that item in the shelf.
-The formulation of the online planning problem in terms of desired states instead of actions results in a failure recovery behaviour that is easier to scale since there is no need to re-write an entire application-specific logic, which is the case in solutions based on state machines, but one can extend the definition of the planning problem with new states and eventually new actions if new skills are developed for the robot.
+If the adaptability of the symbolic actions falls short of
+accounting for a disturbance, e.g., the operator took the
+item from the robot. It is now out of its field of view;
+failing to detect the item, our extremely reactive online
+planner would generate an alternative sequence of symbolic actions to achieve the desired intermediate subgoal belief state of the item being in sight, resulting in the trajectory generation component smoothly transitioning to a trajectory for the end effector to look for another instance of that item in the shelf.
+The formulation of the online planning problem in terms of
+desired states instead of symbolic actions results in a failure
+recovery behaviour that is easier to scale since there is no
+need to re-write an entire application-specific logic, which
+is the case in solutions based on state machines, but one
+can extend the definition of the planning problem with new
+states and eventually new symbolic actions if new symbolic actions are
+developed for the robot.
 
-\paragraph{Task plan level} The behaviour tree structure with pre-defined recoveries in case a subgoal fails to re-try it up to three times, e.g., getting an item into the basket, ensures a reasonable trade-off of reliability and performance, e.g., most of the time the second attempt to pick and item was enough. If the third attempt fails, most likely, the item can not be grasped. This heuristic is computationally simple and easily adjusts to new items, e.g., allowing more attempts for incredibly challenging items.
+\paragraph{Task plan level} The \ac{bt} structure with pre-defined recoveries retries a subgoal, e.g., getting an item into the basket, up to three times when it fails. This ensures a reasonable trade-off of reliability and performance, e.g., most of the time the second attempt to pick and item was enough. If the third attempt fails, most likely, the item can not be grasped. This heuristic is computationally simple and easily adjusts to new items, e.g., allowing more attempts for incredibly challenging items.
 \begin{table*}[t]
     \centering
-    \begin{tabular}{p{.4\linewidth}p{.5\linewidth}}
-        \hline
+    \begin{tabular}{p{5.5cm}p{11cm}}
+        \toprule
         Failure case & Potential causes \\
-        \hline
+        \midrule
         Product knocked over during pick & Inaccuracy in product detection or trajectory following, resulting in insufficient vacuum seal \\
-        \hdashline
         Collision with shelf & Changes in environment due to shelf railing, price tags or discount tags \\
-        \hdashline
         Product outside reachable space  & The arm cannot physically reach the bottom or top shelf \\
-        \hdashline
         Collision with surrounding products on the shelf & Products are differently positioned than during taught behavior \\
-        \hdashline
         Vacuum gripper fails to attach & Factors like product size, weight, shape and material can cause vacuum suction to be insufficient \\
-        \hline
+        \bottomrule
     \end{tabular}
     \caption{Qualitatively evaluated list of potential failure cases}
     \label{tab:failure_cases}

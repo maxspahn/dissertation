@@ -1,19 +1,64 @@
 \section{Perception}
 \label{sec:perception}
 
-The perception pipeline consists of three components as shown in Fig.~\ref{fig:software_overview}.
+The three perception components are
+shown in \cref{fig:software_overview}.
 \begin{itemize}
-    \item \textbf{Object detection and classification:} Generates 2D object proposals and classifies them in a binary way based on a provided target class, resulting in the proposals being classified as either target class or not. 
-    \item \textbf{Object pose estimation:} Uses 2D object proposals in combination with a depth image to convert them to 3D. Additionally it uses the assumption that products have a planar surface to estimate the orientation using a plane-fit of the pointcloud frustum.
-    \item \textbf{Multi-object tracking:} To track the objects over time, we use a set of Kalman Filters, one per object. The object proposals are assigned to Kalman Filter tracks using the Hungarian Algorithm.
+    \item \textbf{Object detection and classification:}
+      Generates 2D object proposals and classifies them in a
+      binary way based on a provided target class, resulting
+      in the proposals being classified as either target
+      class or not. 
+      Object detection and classification are realized using
+      two different models. Both models are fine-tuned on a 
+      supermarket dataset, but do not require retraining to
+      add new products, as we will explain in the following.
+    \item \textbf{Object pose estimation:} Uses 2D object
+      proposals in combination with a depth image to convert
+      them to 3D. To estimate the orientation around the
+      z-axis, we use a plane-fit of the pointcloud frustum.
+      That first order approximation of the surface of the
+      products front has proven to be a reliable approach,
+      even for non-planar surfaces, see
+      \cref{fig:product_examples}.
+    \item \textbf{Multi-object tracking:} To track the
+      objects over time, we use a set of Kalman Filters, one
+      per object. The object proposals are assigned to
+      Kalman Filter tracks using the Hungarian Algorithm
+      \cite{hamuda2018improved,sahbani2016kalman}.
 \end{itemize}
 
-Because a supermarket has a large and often changing set of products, the main requirement for our perception pipeline is that it should be easily adaptable, which rules out large data-driven methods that require retraining. This lead us to the field of so-called \textit{few-shot} models. In the following, we describe the details of our object detection and classification method.
+Because a supermarket has a large and often changing set of
+products, the main requirement for our perception pipeline
+is that it should be easily adaptable. This observation from
+retail environments led us to the constraint on the
+perception pipeline that it should not require retraining
+when new products are added. Such a constraint can be
+addressed using, so-called, \textit{few-shot} models.
+In the
+following, we describe the details of our object detection
+and classification method.
 
-The method utilizes YOLO for
-object detection, relying on product details for object classification. Additionally, our system accommodates the dynamic addition of products using a single or few images.
+The method utilizes YOLO for object detection, relying on
+product details for object classification. Additionally, our
+system allows adding products using a
+single or few images.
 
-This dynamic addition of new products is possible trough a few-shot model we dub ProtoProductNet. This model is based on ProtoNet \cite{protonet_2017}. ProtoNet matches query images to target classes by their distance in feature space. For each target class a prototype is constructed that is essentially the mean of the features of a number of example images of this class. By matching query images to target prototypes, ProtoNet essentially learns to encode features that classify similarity between query images and target classes. Because this model picks random query- and target classes from a dataset for every iteration, ProtoNet learns a general feature extraction strategy that is invariant of actual class. This is an amazing property for adding new products, as classifying new products is as easy as providing the model with new target images of that product.
+This dynamic addition of new products is possible trough a
+few-shot model we dub ProtoProductNet. This model is based
+on ProtoNet \cite{protonet_2017}. ProtoNet matches query
+images to target classes by their distance in feature space.
+For each target class a prototype is constructed that is
+essentially the mean of the features of a number of example
+images of this class. By matching query images to target
+prototypes, ProtoNet essentially learns to encode features
+that classify similarity between query images and target
+classes. Because this model picks random query- and target
+classes from a dataset for every iteration, ProtoNet learns
+a general feature extraction strategy that is invariant of the
+actual class. This is important for adding new
+products, as classifying new products is as easy as
+providing the model with new target images.
 
 The exact implementation of ProtoNet we use is based on P$>$M$>$F \cite{pmf_2022}. P$>$M$>$F shows that in few-shot learning pre-training (P) is more important than meta-training (M), which is in turn more important than fine-tuning (F). For the best results the authors of P$>$M$>$F suggest using ProtoNet with a Vision Transformer pre-trained with DINO \cite{dino_2021} as the feature extractor and meta-training it with a small learning rate.
 

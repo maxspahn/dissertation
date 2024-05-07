@@ -154,9 +154,30 @@
 \newcommand{\MW}[1]{\textbf{{\color{Pink}{@Martijn #1}}}}
 \newcommand{\CH}[1]{\textbf{{\color{violet}{@Carlos #1}}}}
 \newcommand{\JAM}[1]{\textbf{{\color{red}{@Javier #1}}}}
+\newcommand{\CHP}[1]{\textbf{{\color{violet}{@Chris #1}}}}
+
+% cleverref
+\crefname{section}{Sec.}{Sec.}
+
+
+% reviewing
+\renewcommand{\quote}[1]{\paragraph{\textbf{Remark:}} \textit{#1}}
+\newcommand{\response}[1]{\paragraph{\textbf{Response:}} #1}
+\newenvironment{fromtext}[1]
+  {\textsc{#1}\begin{center}
+    \begin{tabular}{|p{0.9\textwidth}|}
+    \hline\\
+    }
+    { 
+    \\\hline
+    \end{tabular} 
+    \end{center}
+  }
 
 % acronyms
 \acrodef{mpc}[MPC]{Model Predictive Control}
+\acrodefplural{bt}[BT's]{Behavior Trees}
+\acrodef{bt}[BT]{Behavior Tree}
 \acrodef{fabrics}[fabrics]{Optimization Fabrics}
 
 % column types

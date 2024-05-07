@@ -4,18 +4,48 @@ We briefly introduce the considered supermarket setting and detail our order-pic
 
 \subsection{Considered supermarket setting}
 
-Modern supermarkets are characterized by a large range of products, around 100,000
-different products per store.  
-Operators usually have access to detailed information of all those
-products, including mass, geometry, and shelf location in the store. 
-In our demonstration, we assume that the robot can access this database to inform its decision.
-The large variety of products usually requires specialized grasping strategies per category, e.g., grasping tomatoes is different from grasping a large soft-drink bottle.
-We focus on a subset of products that can be picked with the suction gripper of our robot (see hardware design in Sec.~\ref{sec:hardware}), e.g., cans, milk boxes, bottles, or bags of crisps. 
-%This work deliberately excludes products that require specialized grasping strategies or even specific hardware design in favor of reliability for the remaining products.
-We assume that products to
-pick are visible from the front of the shelf. % and favor high reliability picking those. 
+Modern supermarkets are characterized by a large range of
+products, around 100,000 different products per store.
+Operators usually have access to detailed information of all
+those products, including mass, geometry, and shelf location
+in the store. In our demonstration, we assume that the robot
+can access this database to inform its decision. The large
+variety of products usually requires specialized grasping
+strategies per category, e.g., grasping tomatoes is
+different from grasping a large soft-drink bottle. We focus
+on a subset of products that can be picked with the suction
+gripper of our robot (see hardware design in
+\cref{sec:hardware}), e.g., cans, milk boxes, bottles, or
+bags of crisps (see \cref{fig:product_examples}). The masses
+of products range from 100g (instant food mixes) to 1.5 kg
+(soft-drink bottle) and the size are between 10 cm (cans)
+and 30 cm (soft-drink bottle). We assume that products to
+pick are visible, accessible from the shelf's front and in the robot's workspace.
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}[b]{0.24\linewidth}
+    \centering
+    \includegraphics[height=1.2\textwidth]{appelmoes_rounded.png}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.24\linewidth}
+    \centering
+    \includegraphics[height=1.2\textwidth]{fries_rounded.png}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.24\linewidth}
+    \centering
+    \includegraphics[height=1.2\textwidth]{mutti_rounded.png}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.24\linewidth}
+    \centering
+    \includegraphics[height=1.2\textwidth]{soup_rounded.png}
+  \end{subfigure}%
+  \caption{Examples of different products considered in this
+  work.}
+  \label{fig:product_examples}
+\end{figure}
+
 %Moreover, in the interest of bridging the gap between robotics research and applications on the market, achieving high reliability for a part of all products is assumed to be favorable. Besides, 
-For in-store picking, we explicitly focus on picking products during opening-hours and generally favor reliability over execution speed. 
+For in-store picking, we focus on picking products during opening-hours and favor reliability over execution speed. 
 %, because warehouse automation is already being tackled by redesigning the interior making collaborative robots obsolete
 %in such environments. Based on this focus, we generally favor reliability over execution speed. 
 
@@ -26,7 +56,7 @@ For in-store picking, we explicitly focus on picking products during opening-hou
 
 
 
-\begin{figure*}[ht]
+\begin{figure*}[h]
   \centering
   \begin{subfigure}[b]{0.18\linewidth}
     \centering
@@ -53,16 +83,17 @@ For in-store picking, we explicitly focus on picking products during opening-hou
     \includegraphics[width=1\textwidth]{placing.png}
     \caption{Place item}
   \end{subfigure}
-  \caption{Overview of ideal flow of skills to complete an order.}
+  \caption{Overview of ideal flow of symbolic actions to complete an order.}
   \label{fig:flow}
 \end{figure*}
 
 
 %A static sequence of tasks for order-picking in supermarkets can roughly be described as follows.
 %
-The high-level overview of our order-picking system is illustrated in Fig.~\ref{fig:flow}.
+The high-level overview of our order-picking system is
+illustrated in \cref{fig:flow}.
 Customers first place an order via the order placement website. 
-The robot processes the received order into a task assignment. 
+The robot processes the order into a task assignment. 
 For each item, it navigates to the item's shelf, locates it, picks and places it in the basket.
 When the order is completed, the customer can pick up the order from the robot.
 
@@ -72,12 +103,12 @@ When the order is completed, the customer can pick up the order from the robot.
 
 \subsection{System components}
 
-We used the order-picking sequence in Sec.~\ref{sec:order_system_overview} to guide our system development, while focusing on adaptiveness to recover from failure and inaccuracies in perception. 
+We used the order-picking sequence in \cref{sec:order_system_overview} to guide our system development, while focusing on adaptiveness to recover from failure and inaccuracies in perception. 
 In the following, we outline the main
 system components that are visualized in \cref{fig:software_overview} and can be grouped in: 
 \begin{figure}[t]
   \begin{center}
-    \includesvg[width=1.00\linewidth]{overview_4}
+    \includegraphics[width=1.00\linewidth]{overview_updated.png}
   \end{center}
   \caption{Overview of system components.}
   \label{fig:software_overview}
@@ -86,22 +117,27 @@ system components that are visualized in \cref{fig:software_overview} and can be
 (a) task planner, (b) motion planners, (c) low-level controllers, and (d) perception.
 
 
-After receiving the customer order, the task planner (see Sec.~\ref{sec:decision_making}
-) determines the order of picking products by minimizing the robot's travelled distance. 
-The task planner uses a combination of a behavior tree and symbolic state information, such as the robot is holding a product or the robot has arrived at the desired position, with an adaptive inference method to determine the best next skill to execute. 
-We use a set of five skills in our robot: picking items, placing items, looking for items, localizing the robot, and navigating the robot. 
-Each skill is realized by the motion planning and control components (see Sec.~\ref{sec:trajectory_generation}). 
-Motion planning is decomposed into path planning and online trajectory optimization for the base and reactive trajectory generation for the arm, augmented with a pseudo-prismatic joint on the base, see \cref{sec:trajectory_generation}.
-Lastly, the perception component (see Sec.~\ref{sec:perception}) takes care of item detection and classification and provides item poses to the planning components.
-
-
-
-
-
-
-
-
-
-
-
-
+After receiving the customer order, the task planner (see
+\cref{sec:decision_making}) determines the order of picking
+products by minimizing the robot's travelled distance. The
+task planner uses a combination of a behavior tree and
+symbolic state information, such as the robot is holding a
+product or has arrived at the desired position,
+with an adaptive inference method to determine the best next
+symbolic action to execute.
+We define a \textit{symbolic action} as an elementary robot
+behavior. Symbolic actions can be as simple as greeting the
+customer or as complex as picking an item.
+We use a set of five robot
+symbolic actions:
+picking items, placing items, looking for items, localizing
+the robot, and navigating the robot. Each symbolic action is realized
+by the motion planning and control components (see
+\cref{sec:trajectory_generation}). Motion planning is
+decomposed into path planning and online trajectory
+optimization for the base and reactive trajectory generation
+for the arm, augmented with a pseudo-prismatic joint on the
+base, see \cref{sec:trajectory_generation}. Lastly, the
+perception component (see \cref{sec:perception}) takes care
+of item detection and classification and provides item poses
+to the planning components.
