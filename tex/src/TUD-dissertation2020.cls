@@ -14,7 +14,6 @@
 \RequirePackage{amssymb}
 %% English is the default language, but Dutch is used for some sections.
 \RequirePackage[dutch,english]{babel}
-\RequirePackage{csquotes}
 \RequirePackage{calc}
 \RequirePackage[footnotesize]{caption}
 \RequirePackage{etaremune}
@@ -118,6 +117,7 @@
     \fi
     \def\headerstyle{\titlestyle}
 \fi
+\RequirePackage{csquotes}
 
 %% Define the TU Delft house style colors.
 \definecolor{tudelft-cyan}{cmyk}{1,0,0,0}
