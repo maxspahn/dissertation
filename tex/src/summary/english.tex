@@ -1,14 +1,15 @@
 % summary of below repeated introduction
 
+% Motivation
 As robotics will play a crucial role in the future of our
-modern societies in the global North, the need for
+modern societies, the need for
 advancements in the field is more pronounced than ever.
 While robots are already present in industrial settings,
-they are noticeably absent from human-shared environments.
-Human-shared environments are characterized by other moving agents, 
+they are noticeably absent from dynamic environments.
+Dynamic environments are characterized by other moving agents, 
 such as humans, varying tasks and high safety requirements.
-In the aim to deploy robots in such environments, the
-\ac{tg} problem becomes crucial. \Ac{tg} approaches to compute sequences
+With the aim to deploy robots in such environments, \ac{tg} becomes crucial.
+\Ac{tg} approaches aim to compute sequences
 of control commands that bring the robot from its current
 configuration to a desired goal state while avoiding
 collisions with obstacles and itself. Thus, it is directly placed between 
@@ -19,36 +20,45 @@ environment, flexible to different goal definitions, and it should promote safet
 Most advancements in the field of robotics in \ac{tg} focus either on
 manipulators or on mobile robots. However, the combination of both
 systems seems inevitable for deployment in human-shared environments.
-This dissertation provides an overview of different approaches to \ac{tg} for
-mobile manipulation. Then, it presents a method to bring widely used \ac{mpc}
-to mobile manipulation. The main part of this thesis focuses on the geometric
-framework for \ac{tg} called \ac{fabrics}. In the framework of \ac{fabrics},
-individual behaviors are designed as differential equations of second order
-for which stability properties are conserved during summation transfer between
-different manifolds of the configuration space. This thesis makes several
-contributions to the framework of \ac{fabrics} and its application to mobile
-manipulation.
 
-\paragraph{\acf{mpc} for mobile manipulation}
-The first contribution of this thesis is the introduction of an \ac{mpc}
-formulation for wheeled mobile manipulators. The method presented in \cref{cha:icra_21}
-copes with poor scaling in the number of collision constraints, by using the
-concept of \ac{fsd}. This leads to reasonable control frequencies of 10Hz
-independent on the amount of collision obstacles in the environment.
-Importantly, this approach allowed for coupled motion of the mobile base and the
-manipulator. This is beneficial in situations where synchronization of the two
-subsystems is crucial, such as opening doors or moving obstacles around.
+% Overview
+% This dissertation first presents a method to bring widely used \ac{mpc} to
+% mobile manipulation. Then, the main part of this thesis focuses on the geometric
+% framework for \ac{tg} called \ac{fabrics}. In the framework of \ac{fabrics},
+% individual behaviors are designed as differential equations of second order for
+% which stability properties are conserved during summation and transfer between
+% different manifolds of the configuration space. This thesis makes several
+% contributions to the framework of \ac{fabrics} and its application to mobile
+% manipulation.
 
-\paragraph{Dynamic fabrics}
-To achieve truly reactive behavior, \ac{mpc} for whole-body \ac{tg} does not
-result in sufficiently fast planning frequencies. A more reactive approach is
-known under the name of \ac{fabrics}. This framework relies on non-Riemannian
+% MPC solution
+\Ac{tg} for mobile manipulation can be formulated as an
+optimization problem of a finite time horizon. This approach is known as
+\ac{mpc} and is widely used in the field of autonomous driving thanks to its
+feasibility and stability guarantees. In \cref{cha:icra_21}, we present a method
+to bring \ac{mpc} to mobile manipulation. The method formulates the \ac{tg}
+problem for the entire kinematic chain and relies on \ac{fsd} for collision
+avoidance. This leads to reasonable control frequencies of 10Hz independent on
+the amount of collision obstacles in the environment. Importantly, this approach
+allowed for coupled motion of the mobile base and the manipulator. This is
+beneficial in situations where synchronization of the two subsystems is crucial,
+such as opening doors or moving obstacles around.
+% Transition to fabrics
+Despite the simplification of the optimization problem, computational costs
+limit the applicability of \ac{mpc} to mobile manipulation as motion is not
+considered truly reactive and different components, such as goal attraction and
+collision avoidance, are not easily separable. An alternative approach to
+receding horizon control is the formulation as a purely geometric problem.
+Early successes in this direction, including \ac{cic} and \ac{apf}, led to the
+formulation as sets of dynamical systems on smooth manifolds in the
+configuration space. A general framework for this approach is known as
+\acf{fabrics} and offers stability guarantees in static environments and highly
+reactive behavior similar to simple low-level controllers.
+% Fabrics solution
+This framework relies on non-Riemannian
 geometry to shape a smooth manifold of the configuration space with individual
 behaviors, such as collision avoidance, joint-limit avoidance, and goal 
-attraction. Essentially, it generalizes the ideas of potential field methods
-and Cartesian impedance control to a more general setting. The framework comes
-with convergence guarantees in static environments, but is still little used
-for real applications. In \cref{cha:tro_23}, we present a generalization of
+attraction. In \cref{cha:tro_23}, we present a generalization of
 \ac{fabrics} to dynamic environments. We refer to the resulting framework as
 \ac{df}. The generalization uses time\hyp{}parameterized manifolds to integrate 
 moving obstacles and time\hyp{}parameterized reference trajectories. The latter is
@@ -56,31 +66,31 @@ especially important for long-horizon \ac{tg} that may exhibit local minima.
 Importantly, \cref{cha:tro_23} shows that the dynamic component of \ac{df}
 is required when coping with moving obstacles, because with slow moving robots,
 collision avoidance in a pseudo-static settings is not sufficient.
-
-\paragraph{Fabrics for mobile manipulation}
-Finally, this thesis also advances the applicability of \ac{fabrics} to mobile
-manipulation by several contributions. 
-Next to the introduction of \ac{df}, \cref{cha:tro_23} also presents a way to
+% Real world settings
+Finally, we deploy the general framework of \ac{df} to several real-world
+settings showing the applicability of the framework to mobile manipulation.
+First, we present a way to
 integrate non\hyp{}holonomic constraints into the framework. Despite resulting in a
 loss of convergence guarantee, the method is shown to be the natural extension
 to wheeled mobile robots characterized by non\hyp{}holonomic constraints.
-\Cref{cha:icra_23} presents a symbolic
+Second, \cref{cha:icra_23} presents a symbolic
 implementation of \ac{fabrics} to achieve higher control frequencies. The
 closed-form solution to the \ac{tg} is parameterized by problem parameters in
 case of changing environments. Additionally, we show symbolic 
 hyperparameters can be tuned automatically to achieve expert-level performance.
-To overcome high requirements on the perception pipeline, \cref{cha:ral_24}
+Third, to overcome high requirements on the perception pipeline, \cref{cha:ral_24}
 integrates different implicit environment representations into the framework.
 Using \acf{sdf} and \acf{fsd} for example is widely used in mobile robotics when
 formulating \ac{tg} as \ac{mpc}. We show that the same representations can be
-used in \ac{fabrics} while achieving much faster solver times.
-\Cref{cha:rss_24} deploys a mobile manipulator controlled by \ac{fabrics}
+used in \ac{fabrics} while achieving faster solver times.
+Finally, 
+\cref{cha:rss_24} deploys a mobile manipulator controlled by \ac{fabrics}
 in a supermarket. Dexterous manipulation is programmed using
 learning-from-demonstration, with \ac{fabrics} as the underlying encoding.
 That allowed to teach rather than program complicated behaviors while
 maintaining properties on collision avoidance.
-
 % Summary of summary
+
 This thesis presents insights and advances the framework of \ac{fabrics} to
 \ac{tg} and compares it extensively to the more commonly method of \ac{mpc}.
 Through the ideas presented in this thesis, we hope to encourage the
