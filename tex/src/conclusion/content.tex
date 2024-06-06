@@ -241,7 +241,8 @@ controller. That comes at the cost of global properties
 which must be taken into account when using the method in
 cluttered environments. In this thesis, we showed how global
 guidance can be integrated using either conventional
-path planning (\cref{cha:tro_2023}) or learning-from-demonstration methods (\cref{cha:rss_2024}).
+path planning (\cref{cha:tro_23}) or learning-from-demonstration methods
+(\cref{cha:rss_24}).
 
 \subsection{The future of \ac{fabrics}}
 \label{sec:discussion_limitations_of_fabrics}
@@ -325,7 +326,7 @@ during testing. Acting as a filter, \ac{fabrics} can ensure that joint limits
 are respecting, self-collision is avoided and that action spaces defined in task
 spaces is tracking in joint space. Especially the latter is a common assumption
 for reinforcement-learning agents, see
-\cref{hansen2020self,hansen2021generalization} for examples. In this setting,
+\cite{hansen2020self,hansen2021generalization} for examples. In this setting,
 \ac{fabrics} replace the simplistic low-level controller that is already
 needed to track end-effector actions.
 % example learning attractor
@@ -344,7 +345,7 @@ Finally, the low computational costs of \ac{fabrics} can be exploited for
 forward rollouts in sampling-based methods. The approach of forward rollouts is
 often used when objectives are non-convex or gradients are unknown. Then
 sampling is benificial and can lead to high-quality trajectories, see
-\cref{Pezzato2023sampling}. In this context, \ac{fabrics} can be used as an
+\cite{Pezzato2023sampling}. In this context, \ac{fabrics} can be used as an
 initial guess to form the mean of the sampling distribution. Potentially, that
 can lead to a reduced sample size. Similarly, pure \ac{fabrics} policies can be
 used to generate non-optimal trajectories for various tasks that are
