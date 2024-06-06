@@ -30,14 +30,15 @@ following, we summarize the key findings of this thesis.
 \label{sec:conclusion_mpc}
 
 \cref{cha:icra_21} applied the widely used method of \ac{fsd} to mobile
-manipulators which led to several improvements. First, it allowed to control
-the system in a coupled way reducing overall execution time, similar to what had
+manipulators which led to several improvements. First, it allowed to control the
+system in a coupled way reducing overall execution time, similar to what had
 been done in \cite{Avanzini2018} with dynamic weighing. Second, it reduced the
 required accuracy of the perception pipeline as raw point clouds or occupancy
-grids can be used. Third, we showed that computationally scaling in the number
-of obstacles can be prevented \MS{improve text clarity}. In \cref{cha:tro_23},
-we additionally showed that geometric approaches tend to outperform \ac{mpc}
-formulations despite weaker theoretical guarantees.
+grids can be used. Third, we showed that reducing the number of constraints
+achieved by using \ac{fsd} allows for substantially faster computation times
+that do not depend on the number of obstacles in the environment. In
+\cref{cha:tro_23}, we additionally showed that geometric approaches tend to
+outperform \ac{mpc} formulations despite weaker theoretical guarantees.
 
 \subsection{Dynamic fabrics}
 \label{sec:conclusion_dynamic_fabrics}
@@ -68,8 +69,8 @@ This property is exploited in a purely symbolic implementation of \ac{fabrics}
 which allows for solver times around 1ms. This chapter additionally
 proposed to use a Bayesian optimization to tune parameters
 for \ac{fabrics}.
-The experiments showed that expert-level can be reached within 50 iterations
-\MS{How long does it take?}.
+The experiments showed that expert-level can be reached within 50 iterations, 
+i.e. 50 full runs in simulation.
 Additionally, the results revealed that parameter sets can be transferred between
 similar embodiments. Finally, qualitative results on a real robot are presented
 confirming the applicability to both manipulation and mobile
@@ -78,15 +79,17 @@ manipulation.
 \subsection{Implicit environment representations}
 \label{sec:conclusion_implicit}
 
-\MS{Still need to add numbers once i have the final results.}
 \cref{cha:ral_24} proposed the integration of several implicit environment
 representations into the framework of \ac{fabrics}. Specifically, we showed how
 \ac{sdf} can be integrated using numeric gradients and how \ac{fsd} can be
 used using plane constraints for which closed-form distance functions can be
 computed. Additionally, we compared these two representations with the usage of
-raw point clouds. Although \ac{fabrics} are computationally light enough to deal
-with the raw sensor data, best results in terms of success rate are obtained
-with \ac{fsd}.
+raw point clouds. The experiments reveal that success rates for all proposed
+implicit representations remain high (>80\%) when transitioning from static to
+dynamic environments while performance of explicit representations drops
+substantially. When used with a robotic manipulator, success rates of raw point
+clouds is highest up to a noise level of $\sigma=0.02$. For all methods and both
+embodiments, solvertimes remain below 30ms allowing for reactive deployment.
 
 \subsection{Real-world demonstration}
 \label{sec:conclusion_real_world}
