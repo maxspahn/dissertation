@@ -1,3 +1,17 @@
 \begin{abstract}
-  This is the abstract.
+Deployment of robots in dynamic environments requires reactive trajectory
+generation. In contrast to optimization-based methods, such as \acl{mpc},
+\acl{fabrics} offer a computationally efficient way to generate trajectories
+that include all avoidance behaviors if the environment can be represented as a
+set of object primitives. Obtaining such a representation from sensor data is
+challenging, especially in dynamic environments. In this paper, we integrate
+\textit{implicit} environment representations, such as \aclp{sdf} and \acl{fsd}
+into the framework of \acl{fabrics}. In the process, we derive how numerical
+gradients can be integrated into the push and pull operations in \acl{fabrics}.
+Our experiments reveal that both, ground robots and robotic manipulators, can be
+controlled using these implicit representations. Moreover, we show that, unlike
+the explicit representation, implicit representations can be used in the
+presence of dynamic obstacles without further considerations. Finally, we
+demonstrate our methods in the real-world, showing the applicability of our
+approach in practice.
 \end{abstract}

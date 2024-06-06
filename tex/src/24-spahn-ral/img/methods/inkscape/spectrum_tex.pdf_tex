@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'methods/inkscape/spectrum_tex.pdf' (pdf, eps, ps)
+%% Accompanies image file 'spectrum_tex.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -53,24 +53,25 @@
   \begin{picture}(1,0.55339527)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0.49937712,0.53051353){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{0.69999999}\smash{\begin{tabular}[t]{c}Increasing Costs Planner\end{tabular}}}}%
+    \put(0.49937712,0.53051353){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{0.69999999}\smash{\begin{tabular}[t]{c}Increasing
+    Implicitness\end{tabular}}}}%
     \put(0.49988677,0.00863213){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{0.69999999}\smash{\begin{tabular}[t]{c}Increasing Costs Perception Pipeline\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{methods/inkscape/spectrum_tex.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{img/methods/inkscape/spectrum_tex.pdf}}%
     \put(0.37081999,0.42836812){\color[rgb]{0.78431373,0,0}\makebox(0,0)[t]{\lineheight{0.69999999}\smash{\begin{tabular}[t]{c}Used
-    with \acs{mpc} \cite{Liu2017,Tordesillas2019a,Spahn2021,Oleynikova2017voxblox}\end{tabular}}}}%
+    with \acs{mpc} \cite{Liu2017,Tordesillas2019,Spahn2021,Oleynikova2017voxblox}\end{tabular}}}}%
     \put(-0.00594607,0.21160346){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{1.09667819\unitlength}\raggedright \end{minipage}}}%
     \put(0.72950743,0.11230065){\color[rgb]{0,0.78431373,0}\makebox(0,0)[t]{\lineheight{0.69999999}\smash{\begin{tabular}[t]{c}Proposed
     Methods for \acs{fabrics}\end{tabular}}}}%
     \put(0.18427974,0.11251017){\color[rgb]{0,0,0.78431373}\makebox(0,0)[t]{\lineheight{0.69999999}\smash{\begin{tabular}[t]{c}Used
     with \acs{fabrics} \cite{Ratliff2020,Spahn2023}\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{methods/inkscape/spectrum_tex.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{img/methods/inkscape/spectrum_tex.pdf}}%
     \put(0.03505905,0.19241762){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\small{Explicit}\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{methods/inkscape/spectrum_tex.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{img/methods/inkscape/spectrum_tex.pdf}}%
     \put(0.29573368,0.19152499){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\small{\acs{sdf}}\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{methods/inkscape/spectrum_tex.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{img/methods/inkscape/spectrum_tex.pdf}}%
     \put(0.54622399,0.19152499){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\small{\acs{fsd}}\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{methods/inkscape/spectrum_tex.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{img/methods/inkscape/spectrum_tex.pdf}}%
     \put(0.80062818,0.19246785){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\small{Raw}\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=6]{methods/inkscape/spectrum_tex.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{img/methods/inkscape/spectrum_tex.pdf}}%
   \end{picture}%
 \endgroup%

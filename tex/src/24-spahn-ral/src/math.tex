@@ -1,12 +1,11 @@
 \section{Background}
 \label{sec:math}
-
-\MS{Rewrite with ChatGPT.}
 %
-In this section, we very briefly introduce the concepts required for trajectory
-generation with \ac{fabrics}. For a more in-depth introduction to \ac{fabrics}
-and its foundations in differential geometry, the reader
-is referred to \cite{Ratliff2021,Spahn2023a,Wyk2022}.
+We introduce some notations and the mathematical operations 
+from differential geometry used in the framework of
+\ac{fabrics}. This introduction is rather limited and the
+reader is referred to \cite{Ratliff2021,Spahn2023,Wyk2022} for a more in-depth
+introduction.
 %
 \subsection{Configurations and task variables}%
 \label{sub:configurations_and_task_variables}
@@ -38,23 +37,26 @@ $\xdot = \J\qdot$ and $\xddot = \J\qddot + \Jdot\qdot$.
 \subsection{Spectral semi-sprays}%
 \label{sub:semi_spectral_sprays}
 %
-Inspired by simple mechanics (e.g., the simple pendulum), the framework of
-\ac{fabrics} designs motion policies as second-order dynamical systems $\xddot =
-\pi(\x,\xdot)$~\cite{Cheng2020,Ratliff2020}. The motion policy is defined by the
+The framework of
+\ac{fabrics} designs trajectory generation as second-order dynamical systems $\xddot =
+\pi(\x,\xdot)$~\cite{Cheng2020,Ratliff2020}. The trajectory is defined by the
 differential equation $\M\xddot + \f = 0$, where $\M(\x,\xdot)$ and
 $\f(\x,\xdot)$ are functions of position and velocity. Besides, \M{} is
 symmetric and invertible. We denote such systems as $\Spec = \spec$ and refer to
-them as \textit{spectral semi-sprays}, or \textit{specs} for short.  When the
-space of the task variable is clear from the context, we drop the subscript. 
-
+them as \textit{spectral semi-sprays}, or \textit{specs} for
+short. Often, we drop the subscript $\X$ when the context is clear.
+%
 \subsection{Operations on specs}%
 \label{sub:operations_on_specs}
 %
-%
-Complex trajectory generation is composed of multiple components, such as collision avoidance, joint limits
-avoidance, etc. The power of \ac{fabrics} lies in the metric-weighted sum to
-combine multiple components from different manifolds.
-These operations are derived from operations on specs and are briefly recalled here.
+Trajectory generation requires the combination of multiple
+components, such as collision avoidance, joint limits
+avoidance, etc.
+In the framework of \ac{fabrics}, these components are
+represented as specs in different manifolds and combined in a consistent way using
+a metric-weighted sum.
+Related operations from differential geometry are recalled
+here.
 
 Given a differential map $\map: \Q\rightarrow\X$ and a spec \spec{}, the \textit{pullback}
 is defined as 
@@ -97,35 +99,37 @@ avoidance or self-collision avoidance, can be realized.
 \subsection{Optimization fabrics}%
 \label{sub:optimization_fabrics}
 %
-In the previous subsection, we explained how different avoidance behaviors can
+In the previous subsection, we recalled how different avoidance behaviors can
 be combined. Spectral semi-sprays can additionally be \textit{forced} by a
 potential, denoted as the \textit{forced variant} of form $\Spec_{\forc} =
 \left(\M,\f + \der{\x}{\forc}\right)$. This forcing term clearly changes the
-behavior of the system. \Ac{fabrics} introduce construction rules to
-make sure that the solution path $\x(t)$ of $\Spec_{\forc}$ converges towards
-the minimum of $\forc(\x)$. Then, the potential is designed in such a way that
-its minimum represents a goal state of the motion planning problem.
+behavior of the system. Under certain conditions, it can be
+shown that the trajectory $\x(t)$ of the forced variant converges towards the minimum of the potential \forc{}~\cite{Ratliff2020}.
 
-First, the initial spec that represents an avoidance component
-is written in the form $\xddot + \vec{h}(\x,\xdot) = 0$,
-such that $\vec{h}$ is \textit{homogeneous of degree 2}:
-$\vec{h}(\x,\alpha\xdot) = \alpha^2\vec{h}(\x,\xdot)$ 
-(\textbf{Creation}). 
-Secondly, the geometry is
-energized (\cref{eq:energization})
-with a Finsler structure~\cite[Definition 5.4]{Ratliff2020} (\textbf{Energization}).
-The property of homogeneity of degree 2 and the energization with the Finsler structure
-guarantees, according to ~\cite[Theorem 4.29]{Ratliff2020}, that the energized spec
-forms a \textit{frictionless fabric}.
-A frictionless fabric is defined to optimize the forcing potential \forc{} when being
-damped by a positive definite damping term~\cite[Definition 4.4]{Ratliff2020}.
-Thirdly, all avoidance components are combined in the configuration space
-of the robot using the pullback and summation operation (\textbf{Combination}).
-Note, that both operations are closed 
-under the algebra designed by these operations, i.e. every pulled optimization fabric or the sum
-of two \ac{fabrics} is, itself, an optimization fabric.
-In the last step, the combined spec is forced by the potential \forc{} with the desired minimum and
-damped with a positive definite damping term (\textbf{Forcing}).
-This resulting system of form $\M\qddot + \f(\q, \qdot) + \der{\q}{\forc} + \beta\qdot = 0$ is solved to 
-obtain the trajectory generation policy in acceleration form $\qddot = \pi(\q,\qdot)$.
+First, the initial spec that represents an avoidance
+component is written in the form $\xddot + \vec{h}(\x,\xdot)
+= 0$, such that $\vec{h}$ is \textit{homogeneous of degree
+2}: $\vec{h}(\x,\alpha\xdot) = \alpha^2\vec{h}(\x,\xdot)$
+(\textbf{Creation}). Secondly, the geometry is energized
+(\cref{eq:energization}) with a Finsler
+structure~\cite[Definition 5.4]{Ratliff2020}
+(\textbf{Energization}). The property of homogeneity of
+degree 2 and the energization with the Finsler structure
+guarantees, according to ~\cite[Theorem 4.29]{Ratliff2020},
+that the energized spec forms a \textit{frictionless
+fabric}. A frictionless fabric is defined to optimize the
+forcing potential \forc{} when being damped by a positive
+definite damping term~\cite[Definition 4.4]{Ratliff2020}.
+Thirdly, all avoidance components are combined in the
+configuration space of the robot using the pullback and
+summation operation (\textbf{Combination}). Note, that both
+operations are closed under the algebra designed by these
+operations, i.e. every pulled optimization fabric or the sum
+of two \ac{fabrics} is, itself, an optimization fabric. In
+the last step, the combined spec is forced by the potential
+\forc{} with the desired minimum and damped with a positive
+definite damping term (\textbf{Forcing}). This resulting
+system of form $\M\qddot + \f(\q, \qdot) + \der{\q}{\forc} +
+\beta\qdot = 0$ is solved to obtain the trajectory
+generation policy in acceleration form $\qddot = \pi(\q,\qdot)$.
 

@@ -1,0 +1,385 @@
+%i Replaced by \u and \z.
+%\def \stateVec {\ensuremath{\vec{z}}}
+%def \inputVec {\ensuremath{\vec{u}}}
+
+% spaces
+\newcommand\X{\ensuremath{\mathcal{X}}}
+\newcommand\U{\ensuremath{\mathcal{U}}}
+\newcommand\Z{\ensuremath{\mathcal{Z}}}
+\newcommand\Xr{\ensuremath{\mathcal{X}_{\textrm{rel}}}}
+\newcommand\Xj{\ensuremath{\mathcal{X}_j}}
+\newcommand\Q{\ensuremath{\mathcal{Q}}}
+\newcommand\Rn{\ensuremath{\mathbb{R}^n}}
+\newcommand\Rm{\ensuremath{\mathbb{R}^m}}
+\newcommand\Rmj{\ensuremath{\mathbb{R}^{m_j}}}
+\newcommand\set{\ensuremath{\mathcal{S}}}
+% fabrics
+\renewcommand\l{\ensuremath{\mathcal{L}}}
+\renewcommand\le{\ensuremath{\mathcal{L}_e}}
+\newcommand\lex{\ensuremath{\mathcal{L}_{ex}}}
+\newcommand\ld{\ensuremath{\mathcal{L}_d}}
+\renewcommand\lg{\ensuremath{\mathcal{L}_g}}
+\newcommand\he{\ensuremath{\mathcal{H}_e}}
+\newcommand\hd{\ensuremath{\mathcal{H}_d}}
+\newcommand\dt{\ensuremath{\Delta t}}
+\newcommand\Me{\ensuremath{\mat{M}_{\le}}}
+\newcommand\fe{\ensuremath{\vec{f}_{\le}}}
+\newcommand\Pe{\ensuremath{\mat{P}_{\le}}}
+\newcommand\M{\ensuremath{\mat{M}}}
+\newcommand\Mnh{\ensuremath{\mat{M}_{\textrm{nh}}}}
+\newcommand\zerovec{\ensuremath{\vec{0}}}
+\newcommand\nullvec{\ensuremath{\vec{0}}}
+\newcommand\I{\ensuremath{\mat{I}}}
+\newcommand\f{\ensuremath{\vec{f}}}
+\newcommand\fnh{\ensuremath{\vec{f}_{\textrm{nh}}}}
+\newcommand\h{\ensuremath{\vec{h}}}
+\newcommand\Spec{\ensuremath{\mathcal{S}}}
+\newcommand\htwo{\ensuremath{\vec{h}_2}}
+\newcommand\Md{\ensuremath{\mat{M}_d}}
+\newcommand\fd{\ensuremath{\vec{f}_d}}
+\newcommand\Mde{\ensuremath{\mat{M}_{de}}}
+\newcommand\fde{\ensuremath{\vec{f}_{de}}}
+\newcommand\forc{\ensuremath{\vec{\psi}}}
+\newcommand\spec{\ensuremath{\left(\M,\f\right)_{\X}}}
+% variables
+\newcommand\x{\ensuremath{\vec{x}}}
+\newcommand\xdot{\ensuremath{\dot{\x}}}
+\newcommand\xddot{\ensuremath{\ddot{\x}}}
+\newcommand\z{\ensuremath{\vec{z}}}
+\newcommand\zdot{\ensuremath{\dot{\z}}}
+\renewcommand\u{\ensuremath{\vec{u}}}
+\newcommand\xj{\ensuremath{\vec{x}_j}}
+\newcommand\xjdot{\ensuremath{\dot{\xj}}}
+\newcommand\xjddot{\ensuremath{\ddot{\xj}}}
+\newcommand\xb{\ensuremath{\bar{\vec{x}}}}
+\newcommand\xbdot{\ensuremath{\dot{\xb}}}
+\newcommand\xbddot{\ensuremath{\ddot{\xb}}}
+\newcommand\xt{\ensuremath{\vec{\tilde{x}}}}
+\newcommand\xg{\ensuremath{\vec{\x_\textrm{goal}}}}
+\newcommand\xtdot{\ensuremath{\dot{\xt}}}
+\newcommand\xtddot{\ensuremath{\ddot{\xt}}}
+\newcommand\xr{\ensuremath{\x_{\textrm{rel}}}}
+\newcommand\xrdot{\ensuremath{\dot{\x}_{\textrm{rel}}}}
+\newcommand\xrddot{\ensuremath{\ddot{\x}_{\textrm{rel}}}}
+\newcommand\q{\ensuremath{\vec{q}}}
+\newcommand\qdot{\ensuremath{\dot{\q}}}
+\newcommand\qddot{\ensuremath{\ddot{\q}}}
+\newcommand\qt{\ensuremath{\vec{\tilde{q}}}}
+\newcommand\qtdot{\ensuremath{\dot{\qt}}}
+\newcommand\qtddot{\ensuremath{\ddot{\qt}}}
+\newcommand\fk{\ensuremath{\textrm{fk}}}
+\newcommand\fkarg[1]{\ensuremath{\textrm{fk}_{\textrm{#1}}}}
+\newcommand\Sc{\ensuremath{\mathcal{S}_c}}
+\newcommand\Con{\ensuremath{\mathcal{C}}}
+
+\newcommand\product{\ensuremath{\textrm{item}}}
+\newcommand\camera{\ensuremath{\textrm{camera}}}
+
+
+% trial
+\newcommand\params{\ensuremath{\vec{\Theta}}}
+\newcommand\cost{\ensuremath{c}}
+\newcommand\costestimate{\ensuremath{\tilde{\cost}(\params)}}
+\newcommand\costdist{\ensuremath{\cost_{\textrm{distance}}}}
+\newcommand\costpath{\ensuremath{\cost_{\textrm{path}}}}
+\newcommand\costcol{\ensuremath{\cost_{\textrm{clearance}}}}
+\newcommand\weight{\ensuremath{w}}
+\newcommand\weightdist{\ensuremath{\weight_{\textrm{distance}}}}
+\newcommand\weightpath{\ensuremath{\weight_{\textrm{path}}}}
+\newcommand\weightcol{\ensuremath{\weight_{\textrm{clearance}}}}
+\newcommand\trial{\ensuremath{\mathcal{T}}}
+\newcommand\mpp{\ensuremath{\mathcal{MP}}}
+\newcommand\paramsmp{\ensuremath{\params_{\mpp}}}
+\newcommand\planner{\ensuremath{\mathcal{P}}}
+\newcommand\kgeocol{\ensuremath{k_{\textrm{geo,col}}}}
+\newcommand\expgeocol{\ensuremath{\beta_{\textrm{geo,col}}}}
+\newcommand\kfincol{\ensuremath{k_{\textrm{fin,col}}}}
+\newcommand\expfincol{\ensuremath{\beta_{\textrm{fin,col}}}}
+\newcommand\kgeolimit{\ensuremath{k_{\textrm{geo,limit}}}}
+\newcommand\expgeolimit{\ensuremath{\beta_{\textrm{geo,limit}}}}
+\newcommand\kfinlimit{\ensuremath{k_{\textrm{fin,limit}}}}
+\newcommand\expfinlimit{\ensuremath{\beta_{\textrm{fin,limit}}}}
+\newcommand\kgeoself{\ensuremath{k_{\textrm{geo,self}}}}
+\newcommand\expgeoself{\ensuremath{\beta_{\textrm{geo,self}}}}
+\newcommand\kfinself{\ensuremath{k_{\textrm{fin,self}}}}
+\newcommand\expfinself{\ensuremath{\beta_{\textrm{fin,self}}}}
+\newcommand\baseinertia{\ensuremath{m_{\textrm{base}}}}
+\newcommand\kattractor{\ensuremath{k_{\textrm{attractor}}}}
+\newcommand\Bmax{\ensuremath{\mat{B}_{\textrm{max}}}}
+\newcommand\Bmin{\ensuremath{\mat{B}_{\textrm{min}}}}
+\newcommand\alphaex{\ensuremath{\alpha_{\textrm{ex}}}}
+\newcommand\alphale{\ensuremath{\alpha_{\le}}}
+\newcommand\alphab{\ensuremath{\alpha_{\beta}}}
+\newcommand\exfactor{\ensuremath{v_{ex}}}
+\newcommand\radiusshift{\ensuremath{r_{shift}}}
+
+
+\newcommand\J{\ensuremath{\mat{J}_{\phi}}}
+\newcommand\Jt{\ensuremath{\mat{J}^T_{\phi}}}
+\newcommand\Jdot{\ensuremath{\dot{\mat{J}}_{\phi}}}
+\newcommand\Jnh{\ensuremath{\mat{J}_{\textrm{nh}}}}
+\newcommand\Jnht{\ensuremath{\mat{J}^T_{\textrm{nh}}}}
+\newcommand\Jnhdot{\ensuremath{\dot{\mat{J}}_{\textrm{nh}}}}
+\newcommand{\map}{\ensuremath{\phi}}
+\newcommand{\mapt}{\ensuremath{\phi_t(\vec{q})}}
+\newcommand{\mapd}{\ensuremath{\phi_d}}
+\newcommand{\g}{\ensuremath{\vec{g}(t)}}
+\newcommand{\gp}{\ensuremath{\vec{g}^{\prime}(t)}}
+\newcommand{\gpp}{\ensuremath{\vec{g}^{\prime\prime}(t)}}
+\newcommand{\point}{\ensuremath{\vec{p}}}
+\newcommand{\pointcloud}{\ensuremath{\mathcal{P}}}
+\newcommand{\plane}{\ensuremath{\bm{P}}}
+\newcommand{\np}{\ensuremath{\vec{n}_{\plane}}}
+\newcommand{\cp}{\ensuremath{c_{\plane}}}
+\newcommand{\link}{\ensuremath{\bm{L}}}
+\newcommand{\rl}{\ensuremath{r_{\link}}}
+\newcommand{\seed}{\ensuremath{\x_{\textrm{seed}}}}
+% operators
+\newcommand{\pull}[2]{\textrm{pull}_{#1}{#2}}
+\newcommand{\energize}[2]{\textrm{energize}_{#1}{#2}}
+\newcommand{\der}[2]{\partial_{#1}#2}
+\newcommand{\dertwo}[2]{\partial^2_{#1}#2}
+\newcommand{\derf}[2]{\frac{\partial#2}{\partial#1}}
+\newcommand{\derftwo}[3]{\frac{\partial^2#3}{\partial#1\partial#2}}
+\newcommand{\dert}[1]{\frac{d}{dt}#1}
+\newcommand{\pinv}[1]{#1^{\dagger}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\abs}[1]{\lVert#1\rVert}
+\newcommand\mat[1]{\ensuremath{\bm{#1}}}
+\renewcommand\vec[1]{\ensuremath{\bm{#1}}}
+\newcommand\switching[2]{\ensuremath{{\vec{s}_{#1}(#2)}}}
+\newcommand\sign[1]{\ensuremath{\textrm{sgn}(#1)}}
+
+
+% Namings
+\newcommand{\panda}{Panda robot}
+\newcommand{\boxer}{Clearpath Boxer}
+\newcommand{\ros}{ROS}
+\newcommand{\optuna}{Optuna}
+\newcommand{\reachingontable}{\textit{reaching-on-table}}
+\newcommand{\reachinginring}{\textit{reaching-in-ring}}
+\newcommand{\realsupermarket}{realistic store environment\xspace}
+
+% Commenting
+\definecolor{OliveGreen}{rgb}{0,0.6,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{Part1Color}{rgb}{0.906,0.478,0.486}
+\definecolor{Part2Color}{rgb}{0.41176471, 0.83137255,0.7372549}
+\newcommand{\MS}[1]{\textbf{{\color{OliveGreen}{{#1}}}}} % Max Answers
+\newcommand{\added}[1]{{\color{Blue}{{#1}}}} % added text
+
+% acronyms
+\acrodef{rrt}[RRT]{Rapidly-exploring Random Tree}
+\acrodef{prm}[PRM]{Probabilistic Roadmap}
+\acrodef{tg}[TG]{Trajectory Generation}
+\acrodef{mpc}[MPC]{Model Predictive Control}
+\acrodef{fsd}[FSD]{Free Space Decomposition}
+\acrodef{apf}[APF]{Artificial Potential Fields}
+\acrodef{dmp}[DMPs]{Dynamic Movement Primitives}
+\acrodef{osc}[OSCs]{Operational Space Control}
+\acrodef{rmp}[RMPs]{Riemannian Motion Policies}
+\acrodef{ic}[IC]{Impedence Control}
+\acrodef{cic}[IC]{Cartesian Impedence Control}
+\acrodef{fabrics}[fabrics]{Geometric Fabrics}
+\acrodef{fabric}[fabric]{Geometric Fabric}
+\acrodef{sf}[SF]{Static Fabrics}
+\acrodef{df}[DF]{Dynamic Fabrics}
+\acrodef{icra}[ICRA]{IEEE International Conference on Robotics and Automation}
+\acrodef{rss}[RSS]{Robotics: Science and Systems}
+\acrodef{iros}[IROS]{IEEE/RSJ International Conference on Intelligent Robots and Systems}
+\acrodef{tro}[T-RO]{IEEE Transactions on Robotics}
+\acrodef{ral}[RA-L]{IEEE Robotics and Automation Letters}
+\acrodef{tcds}[TCDS]{IEEE Transactions on Cognitive and Developmental Systems}
+\acrodef{mrs}[MRS]{IEEE International Symposium on Multi-Robot \& Multi-Agent Systems}
+\acrodef{sdf}[SDF]{Signed Distance Field}
+\acrodef{panda}[Panda]{Franka Emika Panda}
+\acrodefplural{dof}[DoF's]{Degrees of Freedom}
+\acrodef{dof}[DoF]{Degree of Freedom}
+\acrodefplural{bt}[BT's]{Behavior Trees}
+\acrodef{bt}[BT]{Behavior Tree}
+
+% hyphenation
+\hyphenation{pipe-line}
+
+% text
+\newcommand{\tn}[1]{\textnormal{#1}}
+\newcommand{\tb}[1]{\textbf{#1}}
+\newcommand{\ti}[1]{\textit{#1}}
+% matrices
+% vectors
+\newcommand{\va}{\mathbf{a}}
+\newcommand{\vb}{\mathbf{b}}
+\newcommand{\vc}{\mathbf{c}}
+\newcommand{\vd}{\mathbf{d}}
+\newcommand{\ve}{\mathbf{e}}
+\newcommand{\vf}{\mathbf{f}}
+\newcommand{\vg}{\mathbf{g}}
+\newcommand{\vh}{\mathbf{h}}
+\newcommand{\vl}{\mathbf{l}}
+\newcommand{\vm}{\mathbf{m}}
+\newcommand{\vn}{\mathbf{n}}
+\newcommand{\vp}{\mathbf{p}}
+\newcommand{\vq}{\mathbf{q}}
+\newcommand{\vr}{\mathbf{r}}
+\newcommand{\vs}{\mathbf{s}}
+\newcommand{\vS}{\mathbf{S}}
+\newcommand{\vo}{\mathbf{o}}
+\newcommand{\vt}{\mathbf{t}}
+\newcommand{\vu}{\mathbf{u}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vX}{\mathbf{X}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+% mathcal
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+% Define the new environment
+%\newenvironment{textboxold}
+%  {\par\medskip\centering\colorbox{gray!30}{\begin{minipage}{0.8\textwidth}\color{black}}
+%  {\end{minipage}
+%}
+
+\newenvironment{textbox}[2]
+  {\begin{tcolorbox}[colback=#1!20!white,colframe=#1,title=\textbf{#2}]}
+  {\end{tcolorbox}}
+
+\newtheoremstyle{spaced}
+  {1em plus .2em minus .0em}%   Space above
+  {1em plus .2em minus .0em}%   Space below
+  {\itshape}%  Body font
+  {}%          Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%         Punctuation after thm head
+  {0.5em}%     Space after thm head: " " = normal interword space;
+     %         \newline = linebreak
+  {}%          Thm head spec (can be left empty, meaning `normal')
+
+%\theoremstyle{spaced}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{lemma}[definition]{Lemma}
+
+
+\newcommand{\publication}[4]{\ding{43} #1. {\itshape "#2"}. #3, (#4).}
+\newcommand{\partscontentfootnote}{
+  Parts of this chapter
+  appeared in the following publications:
+}
+\newcommand{\copycontentfootnote}{
+  This chapter is a verbatim copy of the peer-reviewed
+  publication:
+}
+\newcommand{\copysubmittedcontentfootnote}{
+  This chapter is a verbatim copy of the submitted work:
+}
+\newcommand{\copypreparationcontentfootnote}{
+  This chapter is a verbatim copy of the work in preparation for submission:
+}
+\newcommand{\statementcontributions}[1]{\textit{Statement of
+contributions:} #1}
+
+
+\newcommand{\ralsampling}{
+  \publication
+  {C. Pezzato$^*$, C. Salmi$^*$, \textbf{M. Spahn}$^*$, E. Trevisan$^*$, J.
+  Alonso-Mora and C.H. Corbato}
+  {Sampling-based model predictive control leveraging parallelizable physics simulations}
+  {\textit{In preparation for submission to} \acl{ral}}
+  {2024}
+}
+
+\newcommand{\ralovercoming}{
+  \publication
+  {\textbf{M. Spahn} and J. Alonso-Mora}
+  {Overcoming Explicit Environment Representations with Geometric Fabrics}
+  {\textit{In preparation for submission to} \acl{ral}}
+  {2024}
+}
+
+\newcommand{\trodynamic}{
+  \publication
+  {\textbf{M. Spahn}, M. Wisse and J. Alonso-Mora}
+  {Dynamic Optimization Fabrics for Motion Generation}
+  {\acl{tro}}
+  {2023}
+}
+
+\newcommand{\tcdsactive}{
+  \publication
+  {C. Meo, G. Franzese, C. Pezzato, \textbf{M. Spahn} and P. Lanillos}
+  {Adaptation through prediction: multisensory active inference torque control}
+  {\acl{tcds}}
+  {2022}
+}
+
+\newcommand{\rssdemo}{
+  \publication
+  {\textbf{M. Spahn}, C. Pezzato, C. Salmi, R. Dekker, C.
+  Wang, C. Pek, J. Kober, J. Alonso-Mora, C. Hernandez
+  Corbato and M. Wisse}
+  {DEMO: Mobile Manipulation in Human-Shared Retail Spaces}
+  {\acl{rss}}
+  {2024}
+}
+
+
+\newcommand{\mrsmulti}{
+  \publication{S. Bakker, L. Knödler, \textbf{M. Spahn}, W. Böhmer and J. Alonso-Mora}
+  {Multi-Robot Local Motion Planning Using Dynamic
+  Optimization Fabrics}
+  {\acl{mrs}}
+  {2023}
+}
+
+\newcommand{\icraautotuning}{
+  \publication
+  {\textbf{M. Spahn} and J. Alonso-Mora}
+  {Autotuning Symbolic Optimization Fabrics for Trajectory Generation}
+  {\acl{icra}}
+  {2023}
+}
+
+\newcommand{\icracoupled}{
+  \publication
+  {\textbf{M. Spahn}, B. Brito and J. Alonso-Mora}
+  {Coupled Mobile Manipulation via Trajectory Optimization with Free Space Decomposition}
+  {\acl{icra}}
+  {2021}
+}
+
+\newcommand{\irosbench}{
+  \publication{\textbf{M. Spahn}, C. Salmi and J. Alonso-Mora}
+  {Local Planner Bench: Benchmarking for Local Motion Planning}
+  {\acl{iros}}
+  {2023}
+}
+
