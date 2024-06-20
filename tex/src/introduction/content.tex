@@ -17,10 +17,11 @@ dissertation.
 
 
 As the countries of the global North are struggling with the
-challenges of an aging population, shifting demographics
-(\cref{fig:demographic_change}), and a scarcity of
-affordable labor for physically demanding tasks, the need
-for technological solutions is more pronounced than ever
+challenges of shifting demographics
+(\cref{fig:demographic_change}) and a predominantly educated
+workforce resulting in a scarcity of affordable labor for
+physically demanding tasks, the need for technological
+solutions is more pronounced than ever
 \cite{ince2015economic,mcgrath2021report,astrov2021economies}.
 Technological progress in the
 corresponding field of robotics today is disappointing,
@@ -88,7 +89,7 @@ counterparts using different low-level control approaches.
   \end{subfigure}
   \caption[]{The difference between environments where robots
   used to live in (left) \footnotemark and where we expect them to operate
-  in the future (right).}
+  in the future (right, robot used in this thesis).}
   \label{fig:different_robots}
 \end{figure}
 
@@ -168,16 +169,18 @@ The classical setup for robots --where they have
 proven to be quite effective-- is behind fences. This setup
 simplifies \ac{tg} dramatically as collision
 avoidance can be done during the installation process and
-trajectories can remain unchanged for the entire lifetime of
-the robots. Therefore, high computational costs for
+trajectories can remain unchanged for years.
+Therefore, high computational costs for
 \ac{tg} are negligible as it is only performed
 once during installation. However, their Achilles' heel lies
 in their incapacity to adapt to dynamic, changing
 environments.
 
 Recognizing this limitation has led to the rise of local
-\ac{tg} methods, especially as robots are
-expected to enter human-shared environments. However, even
+\ac{tg} methods, where \textit{local} refers to the
+fact that \ac{tg} is performed in real-time only considering
+local changes to the environment.
+However, even
 within this domain, challenges persist. Pure control
 approaches, exemplified by operational space control or
 impedance control, offer speed and interpretability but fall
