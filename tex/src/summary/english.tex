@@ -32,7 +32,7 @@ systems seems inevitable for deployment in human-shared environments.
 % manipulation.
 
 % MPC solution
-\Ac{tg} for mobile manipulation can be formulated as an
+\Ac{tg} for mobile manipulation is usually formulated as an
 optimization problem of a finite time horizon. This approach is known as
 \ac{mpc} and is widely used in the field of autonomous driving thanks to its
 feasibility and stability guarantees. In \cref{cha:icra_21}, we present a method
@@ -40,19 +40,21 @@ to bring \ac{mpc} to mobile manipulation. The method formulates the \ac{tg}
 problem for the entire kinematic chain and relies on \ac{fsd} for collision
 avoidance. This leads to reasonable control frequencies of 10Hz independent on
 the amount of collision obstacles in the environment. Importantly, this approach
-allowed for coupled motion of the mobile base and the manipulator. This is
+allows for coupled motion of the mobile base and the manipulator. This is
 beneficial in situations where synchronization of the two subsystems is crucial,
 such as opening doors or moving obstacles around.
 % Transition to fabrics
-Despite the simplification of the optimization problem, computational costs
+Despite these simplications on the environment representations, computational costs
 limit the applicability of \ac{mpc} to mobile manipulation as motion is not
 considered truly reactive and different components, such as goal attraction and
-collision avoidance, are not easily separable. An alternative approach to
+collision avoidance, are not easily separable.
+
+A recent novel approach to
 receding horizon control is the formulation as a purely geometric problem.
 Early successes in this direction, including \ac{cic} and \ac{apf}, led to the
 formulation as sets of dynamical systems on smooth manifolds in the
-configuration space. A general framework for this approach is known as
-\acf{fabrics} and offers stability guarantees in static environments and highly
+configuration space. The framework of \acf{fabrics} unifies such ideas, 
+offers stability guarantees in static environments, and results in highly
 reactive behavior similar to simple low-level controllers.
 % Fabrics solution
 This framework relies on non-Riemannian
@@ -64,19 +66,24 @@ attraction. In \cref{cha:tro_23}, we present a generalization of
 moving obstacles and time\hyp{}parameterized reference trajectories. The latter is
 especially important for long-horizon \ac{tg} that may exhibit local minima.
 Importantly, \cref{cha:tro_23} shows that the dynamic component of \ac{df}
-is required when coping with moving obstacles, because with slow moving robots,
-collision avoidance in a pseudo-static settings is not sufficient.
+is required when coping with moving obstacles. As repulsive forces 
+in \ac{fabrics} are proportional to the approaching speed of obstacle and robot,
+collision avoidance in a pseudo-static fashion is not sufficient when the robot
+is moving slowly.
 % Real world settings
 Finally, we deploy the general framework of \ac{df} to several real-world
 settings showing the applicability of the framework to mobile manipulation.
 First, we present a way to
-integrate non\hyp{}holonomic constraints into the framework. Despite resulting in a
-loss of convergence guarantee, the method is shown to be the natural extension
+integrate non\hyp{}holonomic constraints into the framework. Despite loosing
+formal guarantees on convergence, the method is shown to be the natural extension
 to wheeled mobile robots characterized by non\hyp{}holonomic constraints.
 Second, \cref{cha:icra_23} presents a symbolic
-implementation of \ac{fabrics} to achieve higher control frequencies. The
-closed-form solution to the \ac{tg} is parameterized by problem parameters in
-case of changing environments. Additionally, we show symbolic 
+implementation of \ac{fabrics} to achieve higher control frequencies.
+Symbolic implementations are possible because the framework of \ac{fabrics}
+is based on differential equations of second order, for which a closed-form
+solution exists. For changing environments, obstacles states are then only
+concretized at runtime.
+Additionally, we show symbolic 
 hyperparameters can be tuned automatically to achieve expert-level performance.
 Third, to overcome high requirements on the perception pipeline, \cref{cha:ral_24}
 integrates different implicit environment representations into the framework.
@@ -87,17 +94,17 @@ Finally,
 \cref{cha:rss_24} deploys a mobile manipulator controlled by \ac{fabrics}
 in a supermarket. Dexterous manipulation is programmed using
 learning-from-demonstration, with \ac{fabrics} as the underlying encoding.
-That allowed to teach rather than program complicated behaviors while
+That allows to teach rather than program complicated behaviors while
 maintaining properties on collision avoidance.
 % Summary of summary
 
-This thesis presents insights and advances the framework of \ac{fabrics} to
-\ac{tg} and compares it extensively to the more commonly used method of \ac{mpc}.
-Through the ideas presented in this thesis, we hope to encourage the
-usage of geometric properties of robotic systems deployed to human-shared 
-environments. This approach does not only provide reactive \ac{tg} but also may
-act as a compact encoding of trajectories for learning-based methods in the
-future.
+This thesis presents insights into aspects of motion planning, advances the
+framework of \ac{fabrics} for \ac{tg}, and compares it extensively to the more
+commonly used method of \ac{mpc}. Through the ideas presented in this thesis, we
+hope to encourage the usage of geometric properties of robotic systems deployed
+to human-shared environments. This approach does not only provide reactive
+\ac{tg} but also may act as a compact encoding of trajectories for
+learning-based methods in the future.
 
 
 
