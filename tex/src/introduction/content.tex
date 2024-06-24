@@ -213,20 +213,16 @@ approaches have gained popularity as they promise similar
 performance to optimization-based techniques. After all,
 they solve the same problem, while changing the naming of
 the objective function from cost function to loss (or
-reward) function. Their major drawback lies in their
-inability to integrate safety constraints in a principled
-manner, and they are often prone to overfitting specific use cases during
-training and thus lacking generalizability when confronted
-with new scenarios \cite{noroozi2023conventional}.
-Computational costs are also often mentioned when
+reward) function. Computational costs are often mentioned when
 criticizing such approaches, but as computational capacity
 increases rapidly and important advancements in natural
 language processing resulted from more capable hardware and
 larger datasets \cite{radford2023robust}, it seems little
-justified. In the context of \ac{tg}, the main drawback of 
-learning-based approaches is their lack of interpretability,
-low generalizability, and the need for large amounts of
-training data.
+justified. Their major drawback lies in their
+inability to integrate safety constraints in a principled
+manner, and they are often prone to overfitting specific use cases during
+training and thus lacking generalizability when confronted
+with new scenarios \cite{noroozi2023conventional}.
 
 \subsection*{Control-based approaches}
 In the early days of robotics, potential field methods were
@@ -242,7 +238,7 @@ does not naturally integrate the dynamics of the robot.
 
 Another notable contender from the same era is Cartesian
 impedance control, praised for its rapid responsiveness and
-perceived safety, \cite{hogan1985impedance}. Cartesian
+perceived safety \cite{hogan1985impedance}. Cartesian
 impedance control models the point of interest on the
 kinematic chain, usually the end-effector, as a
 spring-damper-system attracted to the goal pose. In contrast
@@ -252,7 +248,7 @@ encompassing crucial components for collision-free
 \ac{tg}, such as self-collision avoidance or joint-limit
 avoidance.
 Modeling the point of interest of the robot as a
-second-order differential equation raises whether all
+second-order differential equation raises the question whether all
 components of the \ac{tg} problem can be handled in this
 way. 
 
@@ -289,7 +285,7 @@ distance between two points is the length of the straight
 line connecting them. Formally, the metric tensor defining
 distance is independent of the position in the space. This
 is not the case in non-Euclidean geometries, where the
-metric tensor can depend on the position in the space.
+metric tensor can depend on the position in space.
 As a consequence, the distance between two points is not
 necessarily the length of the straight line connecting them.
 This fundamental difference between Euclidean and
@@ -298,14 +294,14 @@ Specifically, we can \textit{shape} the geometry in such a
 way that distances between points in the configuration space
 that are \textit{desirable} are shorter than distances
 between points that are \textit{undesirable}. Given the
-resulting the geometry, a desired trajectory becomes
+resulting geometry, a desired trajectory becomes
 equivalent to the shortest path in this geometry, making
 computations efficient and the resulting trajectory
 intuitive.
 
 In this dissertation, we recall and extend a framework that
-allows to design \ac{tg} by iteratively shaping the geometry
-of the configuration space. Specifically, individual
+allows to design \ac{tg} by iteratively shaping a geometry
+in the configuration space. Specifically, individual
 desirerable behaviors are combined using summation. These
 behaviors are designed as special geometries for which
 stability properties are conserved during summation. This

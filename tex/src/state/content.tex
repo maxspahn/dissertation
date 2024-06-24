@@ -37,7 +37,7 @@ compute frequency, see \cref{fig:reactivity_scale}.
 At the most reactive end, we find low
 level controllers and on the least reactive end, we find
 global path planning methods. In most robotics planning
-pipelines, a global path planner is guiding the 
+pipelines, a global path planner is guiding a more reactive
 \ac{tg} method.
 This thesis focuses on the reactive end of the scale, and
 therefore we will only give a brief overview of global path
@@ -63,7 +63,7 @@ Control-based approaches to \ac{tg} are methods that
 control the robot using the robot's current state
 \textit{without} taking into account the future development.
 The simplest form of a control-based approach is a
-proportinal controller where more involved methods solve an
+proportional controller whereas more involved methods solve an
 optimization problme taking into account the robot's
 kinematics and dynamics.
 
@@ -283,7 +283,7 @@ such environments.
 \section{Receding-horizon trajectory optimization}%
 \label{sec:receding_horizon_trajectory_optimization}
 
-Acknowledging the limitations of reactive \ac{tg} methods,
+Acknowledging the limitations of reactive methods,
 \ac{tg} is formulated as an optimization problem with with a
 finite discrete time horizon. Such methods are known under
 the name of receding-horizon trajectory optimization. In
