@@ -56,7 +56,18 @@ planning methods.
   \label{fig:reactivity_scale}
 \end{figure}
 
-\section{Impedance control}%
+\section{Control-based approaches}%
+\label{sec:control_based_approaches}
+
+Control-based approaches to \ac{tg} are methods that
+control the robot using the robot's current state
+\textit{without} taking into account the future development.
+The simplest form of a control-based approach is a
+proportinal controller where more involved methods solve an
+optimization problme taking into account the robot's
+kinematics and dynamics.
+
+\subsection{Impedance control}%
 \label{sec:impedance_control}
 
 Impedance control is a widely used control method in
@@ -77,14 +88,18 @@ the robot's behavior to the task at hand
 modified by human feedback to improve perceived safety and
 increase reliability of the task execution with human
 feedback \cite{lachner2022shaping,franzese2021ilosa}.
+Impedance control is a method for \ac{tg}, that does not
+take into account the environment, such as obstacles or
+other agents.
 
-\section{Reactive trajectory generation}%
+\subsection{Reactive control}%
 \label{sec:reactive_trajectory_generation}
 
 In this dissertation, we refer to \textit{reactive \ac{tg}}
 as methods that rely on local information about the
-environment and the robot that compute actions without a
-time horizon into the future. The most prominent example of
+environment, including obstacles and other agents, and the
+robot that compute actions without a time horizon into the
+future. The most prominent example of
 reactive \ac{tg} is the \acf{apf} method as we will
 see by visiting the different embodiments of robotic
 systems.
@@ -138,7 +153,7 @@ While, these reactive \ac{tg} methods capture more
 information than pure controllers, they often rely on 
 scalar objectives functions to weigh different components.
 
-\subsection{Geometries of trajectories}
+\subsection{Geometric approaches}
 \label{sec:geometries_of_trajectories}
 
 Reactive \ac{tg} approaches, such as \ac{apf} theory,
