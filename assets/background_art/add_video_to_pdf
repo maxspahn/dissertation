@@ -8,9 +8,19 @@
 videoFile=$1
 inputPdf=$2
 outputPdf=$3
-rate=10
 
-ffmpeg -i $videoFile -r ${rate} frame_%4d.png
+# get number of pages of input pdf
+nb_images=$(pdfinfo $inputPdf | grep Pages | awk '{print $2}')
+
+# compute rate such that we have cover the entire duration of the video with
+# nb_images
+duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $videoFile)
+rate=$(echo "scale=2; $nb_images / ( $duration * 2 )" | bc)
+
+echo "Extracting frames from video $videoFile with rate $rate"
+
+# run ffmpeg without verbose
+ffmpeg -i $videoFile -loglevel error -r ${rate} frame_%4d.png
 images=($(ls frame_*.png))
 
 n=${#images[@]}
@@ -20,7 +30,10 @@ for i in $(seq 1 $n); do
   # First get image name without the extension
   image_name=$(echo ${images[$i-1]} | cut -f 1 -d '.')
   # Crop the image
-  convert ${image_name}.png -crop 180x180+100+150 ${image_name}_crop.png
+  #convert ${image_name}.png -crop 180x180+100+150 ${image_name}_crop.png
+  #convert ${image_name}.png ${image_name}_crop.png
+  convert ${image_name}.png -resize 180x ${image_name}_crop.png
+
 done
 
 croped_images=($(ls frame_*crop.png))
