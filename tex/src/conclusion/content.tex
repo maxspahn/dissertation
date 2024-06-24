@@ -1,6 +1,8 @@
 \chapter{Conclusion and discussion}
 \label{cha:conclusion}
 
+\acresetall
+
 \input{src/conclusion/transition}
 
 \newpage
@@ -36,7 +38,8 @@ been done in \cite{Avanzini2018} with dynamic weighing. Second, it reduced the
 required accuracy of the perception pipeline as raw point clouds or occupancy
 grids can be used. Third, we showed that reducing the number of constraints
 achieved by using \ac{fsd} allows for substantially faster computation times
-that do not depend on the number of obstacles in the environment. In
+that do not depend on the number of obstacles in the environment, e.g. a solver
+time decrease of a factor 3 for 100 obstacles. In
 \cref{cha:tro_23}, we additionally showed that geometric approaches tend to
 outperform \ac{mpc} formulations despite weaker theoretical guarantees.
 
@@ -69,7 +72,7 @@ This property is exploited in a purely symbolic implementation of \ac{fabrics}
 which allows for solver times around 1ms. This chapter additionally
 proposed to use a Bayesian optimization to tune parameters
 for \ac{fabrics}.
-The experiments showed that expert-level can be reached within 50 iterations, 
+The experiments showed that expert-level tuning can be reached within 50 iterations, 
 i.e. 50 full runs in simulation.
 Additionally, the results revealed that parameter sets can be transferred between
 similar embodiments. Finally, qualitative results on a real robot are presented
@@ -126,7 +129,7 @@ experienced roboticist may be aware of the strengths and weaknesses of
 \ac{mpc}. In contrast, fewer readers may have heard of \ac{fabrics} before.
 One way to make a connection between both methods, because
 \ac{mpc} is based on an \textit{optimization} which is part
-of the name of \acf{fabrics}
+of the name of \acf{fabrics}.
 However, the methods are
 fundamentally different,
 and it is important to analyze the differences and similarities between
