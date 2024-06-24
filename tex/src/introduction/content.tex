@@ -177,21 +177,24 @@ in their incapacity to adapt to dynamic, changing
 environments.
 
 Recognizing this limitation has led to the rise of local
-\ac{tg} methods, where \textit{local} refers to the
-fact that \ac{tg} is performed in real-time only considering
+\ac{tg} methods, where \textit{local} refers to the fact
+that \ac{tg} is performed in real-time only considering
 local changes to the environment.
-However, even
-within this domain, challenges persist. Pure control
-approaches, exemplified by operational space control or
-impedance control, offer speed and interpretability but fall
-short in incorporating the entirety of the problem, such as
-collision avoidance with itself and the environment or
-joint limit avoidance.
-
-
+We divide these methods into two categories: optimization-based
+approaches and control-based approaches. Both categories
+are heavily investigated in the literature.
+%
+%Pure control
+%approaches, exemplified by operational space control or
+%impedance control, offer speed and interpretability but fall
+%short in incorporating the entirety of the problem, such as
+%collision avoidance with itself and the environment or
+%joint limit avoidance.
+%
+%
 \subsection*{Optimization-based approaches}
 With the aim of safe robots, many approaches are
-rooted on optimization problems, centered around an
+rooted in optimization problems, centered around an
 objective function and constraints that favor safety
 guarantees and optimality. Such approaches are often
 referred to as \acf{mpc} schemes or receding
@@ -200,7 +203,8 @@ optimization-based methods have demonstrated success in
 autonomous driving applications, they stumble when
 confronted with real-time constraints in systems with
 a large number of degrees of freedom due to high computational costs
-\cite{spahn2021coupled}.
+\cite{spahn2021coupled}. This is also investigated in this
+thesis in \cref{cha:icra_21}.
 
 In the age of deep neural networks, learning-based
 approaches have gained popularity as they promise similar
@@ -212,14 +216,15 @@ inability to integrate safety constraints in a principled
 manner, and they are often prone to overfitting specific use cases during
 training and thus lacking generalizability when confronted
 with new scenarios \cite{noroozi2023conventional}.
-Computational costs are also often
-mentioned when criticizing such approaches, but as
-computational capacity increases rapidly and important
-advancements in natural language processing resulted from
-more capable hardware and larger datasets
-\cite{radford2023robust},
-it seems little
-justified. 
+Computational costs are also often mentioned when
+criticizing such approaches, but as computational capacity
+increases rapidly and important advancements in natural
+language processing resulted from more capable hardware and
+larger datasets \cite{radford2023robust}, it seems little
+justified. In the context of \ac{tg}, the main drawback of 
+learning-based approaches is their lack of interpretability,
+low generalizability, and the need for large amounts of
+training data.
 
 \subsection*{Control-based approaches}
 In the early days of robotics, potential field methods were
@@ -249,7 +254,7 @@ second-order differential equation raises whether all
 components of the \ac{tg} problem can be handled in this
 way. 
 
-We can observe that modern approaches to \ac{tg} focus on
+We can observe that optimization-based approaches focus on
 the practical side of \ac{tg} and often ignore the
 underlying geometric structure \cite{Ratliff2015}. For
 example, formulating the \ac{tg} problem in the Euclidean
@@ -267,21 +272,45 @@ a series of works where \ac{tg} has been addressed
 purely geometrically
 \cite{Ratliff2015,Ratliff2018,Cheng2020,Cheng2020a,Ratliff2020,Xie2020}.
 
-\section{Geometries in trajectory generation}
+\section{Geometric approaches}
 \label{sec:geometries_in_trajectory_generation}
 
-In this dissertation, we recall and extend a framework
-that allows to iteratively design \ac{tg} via
-summation of individual behaviors. Individual behaviors are
-designed as differential equations of second order for which
-stability properties are conserved during summation.
-This concept, elegantly formalized as \ac{fabrics}, offers
-a nuanced understanding of \ac{tg}.
-Informally speaking, the composition shapes the
-landscape on which the trajectory is then generated.
-Formally speaking, we gradually introduce terms into the
-non-Riemannian metric, shaping a smooth manifold of the
-configuration space.
+Although methods that consider the geometry of the robot's 
+configuration space are closely related to control-based
+approaches, we distinguish them because this thesis focuses
+mainly on non-Euclidean approaches. 
+The most visual
+difference between Euclidean and non-Euclidean geometries is
+the concept of distance. Our understanding of distance is 
+intuitively based on the Euclidean geometry, where the
+distance between two points is the length of the straight
+line connecting them. Formally, the metric tensor defining
+distance is independent of the position in the space. This
+is not the case in non-Euclidean geometries, where the
+metric tensor can depend on the position in the space.
+As a consequence, the distance between two points is not
+necessarily the length of the straight line connecting them.
+This fundamental difference between Euclidean and
+non-Euclidean geometries can be utilized for \ac{tg}.
+Specifically, we can \textit{shape} the geometry in such a
+way that distances between points in the configuration space
+that are \textit{desirable} are shorter than distances
+between points that are \textit{undesirable}. Given the
+resulting the geometry, a desired trajectory becomes
+equivalent to the shortest path in this geometry, making
+computations efficient and the resulting trajectory
+intuitive.
+
+In this dissertation, we recall and extend a framework that
+allows to design \ac{tg} by iteratively shaping the geometry
+of the configuration space. Specifically, individual
+desirerable behaviors are combined using summation. These
+behaviors are designed as special geometries for which
+stability properties are conserved during summation. This
+concept, elegantly formalized as \ac{fabrics}, offers a
+nuanced understanding of \ac{tg}. Informally speaking, the
+composition shapes the landscape on which the trajectory is
+then generated.
 
 \section{Contributions}
 \label{sec:contributions}
