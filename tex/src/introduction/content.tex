@@ -295,9 +295,11 @@ way that distances between points in the configuration space
 that are \textit{desirable} are shorter than distances
 between points that are \textit{undesirable}. Given the
 resulting geometry, a desired trajectory becomes
-equivalent to the shortest path in this geometry, making
-computations efficient and the resulting trajectory
-intuitive.
+equivalent to the shortest path in this geometry.
+Computationally, finding a shortest path in a geometry is 
+often cheaper than solving an optimization problem, for
+geometries used in this thesis, the costs are dominated by
+one matrix inversion.
 
 In this dissertation, we recall and extend a framework that
 allows to design \ac{tg} by iteratively shaping a geometry
