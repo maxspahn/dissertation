@@ -7,12 +7,17 @@
   \label{fig:ral24_overview}
 \end{figure}
 
-While \ac{fabrics} mainly focus on explicit environment
-representation \cite{Spahn2023,Ratliff2020}, new \ac{tg}
-methods lean towards implicit approaches. For \ac{tg} using
-short-term optimization, unoccupied space constraints limit
-robot movement, proven useful for mobile manipulators in
-cluttered areas \cite{Spahn2021}. In drone flight, a similar
+While \ac{fabrics} mainly employ explicit environment
+representations \cite{Spahn2023,Ratliff2020}, new \ac{tg}
+methods lean towards implicit approaches.
+For example, representing the environment's free space as 
+a set of half-planes has proven sucessful for whole-body
+\ac{mpc} formulations \cite{Spahn2021}.
+%For \ac{tg} using
+%short-term optimization, unoccupied space constraints limit
+%robot movement, proven useful for mobile manipulators in
+%cluttered areas \cite{Spahn2021}.
+In drone flight, a similar
 concept generates safe flight zones along a global path
 \cite{Liu2017a,Tordesillas2019a}. In the context of drone
 flying, \ac{sdf} has been utilized with \ac{mpc} in unknown
@@ -20,15 +25,15 @@ environments \cite{Oleynikova2017voxblox}. Raw lidar data
 has been used in combination with \acp{rmp} showing
 impressively high frequencies when computation is parallized
 on GPU \cite{Pantic2023obstacle}. Recent advances in
-sampling-based \ac{mpc}, utilizing physics engines for
+sampling-based \ac{mpc}, also referred to as \ac{mppi}, utilizing physics engines for
 collision avoidance \cite{Pezzato2023sampling}, integrate
 obstacle collisions in cost functions during trajectory
 rollouts. A similar approach is seen in
 \cite{Sundaralingam2023curobo}.
 
-All previous works focus on implicit environment
-representations. However, most of these methods still
-require manual robot representation, like composing spheres.
-On that end, some exploration of more implicit
-characterizations, such as learned \ac{sdf} like in
-\cite{Liu2022regularized,Koptev2023neural}, is underway.
+% All previous works focus on implicit environment
+% representations. However, most of these methods still
+% require manual robot representation, like composing spheres.
+% On that end, some exploration of more implicit
+% characterizations, such as learned \ac{sdf} like in
+% \cite{Liu2022regularized,Koptev2023neural}, is underway.

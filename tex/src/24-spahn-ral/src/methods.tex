@@ -6,7 +6,28 @@ As this work does not alter the fundamental principles of
 three different implicit environment representations into
 the framework. In the process, we lay out the necessary
 concepts required for the representations, and provide the
-tools to combine them with \ac{fabrics}.
+tools to combine them with \ac{fabrics}. The core idea
+however is identical for all presented methods.
+Collision avoidance is realized by defining a differentiable
+mapping \map{} from the configuration space \Q{} to the distance
+manifold between the robot and the environment. On that
+manifold, the desired behavior is encoded using a geometry
+and a energizing Finsler to form a geometric fabric of form
+\[
+  \Spec = \left(\M, \f\right)_{\X}.
+\]
+When being combined with other behaviors, this fabric is
+\textit{pulled} back into the configuration space \Q{} to
+be \textit{summed} up with other fabrics. To recall, the
+\textit{pullback} is defined as
+\[
+  \pull{\map}{\spec} = {\left(\Jt\M\J, \Jt(\f+\M\Jdot\qdot)\right)}_{Q}.
+\]
+The difference between the methods presented in
+this work is the definition of the mapping \map{} and
+therefore the computation of the gradient \J{}. The
+specifics of the fabric defined on the distance manifold 
+remain unchanged over all methods.
 %
 \subsection{Signed distance fields}
 \label{sub:signed_distance_fields}
@@ -14,7 +35,8 @@ tools to combine them with \ac{fabrics}.
 \paragraph{Representation}
 Collision avoidance can be realized using \ac{sdf}
 \cite{Oleynikova2017voxblox}.
-In this approach, the environment is discretized into a grid and a distance to
+In this approach, the environment is discretized into a grid
+and the distance to
 the closest obstacle of the environment is assigned to each voxel in the grid.
 The distance is zero on the
 obstacle's surface and in its inside and positive outside the obstacle.
@@ -23,7 +45,7 @@ based on Lidar data in combination with continuous mapping,
 but other ways to generate \acp{sdf} are possible, see
 \cite{Liu2022regularized,Koptev2023neural} for some
 manipulation examples.
-In this work, we are addressing dynamic environments, so the \ac{sdf} changes
+In this work, we address dynamic environments, therefore the \ac{sdf} changes
 over time, see \cref{fig:sdf} for a two-dimensional example.
 %
 \begin{figure}[ht]
@@ -67,7 +89,7 @@ so $\map_{sdf}(\fk)$ is a function of \q{}.
 As $\der{\q}{\map_{sdf}}$ is not analytically accessible due to the numerical
 nature of \acp{sdf}, we apply the chain rule to obtain
 \[
-  \derf{\q}{\map_{sdf}} = \derf{\fk}{\map_{sdf}}\derf{\q}{\fk}.
+  \bm{J}_{\map,sdf} = \derf{\q}{\map_{sdf}} = \derf{\fk}{\map_{sdf}}\derf{\q}{\fk}.
 \]
 The second term $\der{\q}{\fk}$ is the gradient of the forward
 kinematics, which can be computed analytically. The first part is the gradient
@@ -77,16 +99,18 @@ approximated using finite differences:
   \left(\derf{\fk}{\map_{sdf}}\right)_i \approx 
   \frac{\map_{sdf}(\fk + \Delta_i e_i) - \map_{sdf}(\fk - \Delta_i e_i)}{2 \Delta_i},
 \]
-where $\Delta$ is the resolution in the $i$-th dimension. For 
-\ac{fabrics}, the gradient and the value of the \ac{sdf} must be computed externally
-at each time step, while the analytical compenent is stored internally. Similar
-to \cite{Ratliff2021}, we omit the curvature term \Jdot{} in the pullback
-operation.
+where $\Delta$ is the resolution in the $i$-th dimension.
+For the integration into \ac{fabrics}, the
+value $\map_{sdf}(\fk)$ and the gradient $\der{\fk}{\map_{sdf}}$
+must be computed at runtime.
+In contrast, the analytical compenent $\der{\q}{\fk}$ can be
+precomputed symbolically. Similar to \cite{Ratliff2021}, we omit the
+curvature term \Jdot{} in the pullback operation.
 %
 When working with multi-link robots, such as manipulators, different manifolds
 are created for the different collision links. Note, that
 the same \ac{sdf}
-can be used and does not require extra computation.
+can be used for all collision links.
 
 \subsection{Free space decomposition}
 \label{sub:Free Space Decomposition}
@@ -131,31 +155,33 @@ can be used and does not require extra computation.
 \end{figure}
 
 \paragraph{Representation}
-Very popular in recent literature
-\cite{Tordesillas2019,Liu2017a,Spahn2021} is to decompose the environment with
-all its obstacles, including dynamic obstacles, into an
-\ac{fsd}. Then, the
-workspace in the constrained optimization is reduced to the
-resulting, often convex, free space. The free space is
-defined by a set of half-planes, each defined by a normal
-vector \np{} and a constant \cp{}, see \cref{fig:fsd}. In
-the following, we describe how the free space decomposition
-can be computed given a \pointcloud{} of the environment.
+Popular in recent literature
+\cite{Tordesillas2019,Liu2017a,Spahn2021} is to decompose
+the environment, with all its obstacles, including dynamic
+obstacles, into a set of \ac{fsd}. Then, the workspace is
+reduced or locally approximated by, typically one, convex
+regions. The free space is defined by a set of half-planes,
+each defined by a normal vector \np{} and a constant \cp{},
+see \cref{fig:fsd}. In the following, we describe how the
+free space decomposition can be computed given a
+\pointcloud{} of the environment.
 
 The method used in this work is inspired by \cite{Liu2017a}. We define the
-\seed{} for the \ac{fsd} as the \fk{} of the collision link in question. Then,
+\seed{}, the point in space from which the \ac{fsd} is
+computed, 
+as the position of the collision link in question, see
+\cref{fig:fsd}. Then,
 \pointcloud{} is sorted according to the euclidean distance to the \seed{}.
 Starting with the closest point, a plane \plane{} defined by $\np = \point -
 \seed$ and $\cp = \point$ for every $\point \in \pointcloud$. To further
 speedup the process, every \point{} in \pointcloud{} that is `behind' an
 existing \plane{} is removed from \pointcloud{}. The method results in set
-of $\set_{\textrm{planes}} = \{\plane_i, i\in[0,n]\}$ representing the free
+$\set_{\textrm{planes}} = \{\plane_i, i\in[0,n]\}$, representing the free
 space around \seed{}. The algorithm is visualized in \cref{fig:fsd} for a 2D
 case.
 
 \paragraph{Integration}
-We propose a method to integrate free space
-decomposition into the framework of optimization \ac{fabrics}. Specifically, we
+To integrate \ac{fsd} into the framework of \ac{fabrics}, we
 define a differentiable mapping from configuration space \Q{} to the distance
 manifold between robot and each constrained plane \plane{}.
 Given the \fk{} of a collision link on the robot and the radius of the
@@ -174,26 +200,32 @@ computed analytically as a function of \q{}, \np{} and \cp{}.
 \label{sub:raw_sensor_data}
 
 \paragraph{Representation}
-For the sake of completeness, we also include the usage of
-raw sensor data into the framework of \ac{fabrics}. As
-pointclouds generated with either cameras or lidars are
+As pointclouds generated with either cameras or lidars are
 ususally very large, the direct usage of the raw data is not
-tractable for most trajectory generation methods. However,
-\ac{fabrics} are computationally efficient and can handle
-large amounts of constraints more easily \cite{Spahn2023}.
-This is also based on the findings by
-\cite{Pantic2023obstacle} where raw sensor data was used for
-drone flying with \ac{rmp}.
-This allows to reduce the amount of preprocessing,
-limiting the amount of uncertainty and room for error in this step. Here, we
-explain how raw lidar sensor data can be utilized with \ac{fabrics}.
-The same approach can be used to directly integrate pointclouds or occupancy
-grids.
+tractable for most trajectory generation methods. Direct
+integration refers to create one spherical obstacle for each
+data point in your raw sensor data. As \ac{fabrics} are
+computationally efficient and can handle large amounts of
+constraints more easily than methods relying on iterative
+optimization in each time step\cite{Spahn2023}, direct
+integration becomes feasible. This is also based on the
+findings by \cite{Pantic2023obstacle} where raw sensor data
+was used for drone flying with \ac{rmp}. This allows to
+reduce the amount of preprocessing, limiting the amount of
+uncertainty and room for error in this step. Here, we
+explain how raw lidar sensor data can be utilized with
+\ac{fabrics}. The same approach can be used to directly
+integrate pointclouds or occupancy grids.
 
 \paragraph{Integration}
 We assume that a sensor outputs a set of
 $n_{\textrm{points}}$ points \pointcloud{} in the robot`s
 workspace. We integrate this data directly into \ac{fabrics}
 by placing a virtual, spherical obstacle at each $\point \in
-\pointcloud$. The radius of these obstacles must be chosen
+\pointcloud$. The map is then defined as 
+\[
+  \map_{\textrm{raw}}(\point) = \norm{\point - \fk} - \rl -
+  \rr,
+\]
+The radius \rr{} of these obstacles must be chosen
 to reflect the resolution of the point cloud.

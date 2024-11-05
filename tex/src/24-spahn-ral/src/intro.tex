@@ -1,17 +1,17 @@
 \section{Introduction}
 \label{sec:ral24_intro}
 %
-As robots are making their way into human shared environments,
+As robots make their way into human shared environments,
 fast reactive behavior is needed to ensure that collisions are avoided
 at all time. \acf{tg} is commonly formulated as a receding
 horizon optimization problem, where the robot's trajectory
 is optimized over a short time horizon. Such methods are
-known as \acf{mpc} have shown great success for autonomous
+known as \acf{mpc} and have shown great success for autonomous
 vehicles and drones where the dimension of the configuration
-space remains small. When moving to higher dimensional
-configuration space, e.g. manipulators and mobile
-manipulators, the computational costs of \ac{mpc} scale
-poorly leading to slower computation cycles and ultimately
+space remains small. For higher dimensional
+configuration spaces, e.g. manipulators and mobile
+manipulators, the computational cost of \ac{mpc} scale
+poorly, leading to slower computation cycles and ultimately
 to a less reactive behavior. \acf{fabrics} offer an
 alternative to these approaches. Based on differential
 geometry, policies are composed of several components to form a highly reactive
@@ -40,7 +40,8 @@ paper makes the following contributions:
   \item We derive how numerical gradients can be used for pullback operations
     which are essential in the composition of \ac{fabrics}.
   \item We analyze the strengths and weaknesses of the three representations in
-    different environments, including moving obstacles.
+    different environments, including moving obstacles, and
+    with various robot morphologies.
   \item We present real-world experiments illustrating the power of our
     open-source implementation.
 \end{itemize}
