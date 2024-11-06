@@ -14,7 +14,7 @@ I would suggest to refer to the environments of interest as semi-structured
 dynamic environments. By itself, a dynamic environment could be totally
 predicable, thus presenting limited challenges for planning. The challenges
 emerge in presence of uncertainty (structured vs. unstructured).
--> semi-structured and human-shared as a special case?
+-> semi-structured and human-shared as a special case? DONE
 
 It would be potentially benefit to slightly revise Chapter 2, to make sure it is
 self-contained. In particular, to define what a Finsler structure is explicitly,
@@ -27,7 +27,7 @@ Dynamical System approach developed, among other places, at EPFL and a more
 in-depth (qualitative) comparison with the concept of optimization fabric. I
 regard these approaches as quite similar (but being no expert) and therefore it
 would be of value to get better insights in the main differences.
--> comparison to dynamic systems
+-> comparison to dynamic systems DONE in related works
 
 One aspect that could also be improved is to explicitly discuss the need to
 define a trajectory to follow for a robot. Somehow, this seems to comes from

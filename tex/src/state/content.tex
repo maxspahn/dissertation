@@ -166,7 +166,10 @@ interpreted as a measure of curvature on the optimization
 manifold. The tuple of metric and policy defines
 for each \textit{behavior} a dynamical system.
 Formulating \ac{tg} as a dynamical system is a widely used
-approach \cite{khansari2012dynamical,huber2023avoidance}.
+approach \cite{khansari2012dynamical,zadeh2011learning}.
+The concept of \textit{modulation} of dynamic systems multiplies the system
+with matrix that captures directional preferences when avoiding obstacles
+or imitating human demonstrations \cite{huber2022avoiding,huber2023avoidance}.
 Similarly, \ac{dmp} formulate \ac{tg} as a known dynamical
 systems with convenient stability properties for which
 parameters can be learned or tuned
@@ -176,6 +179,7 @@ chosen dynamical systems are usally damped spring models
 \cite{perez2023stable}. When limited to damped spring models
 in one task space, \ac{dmp} ared reduced to \ac{osc}
 \cite{Khatib1987a}.
+
 %
 %Based on the findings of contracting metrics for non-linear
 %control design \cite{l2,l3}, geometric approaches design the motion
@@ -192,8 +196,13 @@ A more general framework was introduced as \acf{rmp} in
 natural way of combining multiple policies into one joined policy.
 \ac{rmp} define individual sub-tasks of the motion planning as
 differential equations (\textit{spectral semi sprays} or
-\textit{specs} for short) of second order and propose the
-\textit{pullback} and \textit{summation} operators to combine multiple policies
+\textit{specs} for short) of second order. Importantly,
+\ac{rmp} make an explicit separation between metric and forcing vector, thus
+being closely related to the concept of modulation of
+dynamic systems \cite{huber2023avoidance}.
+After defining all desired behaviors as tuples of metric and forcing vector, they
+are combined using
+\textit{pullback} and \textit{summation} operations
 in the configuration space, see \cref{fig:spec_combination}. As subtasks can be defined in arbitrary manifolds
 of the configuration space, \ac{rmp} generalize operational space
 control~\cite{Khatib1987}. The resulting behavior of
