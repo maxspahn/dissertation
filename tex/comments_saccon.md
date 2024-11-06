@@ -36,6 +36,7 @@ a good paradigm also for robots in unstructured environments or robots that are
 tasked to interact physically with the environment. 
 -> I think he refers to trajectory but means path, in the sense that path
 following. In the introduction we can add a sentence or two for local minima
+IGNORED
 
 One aspect I am missing in the introduction is a also discussion about
 making/breaking of contact with the environment, and its potential connection

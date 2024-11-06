@@ -125,7 +125,7 @@ manipulators in human-shared environments.
 
 Most readers are likely familiar with \acl{mpc} and may have seen its application
 to, for example, autonomous driving or mobile manipulation, and some 
-experienced roboticist may be aware of the strengths and weaknesses of
+experienced roboticists may be aware of the strengths and weaknesses of
 \ac{mpc}. In contrast, fewer readers may have heard of \ac{fabrics} before.
 One way to make a connection between both methods, because
 \ac{mpc} is based on an \textit{optimization} which is part
@@ -341,13 +341,13 @@ policy equation
 \]
 could be computed based on visuals inputs, such as images or point clouds. By
 doing so complex behaviors can be achieved without the need for hand-crafting
-complicated objectives. This direction of research has already been experiented
-with in \cite{vanwyk2024geometric}.
+complicated objectives. This direction of research has already been experimented
+with in \cite{vanwyk2024geometric,lum2024dextrah}.
 % sampling to exploit cheap forward computations
 Finally, the low computational costs of \ac{fabrics} can be exploited for
 forward rollouts in sampling-based methods. The approach of forward rollouts is
 often used when objectives are non-convex or gradients are unknown. Then
-sampling is benificial and can lead to high-quality trajectories, see
+sampling is beneficial and can lead to high-quality trajectories, see
 \cite{Pezzato2023sampling}. In this context, \ac{fabrics} can be used as an
 initial guess to form the mean of the sampling distribution. Potentially, that
 can lead to a reduced sample size. Similarly, pure \ac{fabrics} policies can be
@@ -358,14 +358,23 @@ subsequently used for training.
 \label{par:discussion_fabrics_for_manipulation}
 
 All approaches presented in this work treated collisions as harmful and integrated
-the environment as avoidance behaviors. Collision avoidance is critical for
+the environment in avoidance behaviors. Collision avoidance is critical for
 safety in human-shared environments, but contacts are not \textit{per-se} harmful, 
 in fact, we, humans, make contact very often to interact with the environment or
 to better understand characteristics of the tasks we want to achieve.
-
-
-  
-
+Therefore, one clear direction of future research for optimization fabrics is
+application of \ac{fabrics} for actual manipulation tasks. One way is the
+presented approach in \cref{cha:rss_24} where \ac{fabrics} are used to generate
+trajectories that actually make contact. However, the contact was not actually 
+considered in the \ac{tg} problem. Similarly in terms of contact integration
+is the work of \cite{lum2024dextrah}. Trying to lift the assumptions that
+contacts occur at \textit{close-to-zero}-velocity, recent works integrate 
+collision, or positively phrased contact, into the control formulation, see
+for example \cite{wang2023impact,khurana2023motion,yan2024impact}. These
+approaches integrate the impact-awareness into a task-space controller. As 
+\ac{fabrics} can be interpreted as a generalization of \ac{cic}, an extension
+for impact-aware \ac{fabrics} seems possible and should be investigated in the
+future.
 
 \input{src/conclusion/considerations}
 
