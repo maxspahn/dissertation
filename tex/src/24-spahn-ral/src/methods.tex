@@ -41,7 +41,7 @@ the closest obstacle of the environment is assigned to each voxel in the grid.
 The distance is zero on the
 obstacle's surface and in its inside and positive outside the obstacle.
 In \cite{Oleynikova2017voxblox}, the \ac{sdf} is computed
-based on Lidar data in combination with continuous mapping,
+based on lidar data in combination with continuous mapping,
 but other ways to generate \acp{sdf} are possible, see
 \cite{Liu2022regularized,Koptev2023neural} for some
 manipulation examples.
@@ -103,7 +103,7 @@ where $\Delta$ is the resolution in the $i$-th dimension.
 For the integration into \ac{fabrics}, the
 value $\map_{sdf}(\fk)$ and the gradient $\der{\fk}{\map_{sdf}}$
 must be computed at runtime.
-In contrast, the analytical compenent $\der{\q}{\fk}$ can be
+In contrast, the analytical component $\der{\q}{\fk}$ can be
 precomputed symbolically. Similar to \cite{Ratliff2021}, we omit the
 curvature term \Jdot{} in the pullback operation.
 %
@@ -201,7 +201,7 @@ computed analytically as a function of \q{}, \np{} and \cp{}.
 
 \paragraph{Representation}
 As pointclouds generated with either cameras or lidars are
-ususally very large, the direct usage of the raw data is not
+usually very large, the direct usage of the raw data is not
 tractable for most trajectory generation methods. Direct
 integration refers to create one spherical obstacle for each
 data point in your raw sensor data. As \ac{fabrics} are
