@@ -1,5 +1,99 @@
-%{\selectlanguage{german}
+%**Motivation**  
+Da Robotik eine zentrale Rolle in der Zukunft unserer modernen Gesellschaften
+spielen wird, ist der Bedarf an Fortschritten in diesem Bereich ausgeprägter
+denn je. Während Roboter bereits in industriellen Umgebungen präsent sind,
+fehlen sie auffallend in dynamischen Umgebungen. Dynamische Umgebungen sind
+durch andere bewegliche Akteure wie Menschen, wechselnde Aufgaben und hohe
+Sicherheitsanforderungen gekennzeichnet. Um Roboter in solchen Umgebungen
+einzusetzen, wird die \ac{tg} entscheidend. \Ac{tg}-Ansätze zielen darauf ab,
+Sequenzen von Steuerbefehlen zu berechnen, die den Roboter von seiner aktuellen
+Konfiguration zu einem gewünschten Zielzustand bringen und dabei Kollisionen mit
+Hindernissen und sich selbst vermeiden. Somit ist \ac{tg} direkt zwischen der
+Aufgabenplanung – dem Problem, welche Aufgaben in welcher Reihenfolge ausgeführt
+werden sollen – und der Steuerung – dem Problem der Ausführung von Motorbefehlen
+– angesiedelt. Eine gute Lösung für \ac{tg} muss schnell sein, um auf Änderungen
+in der Umgebung reagieren zu können, flexibel für verschiedene Zieldefinitionen
+und sicherheitsfördernd. Die meisten Fortschritte im Bereich der Robotik in
+Bezug auf \ac{tg} konzentrieren sich entweder auf Manipulatoren oder auf mobile
+Roboter. Die Kombination beider Systeme scheint jedoch für den Einsatz in von
+Menschen geteilten Umgebungen unvermeidlich.
 
-Zusammenfassung in Deutsch\ldots
+%**\Ac{mpc}-Lösung**  
+\Ac{tg} für mobile Manipulation wird üblicherweise als Optimierungsproblem über
+einen endlichen Zeithorizonts formuliert. Dieser Ansatz ist als \ac{mpc} bekannt
+und wird im Rahmen von autonomen Fahren aufgrund seiner Machbarkeits- und
+Stabilitätsgarantien weit verbreitet eingesetzt. In \cref{cha:icra_21}
+präsentieren wir eine Methode, um \ac{mpc} auf mobile Manipulation anzuwenden.
+Die Methode formuliert das \ac{tg}-Problem für die gesamte kinematische Kette
+und nutzt \ac{fsd} zur Kollisionsvermeidung. Dies führt zu ausreichend schnellen
+Steuerfrequenzen von 10 Hz, unabhängig von der Anzahl der Kollisionshindernisse
+in der Umgebung. Wichtig ist, dass dieser Ansatz eine gekoppelte Bewegung der
+mobilen Basis und des Manipulators ermöglicht. Dies ist vorteilhaft in
+Situationen, in denen die Synchronisation der beiden Teilsysteme entscheidend
+ist, wie beim Öffnen von Türen oder beim Bewegen von Hindernissen.
 
-%}
+%**Übergang zu \ac{fabrics}**  
+Trotz dieser Vereinfachungen in der Umgebungsdarstellung schränken die
+Rechenkosten die Anwendbarkeit von \ac{mpc} auf die mobile Manipulation ein, da
+die Bewegung nicht wirklich reaktiv betrachtet wird und verschiedene Komponenten
+wie Zielanziehung und Kollisionsvermeidung nicht leicht trennbar sind. Ein neuer
+Ansatz zu Receding-Horizon-Control ist die Formulierung als rein
+geometrisches Problem. Erste Erfolge in diese Richtung, einschließlich \ac{cic}
+und \ac{apf}, führten zur Formulierung als Menge von dynamischen Systemen auf
+glatten Mannigfaltigkeiten im Konfigurationsraum. Der Rahmen von \acf{fabrics}
+vereinheitlicht solche Ideen, bietet Stabilitätsgarantien in statischen
+Umgebungen und ermöglicht ein hochreaktives Verhalten ähnlich wie bei einfachen
+niederen Steuerungen.
+
+%**\Ac{fabrics}-Lösung**  
+Dieser Rahmen basiert auf nicht-riemannscher Geometrie, um eine glatte
+Mannigfaltigkeit des Konfigurationsraums mit individuellen Verhaltensweisen wie
+Kollisionsvermeidung, Gelenkgrenzenvermeidung und Zielanziehung zu gestalten. In
+\cref{cha:tro_23} präsentieren wir eine Verallgemeinerung von \ac{fabrics} auf
+dynamische Umgebungen. Wir bezeichnen den resultierenden Rahmen als \ac{df}. Die
+Verallgemeinerung nutzt zeitparameterisierte Mannigfaltigkeiten zur Integration
+von sich bewegenden Hindernissen und zeitparameterisierten Referenztrajektorien.
+Letzteres ist besonders wichtig für langhorizontale \ac{tg}, die lokale Minima
+aufweisen können. Wichtig ist, dass in \cref{cha:tro_23} gezeigt wird, dass die
+dynamische Komponente von \ac{df} notwendig ist, um mit beweglichen Hindernissen
+umzugehen. Da abstoßende Kräfte in \ac{fabrics} proportional zur
+Annäherungsgeschwindigkeit von Hindernis und Roboter sind, ist eine
+pseudo-statische Kollisionsvermeidung nicht ausreichend, wenn sich der Roboter
+langsam bewegt.
+
+%**Einstellungen in der realen Welt**  
+Schließlich setzen wir das allgemeine Rahmenwerk von \ac{df} in mehreren realen
+Umgebungen ein, um die Anwendbarkeit des Rahmens auf die mobile Manipulation zu
+demonstrieren. Zuerst präsentieren wir eine Methode, um nicht-holonome
+Einschränkungen in das Rahmenwerk zu integrieren. Trotz des Verlusts formaler
+Konvergenzgarantien erweist sich die Methode als natürliche Erweiterung auf
+mobile Roboter mit nicht-holonomischen Einschränkungen. Zweitens wird in
+\cref{cha:icra_23} eine symbolische Implementierung von \ac{fabrics}
+vorgestellt, um höhere Steuerfrequenzen zu erreichen. Symbolische
+Implementierungen sind möglich, da der Rahmen von \ac{fabrics} auf
+Differentialgleichungen zweiter Ordnung basiert, für die eine geschlossene
+Lösung existiert. Für sich ändernde Umgebungen werden die Hinderniszustände dann
+nur zur Laufzeit konkretisiert. Außerdem zeigen wir, dass symbolische
+Hyperparameter automatisch abgestimmt werden können, um eine
+Experten-Tuning-Leistung zu erreichen. Drittens integriert \cref{cha:ral_24}, um
+hohe Anforderungen an die Wahrnehmungspipeline zu überwinden, verschiedene
+implizite Umgebungsdarstellungen in den Rahmen. Die Verwendung von \acf{sdf} und
+\acf{fsd} wird beispielsweise häufig in der mobilen Robotik verwendet, wenn
+\ac{tg} als \ac{mpc} formuliert wird. Wir zeigen, dass dieselben Darstellungen
+in \ac{fabrics} verwendet werden können und dabei schnellere Lösungszeiten
+erreicht werden. Schließlich wird in \cref{cha:rss_24} ein mobiler Manipulator,
+der von \ac{fabrics} gesteuert wird, in einem Supermarkt eingesetzt. Geschickte
+Manipulationen werden mittels Lernen aus Demonstrationen programmiert, wobei
+\ac{fabrics} als zugrunde liegende Kodierung verwendet wird. Dadurch wird es
+möglich, komplizierte Verhaltensweisen zu lehren anstatt sie zu programmieren,
+während die Eigenschaften der Kollisionsvermeidung erhalten bleiben.
+
+%Zusammenfassung
+Diese Dissertation präsentiert Einblicke in verschiedene Aspekte der
+Bewegungsplanung, erweitert den Rahmen von \ac{fabrics} für die \ac{tg} und
+vergleicht ihn umfassend mit der häufiger verwendeten Methode der \ac{mpc}. Mit
+den in dieser Dissertation vorgestellten Ideen hoffen wir, die Nutzung
+geometrischer Eigenschaften von Robotersystemen in von Menschen geteilten
+Umgebungen zu fördern. Dieser Ansatz bietet nicht nur eine reaktive \ac{tg},
+sondern kann auch als kompakte Kodierung von Trajektorien für zukünftige
+lernbasierte Methoden dienen.
