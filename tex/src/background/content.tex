@@ -297,7 +297,7 @@ forms a \textit{frictionless fabric}~\cite[Definition
 pendulum forms a frictionless fabric, as it optimizes the
 potential function defined by gravity when being damped
 (i.e., it eventually comes to rest at the configuration with
-minimal potential energy)
+minimal potential energy).
 
 In the following, methods to construct \ac{fabrics} are
 summarized.
@@ -306,7 +306,7 @@ summarized.
 \label{sub:conservative_fabrics_and_energization}
 
 While the previous subsection defined what criteria are required for a spec to form
-a \ac{fabric}, the theory on conservative fabrics and energization 
+an \ac{fabric}, the theory on conservative fabrics and energization 
 offers a simple way of generating such special specs. As a full summary of the theory
 on \ac{fabrics} and their construction is out of scope here, this
 subsection only provides an outline of the theory and the reader is referred to 
@@ -314,7 +314,8 @@ subsection only provides an outline of the theory and the reader is referred to
 
 In the context of \ac{fabrics}, the term \textit{energy} describes a scalar quantity that
 changes as the system evolves over time.  Although this quantity has a physical meaning in
-natural systems (e.g., kinetic energy), it can be arbitrarily defined for motion generation.
+natural systems (e.g., kinetic energy), it can be
+arbitrarily defined for \ac{tg}.
 Besides, this quantity can be used as
 a Lyapunov function to prove the convergence of the trajectory to the minimum of the potential
 function.
@@ -348,7 +349,8 @@ The operation of \textit{energization} transforms a given differential equation 
 a conservative spec.
 Specifically, given an unbiased energy Lagrangian \le{} with boundary conforming
 \Me{}~\cite[Definition~4.6]{Ratliff2020} and
-lower bounded energy \he{}, an unbiased spec in normalized,
+lower bounded energy $\he = \der{\xdot}{\le}^T\xdot - \le$,
+an unbiased spec in normalized,
 i.e. $\vec{h} = \inv{\M}\f$,
 form $\Spec_{\vec{h}} = (\mat{I},\vec{h})$
 is transformed into a frictionless fabric using energization as
@@ -372,12 +374,12 @@ However, if
 the resulting energized spec forms a frictionless fabric for which the trajectory matches
 the original trajectory of $\Spec_{\vec{h}}$. We refer to energized fabrics with that
 property as \textit{geometric fabrics}. Geometric fabrics form the building blocks for
-motion generation with \ac{fabrics}.
+\ac{tg} with \ac{fabrics}.
 Practically, energization equips the individual components of the planning problem
 with a metric when being combined with other components.
 
 
-\subsection{Motion generation using optimization fabrics}%
+\subsection{Trajectory generation using optimization fabrics}%
 \label{sub:trajectory_generation_using_optimization_fabrics}
 
 After this brief introduction to the theory of \ac{fabrics},
@@ -387,7 +389,7 @@ When using \ac{fabrics} for \ac{tg}, all
 components including constraints and goal attraction are
 designed as second order differential equations. If specific
 design rules for these equations are respected, all
-components can be combined to form a converging motion
+components can be combined to form a converging trajectory
 generator. Specifically, the following steps are performed:
 %
 \begin{enumerate}
@@ -406,13 +408,14 @@ generator. Specifically, the following steps are performed:
 
 This procedure has been initial presented in
 \cite{Ratliff2020} and is used throughout this thesis to
-generate trajectory with \ac{fabrics}. In \cref{cha:tro_23},
+generate trajectories with \ac{fabrics}. In \cref{cha:tro_23},
 we adopt the procedure to our generalization to dynamic
 settings.
 
 Although important concepts and findings on \ac{fabrics} were summarized in this
-section, we refer to~\cite{Ratliff2020} for a more in-depth presentation of optimization
-fabrics. In the following, we generalize the framework of optimization fabrics to dynamic settings.
+section, we refer to~\cite{Ratliff2020} for a more in-depth presentation of
+\ac{fabrics}. In the following, we generalize the framework of
+\ac{fabricss} to dynamic settings.
 
 \section{Conclusion}%
 \label{sec:background_conclusion}

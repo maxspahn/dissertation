@@ -52,7 +52,7 @@ planning methods.
   reactive methods, such as \ac{mpc}
   \cite{hewing2020learning}, \ac{apf} \cite{Khatib1985} and
   low-level control methods such as \ac{ic} \cite{hogan1985impedance}
-  are at the most reactive end.}
+  are towards the more reactive side.}
   \label{fig:reactivity_scale}
 \end{figure}
 
@@ -70,25 +70,25 @@ kinematics and dynamics.
 \subsection{Impedance control}%
 \label{sec:impedance_control}
 
-Impedance control is a widely used control method in
-robotics \cite{hogan1985impedance,abu2020variable}. In impedance
-control, the controlled system is modeled as a
-mass-spring-damper system. The specific case of Cartesian
-impedance control was proposed in \cite{albu2002cartesian} and
+\Ac{ic} is a widely used control method in
+robotics \cite{hogan1985impedance,abu2020variable}. In
+\ac{ic}, the controlled system is modeled as a
+mass-spring-damper system. The specific case of \acf{cic}
+was proposed in \cite{albu2002cartesian} and
 could be characterized as a \ac{tg} method, because of
 its ability to cope with various goal specifications and its
 safety properties in the proximity of humans
 ~\cite{van2022disagreement,hjorth2024enabling}.
-Additionally, impedance control can be used in collaborative
+Additionally, \ac{ic} can be used in collaborative
 settings, e.g., when lifting large objects together with
 humans \cite{abu2020variable}. More recent works on
-impedance control use variable impedance parameters to adapt
+\ac{ic} use variable impedance parameters to adapt
 the robot's behavior to the task at hand
-\cite{abu2020variable}. Often, the impedance controller is
+\cite{abu2020variable}. Often, the parameters are
 modified by human feedback to improve perceived safety and
 increase reliability of the task execution with human
 feedback \cite{lachner2022shaping,franzese2021ilosa}.
-Impedance control is a method for \ac{tg}, that does not
+\Ac{ic} is a method for \ac{tg}, that does not
 take into account the environment, such as obstacles or
 other agents.
 
@@ -149,7 +149,7 @@ with many agents, \textit{ORCA} was proposed in
 bases in \cite{Alonso-Mora2012a}.
 
 
-While, these reactive \ac{tg} methods capture more
+While these reactive \ac{tg} methods capture more
 information than pure controllers, they often rely on 
 scalar objectives functions to weigh different components.
 
@@ -199,7 +199,7 @@ differential equations (\textit{spectral semi sprays} or
 \textit{specs} for short) of second order. Importantly,
 \ac{rmp} make an explicit separation between metric and forcing vector, thus
 being closely related to the concept of modulation of
-dynamic systems \cite{huber2023avoidance}.
+dynamical systems \cite{huber2023avoidance}.
 After defining all desired behaviors as tuples of metric and forcing vector, they
 are combined using
 \textit{pullback} and \textit{summation} operations
@@ -240,14 +240,15 @@ components.
     Combining different avoidance behaviors using optimization fabrics. The
     components defining collision avoidance with single obstacles (a,b) are
     combined in (c). Obstacles are shown in red. Trajectories of the point
-    robot are shown in blue.
+    robot with various initial velocity vectors are shown in
+    shades of blue.
   }
   \label{fig:spec_combination}
 \end{figure}
 %
 
 Although \ac{rmp} have proven to be a powerful tool for
-motion generation, it was reported to require intuition and
+\ac{tg}, it was reported to require intuition and
 experience during tuning~\cite{Ratliff2020}. \Acf{fabrics}
 with Finsler structures as metric generators simplify the
 motion design as the conditions for stability and
@@ -283,7 +284,7 @@ of global path planning to overcome local minima is not
 possible to this date. Second, \ac{fabrics} and \ac{rmp} do
 not make use of velocity estimates of obstacles but rely
 purely on their high reactivity in dynamic environments. As
-for other trajectory optimization techniques, motion
+for other \ac{tg} approaches, motion
 estimates could benefit \ac{fabrics} (and \ac{rmp}) to
 result in even smoother motion and allow applications in
 such environments. 
@@ -293,7 +294,7 @@ such environments.
 \label{sec:receding_horizon_trajectory_optimization}
 
 Acknowledging the limitations of reactive methods,
-\ac{tg} is formulated as an optimization problem with with a
+\ac{tg} is formulated as an optimization problem over a
 finite discrete time horizon. Such methods are known under
 the name of receding-horizon trajectory optimization. In
 line with most literature in robotics, we will refer to such
@@ -302,7 +303,7 @@ Generally, several objectives are encoded in the scalar
 objective function, dynamics
 are formulated as equality constraints and inequality constraints ensure
 collision avoidance and joint limit avoidance. The dynamics for this problem can
-include the full dynamics model or simple integrating
+include the full dynamics model or simple integration
 schemes \cite{hewing2020learning}.
 By explicitly solving the constrained optimization problem, this approach yields
 formal guarantees on stability. Stability for \ac{mpc} is proven by formulating
@@ -398,8 +399,8 @@ configurations is found \cite{Karaman2011}. Sampling-based
 methods, such as \acf{rrt}
 \cite{Webb2013,Kleinbort2019,Kuffner2000} and \acf{prm}
 \cite{Hsu2002,Faust2017} are highly
-efficient at generating paths for systems with high-degree
-of freedom.
+efficient at generating paths for systems with
+high-dimensional configuration spaces.
 
 \paragraph{Robotic arms}%
 
@@ -454,7 +455,7 @@ opening doors \cite{Jain2009, Chitta2010} or moving obstacles out of the way
 \label{sec:state_conclusion}
 
 To summarize, motion planning in robotics is a well-studied
-problem. Especially in the early days of robotics, where
+problem. In the early days of robotics, where
 robots were mostly deployed in static environments, motion
 planning was limited to global path planning.
 However, when exposed to

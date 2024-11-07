@@ -127,7 +127,7 @@ Most readers are likely familiar with \acl{mpc} and may have seen its applicatio
 to, for example, autonomous driving or mobile manipulation, and some 
 experienced roboticists may be aware of the strengths and weaknesses of
 \ac{mpc}. In contrast, fewer readers may have heard of \ac{fabrics} before.
-One way to make a connection between both methods, because
+Often times, both methods are put in the same category, because
 \ac{mpc} is based on an \textit{optimization} which is part
 of the name of \acf{fabrics}.
 However, the methods are
@@ -223,7 +223,7 @@ Specifically, the defining manifold can be iteratively
 enhanced, such that individual components can be tested and
 tuned separately. For example, in the experiments of this
 thesis, we usually defined behaviors in order of
-increasing importance, starting with joint limit avoidance
+decreasing importance, starting with joint limit avoidance
 and ending with goal-attraction. That makes the method
 user-friendly and individual components exchangeable if an
 application might require that. Moreover, individual
@@ -276,8 +276,9 @@ intuition that usually comes from experience. We aimed to
 tackle that problem in \cref{cha:icra_23}, but further
 research should be conducted to simplify the tuning process.
 Moreover, all behaviors used in this thesis are
-hand-crafted, in \cref{cha:icra_23} up to certain
-parameter bounds. Hand-crafting \ac{tg} methods is time-consuming
+hand-crafted, in \cref{cha:icra_23} up to certain level
+of parameterization.
+Hand-crafting \ac{tg} methods is time-consuming
 and does not seem to be the right approach in the long run.
 Especially considering the success of learning-based methods
 in other fields. Therefore, we argue that \ac{fabrics}
@@ -326,8 +327,8 @@ intensive sampling for either learning or online-sampling.
 For one
 example, \ac{fabrics} can be used as a safety filter during training and/or
 during testing. Acting as a filter, \ac{fabrics} can ensure that joint limits
-are respecting, self-collision is avoided and that action spaces defined in task
-spaces is tracking in joint space. Especially the latter is a common assumption
+are respected, self-collision is avoided and that action spaces defined in task
+spaces are tracked in joint space. Especially the latter is a common assumption
 for reinforcement-learning agents, see
 \cite{hansen2020self,hansen2021generalization} for examples. In this setting,
 \ac{fabrics} replace the simplistic low-level controller that is already
@@ -362,7 +363,7 @@ the environment in avoidance behaviors. Collision avoidance is critical for
 safety in human-shared environments, but contacts are not \textit{per-se} harmful, 
 in fact, we, humans, make contact very often to interact with the environment or
 to better understand characteristics of the tasks we want to achieve.
-Therefore, one clear direction of future research for optimization fabrics is
+Therefore, one clear direction of future research is the
 application of \ac{fabrics} for actual manipulation tasks. One way is the
 presented approach in \cref{cha:rss_24} where \ac{fabrics} are used to generate
 trajectories that actually make contact. However, the contact was not actually 
