@@ -18,6 +18,7 @@ def stamp_img(
     content_pdf: str,
     stamp_imgs: List[str],
     pdf_result: str,
+    start_page: int = 1,
 ):
 
     writer = PdfWriter()
@@ -26,7 +27,7 @@ def stamp_img(
     writer.append(reader)
 
     # get page indices to take every other page
-    page_indices = list(range(1, len(reader.pages), 2))
+    page_indices = list(range(start_page, len(reader.pages)+1, 2))
 
     tf_matrix = Transformation().scale(sx=0.4, sy=0.4).translate(tx=400, ty=10)
 
@@ -51,8 +52,9 @@ def stamp_img(
 def main():
     input_pdf = sys.argv[1]
     output_pdf = sys.argv[2]
-    images = sys.argv[3:]
-    stamp_img(input_pdf, images, output_pdf)
+    start_page = int(sys.argv[3])
+    images = sys.argv[4:]
+    stamp_img(input_pdf, images, output_pdf, start_page=start_page)
 
 if __name__ == "__main__":
     main()

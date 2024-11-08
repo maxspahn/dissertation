@@ -4,13 +4,21 @@
 # The video should have a white background.
 #
 # Usage: ./overal.sh video_file input.pdf output.pdf
+#
+if [ "$#" -ne 4 ]; then
+  echo "Usage: $0 video_file input.pdf output.pdf startPage"
+  exit 1
+fi
 
 videoFile=$1
 inputPdf=$2
 outputPdf=$3
+startPage=$4
 
-# get number of pages of input pdf
+# get number of pages of input pdf and reduce it by startPage
 nb_images=$(pdfinfo $inputPdf | grep Pages | awk '{print $2}')
+nb_images=$(($nb_images - $startPage + 1))
+
 
 # compute rate such that we have cover the entire duration of the video with
 # nb_images
@@ -37,7 +45,7 @@ for i in $(seq 1 $n); do
 done
 
 croped_images=($(ls frame_*crop.png))
-python3 add_image_to_pdf.py $inputPdf $outputPdf ${croped_images[@]}
+python3 add_image_to_pdf.py $inputPdf $outputPdf $startPage ${croped_images[@]}
 rm ${croped_images[@]}
 rm ${images[@]}
 
