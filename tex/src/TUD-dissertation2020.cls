@@ -141,7 +141,7 @@
 %% for the thumb indices.
 \definecolor{anthracite}{cmyk}{0,0,0,0.8}
 \if@print
-    \colorlet{title}{anthracite}
+    \colorlet{title}{tudelft-cyan}
 \else
     \colorlet{title}{tudelft-cyan}
 \fi
