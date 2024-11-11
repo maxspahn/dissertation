@@ -7,13 +7,13 @@ afwezig in dynamische omgevingen. Dynamische omgevingen worden gekenmerkt door
 andere bewegende agenten, zoals mensen, variërende taken en hoge
 veiligheidseisen. Met als doel robots in dergelijke omgevingen in te zetten,
 wordt \ac{tg} cruciaal. \Ac{tg}-benaderingen zijn gericht op het berekenen van
-reeksen controlecommando's die de robot van zijn huidige configuratie naar een
+reeksen acties die de robot van zijn huidige configuratie naar een
 gewenste eindtoestand brengen, terwijl botsingen met obstakels en met zichzelf
 worden vermeden. Hierdoor bevindt \ac{tg} zich direct tussen taakplanning – het
 probleem van welke taken in welke volgorde moeten worden uitgevoerd – en
 controle, het probleem van het uitvoeren van motorcommando's. Een goede
 oplossing voor \ac{tg} moet snel zijn om veranderingen in de omgeving het hoofd
-te bieden, flexibel voor verschillende doeldefinities, en de veiligheid
+te bieden, flexibel voor verschillende doelstellingen, en de veiligheid
 bevorderen. De meeste vooruitgangen op het gebied van robotica in \ac{tg}
 richten zich ofwel op manipulatoren of op mobiele robots. Echter, de combinatie
 van beide systemen lijkt onvermijdelijk voor inzet in door mensen gedeelde
@@ -26,7 +26,7 @@ als \ac{mpc} en wordt veel gebruikt op het gebied van autonoom rijden vanwege de
 haalbaarheids- en stabiliteitsgaranties. In \cref{cha:icra_21} presenteren we
 een methode om \ac{mpc} toe te passen op mobiele manipulatie. De methode
 formuleert het \ac{tg}-probleem voor de gehele kinematische keten en maakt
-gebruik van \ac{fsd} voor botsingsvermijding. Dit leidt tot redelijke
+gebruik van \ac{fsd} voor het vermijden van botsingen. Dit leidt tot
 controlefrequenties van 10 Hz, onafhankelijk van het aantal obstakels in de
 omgeving. Belangrijk is dat deze aanpak een gekoppelde beweging van de mobiele
 basis en de manipulator mogelijk maakt. Dit is voordelig in situaties waarin
@@ -34,27 +34,30 @@ synchronisatie van de twee subsystemen cruciaal is, zoals bij het openen van
 deuren of het verplaatsen van obstakels.
 
 %**Overgang naar \ac{fabrics}**  
-Ondanks deze vereenvoudigingen in de omgevingsvoorstellingen, beperken de
+Ondanks deze vereenvoudigingen in de representatie van de omgeving, beperken de
 rekentijden de toepasbaarheid van \ac{mpc} op mobiele manipulatie, omdat de
 beweging niet echt reactief wordt beschouwd en verschillende componenten zoals
-doelattractie en botsingsvermijding niet gemakkelijk te scheiden zijn. Een
-recent nieuwe benadering voor receding horizon control is de formulering als een
+aantrekking tot het doel en het vermijden van botsingen
+niet gemakkelijk te scheiden zijn. Een
+recente benadering voor receding horizon control is de formulering als een
 puur geometrisch probleem. Vroege successen in deze richting, waaronder \ac{cic}
-en \ac{apf}, leidden tot de formulering als verzamelingen dynamische systemen op
-gladde variëteiten in de configuratieruimte. Het kader van \ac{fabrics}
+en \ac{apf}, leidden tot de formulering als verzamelingen dynamische systemen
+in de configuratieruimte. Het kader van \ac{fabrics}
 verenigt dergelijke ideeën, biedt stabiliteitsgaranties in statische omgevingen
 en resulteert in zeer reactief gedrag vergelijkbaar met eenvoudige laag-niveau
 controllers.
 
 %**\Ac{fabrics}-oplossing**  
-Dit kader is gebaseerd op niet-Riemanniaanse geometrie om een gladde variëteit
+Dit kader is gebaseerd op niet-Riemanniaanse geometrie om een manifold
 van de configuratieruimte te vormen met individuele gedragingen zoals
-botsingsvermijding, motorgrensen en doelattractie. In \cref{cha:tro_23}
+het vermijden van botsingen, motorlimieten en het bereiken van het doel.
+In \cref{cha:tro_23}
 presenteren we een generalisatie van \ac{fabrics} naar dynamische omgevingen. We
 verwijzen naar het resulterende kader als \ac{df}. De generalisatie maakt
-gebruik van tijdgeparameteriseerde variëteiten om bewegende obstakels en
+gebruik van tijdgeparameteriseerde manifolds
+om bewegende obstakels en
 tijdgeparameteriseerde referentietrajecten te integreren. Dit laatste is vooral
-belangrijk voor \ac{tg} met lange horizon die lokale minima kan vertonen.
+belangrijk voor \ac{tg} met een lange horizon die lokale minima kan vertonen.
 Belangrijk is dat in \cref{cha:tro_23} wordt aangetoond dat de dynamische
 component van \ac{df} noodzakelijk is bij het omgaan met bewegende obstakels.
 Omdat afstotende krachten in \ac{fabrics} evenredig zijn aan de
@@ -72,20 +75,20 @@ mobiele robots met niet-holonome beperkingen. Ten tweede wordt in
 om hogere controlefrequenties te bereiken. Symbolische implementaties zijn
 mogelijk omdat het kader van \ac{fabrics} is gebaseerd op
 differentiaalvergelijkingen van de tweede orde, waarvoor een gesloten oplossing
-bestaat. Voor veranderende omgevingen worden obstakelstatussen dan alleen op
-runtime geconcretiseerd. Daarnaast tonen we aan dat symbolische hyperparameters
+bestaat. Voor veranderende omgevingen worden obstakelstatussen alleen in runtime
+aangeroepen. Daarnaast tonen we aan dat symbolische hyperparameters
 automatisch kunnen worden afgesteld om een prestatie op expertniveau te
-bereiken. Ten derde integreert \cref{cha:ral_24}, om aan de hoge eisen van de
-perceptiepijplijn te voldoen, verschillende impliciete omgevingsvoorstellingen
-in het kader. Het gebruik van \ac{sdf} en \ac{fsd} is bijvoorbeeld
+bereiken. Ten derde integreert \cref{cha:ral_24} verschillende impliciete representaties van de omgeving, om aan de hoge eisen van de
+perceptiepijplijn te voldoen,
+Het gebruik van \ac{sdf} en \ac{fsd} is bijvoorbeeld
 veelgebruikt in de mobiele robotica bij het formuleren van \ac{tg} als \ac{mpc}.
 We laten zien dat dezelfde voorstellingen in \ac{fabrics} kunnen worden
-gebruikt, met kortere oplossingsuren als resultaat. Tot slot implementeert
+gebruikt, met kortere berekeningstijden als resultaat. Tot slot implementeert
 \cref{cha:rss_24} een mobiele manipulator die wordt bestuurd door \ac{fabrics}
 in een supermarkt. Behendige manipulaties worden geprogrammeerd met behulp van
 leren-uit-demonstratie, met \ac{fabrics} als de onderliggende codering. Dit
 maakt het mogelijk om ingewikkelde gedragingen aan te leren in plaats van ze te
-programmeren, terwijl de eigenschappen van botsingsvermijding behouden blijven.
+programmeren, het vermijden van botsingen als eigenschap behouden blijft 
 
 %**Samenvatting**  
 Deze scriptie presenteert inzichten in aspecten van bewegingsplanning, breidt
