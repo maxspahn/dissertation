@@ -40,7 +40,8 @@ for i in $(seq 1 $n); do
   # Crop the image
   #convert ${image_name}.png -crop 180x180+100+150 ${image_name}_crop.png
   #convert ${image_name}.png ${image_name}_crop.png
-  convert ${image_name}.png -resize 180x ${image_name}_crop.png
+  #convert ${image_name}.png -resize 180x ${image_name}_crop.png
+  convert ${image_name}.png ${image_name}_crop.png
 
 done
 
