@@ -29,7 +29,7 @@ def stamp_img(
     # get page indices to take every other page
     page_indices = list(range(start_page, len(reader.pages)+1, 2))
 
-    tf_matrix = Transformation().scale(sx=0.06, sy=0.06).translate(tx=370, ty=9)
+    tf_matrix = Transformation().scale(sx=0.06, sy=0.06).translate(tx=365, ty=5)
 
 
     for img_index, page_index in enumerate(page_indices):
